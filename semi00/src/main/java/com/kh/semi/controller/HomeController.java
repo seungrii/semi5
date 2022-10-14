@@ -7,6 +7,7 @@ public class HomeController {
 	
 
 	public String test() {
+		String hello ="나다!";
 		return "";
 	}
 	
