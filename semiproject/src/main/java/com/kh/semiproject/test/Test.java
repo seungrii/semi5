@@ -4,8 +4,8 @@ public class Test {
 	private String name = "victory"; 
 
 	//충돌생겨서 머지함 
-	//삭제한거 확인하고 하나가 덮어씀
-	
-	//ㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁ
-	
+	//충돌 삭제했지롱
+	//
+	//
+	//ㅇㅇㄴㅇ
 }
