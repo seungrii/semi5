@@ -1,11 +1,18 @@
 package com.kh.semiproject.test;
 
-public class Test {
-	private String name = "victory"; 
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 
-	//충돌생겨서 머지함 
-	//충돌 삭제했지롱
-	//
-	//
-	//ㅇㅇㄴㅇ
+@Controller
+public class Test {
+	private String name = "Victory"; 
+
+	@RequestMapping("/")
+	public String test() {
+		
+		//깃 테스트 놀이 중
+		
+		return "영화관 사이트 명 : " + name + " ? ㅎㅎ" ;
+	}
+	
 }
