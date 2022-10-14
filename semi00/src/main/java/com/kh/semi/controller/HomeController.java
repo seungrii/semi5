@@ -7,7 +7,7 @@ public class HomeController {
 	
 
 	public String test() {
-		return "";
+		return "ㅁㄴㅁㄴㄻㄴ";
 	}
 	
 }
