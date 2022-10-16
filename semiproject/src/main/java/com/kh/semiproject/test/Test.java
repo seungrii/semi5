@@ -11,7 +11,7 @@ public class Test {
 	public String test() {
 		
 		//깃 테스트 놀이 중
-		
+		//깃 연습
 		return "영화관 사이트 명 : " + name + " ? ㅎㅎ" ;
 	}
 	
