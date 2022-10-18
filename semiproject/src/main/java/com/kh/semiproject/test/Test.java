@@ -18,7 +18,10 @@ public class Test {
 		//깃2
 		return "영화관 사이트 명 : " + name + " ? ㅎㅎ" ;
 		
+		//깃00
+		
 		//충돌낸다! - hr
-	}
+
+		}
 	
 }
