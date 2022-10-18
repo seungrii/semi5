@@ -19,7 +19,6 @@ public class Test {
 		return "영화관 사이트 명 : " + name + " ? ㅎㅎ" ;
 		
 		//충돌낸다! - hr  
-		//히히
+		//또낸다 히히
 	}
-	
 }
