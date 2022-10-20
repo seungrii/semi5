@@ -84,3 +84,78 @@ insert into movie values (18,'제목18','2022-10-30','2022-11-04','"내용"',100
 insert into movie values (19,'제목19','2022-10-30','2022-11-04','"내용"',100,15,null);
 insert into movie values (20,'제목20','2022-10-30','2022-11-04','"내용"',100,15,null);
 insert into movie values (21,'제목21','2022-10-30','2022-11-04','"내용"',100,15,null);
+
+commit;
+
+
+-- 공지게시판 테이블
+
+create table notice_board(
+notice_no number primary key,
+admin_id references admin(admin_id) on delete cascade,
+notice_title varchar2(300) not null,
+notice_contents varchar2(4000) not null,
+notice_write_time date default sysdate not null,
+notice_update_time date,
+notice_read number default 0 not null check(notice_read >= 0),
+notice_like number default 0 not null check(notice_like >= 0)
+);
+
+create sequence notice_board_seq;
+
+
+-- 문의게시판 테이블
+
+create table qna_board(
+qna_no number primary key,
+qna_writer references user_information(user_id) on delete set null,
+admin_id references admin(admin_id) on delete cascade,
+qna_title varchar2(300) not null,
+qna_contents varchar2(4000) not null,
+qna_write_time date default sysdate not null,
+qna_read number default 0 not null check(qna_read >= 0),
+qna_answer  varchar2(4000),
+qna_answer_time date default sysdate not null
+);
+
+create sequence qna_board_seq;
+
+-- 자유게시판 테이블
+
+drop table board;
+create table board(
+board_no number primary key,
+board_writer references user_information(user_id) on delete set null,
+board_title varchar2(300) not null,
+board_contents varchar2(4000) not null,
+board_write_time date default sysdate not null,
+board_update_time date,
+board_read number default 0 not null check(board_read >= 0),
+board_head varchar2(12) check(board_head in('사담', '영화정보', '영화리뷰', '극장후기')),
+board_like number default 0 not null check(board_like >= 0)
+);
+
+drop sequence board_seq;
+create sequence board_seq;
+
+-- 댓글 테이블
+create table reply(
+reply_no number primary key,
+reply_writer references user_information(user_id) on delete set null,
+reply_origin references board(board_no) on delete cascade,
+reply_content varchar2(3000) not null,
+reply_write_time date default sysdate not null,
+reply_update_time date,
+reply_blind char(1) check(reply_blind = 'Y')
+);
+
+create sequence reply_seq;
+
+
+-- 좋아요 테이블
+create table free_board_like (
+user_id references user_information(user_id) on delete cascade not null,
+board_no references board(board_no) on delete cascade not null,
+primary key(user_id, board_no)
+);
+
