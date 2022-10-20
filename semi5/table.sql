@@ -84,3 +84,11 @@ insert into movie values (18,'제목18','2022-10-30','2022-11-04','"내용"',100
 insert into movie values (19,'제목19','2022-10-30','2022-11-04','"내용"',100,15,null);
 insert into movie values (20,'제목20','2022-10-30','2022-11-04','"내용"',100,15,null);
 insert into movie values (21,'제목21','2022-10-30','2022-11-04','"내용"',100,15,null);
+
+-- admin 관리자 테이블 생성
+create table admin(
+    admin_id varchar2(20) primary key check(regexp_like(admin_id, '^[a-z0-9]{5,10}$')),
+    admin_pw varchar2(16) not null check(
+        regexp_like(admin_pw, '^(?=.*[!@#$])(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9!@#$]{8,16}$')),
+    employee_no number(3) not null unique check(employee_no between 0 and 999)
+);
