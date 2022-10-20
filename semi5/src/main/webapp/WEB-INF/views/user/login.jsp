@@ -21,8 +21,12 @@
 			</div>
 			<div>
 				<label>
-				<input type="checkbox">
-				아이디 저장
+					<input type="checkbox">
+					아이디 저장
+				</label>
+				<label>
+					<input type="checkbox">
+					관리자 로그인
 				</label>
 			</div>
 			<div>
