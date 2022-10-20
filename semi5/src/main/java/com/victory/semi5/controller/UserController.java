@@ -40,4 +40,14 @@ public class UserController {
 			return "redirect:login?error";
 		}
 	}
+	
+	@GetMapping("/join")
+	public String join() {
+		return "user/join";
+	}
+	
+	@PostMapping("/join")
+	public String join(@ModelAttribute UserDto userDto) {
+		return "";
+	}
 }
