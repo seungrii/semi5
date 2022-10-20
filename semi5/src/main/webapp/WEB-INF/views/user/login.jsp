@@ -1,14 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-	<div>
+<jsp:include page="/WEB-INF/views/template/header.jsp">
+	<jsp:param value="회원 가입" name="title"/>
+</jsp:include>
+	<section class="w-980 test-css">
 		<div>
 			<h1>로그인</h1>
 		</div>
@@ -37,6 +33,5 @@
 		<c:if test="${param.error != null}">
 			<h2 style="color: red">입력한 정보가 맞지 않습니다</h2>
 		</c:if>
-	</div>
-</body>
-</html>
+	</section>
+<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
