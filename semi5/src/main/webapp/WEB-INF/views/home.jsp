@@ -4,6 +4,7 @@
 	<jsp:param value="메인화면" name="title"/>
 </jsp:include>
 	<section class="w-980 test-css">
-		<!-- 컨텐츠 -->
+		loginId : ${sessionScope.LoginId}
+		
 	</section>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

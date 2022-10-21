@@ -1,14 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<jsp:include page="/WEB-INF/views/user-login-template/header.jsp">
+<jsp:include page="/WEB-INF/views/user-login-template/loginHeader.jsp">
 	<jsp:param value="회원가입" name="title"/>
 </jsp:include>
 	<section class="w-980">
 		<div class="row center">
 			<h1>회원가입</h1>
 		</div>
-		<form action="">
+		<form action="join" method="post">
 			<div>
 				<input type="text" name="userId" class="login-input" placeholder="아이디">
 			</div>

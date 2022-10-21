@@ -1,7 +1,5 @@
 package com.victory.semi5.controller;
 
-import java.lang.ProcessBuilder.Redirect;
-
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +8,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.victory.semi5.entity.UserDto;
 import com.victory.semi5.repository.UserDao;
@@ -31,7 +28,6 @@ public class UserController {
 	public String login(@ModelAttribute UserDto userDto, 
 			HttpSession session) {
 		UserDto findDto = userDao.selectOne(userDto.getUserId());
-		System.out.println("user = "+userDto.getUserId());
 		if(findDto==null) {
 			return "redirect:login?error";
 		}
@@ -42,6 +38,12 @@ public class UserController {
 		}else {
 			return "redirect:login?error";
 		}
+	}
+	
+	@GetMapping("/logout")
+	public String logout(HttpSession session) {
+		session.removeAttribute("LoginId");
+		return "redirect:/";
 	}
 	
 	@GetMapping("/jointos")
@@ -61,6 +63,8 @@ public class UserController {
 	
 	@PostMapping("/join")
 	public String join(@ModelAttribute UserDto userDto) {
-		return "";
+		userDao.join(userDto);
+		
+		return "redirect:login";
 	}
 }
