@@ -109,6 +109,10 @@
                     <a href="#">
                         <li>커뮤니티</li>
                     </a>
+                    <li>
+                    	<input class="input">
+                    	<button type="button" class="btn btn-search"><i class="fa-solid fa-magnifying-glass"></i></button>
+                	</li>
                 </ul>
             </div>
             <!-- 네이게이터 영역 -->

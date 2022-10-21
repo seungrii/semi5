@@ -1,12 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>회원가입</title>
-</head>
-<body>
+<jsp:include page="/WEB-INF/views/template/header.jsp">
+	<jsp:param value="회원가입" name="title"/>
+</jsp:include>
 	<div>
 		<div>
 			<h1>회원가입</h1>
@@ -47,5 +44,4 @@
 			</div>
 		</form>
 	</div>
-</body>
-</html>
+<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
