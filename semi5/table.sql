@@ -92,3 +92,19 @@ create table admin(
         regexp_like(admin_pw, '^(?=.*[!@#$])(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9!@#$]{8,16}$')),
     employee_no number(3) not null unique check(employee_no between 0 and 999)
 );
+
+-- admin 관리자 테이블 컬럼 수정 구문#
+alter table admin modify admin_id varchar2(7);
+
+ALTER TABLE admin MODIFY admin_pw check(
+    regexp_like(admin_pw, '^[a-zA-Z0-9!@#$]{8,16}$')
+    and
+    regexp_like(admin_pw, '[a-z]')
+    and
+    regexp_like(admin_pw, '[A-Z]')
+    and
+    regexp_like(admin_pw, '[0-9]')
+    and
+    regexp_like(admin_pw, '[!@#$]'));
+        
+insert into admin(admin_id, admin_pw, employee_no) values('admin01', 'Admin01!', 1);
