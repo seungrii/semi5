@@ -277,15 +277,6 @@ primary key(user_id, board_no)
 create table admin(
     admin_id varchar2(20) primary key check(regexp_like(admin_id, '^[a-z0-9]{5,10}$')),
     admin_pw varchar2(16) not null check(
-        regexp_like(admin_pw, '^(?=.*[!@#$])(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9!@#$]{8,16}$')),
-    employee_no number(3) not null unique check(employee_no between 0 and 999)
-);
-
-<<<<<<< HEAD
--- admin 관리자 테이블 컬럼 수정 구문#
-alter table admin modify admin_id varchar2(7);
-
-ALTER TABLE admin MODIFY admin_pw check(
     regexp_like(admin_pw, '^[a-zA-Z0-9!@#$]{8,16}$')
     and
     regexp_like(admin_pw, '[a-z]')
@@ -294,9 +285,13 @@ ALTER TABLE admin MODIFY admin_pw check(
     and
     regexp_like(admin_pw, '[0-9]')
     and
-    regexp_like(admin_pw, '[!@#$]'));
-        
-insert into admin(admin_id, admin_pw, employee_no) values('admin01', 'Admin01!', 1);
-=======
+    regexp_like(admin_pw, '[!@#$]')),
+    employee_no number(3) not null unique check(employee_no between 0 and 999)
+);
 
->>>>>>> refs/remotes/origin/main
+-- admin 관리자 테이블 컬럼 수정 구문
+alter table admin modify admin_id varchar2(7);
+
+-- admin 관리자 테이블 기본데이터 1개 추가       
+insert into admin(admin_id, admin_pw, employee_no) values('admin01', 'Admin01!', 1);
+
