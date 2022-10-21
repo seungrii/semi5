@@ -37,7 +37,7 @@ screening_end date,
 movie_summary varchar2(3000),
 movie_play_time number(3),
 movie_age_limit number(2),
-movie_showing varchar2(15)
+
 
 );
 
