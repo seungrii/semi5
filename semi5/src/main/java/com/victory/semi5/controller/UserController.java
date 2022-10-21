@@ -35,9 +35,29 @@ public class UserController {
 		boolean passwordMatch = userDto.getUserId().equals(findDto.getUserId());
 		if(passwordMatch) {
 			session.setAttribute("LoginId", userDto.getUserId());
-			return "redirect:test";
+			return "redirect:/";
 		}else {
 			return "redirect:login?error";
 		}
+	}
+	
+	@GetMapping("/jointos")
+	public String joinTos() {
+		return "user/joinTos";
+	}
+	
+//	@PostMapping("/jointos")
+//	public String jointos(@RequestParam(required = false) String agree) {
+//		return "redirect:user/join";
+//	}
+	
+	@GetMapping("/join")
+	public String join() {
+		return "user/join";
+	}
+	
+	@PostMapping("/join")
+	public String join(@ModelAttribute UserDto userDto) {
+		return "";
 	}
 }
