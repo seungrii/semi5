@@ -3,6 +3,9 @@ package com.victory.semi5.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+
+
+
 @Controller
 @RequestMapping("/movie")
 public class MovieController {
@@ -22,6 +25,12 @@ public class MovieController {
 	//상영예정
 	//@GetMapping("/plan")
 	//@PostMapping("/plan")
+	
+	//영화정보
+	//@GetMapping("/information")
+	//@PostMapping("/information")
+	
+	
 
 	
 	
