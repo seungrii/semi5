@@ -353,3 +353,7 @@ ul.pagination.pagination-small {
     background-position-x: 0.75em;
     background-position-y: center;
 }
+
+textarea.fix-size {
+    resize: none;
+}
