@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.victory.semi5.entity.MovieDao;
+import com.victory.semi5.repository.MovieDao;
 
 @Controller
 @RequestMapping("/movie")
@@ -25,6 +25,12 @@ public class MovieController {
 	//상영예정
 	//@GetMapping("/plan")
 	//@PostMapping("/plan")
+	
+	//영화정보
+	//@GetMapping("/information")
+	//@PostMapping("/information")
+	
+	
 
 	
 	
