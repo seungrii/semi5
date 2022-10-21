@@ -1,5 +1,7 @@
 package com.victory.semi5.controller;
 
+import java.lang.ProcessBuilder.Redirect;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.victory.semi5.entity.UserDto;
 import com.victory.semi5.repository.UserDao;
@@ -35,9 +38,29 @@ public class UserController {
 		boolean passwordMatch = userDto.getUserId().equals(findDto.getUserId());
 		if(passwordMatch) {
 			session.setAttribute("LoginId", userDto.getUserId());
-			return "redirect:test";
+			return "redirect:/";
 		}else {
 			return "redirect:login?error";
 		}
+	}
+	
+	@GetMapping("/jointos")
+	public String joinTos() {
+		return "user/joinTos";
+	}
+	
+//	@PostMapping("/jointos")
+//	public String jointos(@RequestParam(required = false) String agree) {
+//		return "redirect:user/join";
+//	}
+	
+	@GetMapping("/join")
+	public String join() {
+		return "user/join";
+	}
+	
+	@PostMapping("/join")
+	public String join(@ModelAttribute UserDto userDto) {
+		return "";
 	}
 }

@@ -12,5 +12,5 @@ public class UserDto {
 	String userId, userPw, userName, userGender,
 	userEmail, userRank, userTel;
 	Date userBirth;
-	
+
 }
