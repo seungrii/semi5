@@ -281,4 +281,4 @@ create table admin(
     employee_no number(3) not null unique check(employee_no between 0 and 999)
 );
 
->>>>>>> refs/remotes/origin/main
+
