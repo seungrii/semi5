@@ -79,7 +79,7 @@
                     <a href="#">
                         <li>영화</li>
                     </a>
-                    <a href="#">
+                    <a href="/advance/list">
                         <li>예매</li>
                     </a>
                     <a href="#">
