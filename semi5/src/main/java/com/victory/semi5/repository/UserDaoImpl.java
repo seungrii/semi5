@@ -36,4 +36,16 @@ public class UserDaoImpl implements UserDao{
 		Object[] param= {userId};
 		return jdbcTemplate.query(sql, userExtractor, param);
 	}
+
+	@Override
+	public void join(UserDto userDto) {
+		String sql = "insert into user_information (user_id, user_pw, user_name, "
+				+ "user_gender, user_birth, user_email, user_tel) values "
+				+ "(?, ?, ?, ?, ?, ?, ?)";
+		Object[] param = {userDto.getUserId(), userDto.getUserPw(),
+				userDto.getUserName(), userDto.getUserGender(), userDto.getUserBirth(),
+				userDto.getUserEmail(), userDto.getUserTel()};
+		
+		jdbcTemplate.update(sql, param);
+	}
 }
