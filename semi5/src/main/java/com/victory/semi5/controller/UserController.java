@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.victory.semi5.entity.UserDto;
 import com.victory.semi5.repository.UserDao;
@@ -53,7 +54,7 @@ public class UserController {
 	
 //	@PostMapping("/jointos")
 //	public String jointos(@RequestParam(required = false) String agree) {
-//		return "redirect:user/join";
+//		return "user/join";
 //	}
 	
 	@GetMapping("/join")
@@ -66,5 +67,15 @@ public class UserController {
 		userDao.join(userDto);
 		
 		return "redirect:login";
+	}
+	
+	@GetMapping("/mypage")
+	public String mypage() {
+		return "user/userMyPage";
+	}
+	
+	@PostMapping("/mypage")
+	public String mypage(@RequestParam String userId) {
+		return "";
 	}
 }
