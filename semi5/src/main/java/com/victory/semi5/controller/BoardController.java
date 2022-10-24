@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.victory.semi5.constant.SessionConstant;
 import com.victory.semi5.entity.BoardDto;
 import com.victory.semi5.repository.BoardDao;
 import com.victory.semi5.vo.BoardListSearchVO;
@@ -36,9 +37,9 @@ public class BoardController {
 			HttpSession session) {
 		
 		// session에 있는 아이디를 작성자로 추가한 뒤 등록
-		String memberId = (String)session.getAttribute("loginId");
-//		String memberId = (String)session.getAttribute(SessionConstant.ID);
-//		boardDto.setBoardWriter(userId);
+//		String memberId = (String)session.getAttribute("loginId");
+		String memberId = (String)session.getAttribute(SessionConstant.ID);
+		boardDto.setBoardWriter(memberId);
 		
 		boardDao.insert(boardDto);
 		return "redirect:list";
