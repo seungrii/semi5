@@ -8,9 +8,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data @AllArgsConstructor @NoArgsConstructor @Builder
-public class UserDto {
-	String userId, userPw, userName, userGender,
-	userEmail, userRank, userTel, userBlurb;
-	Date userBirth;
+public class MovieDto {
+	private int movieNumber, moviePlayTime, movieAgeLimit;
+	private String movieName, movieSummary;
+	private Date openingDate, screeningEnd;
 
 }

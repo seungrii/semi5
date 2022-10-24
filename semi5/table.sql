@@ -37,7 +37,7 @@ screening_end date,
 movie_summary varchar2(3000),
 movie_play_time number(3),
 movie_age_limit number(2),
-movie_showing varchar2(15)
+
 
 );
 
@@ -277,15 +277,6 @@ primary key(user_id, board_no)
 create table admin(
     admin_id varchar2(20) primary key check(regexp_like(admin_id, '^[a-z0-9]{5,10}$')),
     admin_pw varchar2(16) not null check(
-        regexp_like(admin_pw, '^(?=.*[!@#$])(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9!@#$]{8,16}$')),
-    employee_no number(3) not null unique check(employee_no between 0 and 999)
-);
-
-<<<<<<< HEAD
--- admin 관리자 테이블 컬럼 수정 구문#
-alter table admin modify admin_id varchar2(7);
-
-ALTER TABLE admin MODIFY admin_pw check(
     regexp_like(admin_pw, '^[a-zA-Z0-9!@#$]{8,16}$')
     and
     regexp_like(admin_pw, '[a-z]')
@@ -294,9 +285,34 @@ ALTER TABLE admin MODIFY admin_pw check(
     and
     regexp_like(admin_pw, '[0-9]')
     and
-    regexp_like(admin_pw, '[!@#$]'));
-        
-insert into admin(admin_id, admin_pw, employee_no) values('admin01', 'Admin01!', 1);
-=======
+    regexp_like(admin_pw, '[!@#$]')),
+    employee_no number(3) not null unique check(employee_no between 0 and 999)
+);
 
->>>>>>> refs/remotes/origin/main
+-- admin 관리자 테이블 컬럼 수정 구문
+alter table admin modify admin_id varchar2(7);
+
+-- admin 관리자 테이블 기본데이터 1개 추가       
+insert into admin(admin_id, admin_pw, employee_no) values('admin01', 'Admin01!', 1);
+
+
+--sequence 추가
+create sequence movie_seq;
+create sequence theater_seq;
+create sequence movie_play_seq;
+create sequence genre_seq;
+create sequence image_seq;
+create sequence theater_seat_seq;
+create sequence ticketing_seq;
+create sequence review_seq;
+
+--상영관 타입 자료형 변경 char(9) -> varchar2(12)로 변경
+alter table theater modify(theater_type varchar2(12));
+
+--상영일 컬럼 삭제 (날짜, 시간 따로 저장 하는 방법을 도저히 모르겠음)
+alter table movie_play drop column movie_date;
+
+
+--date format 변경 (시간까지 저장하기 위해서 변경)
+alter session set nls_date_format = 'yyyy-MM-dd hh24:mi';
+

@@ -17,6 +17,7 @@
     <link rel="stylesheet" type="text/css" href="/css/semi-commons.css">
     <link rel="stylesheet" type="text/css" href="/css/reset.css">
     <link rel="stylesheet" type="text/css" href="/css/semi-layout.css">
+    <link rel="stylesheet" type="text/css" href="/css/join.css">
 
     <!-- 폰트어썸 -->
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"/>
@@ -27,6 +28,7 @@
     <!-- js 파일 -->
     <script src="/js/navigator.js"></script>
     <script type="text/javascript">
+
 
         
     </script>
@@ -78,7 +80,7 @@
                     <a href="#">
                         <li>영화</li>
                     </a>
-                    <a href="/advance/list">
+                    <a href="#">
                         <li>예매</li>
                     </a>
                     <a href="#">
