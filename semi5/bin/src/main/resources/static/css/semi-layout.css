@@ -1,0 +1,44 @@
+@charset "UTF-8";
+
+/* 
+홈페이지 레이아웃을 설정하는 스타일시트
+*/
+
+main {
+    /* width: 1040px; */
+    /* 메인 width가 살짝 애매 */
+    margin: 0 auto;
+    /* text-align: center; */
+    position: relative;
+}
+
+header {
+    height: 112px;
+    border-bottom: 1px solid #eee;
+}
+
+nav {
+    height: 50px;
+}
+
+aside {
+    padding-left: 10px;
+    /* float: left; */
+    width: 155px;
+    min-height: 400px;
+}
+
+section {
+    /* float: left; */
+    /* width: 980px; */
+    min-height: 400px;
+    margin: 0 auto;
+}
+
+footer {
+    /* width: 980px; */
+    /* height: 192px; */
+    padding-bottom: 14px;
+    margin: 0 auto;
+    background-color: #F5F5F5;
+}
