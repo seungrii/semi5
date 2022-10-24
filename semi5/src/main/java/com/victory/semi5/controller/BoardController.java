@@ -37,12 +37,16 @@ public class BoardController {
 			HttpSession session) {
 		
 		// session에 있는 아이디를 작성자로 추가한 뒤 등록
-//		String memberId = (String)session.getAttribute("loginId");
+//		String memberId = (String)session.getAttribute("LoginId");
 		String memberId = (String)session.getAttribute(SessionConstant.ID);
 		boardDto.setBoardWriter(memberId);
 		
 		boardDao.insert(boardDto);
-		return "redirect:list";
+//		return "redirect:list";
+		
+		//문제점 : 등록은 되는데 몇 번인지 모름
+		//해결책 : 
+		return "redirect:detail";
 	}
 	
 //	@GetMapping("/write_success")
@@ -89,7 +93,6 @@ public class BoardController {
 		
 //		2. 데이터를 읽도록 처리한다
 		model.addAttribute("boardDto", boardDao.read(boardNo));
-		
 		return "board/detail";
 
 	}
