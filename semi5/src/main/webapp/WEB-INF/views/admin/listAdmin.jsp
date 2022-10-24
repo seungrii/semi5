@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<jsp:include page="/WEB-INF/views/template/adminHeader.jsp">
+<jsp:include page="/WEB-INF/views/admin/admin-template/adminHeader.jsp">
 	<jsp:param value="관리자계정 목록" name="title"/>
 </jsp:include>
 <section class="w-980 test-css">
@@ -23,12 +23,12 @@
 					<option value="employee_no">사원번호</option>
 				</select>
 			</c:when>
-			<c:when test="${param.type == 'employee_no'}">
+			<c:otherwise>
 				<select class="input" name="type" required>
 					<option value="admin_id">아이디</option>
 					<option value="employee_no" selected>사원번호</option>
 				</select>
-			</c:when>
+			</c:otherwise>
 		</c:choose>
 		<!-- keyword 입력 -->
 		<input class="input" type="search" name="keyword" required value="${param.keyword}">

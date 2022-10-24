@@ -41,7 +41,7 @@ public class AdminDaoImpl implements AdminDao{
 	public List<AdminDto> selectList(String type, String keyword) {
 		String sql = "select * from admin "
 					+ "where instr(#1, ?) >0 "
-					+ "order by admin_in asc";
+					+ "order by admin_id asc";
 		sql = sql.replace("#1", type);
 		Object[] param = {keyword};
 		return jdbcTemplate.query(sql, mapper, param);
