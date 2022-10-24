@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.victory.semi5.entity.CinemaDto;
 import com.victory.semi5.entity.MovieDto;
+import com.victory.semi5.vo.MoviePlayDateVO;
 
 @Repository
 public class AdvanceDaoImpl implements AdvanceDao {
@@ -53,5 +54,36 @@ public class AdvanceDaoImpl implements AdvanceDao {
 		String sql = "select * from cinema order by cinema_porin asc";
 		return jdbcTemplate.query(sql, cinemaMapper);
 	}
+	
+	@Override
+	public List<CinemaDto> selectChoiceList() {
+		String sql = "";
+		return null;
+	}
+	
+	private RowMapper<MoviePlayDateVO> moviePlayDateRowMapper = (rs, idx) -> {
+		MoviePlayDateVO moviePlayDateVO = new MoviePlayDateVO();
+		
+		moviePlayDateVO.setNyeon(rs.getString("nyeon"));
+		moviePlayDateVO.setWoar(rs.getString("woar"));
+		moviePlayDateVO.setIl(rs.getString("il"));
+		moviePlayDateVO.setYoil(rs.getString("yoil"));
+		
+		return moviePlayDateVO;
+		
+	};
+	
+	@Override
+	public List<MoviePlayDateVO> selectMoviePlayDateList() {
+		String sql = "select to_char(movie_play_start, 'yyyy')nyeon,"
+				+ "to_char(movie_play_start, 'mm')woar,"
+				+ "to_char(movie_play_start, 'dd')il,"
+				+ "to_char(movie_play_start, 'dy')yoil "
+				+ "from movie_play";
+		return jdbcTemplate.query(sql, moviePlayDateRowMapper);
+	}
+	
+	
+	
 
 }
