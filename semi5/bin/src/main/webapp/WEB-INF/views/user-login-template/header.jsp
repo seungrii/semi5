@@ -17,44 +17,16 @@
     <link rel="stylesheet" type="text/css" href="/css/semi-commons.css">
     <link rel="stylesheet" type="text/css" href="/css/reset.css">
     <link rel="stylesheet" type="text/css" href="/css/semi-layout.css">
+    <link rel="stylesheet" type="text/css" href="/css/join.css">
 
     <!-- 폰트어썸 -->
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"/>
 
-<<<<<<< HEAD
     <!-- jquery 사용 위한 라이브러리 파일 불러옴 -->
     <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 
     <!-- js 파일 -->
     <script src="/js/navigator.js"></script>
-=======
-    <style>
-        
-        /*
-        스크롤 확인용 테스트 확인만 하고 지움.
-        위치: <section>
-        */
-        .test-css {
-            height: 3000px;
-        }
-
-        /* 
-        - hover 를 li a 전부에 걸면 흔들림 보정 가능
-        - 네비게이터 바 높이 꽉차게 수정
-        - 네비게이터 바와 아래 항목들을 별개로 나눠서 처리
-        - 아래 항목들은 스크롤 위치에 따라 다른 위치에 나오게 함
-        
-        */
-
-
-    </style>
-
-    <!-- jquery 사용 위한 라이브러리 파일 불러옴 -->
-    <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
-
-    <!-- js 파일 -->
-    <script src="./js/navigator.js"></script>
->>>>>>> refs/remotes/origin/main
     <script type="text/javascript">
 
 
@@ -117,13 +89,10 @@
                     <a href="#">
                         <li>커뮤니티</li>
                     </a>
-<<<<<<< HEAD
                     <li>
                     	<input class="input">
                     	<button type="button" class="btn btn-search"><i class="fa-solid fa-magnifying-glass"></i></button>
                 	</li>
-=======
->>>>>>> refs/remotes/origin/main
                 </ul>
             </div>
             <!-- 네이게이터 영역 -->
