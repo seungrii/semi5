@@ -10,7 +10,7 @@ public interface AdvanceDao {
 	
 	List<MovieDto> selectMovies();
 	List<CinemaDto> selectCinemaList();
-	List<CinemaDto> selectChoiceList();
+	List<CinemaDto> selectChoiceList(int movieNumber);
 	List<MoviePlayDateVO> selectMoviePlayDateList();
 
 }

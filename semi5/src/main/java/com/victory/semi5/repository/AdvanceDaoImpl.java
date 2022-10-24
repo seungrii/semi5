@@ -56,9 +56,10 @@ public class AdvanceDaoImpl implements AdvanceDao {
 	}
 	
 	@Override
-	public List<CinemaDto> selectChoiceList() {
-		String sql = "";
-		return null;
+	public List<CinemaDto> selectChoiceList(int movieNumber) {
+		String sql = "select CI.cinema_porin from movie M right join movie_play MP on M.movie_number = MP.movie_number left join theater TH on MP.theater_num = TH.theater_num left join cinema CI on TH.cinema_porin = CI.cinema_porin where M.movie_number = ? group by CI.cinema_porin";
+		Object[] param = {movieNumber};
+		return jdbcTemplate.query(sql, cinemaMapper, param);
 	}
 	
 	private RowMapper<MoviePlayDateVO> moviePlayDateRowMapper = (rs, idx) -> {
