@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.victory.semi5.entity.UserDto;
 import com.victory.semi5.repository.UserDao;
@@ -28,7 +29,6 @@ public class UserController {
 	public String login(@ModelAttribute UserDto userDto, 
 			HttpSession session) {
 		UserDto findDto = userDao.selectOne(userDto.getUserId());
-		System.out.println("user = "+userDto.getUserId());
 		if(findDto==null) {
 			return "redirect:login?error";
 		}
@@ -41,6 +41,12 @@ public class UserController {
 		}
 	}
 	
+	@GetMapping("/logout")
+	public String logout(HttpSession session) {
+		session.removeAttribute("LoginId");
+		return "redirect:/";
+	}
+	
 	@GetMapping("/jointos")
 	public String joinTos() {
 		return "user/joinTos";
@@ -48,7 +54,7 @@ public class UserController {
 	
 //	@PostMapping("/jointos")
 //	public String jointos(@RequestParam(required = false) String agree) {
-//		return "redirect:user/join";
+//		return "user/join";
 //	}
 	
 	@GetMapping("/join")
@@ -58,6 +64,18 @@ public class UserController {
 	
 	@PostMapping("/join")
 	public String join(@ModelAttribute UserDto userDto) {
+		userDao.join(userDto);
+		
+		return "redirect:login";
+	}
+	
+	@GetMapping("/mypage")
+	public String mypage() {
+		return "user/userMyPage";
+	}
+	
+	@PostMapping("/mypage")
+	public String mypage(@RequestParam String userId) {
 		return "";
 	}
 }
