@@ -21,7 +21,7 @@
 					아이디 저장
 				</label>
 				<label>
-					<input type="checkbox">
+					<input type="checkbox" name="rank" value="on">
 					관리자 로그인
 				</label>
 			</div>

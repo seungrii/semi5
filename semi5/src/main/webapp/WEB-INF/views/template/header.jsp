@@ -45,13 +45,13 @@
             <div class="right header-menu">
                 <ul>
                     <li>
-                        <a href="#">
+                        <a href="/user/login">
                             <i class="fa-solid fa-user"></i>
                             <span>로그인</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="/user/join">
                             <i class="fa-solid fa-arrow-right-to-bracket"></i>
                             <span>회원가입</span>
                         </a>

@@ -252,7 +252,7 @@
         	</div>
         	<div class="row left">
             	<label class="w-50">
-                	<input class="ck ck-required" type="checkbox" name="agree" value="type1">
+                	<input class="ck ck-required" type="checkbox">
                 	<span>동의합니다</span>
                 	<span>*</span>
             	</label>
@@ -375,7 +375,7 @@
         	</div>
         	<div class="row left">
             	<label class="w-50">
-                	<input class="ck ck-required" type="checkbox" name="agree" value="type2">
+                	<input class="ck ck-required" type="checkbox">
                 	<span>동의합니다</span>
                 	<span>*</span>
             	</label>
@@ -409,7 +409,7 @@
         	</div>
         	<div class="row left">
             	<label class="w-50">
-                	<input class="ck" type="checkbox" name="agree" value="type3">
+                	<input class="ck" type="checkbox" name="UserBlurb">
                 	<span>동의합니다</span>
             	</label>
         	</div>
@@ -429,13 +429,19 @@
                	<h1>회원가입</h1>
             </div>
             <div class="row">
-				<input type="text" name="userId" class="login-input" placeholder="아이디">
+				<input type="text" id="id" name="userId" class="login-input w-100" placeholder="아이디">
+				<span class="success-message">사용 가능한 아이디 입니다.</span>
+				<span class="fail-message">사용할 수 없는 아이디 입니다.</span>
 			</div>
 			<div class="row">
 				<input type="password" name="userPw" class="login-input" placeholder="비밀번호">
+				<span class="success-message">올바른 비밀번호의 형식입니다.</span>
+				<span class="fail-message">8~16자로 반드시 영문 대/소문자, 숫자, 특수문자가 포함되어야 합니다</span>
 			</div>
 			<div class="row">
-				<input type="password" class="login-input" placeholder="비밀번호 확인">
+				<input id="password-check" type="password" class="login-input" placeholder="비밀번호 확인">
+				<span class="success-message">비밀번호가 일치합니다.</span>
+				<span class="fail-message">비밀번호가 일치하지 않습니다.</span>
 			</div>
 			<div class="row">
 				<input type="text" name="userName" class="login-input" placeholder="이름">
@@ -459,7 +465,7 @@
 			</div>
            	<div class="row">
                	<button type="reset" class="btn btn-neutral login-btn prev">이전으로 이동</button>
-               	<button type="submit" class="btn btn-positive login-btn next">회원가입 하기</button>
+               	<button type="submit" class="btn btn-positive login-btn">회원가입 하기</button>
            	</div>
     	</div>
     	</form>

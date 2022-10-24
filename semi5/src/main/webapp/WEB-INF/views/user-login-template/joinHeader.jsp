@@ -29,6 +29,7 @@
     <script src="/js/navigator.js"></script>
     <script src="/js/joinCheckBox.js"></script>
     <script src="/js/joinMultiPage.js"></script>
+    <script src="/js/joinMessage.js"></script>
     <script type="text/javascript">
 
 
