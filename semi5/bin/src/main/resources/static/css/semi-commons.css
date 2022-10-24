@@ -352,8 +352,11 @@ ul.pagination.pagination-small {
     background-repeat: no-repeat;
     background-position-x: 0.75em;
     background-position-y: center;
+<<<<<<< HEAD
 }
 
 textarea.fix-size {
     resize: none;
+=======
+>>>>>>> refs/remotes/origin/main
 }

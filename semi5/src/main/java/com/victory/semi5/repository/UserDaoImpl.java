@@ -24,6 +24,7 @@ public class UserDaoImpl implements UserDao{
 					.userEmail(rs.getString("user_email"))
 					.userRank(rs.getString("user_rank"))
 					.userTel(rs.getString("user_tel"))
+					.userBlurb(rs.getString("user_blurb"))
 				.build();
 		}else {
 			return null;

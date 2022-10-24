@@ -28,7 +28,6 @@
     <script src="/js/navigator.js"></script>
     <script type="text/javascript">
 
-
         
     </script>
 </head>
@@ -79,7 +78,7 @@
                     <a href="#">
                         <li>영화</li>
                     </a>
-                    <a href="#">
+                    <a href="/advance/list">
                         <li>예매</li>
                     </a>
                     <a href="#">
