@@ -9,16 +9,18 @@
 
 
 <form action="write" method="post">
-
-
 	<div class="row left">
 			<label>말머리</label>
 			<select class="input w-100" name="boardHead">
 					<option value="">선택</option>
 					<option>사담</option>
 					<option>영화정보</option>
-					<option>영화후기</option>
+					<option>영화리뷰</option>
 					<option>극장후기</option>
+					
+					<%-- <c:if test="${ug == '관리자'}">
+					<option>공지</option>
+					</c:if> --%>
 			</select>
 	</div>		
 
@@ -33,9 +35,26 @@
 	</div>
 	
 	<div class="row right">
-		<a class="btn btn-neutral" href="board/list">목록으로</a>
+		<a class="btn btn-neutral" href="list">목록으로</a>
 		<button class="btn btn-positive" type="submit">등록하기</button>
 	</div>
 </form>
+
+<div class="float-left w-33 center">
+					<div class="row">
+						<h2>상태창</h2>	
+					</div>
+					<div class="row">
+					loginId : ${sessionScope.LoginId}
+					</div>
+					<div class="row">
+						로그인 : ${sessionScope.LoginId != null}
+					</div>
+					<div class="row">
+						mg : ${sessionScope.ug}
+					</div>
+					<div class="row">
+						관리자 : ${sessionScope.ug == '관리자'}
+					</div>
 
 <%-- <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include> --%>

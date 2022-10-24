@@ -12,7 +12,7 @@
 		<thead>
 			<td align="right" colspan="5">
 				<a href="write">글쓰기</a>
-				<a href="../boardhome">홈으로</a>
+				<a href="/">홈으로</a>
 			</td>
 		
 			<tr>
@@ -73,3 +73,19 @@
 	 </form>
 	 
 </div>
+
+<div class="row">
+						<h2>상태창</h2>	
+					</div>
+					<div class="row">
+					loginId : ${sessionScope.LoginId}
+					</div>
+					<div class="row">
+						로그인 : ${sessionScope.LoginId != null}
+					</div>
+					<div class="row">
+						mg : ${sessionScope.ug}
+					</div>
+					<div class="row">
+						관리자 : ${sessionScope.ug == '관리자'}
+					</div>
