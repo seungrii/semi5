@@ -24,7 +24,7 @@ public class BoardController {
 	private BoardDao boardDao;
 	
 	
-	//등록
+	//등록 
 	@GetMapping("/write")
 	public String write() {
 		return "board/write";
