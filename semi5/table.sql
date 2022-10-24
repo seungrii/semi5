@@ -54,6 +54,8 @@ character_type varchar2(9),
 character_nationality varchar2(36)
 );
 
+alter table character modify (charater_name varchar2(21));
+
 ---영화 장르 
 create table genre(
 genre_no number primary key,
