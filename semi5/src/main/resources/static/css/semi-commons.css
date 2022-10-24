@@ -353,6 +353,14 @@ ul.pagination.pagination-small {
     background-position-x: 0.75em;
     background-position-y: center;
 }
+.input.input-line{
+	border: 2px solid gray;
+    border-radius: 5px;
+    margin: 5px;
+    padding: 5px;
+    width: 30%;
+    height: 2.5em;
+}
 
 textarea.fix-size {
     resize: none;

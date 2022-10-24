@@ -20,3 +20,28 @@ form > div{
     background-color: #6FB8FB;
     color: white;
 }
+.success-message,
+.fail-message { 
+    display: none;
+}
+
+.success-message {
+    color:green;
+}
+.fail-message {
+    color:red;
+}
+
+/* 입력창의 상태에 따라 특정 메세지를 표시 */
+.login-input.success {
+    border-color: green;
+}
+.login-input.success ~ .success-message {
+    display: block;
+}
+.login-input.fail {
+    border-color: red;
+}
+.login-input.fail ~ .fail-message {
+    display: block;
+}
