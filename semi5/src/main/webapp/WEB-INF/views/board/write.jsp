@@ -1,0 +1,49 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+<jsp:include page="/WEB-INF/views/template/header.jsp">
+	<jsp:param value="자유 게시판" name="title"/>
+</jsp:include>
+
+
+<form action="write" method="post">
+<div class="row center">
+	<div class="row">
+		<label>말머리</label>
+		<select class="input w-100" name="boardHead">
+				<option value="">선택</option>
+				<option>사담</option>
+				<option>영화정보</option>
+				<option>영화후기</option>
+				<option>극장후기</option>
+				
+				
+			</select>
+	</div>
+
+
+
+	<div class="row">
+		<label>user</label>
+		<input class="input w-100" type="text" name="userId" required>
+	</div>
+	<div class="row">
+		<label>제목</label>
+		<input class="input w-100" type="text" name="boardTitle" required>
+	</div>
+	
+	<div class="row">
+		<label>내용</label>
+		<textarea name="boardContents" rows="10" required></textarea>
+	</div>
+	
+	<div class="row right">
+		<a class="btn btn-neutral" href="list">목록으로</a>
+		<button class="btn btn-positive" type="submit">등록하기</button>
+	</div>
+	
+	</div>
+	
+	</form>
