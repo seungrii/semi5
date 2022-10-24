@@ -27,6 +27,7 @@
 			</div>
 			<div class="row">
 				<button type="submit" class="btn btn-positive login-btn">로그인</button>
+				<button id="id-pw" type="button" class="btn btn-neutral login-btn">ID/PW 찾기</button>
 			</div>
 		</form>
 		<!-- 이상인 경우만 나오는 화면 -->

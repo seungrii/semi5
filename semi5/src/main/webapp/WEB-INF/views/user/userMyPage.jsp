@@ -7,6 +7,9 @@
 		<div class="row center">
 			<h1>마이페이지</h1>
 		</div>
+		<div>
+			<img src="download?userId=${userDto.userId}" width="100" height="100">
+		</div>
 		<div class="row">${userDto.userId}</div>
 		<div class="row">${userDto.userName}</div>
 		<div class="row">${userDto.userGender}</div>

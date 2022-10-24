@@ -48,11 +48,15 @@ public class AdminDaoImpl implements AdminDao{
 	}
 	
 	private ResultSetExtractor<AdminDto> extractor = (rs) -> {
-		return AdminDto.builder()
+		if(rs.next()) {
+			return AdminDto.builder()
 					.adminId(rs.getString("admin_id"))
 					.adminPw(rs.getString("admin_pw"))
 					.employeeNo(rs.getInt("employee_no"))
-				.build();
+					.build();			
+		}else {
+			return null;
+		}
 	};
 	@Override
 	public AdminDto selectOne(String adminId) {
