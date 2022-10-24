@@ -9,8 +9,8 @@ import lombok.NoArgsConstructor;
 
 @Data @AllArgsConstructor @NoArgsConstructor @Builder
 public class UserDto {
-	String userId, userPw, userName, userGender,
+	private String userId, userPw, userName, userGender,
 	userEmail, userRank, userTel, userBlurb;
-	Date userBirth;
+	private Date userBirth;
 
 }

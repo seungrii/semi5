@@ -4,13 +4,14 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.victory.semi5.entity.UserDto;
+import com.victory.semi5.repository.AdminDao;
 import com.victory.semi5.repository.UserDao;
 
 @Controller
@@ -19,6 +20,8 @@ public class UserController {
 	
 	@Autowired
 	private UserDao userDao;
+	@Autowired
+	private AdminDao adminDao;
 	
 	@GetMapping("/login")
 	public String login() { 
@@ -47,16 +50,6 @@ public class UserController {
 		return "redirect:/";
 	}
 	
-	@GetMapping("/jointos")
-	public String joinTos() {
-		return "user/joinTos";
-	}
-	
-//	@PostMapping("/jointos")
-//	public String jointos(@RequestParam(required = false) String agree) {
-//		return "user/join";
-//	}
-	
 	@GetMapping("/join")
 	public String join() {
 		return "user/join";
@@ -70,12 +63,11 @@ public class UserController {
 	}
 	
 	@GetMapping("/mypage")
-	public String mypage() {
+	public String mypage(Model model,
+			HttpSession session) {
+		String userId = (String)session.getAttribute("LoginId");
+		UserDto userDto = userDao.selectOne(userId);
+		model.addAttribute("userDto", userDto);
 		return "user/userMyPage";
-	}
-	
-	@PostMapping("/mypage")
-	public String mypage(@RequestParam String userId) {
-		return "";
 	}
 }
