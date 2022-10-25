@@ -9,6 +9,9 @@
 	<fmt:formatDate value="${now}" pattern="yyyy-MM-dd"/>
 </c:set>
 
+
+<link rel="stylesheet" type="text/css" href="/css/semi-commons.css">
+
 <!-- 테스트용 데이터 출력 -->
 <%-- <h3>${vo}</h3> --%>
 
@@ -88,56 +91,16 @@
 	.table a:hover {
 		color:red;
 	}
-	
-        /*
-            Pagination 디자인
-            - ul 혹은 ol 을 개조하여 구조를 설계
-        */
-        ul.pagination {
-            list-style: none;
-            margin: 0;
-            padding: 0;
-            font-size: 16px;
-            text-align: center;
-        }
-        ul.pagination > li {
-            display: inline-block;
-            border: 1px solid transparent;
-            padding: 0.5em;
-            line-height: 1em;/*글자 표시 높이 설정 */
-            min-width: 2em;
-            text-align: center;
-            cursor: pointer;
-        }
-        ul.pagination > li.on,
-        ul.pagination > li:hover {
-            border-color: #b2bec3;
-            color: #d63031;
-        }
-        ul.pagination > li > a {
-            display: block;
-            width:100%;
-            color: inherit;
-            text-decoration: none;
-        }
-
-        /* 확장 스타일 : 글자 크기를 다르게 하여 다양한 크기 옵션을 제공 */
-        ul.pagination.pagination-big {
-            font-size: 1.25em;
-        }
-        ul.pagination.pagination-small {
-            font-size: 0.75em;
-        }
     </style>
 
-<div class="container-900 mt-40 mb-40">
-	<div class="row center">
-		<h1>자유 게시판</h1>
+<div class="container mt-40">
+	<div class="row center mt-40 mb-40">
+		<h1>자유게시판 💬</h1>
 	</div>
 	
 	
 	<div class="row center">	
-	<table class="table table-border table-hover">
+	<table class="table table-slit">
 		<thead>
 			<td align="right" colspan="5">
 				<a href="write">글쓰기</a>
@@ -152,6 +115,8 @@
 				<th>조회수</th>
 			</tr>
 		</thead>
+		
+		
 		<tbody align="center">
 			<c:forEach var="boardDto" items="${list}">
 				<tr>
@@ -183,7 +148,7 @@
 	
 	
 	 <!-- 페이지 네비게이터 -->
-	 <div class="center">
+	 <div class="center mt-40">
 		<ul class="pagination">
 		
 			<!-- 이전 -->
@@ -240,15 +205,16 @@
 	 
 	 
 	 <!-- 검색 -->
-	<div class="row center">
+	<div class="row center mt-20">
 	<form action="list" method="get">
-	 	<select name="type">
+		<input type="hidden" name="size" value="${vo.size}">
+		<select class="input" name="type" required>
 			<option value="board_title" <c:if test="${vo.type == 'board_title'}">selected</c:if>>제목</option>
 			<option value="board_writer" <c:if test="${vo.type == 'board_writer'}">selected</c:if>>작성자</option>
 	 	</select>
 	 	
-	 	<input type="search" name="keyword" placeholder="검색어" required value="${vo.keyword}">
-	 	<button type="submit">검색</button>
+		<input class="input" type="search" name="keyword" placeholder="검색어" required value="${vo.keyword}">
+		<button class="btn btn-positive" type="submit">검색</button>
 	 	
 	 </form>
 	</div>	 

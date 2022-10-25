@@ -7,38 +7,10 @@
 	<jsp:param value="자유 게시판" name="title"/>
 </jsp:include>
 
+<link rel="stylesheet" type="text/css" href="/css/semi-commons.css">
+
+
 <style>
-        /*
-            입력창은 버튼과 같이 등장하므로 비율이나 크기등이 같아야 한다
-        */
-        .input {
-            font-size: 20px;
-            padding: 0.75em;
-            outline: none;
-            border:1px solid gray;
-        }
-        .input:focus {
-            border-color: black;
-        }
-        /* input이라는 클래스가 있으면서 input-underline 클래스가 있다면 */
-        .input.input-underline {
-            border: none;
-            border-bottom: 1px solid gray;
-        }
-        .input.input-underline:focus {
-            border-color: black;
-        }
-
-        /* 배경이미지가 들어가는 입력창 */
-        .input.input-icon {
-            padding-left: 2.5em;
-            /* background-image: url("./image/search-icon.png"); */
-            background-size: 1em;
-            background-repeat: no-repeat;
-            background-position-x: 0.75em;
-            background-position-y: center;
-        }
-
         /*
             textarea는 기본적으로 폭 조절이 가능하여 디자인에 어려움이 많다
             - 높이만 조절되게 하던가
@@ -51,20 +23,15 @@
         textarea.input.fix-size {
             resize: none;
         }
-
-        .search-input {
-            background-image: url("./image/search-icon.png");
-        }
     </style>
 
 
 <form action="write" method="post">
-	<div class="container-800 mt-40">
+	<div class="container mt-40 center">
 		
-		<div class="row left">
-			<label>말머리</label>
+		<div class="row">
 			<select class="input w-100" name="boardHead">
-					<option value="">선택</option>
+					<option value="">말머리 선택</option>
 					<option>사담</option>
 					<option>영화정보</option>
 					<option>영화리뷰</option>
@@ -73,13 +40,11 @@
 		</div>
 		
 		<div class="row left">
-			<label>제목</label>
-			<input class="input w-100" type="text" name="boardTitle" required>
+			<input class="input w-100" type="text" name="boardTitle" required placeholder="제목을 입력해 주세요.">
 		</div>
 		
 		<div class="row left">
-			<label>내용</label>
-			<textarea class="input w-100" name="boardContents" rows="10" required></textarea>
+			<textarea class="input w-100" name="boardContents" rows="20" required placeholder="내용을 입력하세요."></textarea>
 		</div>
 		
 		<div class="row right">

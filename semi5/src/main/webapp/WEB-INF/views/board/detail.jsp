@@ -7,6 +7,10 @@
 	<jsp:param value="자유 게시판" name="title"/>
 </jsp:include>
  
+ 
+<link rel="stylesheet" type="text/css" href="/css/semi-commons.css">
+
+
 <style>
 	.heart {
 		text-decoration: none;
@@ -83,13 +87,13 @@
         }
 </style> 
     
-<div class="container-800 mt-40 mb-40">
+<div class="container mt-40 mb-40">
 	<div class="row center">
 		<h1>게시글 보기</h1>
 	</div>
 	
 	<div class="row center">
-		<table class="table table-border">
+		<table class="table">
 			<tbody>
 				<tr>
 					<th width="25%">번호</th>
@@ -144,10 +148,10 @@
 				<tr>
 					<td colspan="2" align="right">
 			
-	<a class="btn btn-negative" href="write">글쓰기</a>
-	<a class="btn btn-negative" href="edit?boardNo=${boardDto.boardNo}">수정하기</a>
+	<a class="btn btn-positive" href="write">글쓰기</a>
+	<a class="btn btn-positive" href="edit?boardNo=${boardDto.boardNo}">수정하기</a>
 	<a class="btn btn-negative" href="delete?boardNo=${boardDto.boardNo}">삭제하기</a>
-	<a class="btn btn-negative" href="list">목록으로</a>
+	<a class="btn btn-neutral" href="list">목록으로</a>
 	
 
 			
