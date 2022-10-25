@@ -16,7 +16,7 @@ public class BoardDummyTest {
 	
 	@Test
 	public void before() {
-		for(int i=1; i <= 18; i++) {
+		for(int i=1; i <= 371; i++) {
 			boardDao.insert(BoardDto.builder()
 									.boardHead(null)
 									.boardTitle("테스트"+i)

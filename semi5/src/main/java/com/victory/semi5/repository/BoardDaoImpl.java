@@ -101,7 +101,7 @@ public class BoardDaoImpl implements BoardDao{
 	public List<BoardDto> search(BoardListSearchVO vo) {
 		String sql = "select * from ("
 							+ "select rownum rn, TMP.* from ("
-								+ "select * from board"
+								+ "select * from board "
 								+ "where instr(#1, ?) > 0 "
 								+ "order by board_no desc"
 							+ ")TMP"
