@@ -135,7 +135,9 @@ public class UserController {
 		}
 		else {			
 			UserDto userDto = userDao.selectOne(userId);
+			List<BoardDto> boardDto = boardDao.selectIdList(userId);
 			model.addAttribute("userDto", userDto);
+			model.addAttribute("boardDto", boardDto);	
 			return "user/userMyPage";
 		}
 	}
