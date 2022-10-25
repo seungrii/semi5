@@ -4,7 +4,7 @@
 	<jsp:param value="회원가입" name="title"/>
 </jsp:include>
 	<section class="w-980">
-	<form action="" method="post">
+	<form action="" method="post" enctype="multipart/form-data">
 		<div class="join-page">
             <div class="row mt-30 left">
                 <h1>이용약관</h1>
@@ -462,6 +462,9 @@
 			</div>
 			<div class="row">
 				<input name="userBirth" type="date" class="login-input" placeholder="생년월일">
+			</div>
+			<div class="row">
+				<input name="userProfile" class="input" type="file" accept=".png, .jpg">
 			</div>
            	<div class="row">
                	<button type="reset" class="btn btn-neutral login-btn prev">이전으로 이동</button>

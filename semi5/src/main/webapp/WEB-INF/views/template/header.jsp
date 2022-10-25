@@ -42,6 +42,9 @@
                     <img id="logo" src="/image/logo.png">
                 </a>
             </div>
+            <div>
+            	<a href="/user/logout">로그아웃</a>
+            </div>
             <div class="right header-menu">
                 <ul>
                     <li>

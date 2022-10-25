@@ -8,6 +8,11 @@ import com.victory.semi5.vo.BoardListSearchVO;
 
 public interface BoardDao {
 	
+	//1. 등록
+	void insert(BoardDto boardDto);
+	int insert2(BoardDto boardDto);//번호까지 합쳐서 등록하는 메소드(등록에서 상세로)
+
+
 	// 목록
 	List<BoardDto> selectList();
 
@@ -18,7 +23,6 @@ public interface BoardDao {
 	//3. 상세
 	BoardDto selectOne(int boardNo);
 	
-	
 	//DB clear
 	void clear();
 
@@ -27,9 +31,6 @@ public interface BoardDao {
 	
 	//조회수 증가까지
 	BoardDto read(int boardNo);
-	
-	//1. 등록
-	void insert(BoardDto boardDto);
 	
 	//4. 수정
 	boolean update(BoardDto boardDto);
