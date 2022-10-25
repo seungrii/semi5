@@ -178,8 +178,16 @@ public class BoardDaoImpl implements BoardDao{
 		this.updateReadcount(boardNo);
 		return this.selectOne(boardNo);
 	}
-	
-	
+
+	//아이디로 검색
+	@Override
+	public List<BoardDto> selectIdList(String userId) {
+		String sql = "select * from board "
+				+ "where board_writer = ? "
+				+ "order by board_no";
+		Object[] param = {userId};
+		return jdbcTemplate.query(sql, mapper, param);
+	}
 	
 	
 }

@@ -23,8 +23,8 @@ create table user_information(
     user_gender char(6) not null,
     user_birth date not null,
     user_email varchar2(30) not null,
-    user_rank varchar2(9) default '일반' not null check(user_rank in ('일반', 'VIP', '관리자')),
-    user_tel char(13) not null check(regexp_like(user_tel, '^010[0-9]{8}$'))
+    user_rank varchar2(9) default '일반' not null check(user_rank in ('일반', 'VIP')),
+    user_tel char(11) not null check(regexp_like(user_tel, '^010[0-9]{8}$'))
 );
 
 --영화
