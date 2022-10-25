@@ -18,9 +18,12 @@ public class AdminDaoImpl implements AdminDao{
 	
 	@Override
 	public void addAdmin(AdminDto adminDto) {
-		String sql = "insert into admin(admin_id, admin_pw, employee_no) values(?, ?, ?)";
+		String sql = "insert into admin(admin_id, admin_pw, "
+				+ "employee_no, admin_addMemo, admin_addDate) "
+				+ "values(?, ?, ?, ?, sysdate)";
 		Object[] param = {
-			adminDto.getAdminId(), adminDto.getAdminPw(), adminDto.getEmployeeNo()
+			adminDto.getAdminId(), adminDto.getAdminPw(), 
+			adminDto.getEmployeeNo(), adminDto.getAdminAddMemo()
 		};
 		jdbcTemplate.update(sql, param);
 	}
@@ -30,6 +33,8 @@ public class AdminDaoImpl implements AdminDao{
 					.adminId(rs.getString("admin_id"))
 					.adminPw(rs.getString("admin_pw"))
 					.employeeNo(rs.getInt("employee_no"))
+					.adminAddMemo(rs.getString("admin_addMemo"))
+					.adminAddDate(rs.getDate("admin_addDate"))
 				.build();
 	};
 	@Override
@@ -41,7 +46,7 @@ public class AdminDaoImpl implements AdminDao{
 	public List<AdminDto> selectList(String type, String keyword) {
 		String sql = "select * from admin "
 					+ "where instr(#1, ?) >0 "
-					+ "order by admin_in asc";
+					+ "order by admin_id asc";
 		sql = sql.replace("#1", type);
 		Object[] param = {keyword};
 		return jdbcTemplate.query(sql, mapper, param);
@@ -53,8 +58,11 @@ public class AdminDaoImpl implements AdminDao{
 					.adminId(rs.getString("admin_id"))
 					.adminPw(rs.getString("admin_pw"))
 					.employeeNo(rs.getInt("employee_no"))
-					.build();			
-		}else {
+					.adminAddMemo(rs.getString("admin_addMemo"))
+					.adminAddDate(rs.getDate("admin_addDate"))
+				.build();
+		}
+		else {			
 			return null;
 		}
 	};
@@ -64,6 +72,24 @@ public class AdminDaoImpl implements AdminDao{
 					+ "where admin_id = ?";
 		Object[] param = {adminId};
 		return jdbcTemplate.query(sql, extractor, param);
+	}
+	
+	@Override
+	public boolean changeAdmin(AdminDto adminDto) {
+		String sql = "update admin set "
+				+ "employee_no = ?, admin_addMemo = ? "
+				+ "where admin_id = ?";
+		Object[] param = {
+			adminDto.getEmployeeNo(), adminDto.getAdminAddMemo(), 
+			adminDto.getAdminId()};
+		return jdbcTemplate.update(sql, param) >0;
+	}
+	
+	@Override
+	public boolean deleteAdmin(String adminId) {
+		String sql = "delete admin where admin_id = ?";
+		Object[] param = {adminId};
+		return jdbcTemplate.update(sql, param) >0;
 	}
 
 
