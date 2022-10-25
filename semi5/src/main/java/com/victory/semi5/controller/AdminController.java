@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.victory.semi5.entity.AdminDto;
 import com.victory.semi5.repository.AdminDao;
@@ -36,7 +37,6 @@ public class AdminController {
 		adminDao.addAdmin(adminDto);
 		return "redirect:addAdmin";
 	}
-	//계정추가 완료시, 추가완료 알람창 구현필요(js)
 	
 	//admin 계정조회
 	@GetMapping("/listAdmin")
@@ -56,16 +56,49 @@ public class AdminController {
 	@GetMapping("/detailAdmin")
 	public String datailAdmin(
 			Model model,
-			@RequestParam String adminID) {
-		AdminDto adminDto = adminDao.selectOne(adminID);
+			@RequestParam String adminId) {
+		AdminDto adminDto = adminDao.selectOne(adminId);
 		model.addAttribute("adminDto", adminDto);
 		return "admin/detailAdmin";
 	}
 	
 	//admin 계정수정
-	
+	@GetMapping("/changeAdmin")
+	public String changeAdmin(
+			Model model,
+			@RequestParam String adminId) {
+		model.addAttribute("adminDto", adminDao.selectOne(adminId));
+		return "admin/changeAdmin";
+	}
+	@PostMapping("/changeAdmin")
+	public String changeAdmin(
+			@ModelAttribute AdminDto adminDto,
+			RedirectAttributes attr) {
+		adminDao.changeAdmin(adminDto);
+		attr.addAttribute("adminId", adminDto.getAdminId());
+		return "redirect:detailAdmin";
+	}
 	
 	//admin 계정삭제
+	@GetMapping("deleteAdmin")
+	public String deleteAdmin(@RequestParam String adminId) {
+		adminDao.deleteAdmin(adminId);
+//		if(로그인한 관리자 본인이면) {
+//			session 삭제 후, 로그인창이나 메인홈으로 쫓아냄
+//		}
+//		else { 로그인한 관리자 본인이 아니면
+//			회원목록에서 삭제한것이므로, 회원목록으로 보냄
+//		}
+		return "redirect:listAdmin";
+	}
+	
+	
+	
+	//admin 비밀번호 수정 = 로그인(마이페이지)에서만 가능
+	//admin 추가 및 수정 시, id pw 정규표현식 추가
+	
+	//추가사항 : table 디자인css 작성
+	//재확인 알람창 필요
 	
 	
 }
