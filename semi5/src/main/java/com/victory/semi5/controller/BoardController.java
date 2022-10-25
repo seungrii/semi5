@@ -14,6 +14,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.victory.semi5.constant.SessionConstant;
 import com.victory.semi5.entity.BoardDto;
+import com.victory.semi5.error.TargetNotFoundException;
 import com.victory.semi5.repository.BoardDao;
 import com.victory.semi5.vo.BoardListSearchVO;
 
@@ -34,18 +35,20 @@ public class BoardController {
 	@PostMapping("/write")
 	public String write(
 			@ModelAttribute BoardDto boardDto,
-			HttpSession session) {
+			HttpSession session, RedirectAttributes attr) {
 		
 		// session에 있는 아이디를 작성자로 추가한 뒤 등록
 //		String memberId = (String)session.getAttribute("LoginId");
 		String memberId = (String)session.getAttribute(SessionConstant.ID);
 		boardDto.setBoardWriter(memberId);
 		
-		boardDao.insert(boardDto);
+		int boardNo = boardDao.insert2(boardDto);
+		attr.addAttribute("boardNo", boardNo);
+		
 //		return "redirect:list";
 		
-		//문제점 : 등록은 되는데 몇 번인지 모름
-		//해결책 : 
+		//문제점 : 등록 후에 상세를 갈 때 등록은 되는데 몇 번인지 모름 boardtest2
+		//해결책 : boardtest2 , 등록한 데이터 번호?
 		return "redirect:detail";
 	}
 	
@@ -100,8 +103,14 @@ public class BoardController {
 	//수정
 	@GetMapping("/edit")
 	public String edit(Model model, @RequestParam int boardNo) {
-		model.addAttribute("dto", boardDao.selectOne(boardNo));
+		BoardDto boardDto = boardDao.selectOne(boardNo);
+		if(boardDto == null) {//없는 경우 내가 만든 예외 발생
+			throw new TargetNotFoundException();
+		}
+		model.addAttribute("boardDto", boardDto);
 		return "board/edit";
+
+//		model.addAttribute("dto", boardDao.selectOne(boardNo));
 		
 //		boolean result = boardDao.update(boardDto);
 //		if(result) {
@@ -125,24 +134,25 @@ public class BoardController {
 			return "redirect:detail";
 		}
 		else {//실패했다면 오류 발생
-//			throw new TargetNotFoundException();
-			return "redirect:edit_fail";
+			throw new TargetNotFoundException();
+//			return "redirect:edit_fail";
 		}
 	}
 	
-	@GetMapping("/edit_fail")
-	public String editFail() {
-		return "board/edit_fail";
-	}
+//	@GetMapping("/edit_fail")
+//	public String editFail() {
+//		return "board/edit_fail";
+//	}
 	
 	//삭제
 	@GetMapping("/delete")
 	public String delete(@RequestParam int boardNo) {
-		if(boardDao.delete(boardNo)) {
+		boolean result = boardDao.delete(boardNo);
+		if(result) {
 			return "redirect:list";
 		}
-		else {
-			return "board/editFail";
+		else {//구문은 실행되었지만 바뀐 게 없는 경우(강제 예외 처리)
+			throw new TargetNotFoundException();
 		}
 	}
 	

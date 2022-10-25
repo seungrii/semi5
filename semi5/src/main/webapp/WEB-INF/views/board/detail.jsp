@@ -35,7 +35,8 @@
 				<tr height="200" valign="top">
 					<th>내용</th>
 					<td>
-						${boardDto.boardContents}
+					<!-- pre태그는 엔터가 들어감 -->
+						<pre>${boardDto.boardContents}</pre>
 					</td>
 				</tr>
 				<tr>
