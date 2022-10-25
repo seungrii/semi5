@@ -36,5 +36,17 @@
 	
 </div>
 	
+    <div class="row">
+		<input type="text" id="id" name="userId" class="login-input w-100" placeholder="아이디">
+		<span class="success-message">사용 가능한 아이디 입니다.</span>
+		<span class="fail-message">사용할 수 없는 아이디 입니다.</span>
+	</div>
+	<div class="row">
+		<input type="password" name="userPw" class="login-input" placeholder="비밀번호">
+		<span class="success-message">올바른 비밀번호의 형식입니다.</span>
+		<span class="fail-message">8~16자로 반드시 영문 대/소문자, 숫자, 특수문자가 포함되어야 합니다</span>
+	</div>
+	
+	
 </section>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

@@ -26,6 +26,9 @@ create table user_information(
     user_rank varchar2(9) default '일반' not null check(user_rank in ('일반', 'VIP')),
     user_tel char(11) not null check(regexp_like(user_tel, '^010[0-9]{8}$'))
 );
+-- user information 테이블 기본데이터 1개 추가  
+insert into user_information values (
+'hello1234', 'Hello1234!', '테스트', '남자', '2022-10-20', 'hello1234@naver.com', '일반', '01012345678', 'N');
 
 --영화
 create table movie(
@@ -36,7 +39,7 @@ opening_date date,
 screening_end date,
 movie_summary varchar2(3000),
 movie_play_time number(3),
-movie_age_limit number(2),
+movie_age_limit number(2)
 
 
 );
