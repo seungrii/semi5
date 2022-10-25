@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.victory.semi5.entity.AdminDto;
 import com.victory.semi5.entity.UserDto;
@@ -64,6 +65,7 @@ public class UserController {
 			boolean passwordMatch = userDto.getUserPw().equals(findDto.getAdminPw());
 			if(passwordMatch) {
 				session.setAttribute("LoginId", userDto.getUserId());
+				session.setAttribute("loginGrade", "관리자");	//관리자로그인시, session추가
 				return "redirect:/";
 			}else {
 				return "redirect:login?error";
@@ -119,10 +121,20 @@ public class UserController {
 	
 	@GetMapping("/mypage")
 	public String mypage(Model model,
-			HttpSession session) {
+			HttpSession session, RedirectAttributes attr) {
 		String userId = (String)session.getAttribute("LoginId");
 		UserDto userDto = userDao.selectOne(userId);
 		model.addAttribute("userDto", userDto);
 		return "user/userMyPage";
+		
+//		if((session.getAttribute("loginGrade")=="관리자")) {	//관리자 로그인일 경우
+//			attr.addAttribute("adminId", userId);
+//			return "redirect:detailAdmin";
+//		}
+//		else {			
+//			UserDto userDto = userDao.selectOne(userId);
+//			model.addAttribute("userDto", userDto);
+//			return "user/userMyPage";
+//		}
 	}
 }

@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:set var="login" value="${loginId != null}"></c:set>
-<c:set var="admin" value="${loginAdmin == '관리자'}"></c:set>
+<c:set var="login" value="${LoginId != null}"></c:set>
+<c:set var="admin" value="${loginGrade == '관리자'}"></c:set>
 
 <html>
 <html lang="ko">
@@ -174,23 +174,32 @@
     	<aside>
     		<div class="container-150">
     			<div class="row">
+    				<h2>상태창</h2>
+    			</div>
+    			<div class="row">
+    				login : ${sessionScope.LoginId}
+    			</div>
+    			<div class="row">
+    				admin : ${sessionScope.loginGrade}
+    			</div>
+    			<div class="row">
     				<h2>관리자메뉴</h2>
     			</div>
- 		    <div class="row">
-    			<a href="/admin/listAdmin">관리자계정</a>
-     		</div>
-     		<div class="row">
-     			<a href="/user/list">회원목록</a>
-     		</div>
-     		<div class="row">
-     			<a href="/admin/home">???</a>
-     		</div>
-     		<div class="row">
-     			<a href="/admin/home">???</a>
-     		</div>
-     		<div class="row">
-     			<a href="/admin/home">???</a>
-     		</div>
+	 		    <div class="row">
+	    			<a href="/admin/listAdmin">관리자계정</a>
+	     		</div>
+	     		<div class="row">
+	     			<a href="/user/list">회원목록</a>
+	     		</div>
+	     		<div class="row">
+	     			<a href="/admin/home">???</a>
+	     		</div>
+	     		<div class="row">
+	     			<a href="/admin/home">???</a>
+	     		</div>
+	     		<div class="row">
+	     			<a href="/admin/home">???</a>
+	     		</div>
     		</div>
     	</aside>
     </div>
