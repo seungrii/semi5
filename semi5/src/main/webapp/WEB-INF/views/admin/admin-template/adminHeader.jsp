@@ -1,12 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="login" value="${LoginId != null}"></c:set>
+<c:set var="admin" value="${loginGrade == '관리자'}"></c:set>
+
+<html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+	<title>
+		<c:choose>
+			<c:when test="${param.title != null}">
+				${param.title}
+			</c:when>
+			<c:otherwise>
+				VIC
+			</c:otherwise>
+		</c:choose>
+	</title>
 
     <!-- 글꼴 Noto Sans Korean -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -27,9 +40,7 @@
 
     <!-- js 파일 -->
     <script src="/js/navigator.js"></script>
-    <script src="/js/joinCheckBox.js"></script>
-    <script src="/js/joinMultiPage.js"></script>
-    <script src="/js/joinMessage.js"></script>
+    <script src="/js/adminAccountCheck.js"></script>
     <script type="text/javascript">
 
 
@@ -159,4 +170,39 @@
             </div>
         </div>
     </nav>
+    
+    <!-- 관리자메뉴 사이드바 -->
+    <div class="container left">
+    	<aside>
+    		<div class="container-150">
+    			<div class="row">
+    				<h2>상태창</h2>
+    			</div>
+    			<div class="row">
+    				login : ${sessionScope.LoginId}
+    			</div>
+    			<div class="row">
+    				admin : ${sessionScope.loginGrade}
+    			</div>
+    			<div class="row">
+    				<h2>관리자메뉴</h2>
+    			</div>
+	 		    <div class="row">
+	    			<a href="/admin/listAdmin">관리자계정</a>
+	     		</div>
+	     		<div class="row">
+	     			<a href="/user/list">회원목록</a>
+	     		</div>
+	     		<div class="row">
+	     			<a href="/admin/home">???</a>
+	     		</div>
+	     		<div class="row">
+	     			<a href="/admin/home">???</a>
+	     		</div>
+	     		<div class="row">
+	     			<a href="/admin/home">???</a>
+	     		</div>
+    		</div>
+    	</aside>
+    </div>
     <div>

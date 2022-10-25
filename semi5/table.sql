@@ -23,9 +23,12 @@ create table user_information(
     user_gender char(6) not null,
     user_birth date not null,
     user_email varchar2(30) not null,
-    user_rank varchar2(9) default '일반' not null check(user_rank in ('일반', 'VIP', '관리자')),
-    user_tel char(13) not null check(regexp_like(user_tel, '^010[0-9]{8}$'))
+    user_rank varchar2(9) default '일반' not null check(user_rank in ('일반', 'VIP')),
+    user_tel char(11) not null check(regexp_like(user_tel, '^010[0-9]{8}$'))
 );
+-- user information 테이블 기본데이터 1개 추가  
+insert into user_information values (
+'hello1234', 'Hello1234!', '테스트', '남자', '2022-10-20', 'hello1234@naver.com', '일반', '01012345678', 'N');
 
 --영화
 create table movie(
@@ -36,7 +39,7 @@ opening_date date,
 screening_end date,
 movie_summary varchar2(3000),
 movie_play_time number(3),
-movie_age_limit number(2),
+movie_age_limit number(2)
 
 
 );
@@ -53,6 +56,8 @@ character_filmography varchar2(60),
 character_type varchar2(9),
 character_nationality varchar2(36)
 );
+
+alter table character modify (charater_name varchar2(21));
 
 ---영화 장르 
 create table genre(
@@ -288,10 +293,10 @@ create table admin(
     regexp_like(admin_pw, '[!@#$]')),
     employee_no number(3) not null unique check(employee_no between 0 and 999)
 );
-
 -- admin 관리자 테이블 컬럼 수정 구문
 alter table admin modify admin_id varchar2(7);
-
+alter table admin add admin_addMemo varchar2(150);
+alter table admin add admin_addDate date default sysdate not null;
 -- admin 관리자 테이블 기본데이터 1개 추가       
 insert into admin(admin_id, admin_pw, employee_no) values('admin01', 'Admin01!', 1);
 

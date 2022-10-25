@@ -31,6 +31,19 @@ public class UserDaoImpl implements UserDao{
 		}
 	};
 	
+	private ResultSetExtractor<UserDto> userIdExtractor = rs -> {
+		if(rs.next()) {
+			return UserDto.builder()
+					.userName(rs.getString("user_name"))
+					.userBirth(rs.getDate("user_birth"))
+					.userEmail(rs.getString("user_email"))
+					.userTel(rs.getString("user_tel"))
+				.build();
+		}else {
+			return null;
+		}
+	};
+	
 	@Override
 	public UserDto selectOne(String userId) {
 		String sql = "select * from user_information where user_id=?";
@@ -40,13 +53,18 @@ public class UserDaoImpl implements UserDao{
 
 	@Override
 	public void join(UserDto userDto) {
+		String conId = "select userId user_information";
+		if(userDto.getUserBlurb() == null) {
+			userDto.setUserBlurb("off");
+		}
 		String sql = "insert into user_information (user_id, user_pw, user_name, "
-				+ "user_gender, user_birth, user_email, user_tel) values "
-				+ "(?, ?, ?, ?, ?, ?, ?)";
+				+ "user_gender, user_birth, user_email, user_tel, user_blurb) values "
+				+ "(?, ?, ?, ?, ?, ?, ?, ?)";
 		Object[] param = {userDto.getUserId(), userDto.getUserPw(),
 				userDto.getUserName(), userDto.getUserGender(), userDto.getUserBirth(),
-				userDto.getUserEmail(), userDto.getUserTel()};
+				userDto.getUserEmail(), userDto.getUserTel(), userDto.getUserBlurb()};
 		
 		jdbcTemplate.update(sql, param);
 	}
+
 }
