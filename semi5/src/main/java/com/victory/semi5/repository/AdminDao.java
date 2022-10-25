@@ -12,4 +12,7 @@ public interface AdminDao {
 	List<AdminDto> selectList(String type, String keyword);
 	AdminDto selectOne(String adminId);
 	
+	boolean changeAdmin(AdminDto adminDto);
+	
+	boolean deleteAdmin(String adminId);
 }
