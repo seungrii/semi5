@@ -1,5 +1,8 @@
 package com.victory.semi5.controller;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -73,12 +76,18 @@ public class BoardController {
 //		else {
 //			model.addAttribute("list", boardDao.selectList());
 //		}
-		if(vo.isSearch()) {
-			model.addAttribute("list", boardDao.selectList(vo));
-		}
-		else {
-			model.addAttribute("list", boardDao.selectList());
-		}
+//		if(vo.isSearch()) {
+//			model.addAttribute("list", boardDao.selectList(vo));
+//		}
+//		else {
+//			model.addAttribute("list", boardDao.selectList());
+//		}
+		
+		// 페이지 네비게이터를 위한 게시글 수를 구한다
+		int count = boardDao.count(vo);
+		vo.setCount(count);
+		
+		model.addAttribute("list", boardDao.selectList(vo));
 //		model.addAttribute("list", boardDao.selectList());
 		return "board/list";
 	}
@@ -86,16 +95,29 @@ public class BoardController {
 	//상세
 	@GetMapping("/detail")
 	public String detail(Model model,
-			@RequestParam int boardNo) {
+			@RequestParam int boardNo, HttpSession session) {
 		
 		//조회수 증가
-		
 //		1. 조회수 증가시켜서 데이터를 불러온다
 //		boardDao.updateReadCount(boardNo);
 //		model.addAttribute("dto", boardDao.selectOne(boardNo));
 		
 //		2. 데이터를 읽도록 처리한다
-		model.addAttribute("boardDto", boardDao.read(boardNo));
+//		model.addAttribute("boardDto", boardDao.read(boardNo));
+		
+		//조회수 중복 방지
+		Set<Integer> history = (Set<Integer>) session.getAttribute("history");
+		if(history == null) {//history가 없다면 신규 생성
+			history = new HashSet<>();
+		}
+		if(history.add(boardNo)) {//추가된 경우 - 처음 읽는 번호면
+			model.addAttribute("boardDto", boardDao.read(boardNo));
+		}
+		else {//추가가 안된 경우 - 읽은 적이 있는 번호면
+			model.addAttribute("boardDto", boardDao.selectOne(boardNo));
+		}
+		session.setAttribute("history", history);
+		
 		return "board/detail";
 
 	}

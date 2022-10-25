@@ -14,11 +14,19 @@ public interface BoardDao {
 
 
 	// 목록
-	List<BoardDto> selectList();
-
-	//검색
+	List<BoardDto> selectList(); //안쓰는데 왜 있냐고
+	//통합 검색 메소드(목록+검색)
 //	List<BoardDto> selectList(String type, String keyword);
 	List<BoardDto> selectList(BoardListSearchVO vo);
+	//목록
+	List<BoardDto> list(BoardListSearchVO vo);
+	//검색
+	List<BoardDto> search(BoardListSearchVO vo);
+	
+	//검색과 목록의 총 데이터 개수를 구하는 메소드(마지막 페이지 번호)
+	int count(BoardListSearchVO vo);
+	int searchCount(BoardListSearchVO vo);
+	int listCount(BoardListSearchVO vo);
 
 	//3. 상세
 	BoardDto selectOne(int boardNo);

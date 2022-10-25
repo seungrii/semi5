@@ -9,6 +9,8 @@
 	<fmt:formatDate value="${now}" pattern="yyyy-MM-dd"/>
 </c:set>
 
+<!-- 테스트용 데이터 출력 -->
+<h3>${vo}</h3>
 
 <div class="container-900 mt-40 mb-40">
 	<div class="row center">
