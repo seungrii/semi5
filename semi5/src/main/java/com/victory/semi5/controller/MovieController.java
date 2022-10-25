@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.victory.semi5.entity.MovieDto;
 import com.victory.semi5.repository.MovieDao;
@@ -71,24 +72,43 @@ public class MovieController {
 	@GetMapping("/edit")
 	public String edit(Model model, @RequestParam int movieNumber) {
 		model.addAttribute("dto",movieDao.selectOne(movieNumber));
-		return "수정입력페이지";
+		return "movie/edit";
 	}
-//	@PostMapping("/edit")
-//	public String edit(@ModelAttribute MovieDto dto,
-//			//redirect 전용 저장소(Model의 자식 클래스)
-//			RedirectAttributes attr) {
-//		boolean result=movieDao.update(dto);
-//		if(result) {
-//			attr
-//			//return "redirect:detail?movieNumber="+dto.getMovieNumber();
-//			return "redirect:detail";
-//		}
-//		else {
-//		return "redirect:edit_fail";
-//	    }
-//  }
+	@PostMapping("/edit")
+	public String edit(@ModelAttribute MovieDto dto,
+			//redirect 전용 저장소(Model의 자식 클래스),리다이렉트를 하는데 데이터를 넘길 경우
+			RedirectAttributes attr) {
+		boolean result=movieDao.update(dto);
+	if(result) {
+			attr.addAttribute("movieNumber",dto.getMovieNumber());
+			//return "redirect:detail?movieNumber="+dto.getMovieNumber();
+			return "redirect:detail";
+		}
+	else {
+			return "redirect:edit_fail";
+	    }
+  }
 	
+	@GetMapping("/edit_fail")
+	public String editFail() {
+		return "movie/editFail";
+	}
 	
+	//삭제
+	@GetMapping("/delete")
+	public String delete(@RequestParam int movieNumber) {
+		boolean result=movieDao.delete(movieNumber);
+		if(result) {
+			return "redirect:list";
+		}
+		else {
+			return "movie/editFail";
+		}
+	}
+	
+	//model은 jsp 불러 올 때 데이터 전달
+	//redirect는 다른 컨트롤러를 불러 오는 것
+	//redirect전용 어트리부트가 나옴
 	
 	
 }

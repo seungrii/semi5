@@ -43,7 +43,7 @@
 <h2><a href="list">목록보기</a></h2>
 <h2><a href="insert">영화정보 넣기</a></h2>
 <h2><a href="edit?movieNumber=${dto.movieNumber}">수정하기</a></h2>
-
+<h2><a href="delete?movieNumber=${dto.movieNumber}">삭제하기</a></h2>
 
 
 

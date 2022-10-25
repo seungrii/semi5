@@ -4,13 +4,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>등록 완료</title>
+<title>오류</title>
 </head>
 <body>
-<h1>영화정보등록 완료</h1>
+<div align="center">
+<h1>존재하지 않는 번호입니다</h1>
 <h2><a href="list">목록보기</a></h2>
-<h2><a href="insert">영화정보 넣기</a></h2>
-
+</div>
 
 </body>
 </html>

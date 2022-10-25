@@ -13,5 +13,6 @@ public interface MovieDao {
     List<MovieDto>selectList(String type, String keyword);//검색
     MovieDto selectOne(int movieNumber);//상세조회
     boolean update(MovieDto dto);//수정
+    boolean delete(int movieNumber);
 
 }

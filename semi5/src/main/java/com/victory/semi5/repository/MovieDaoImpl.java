@@ -104,18 +104,28 @@ public class MovieDaoImpl implements MovieDao {
 
 	@Override
 	public boolean update(MovieDto dto) {
-		String sql="update movie"
-				+"set movie_name=?,opening_date=?,screening_end=?"
-				+"movie_summary=?,movie_play_time=?,movie_age_limit=?"
-				+"where movie_number=?";
+		String sql="update movie "
+				+"set "
+				+"movie_name=?,opening_date=?,screening_end=?,movie_summary=?,movie_play_time=?,movie_age_limit=? "
+				+"where "
+					+"movie_number=?";
 		
 
 		Object[] param= {
 				dto.getMovieName(),dto.getOpeningDate(),
 				dto.getScreeningEnd(),dto.getMovieSummary(),
-				dto.getMoviePlayTime(),dto.getMovieAgeLimit(),dto.getMovieNumber()
+				dto.getMoviePlayTime(),dto.getMovieAgeLimit(),
+				dto.getMovieNumber()
 		};
 		return jdbcTemplate.update(sql,param)>0;
+	}
+
+	@Override//삭제
+	public boolean delete(int movieNumber) {
+		String sql="delete movie where movie_number=?";
+		Object[] param= {movieNumber};
+		return jdbcTemplate.update(sql,param)>0;
+		
 	}
 }
 
