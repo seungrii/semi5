@@ -127,21 +127,17 @@ public class UserController {
 	public String mypage(Model model,
 			HttpSession session, RedirectAttributes attr) {
 		String userId = (String)session.getAttribute("LoginId");
-		UserDto userDto = userDao.selectOne(userId);
-		List<BoardDto> boardDto = boardDao.selectIdList(userId);
-		model.addAttribute("userDto", userDto);
-		model.addAttribute("boardDto", boardDto);
-		return "user/userMyPage";
+		String loginGrade = (String)session.getAttribute("loginGrade");
 		
-//		if((session.getAttribute("loginGrade")=="관리자")) {	//관리자 로그인일 경우
-//			attr.addAttribute("adminId", userId);
-//			return "redirect:detailAdmin";
-//		}
-//		else {			
-//			UserDto userDto = userDao.selectOne(userId);
-//			model.addAttribute("userDto", userDto);
-//			return "user/userMyPage";
-//		}
+		if(loginGrade.equals("관리자")) {	//관리자 로그인일 경우
+			attr.addAttribute("adminId", userId);
+			return "redirect:/admin/detailAdmin";
+		}
+		else {			
+			UserDto userDto = userDao.selectOne(userId);
+			model.addAttribute("userDto", userDto);
+			return "user/userMyPage";
+		}
 	}
 	
 	@RequestMapping("/userFind")

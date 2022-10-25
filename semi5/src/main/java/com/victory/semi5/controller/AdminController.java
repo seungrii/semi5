@@ -1,5 +1,7 @@
 package com.victory.semi5.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -81,24 +83,27 @@ public class AdminController {
 	
 	//admin 계정삭제
 	@GetMapping("deleteAdmin")
-	public String deleteAdmin(@RequestParam String adminId) {
+	public String deleteAdmin(
+		HttpSession session, @RequestParam String adminId) {
 		adminDao.deleteAdmin(adminId);
-//		if(로그인한 관리자 본인이면) {
-//			session 삭제 후, 로그인창이나 메인홈으로 쫓아냄
-//		}
-//		else { 로그인한 관리자 본인이 아니면
-//			회원목록에서 삭제한것이므로, 회원목록으로 보냄
-//		}
-		return "redirect:listAdmin";
+		String userId = (String)session.getAttribute("LoginId");
+		if(userId.equals(adminId)) { //로그인한 관리자 본인이면
+			//session 삭제 후, 로그인창이나 메인홈으로 쫓아냄
+			session.removeAttribute("LoginId");
+			session.removeAttribute("loginGrade");
+			return "redirect:/";
+		}
+		else {
+			return "redirect:listAdmin";
+		}
 	}
 	
 	
-	
-	//admin 비밀번호 수정 = 로그인(마이페이지)에서만 가능
+
 	//admin 추가 및 수정 시, id pw 정규표현식 추가
 	
 	//추가사항 : table 디자인css 작성
-	//재확인 알람창 필요
+	//재확인 알람창 필요 (ex. 정말 삭제하시겠습니까?)
 	
 	
 }
