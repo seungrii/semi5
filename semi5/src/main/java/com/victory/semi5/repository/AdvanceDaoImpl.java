@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.victory.semi5.entity.CinemaDto;
 import com.victory.semi5.entity.MovieDto;
+import com.victory.semi5.vo.CinemaNameVO;
 import com.victory.semi5.vo.MoviePlayDateVO;
 
 @Repository
@@ -55,11 +56,23 @@ public class AdvanceDaoImpl implements AdvanceDao {
 		return jdbcTemplate.query(sql, cinemaMapper);
 	}
 	
+	private RowMapper<CinemaNameVO> cinemaNameMapper = (rs, idx) -> {
+		CinemaNameVO cinemaNameVO = new CinemaNameVO();
+		
+		cinemaNameVO.setCiName(rs.getString("CINAME"));
+		
+		return cinemaNameVO;
+	};
+	
 	@Override
-	public List<CinemaDto> selectChoiceList(int movieNumber) {
-		String sql = "select CI.cinema_porin from movie M right join movie_play MP on M.movie_number = MP.movie_number left join theater TH on MP.theater_num = TH.theater_num left join cinema CI on TH.cinema_porin = CI.cinema_porin where M.movie_number = ? group by CI.cinema_porin";
+	public List<CinemaNameVO> selectChoiceList(int movieNumber) {
+		String sql = "select CI.cinema_porin CINAME from movie M "
+				+ "right join movie_play MP on M.movie_number = MP.movie_number "
+				+ "left join theater TH on MP.theater_num = TH.theater_num "
+				+ "left join cinema CI on TH.cinema_porin = CI.cinema_porin "
+				+ "where M.movie_number = ? group by CI.cinema_porin";
 		Object[] param = {movieNumber};
-		return jdbcTemplate.query(sql, cinemaMapper, param);
+		return jdbcTemplate.query(sql, cinemaNameMapper, param);
 	}
 	
 	private RowMapper<MoviePlayDateVO> moviePlayDateRowMapper = (rs, idx) -> {

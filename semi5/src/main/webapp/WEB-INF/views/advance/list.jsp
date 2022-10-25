@@ -39,6 +39,31 @@
 }
 </style>
 
+<script type="text/javascript">
+        $(function(){
+            $(".advance-movie").find("li").click(function(){
+                // $(".advance-theater").css("color","red");
+                // console.log($(this).text()); //text 확인
+
+                var moiveNumber = $(this).data("no");
+                // console.log($(this).data("no"));
+                if(!moiveNumber) return;
+
+                $.ajax({
+                    url:"http://localhost:8888/rest/advance/list?movieNumber="+$(this).data("no"),//moiveNumber,
+                    method:"get",
+                    success:function(resp){
+                        $(".advance-theater").find("li").text(resp);
+                        
+                    }
+                });
+
+            });
+        });
+
+        
+    </script>
+
 <section class="w-980">
 
 	<!-- 컨텐츠 -->
@@ -101,8 +126,60 @@
 
 
 
-
 	</div>
+	<!-- 컨텐츠 -->
+            <div class="advance-container">
+                <!-- 영화 고르는 박스 -->
+                <!-- 284px -->
+                <div class="advance-movie">
+                    <div>
+                        <ul>
+                            <li data-no="1">영화1</li>
+                            <li data-no="2">영화2</li>
+                            <li data-no="3">영화3</li>
+                            <li data-no="4">영화4</li>
+                            <li data-no="5">영화5</li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- 극장 고르는 박스 -->
+                <!-- 265px -->
+                <div class="advance-theater">
+                    <div>
+                        <ul>
+                            <li>지점1</li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- 날짜 고르는 박스 -->
+                <!-- 91px -->
+                <div class="advance-date">
+                    <div>
+                        <ul>
+                            <li>날짜1</li>
+                            <li>날짜2</li>
+                            <li>날짜3</li>
+                            <li>날짜4</li>
+                            <li>날짜5</li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- 시간 고르는 박스 -->
+                <!-- 340px -->
+                <div class="advance-time">
+                    <div>
+                        <ul>
+                            <li>시간1</li>
+                            <li>시간2</li>
+                            <li>시간3</li>
+                            <li>시간4</li>
+                            <li>시간5</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
 </section>
 
 
