@@ -28,7 +28,7 @@ create table user_information(
 );
 -- user information 테이블 기본데이터 1개 추가  
 insert into user_information values (
-'hello1234', 'Hello1234!', '테스트', '남자', '2022-10-20', 'hello1234@naver.com', '일반', '01012345678');
+'hello1234', 'Hello1234!', '테스트', '남자', '2022-10-20', 'hello1234@naver.com', '일반', '01012345678', 'N');
 
 --영화
 create table movie(
