@@ -12,7 +12,7 @@
 		<h1>게시글 보기</h1>
 	</div>
 	
-<div class="row center">
+	<div class="row center">
 		<table class="table table-border">
 			<tbody>
 				<tr>
@@ -35,7 +35,8 @@
 				<tr height="200" valign="top">
 					<th>내용</th>
 					<td>
-						${boardDto.boardContents}
+					<!-- pre태그는 엔터가 들어감 -->
+						<pre>${boardDto.boardContents}</pre>
 					</td>
 				</tr>
 				<tr>
@@ -57,22 +58,38 @@
 					</td>
 				</tr>
 				</c:if>
+				
+				<!-- 첨부파일 -->
+				
+				
 			</tbody>
 			
 			<tfoot>
 				<tr>
 					<td colspan="2" align="right">
+			
+	<a class="btn btn-negative" href="write">글쓰기</a>
+	<a class="btn btn-negative" href="edit?boardNo=${boardDto.boardNo}">수정하기</a>
+	<a class="btn btn-negative" href="delete?boardNo=${boardDto.boardNo}">삭제하기</a>
+	<a class="btn btn-negative" href="list">목록으로</a>
+	
+
+			
+			
+			
+			
+			
 						
-						<c:if test="${loginId != null}">
+						<%-- <c:if test="${LoginId != null}">
 						<a class="btn btn-positive" href="write">글쓰기</a>
 						<a class="btn btn-positive" href="write?boardParent=${dto.boardNo}">답글쓰기</a>
 						</c:if>
 						
-						<%--
+						
 							관리자는 삭제만, 회원은 자신의 글만 수정/삭제 가능하도록 처리
-						 --%>
+						
 						<c:set var="owner" value="${LoginId == boardDto.boardWriter}"></c:set>
-						<c:set var="admin" value="${mg == '관리자'}"></c:set>
+						<c:set var="admin" value="${ug == '관리자'}"></c:set>
 						
 						<c:if test="${owner}">
 						<a class="btn btn-negative" href="edit?boardNo=${boardDto.boardNo}">수정하기</a>
@@ -81,9 +98,8 @@
 						
 						<c:if test="${admin}">
 						<a class="btn btn-negative" href="delete?boardNo=${dto.boardNo}">삭제하기</a>
-						</c:if>
+						</c:if> --%>
 						
-						<a class="btn btn-neutral" href="list">목록으로</a>
 					</td>
 				</tr>
 			
@@ -92,17 +108,17 @@
 	</div>
 	
 	<div class="row">
-						<h2>상태창</h2>	
-					</div>
-					<div class="row">
-					loginId : ${sessionScope.LoginId}
-					</div>
-					<div class="row">
-						로그인 : ${sessionScope.LoginId != null}
-					</div>
-					<div class="row">
-						mg : ${sessionScope.ug}
-					</div>
-					<div class="row">
-						관리자 : ${sessionScope.ug == '관리자'}
-					</div>
+	<h2>상태창</h2>	
+	</div>
+	<div class="row">
+	loginId : ${sessionScope.LoginId}
+	</div>
+	<div class="row">
+		로그인 : ${sessionScope.LoginId != null}
+	</div>
+	<div class="row">
+		mg : ${sessionScope.ug}
+	</div>
+	<div class="row">
+		관리자 : ${sessionScope.ug == '관리자'}
+	</div>

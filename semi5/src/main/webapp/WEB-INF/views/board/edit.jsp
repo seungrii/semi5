@@ -6,7 +6,7 @@
 
 <form action="edit" method="post">
 <!-- input[type=hidden]은 form 안에 위치해야 한다 -->
-<input type="hidden" name="boardNo" value="${dto.boardNo}">
+<input type="hidden" name="boardNo" value="${boardDto.boardNo}">
 
 <div class="container-800 mt-40">
 	<div class="row center">
@@ -19,12 +19,8 @@
 			<option value="">선택</option>
 			<option <c:if test="${boardDto.boardHead == '사담'}">selected</c:if>>사담</option>
 			<option <c:if test="${boardDto.boardHead == '영화정보'}">selected</c:if>>영화정보</option>
-			<option <c:if test="${boardDto.boardHead == '영화후기'}">selected</c:if>>영화후기</option>
+			<option <c:if test="${boardDto.boardHead == '영화리뷰'}">selected</c:if>>영화리뷰</option>
 			<option <c:if test="${boardDto.boardHead == '극장후기'}">selected</c:if>>극장후기</option>
-			
-			<c:if test="${mg == '관리자'}">
-			<option <c:if test="${boardDto.boardHead == '공지'}">selected</c:if>>공지</option>
-			</c:if>
 		</select>
 	</div>
 	
@@ -35,10 +31,6 @@
 	
 	<div class="row left">
 		<label>내용</label>
-		<!-- 
-			textarea는 value 속성이 없고 시작태그와 종료태그 사이에 작성
-			(주의) pre 태그와 동일하므로 엔터나 띄어쓰기 조심
-		-->
 		<textarea class="input w-100" name="boardContents" rows="10" required>${boardDto.boardContents}</textarea>
 	</div>
 	

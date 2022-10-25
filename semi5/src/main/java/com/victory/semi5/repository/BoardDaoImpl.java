@@ -132,10 +132,12 @@ public class BoardDaoImpl implements BoardDao{
 		return jdbcTemplate.query(sql, extractor, param);
 	}
 	
+	//수정
 	@Override
 	public boolean update(BoardDto boardDto) {
 		String sql = "update board set "
-				+ "board_title=?, board_contents=?, board_head=? "
+				+ "board_title=?, board_contents=?, board_head=?, "
+				+ "board_update_time=sysdate "
 				+ "where board_no=?";
 		Object[] param = {
 				boardDto.getBoardTitle(),
@@ -187,6 +189,27 @@ public class BoardDaoImpl implements BoardDao{
 				+ "order by board_no";
 		Object[] param = {userId};
 		return jdbcTemplate.query(sql, mapper, param);
+	}
+	
+	//등록에서 상세로
+	@Override
+	public int insert2(BoardDto boardDto) {
+
+		String sql = "select board_seq.nextval from dual";
+		int boardNo = jdbcTemplate.queryForObject(sql, int.class);
+		
+		sql = "insert into board("
+				+ "board_no, board_title, board_contents,"
+				+ "board_writer, board_head "
+				+ ") values(?, ?, ?, ?, ?)";
+		Object[] param = {
+		                boardNo, boardDto.getBoardTitle(),
+		                boardDto.getBoardContents(), boardDto.getBoardWriter(),
+		      			boardDto.getBoardHead()
+		};
+		jdbcTemplate.update(sql, param);
+		
+		return boardNo;
 	}
 	
 	
