@@ -10,7 +10,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.victory.semi5.entity.CharacterDto;
+import com.victory.semi5.entity.ImageDto;
 import com.victory.semi5.entity.MovieDto;
+import com.victory.semi5.repository.CharacterDao;
+import com.victory.semi5.repository.ImageDao;
 import com.victory.semi5.repository.MovieDao;
 
 
@@ -23,6 +27,12 @@ public class MovieController {
 	
 	@Autowired 
 	MovieDao movieDao;
+
+	@Autowired 
+	ImageDao imageDao;
+	
+	@Autowired 
+	CharacterDao characterDao;
 	
 	
 	@GetMapping("/insert")
@@ -35,11 +45,36 @@ public class MovieController {
 	public String insert(@ModelAttribute MovieDto dto) {
 //		DB insert
 		movieDao.insert(dto);
-		//iageDao.insert(dto);
+		
 		
 //		insert_success 매핑으로 redirect(강제이동) 처리하세요
 		return "redirect:insert_success";
 	}
+	
+	@PostMapping("/insert")
+	public String insert(@ModelAttribute ImageDto dto) {
+//		DB insert
+		
+		imageDao.insert(dto);
+		
+//		insert_success 매핑으로 redirect(강제이동) 처리하세요
+		return "redirect:insert_success";
+	}
+	
+	@PostMapping("/insert")
+	public String insert(@ModelAttribute CharacterDto dto) {
+//		DB insert
+		
+		characterDao.insert(dto);
+		//void insert(CharacterDto dto);//데이터 넣기   
+		
+		
+//		insert_success 매핑으로 redirect(강제이동) 처리하세요
+		return "redirect:insert_success";
+	}
+	
+	
+	
 	
 	@GetMapping("/insert_success")
 	public String insertSuccess() {
