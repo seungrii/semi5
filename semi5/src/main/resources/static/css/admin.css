@@ -1,0 +1,23 @@
+@charset "UTF-8";
+
+.input.NNNNN ~ .NNNNN-message ,
+.input.NNNNY ~ .NNNNY-message ,
+.input.fail ~ .fail-message {
+    display: block;
+}
+.input ~ .NNNNN-message {
+    color: red;
+    display: none;
+}
+.input ~ .NNNNY-message {
+    color: green;
+    display: none;
+}
+.input ~ .fail-message {
+    color: red;
+    display: none;
+}
+
+span {
+	margin: 5px;
+}
