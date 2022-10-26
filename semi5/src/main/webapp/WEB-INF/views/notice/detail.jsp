@@ -104,10 +104,7 @@
 					<td>
 						${noticeDto.noticeTitle}</td>
 				</tr>	
-				<tr>
-					<th>작성자</th>
-					<td>${noticeDto.adminId}</td>
-				</tr>
+			
 				<tr height="200" valign="top">
 					<th>내용</th>
 					<td>
