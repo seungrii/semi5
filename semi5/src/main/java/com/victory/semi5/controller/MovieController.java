@@ -35,6 +35,7 @@ public class MovieController {
 	public String insert(@ModelAttribute MovieDto dto) {
 //		DB insert
 		movieDao.insert(dto);
+		//iageDao.insert(dto);
 		
 //		insert_success 매핑으로 redirect(강제이동) 처리하세요
 		return "redirect:insert_success";
@@ -63,10 +64,10 @@ public class MovieController {
 		return "movie/list";
 	}
 	
-	@GetMapping("/detail")
+	@GetMapping("/detailAdmin")
 	public String detail(Model model,@RequestParam int movieNumber ) {
 		model.addAttribute("dto", movieDao.selectOne(movieNumber));
-		return "movie/detail";
+		return "movie/detailAdmin";
 	}
 	//수정
 	@GetMapping("/edit")
@@ -84,7 +85,8 @@ public class MovieController {
 			//return "redirect:detail?movieNumber="+dto.getMovieNumber();
 			return "redirect:detail";
 		}
-	else {
+	else {//리스트에 있는 movieNumber가 아니면  edit_fail 페이지로
+		    
 			return "redirect:edit_fail";
 	    }
   }
