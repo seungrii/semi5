@@ -8,5 +8,7 @@ public interface UserDao {
 	
 //	회원 테이블에 데이터 삽입
 	void join(UserDto userDto);
+	
+	UserDto selectId(String userName, String userTel);
 
 }

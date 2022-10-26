@@ -2,6 +2,7 @@ package com.victory.semi5.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.ProcessBuilder.Redirect;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -131,18 +132,8 @@ public class UserController {
 		model.addAttribute("boardDto", boardDto);
 		return "user/userMyPage";
 	}
-	
-	@RequestMapping("/userFind")
-	public String userFind() {
-		return "user/userFind";
-	}
 	@GetMapping("/idFind")
 	public String idFind() {
 		return "user/idFind";
-	}
-	
-	@GetMapping("/pwFind")
-	public String pwFind() {
-		return "user/pwFind";
 	}
 }

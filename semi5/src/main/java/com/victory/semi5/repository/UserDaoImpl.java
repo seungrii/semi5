@@ -31,18 +31,6 @@ public class UserDaoImpl implements UserDao{
 		}
 	};
 	
-	private ResultSetExtractor<UserDto> userIdExtractor = rs -> {
-		if(rs.next()) {
-			return UserDto.builder()
-					.userName(rs.getString("user_name"))
-					.userBirth(rs.getDate("user_birth"))
-					.userEmail(rs.getString("user_email"))
-					.userTel(rs.getString("user_tel"))
-				.build();
-		}else {
-			return null;
-		}
-	};
 	
 	@Override
 	public UserDto selectOne(String userId) {
@@ -65,6 +53,15 @@ public class UserDaoImpl implements UserDao{
 				userDto.getUserEmail(), userDto.getUserTel(), userDto.getUserBlurb()};
 		
 		jdbcTemplate.update(sql, param);
+	}
+
+	@Override
+	public UserDto selectId(String userName, String userTel) {
+		String sql = "select * from user_information where user_name=? and user_tel=?";
+		Object[] param = {userName, userTel};
+		
+		return jdbcTemplate.query(sql, userExtractor, param);
+ 
 	}
 
 }
