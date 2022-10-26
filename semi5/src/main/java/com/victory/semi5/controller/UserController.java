@@ -80,6 +80,10 @@ public class UserController {
 	@GetMapping("/logout")
 	public String logout(HttpSession session) {
 		session.removeAttribute("LoginId");
+		String loginGrade = (String)session.getAttribute("loginGrade");
+		if(loginGrade.equals("관리자")) {	//관리자 로그인일 경우
+			session.removeAttribute("loginGrade");
+		}
 		return "redirect:/";
 	}
 	
