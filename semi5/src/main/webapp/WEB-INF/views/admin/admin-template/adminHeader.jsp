@@ -50,7 +50,7 @@
         <!-- 헤더 영역 -->
         <div class="flex-container">
             <div class="left">
-                <a href="#" id="logo">
+                <a href="/" id="logo">
                     <img id="logo" src="/image/logo.png">
                 </a>
             </div>
@@ -63,19 +63,13 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#">
-                            <i class="fa-solid fa-user"></i>
-                            <span>로그인</span>
-                        </a>
-                    </li>
+                       	<a href="/user/logout">
+                           <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                           <span>로그아웃</span>
+                       	</a>
+                 	</li>
                     <li>
-                        <a href="#">
-                            <i class="fa-solid fa-arrow-right-to-bracket"></i>
-                            <span>회원가입</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
+                        <a href="/user/mypage">
                             <i class="fa-solid fa-gear"></i>
                             <span>마이페이지</span>
                         </a>
