@@ -4,7 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <jsp:include page="/WEB-INF/views/template/header.jsp">
-	<jsp:param value="자유 게시판" name="title"/>
+	<jsp:param value="공지 게시판" name="title"/>
 </jsp:include>
 
 <link rel="stylesheet" type="text/css" href="/css/semi-commons.css">
@@ -28,36 +28,23 @@
 
 <form action="write" method="post">
 	<div class="container mt-40 center">
-		
-		<div class="row">
-			<select class="input w-100" name="boardHead">
-					<option value="">말머리 선택</option>
-					<option>사담</option>
-					<option>영화정보</option>
-					<option>영화리뷰</option>
-					<option>극장후기</option>
-			</select>
+		<div class="row left">
+			<input class="input w-100" type="text" name="noticeTitle" required placeholder="제목을 입력해 주세요.">
 		</div>
 		
 		<div class="row left">
-			<input class="input w-100" type="text" name="boardTitle" required placeholder="제목을 입력해 주세요.">
+			<textarea class="input w-100" name="noticeContents" rows="20" required placeholder="내용을 입력하세요."></textarea>
 		</div>
-		
-		<div class="row left">
-			<textarea class="input w-100" name="boardContents" rows="20" required placeholder="내용을 입력하세요."></textarea>
-		</div>
-		
 		<div class="row right">
-			<a class="btn btn-neutral" href="list">목록으로</a>
+			<a class="btn btn-neutral" href="#">목록으로</a>
 			<button class="btn btn-positive" type="submit">등록하기</button>
 		</div>
-		
 	</div>
 </form>
 
 
 
-<div class="row">
+	<div class="row">
 	<h2>상태창</h2>	
 	</div>
 	<div class="row">
@@ -72,5 +59,9 @@
 	<div class="row">
 		관리자 : ${sessionScope.ug == '관리자'}
 	</div>
+
+
+
+
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

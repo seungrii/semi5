@@ -30,7 +30,11 @@
     <link rel="stylesheet" type="text/css" href="/css/semi-commons.css">
     <link rel="stylesheet" type="text/css" href="/css/reset.css">
     <link rel="stylesheet" type="text/css" href="/css/semi-layout.css">
+<<<<<<< HEAD
     <link rel="stylesheet" type="text/css" href="/css/admin.css">
+=======
+    <link rel="stylesheet" type="text/css" href="/css/join.css">
+>>>>>>> refs/remotes/origin/main
 
     <!-- 폰트어썸 -->
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"/>
@@ -40,6 +44,7 @@
 
     <!-- js 파일 -->
     <script src="/js/navigator.js"></script>
+    <script src="/js/adminAccountCheck.js"></script>
     <script type="text/javascript">
 
 
@@ -175,23 +180,32 @@
     	<aside>
     		<div class="container-150">
     			<div class="row">
+    				<h2>상태창</h2>
+    			</div>
+    			<div class="row">
+    				login : ${sessionScope.LoginId}
+    			</div>
+    			<div class="row">
+    				admin : ${sessionScope.loginGrade}
+    			</div>
+    			<div class="row">
     				<h2>관리자메뉴</h2>
     			</div>
- 		    <div class="row">
-    			<a href="/admin/listAdmin">관리자계정</a>
-     		</div>
-     		<div class="row">
-     			<a href="/user/list">회원목록</a>
-     		</div>
-     		<div class="row">
-     			<a href="/admin/home">???</a>
-     		</div>
-     		<div class="row">
-     			<a href="/admin/home">???</a>
-     		</div>
-     		<div class="row">
-     			<a href="/admin/home">???</a>
-     		</div>
+	 		    <div class="row">
+	    			<a href="/admin/listAdmin">관리자계정</a>
+	     		</div>
+	     		<div class="row">
+	     			<a href="/user/list">회원목록</a>
+	     		</div>
+	     		<div class="row">
+	     			<a href="/admin/home">???</a>
+	     		</div>
+	     		<div class="row">
+	     			<a href="/admin/home">???</a>
+	     		</div>
+	     		<div class="row">
+	     			<a href="/admin/home">???</a>
+	     		</div>
     		</div>
     	</aside>
     </div>
