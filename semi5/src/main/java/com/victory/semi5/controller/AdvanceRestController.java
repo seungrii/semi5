@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.victory.semi5.entity.CinemaDto;
 import com.victory.semi5.repository.AdvanceDao;
 import com.victory.semi5.vo.CinemaNameVO;
+import com.victory.semi5.vo.MoviePlayStartVO;
 
 //CrossOrigin 어노테이션을 붙이면 외부의 접근이 허용된다
 @CrossOrigin(origins = {"http://127.0.0.1:5500"})
@@ -25,7 +26,7 @@ public class AdvanceRestController {
 	
 	@GetMapping("/list")
 	public List<CinemaNameVO> selectCinemaList(@RequestParam int movieNumber ) {
-		List<CinemaNameVO> cinemaNameVOs = advanceDao.selectChoiceList(movieNumber);
+		List<CinemaNameVO> cinemaNameVOs = advanceDao.selectMovieChoiceList(movieNumber);
 		
 		if(cinemaNameVOs != null) {
 			return cinemaNameVOs; //성공
@@ -34,6 +35,20 @@ public class AdvanceRestController {
 			return null; //실패			
 		}
 		
-	}
+	}//selectCinemaList() end
+	
+//	@GetMapping("/list")
+//	public List<MoviePlayStartVO> selectMoviePlayDays(@RequestParam int movieNumber,
+//			@RequestParam String cinemaName) {
+//		List<MoviePlayStartVO> moviePlayStartVOs = advanceDao.selectCinemaChoiceList(movieNumber, cinemaName);
+//		
+//		if(moviePlayStartVOs != null) {
+//			return moviePlayStartVOs; //성공
+//		}
+//		else {
+//			return null; //실패
+//		}
+//	}//selectMoviePlayDays() end
+	
 
-}
+}//AdvanceRestController end

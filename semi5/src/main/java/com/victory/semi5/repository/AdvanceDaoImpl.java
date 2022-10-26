@@ -11,6 +11,7 @@ import com.victory.semi5.entity.CinemaDto;
 import com.victory.semi5.entity.MovieDto;
 import com.victory.semi5.vo.CinemaNameVO;
 import com.victory.semi5.vo.MoviePlayDateVO;
+import com.victory.semi5.vo.MoviePlayStartVO;
 
 @Repository
 public class AdvanceDaoImpl implements AdvanceDao {
@@ -33,6 +34,13 @@ public class AdvanceDaoImpl implements AdvanceDao {
 		
 	};
 	
+	
+	@Override
+	public List<MovieDto> selectMovies() {
+		String sql = "select * from movie where screening_end >= sysdate";
+		return jdbcTemplate.query(sql, movieMapper);
+	}
+	
 	private RowMapper<CinemaDto> cinemaMapper = (rs, idx) -> {
 		CinemaDto cinemaDto = new CinemaDto();
 		
@@ -44,11 +52,6 @@ public class AdvanceDaoImpl implements AdvanceDao {
 		return cinemaDto;
 	};
 	
-	@Override
-	public List<MovieDto> selectMovies() {
-		String sql = "select * from movie where screening_end >= sysdate";
-		return jdbcTemplate.query(sql, movieMapper);
-	}
 	
 	@Override
 	public List<CinemaDto> selectCinemaList() {
@@ -64,8 +67,9 @@ public class AdvanceDaoImpl implements AdvanceDao {
 		return cinemaNameVO;
 	};
 	
+	
 	@Override
-	public List<CinemaNameVO> selectChoiceList(int movieNumber) {
+	public List<CinemaNameVO> selectMovieChoiceList(int movieNumber) {
 		String sql = "select CI.cinema_porin CINAME from movie M "
 				+ "right join movie_play MP on M.movie_number = MP.movie_number "
 				+ "left join theater TH on MP.theater_num = TH.theater_num "
@@ -74,7 +78,7 @@ public class AdvanceDaoImpl implements AdvanceDao {
 		Object[] param = {movieNumber};
 		return jdbcTemplate.query(sql, cinemaNameMapper, param);
 	}
-	
+	//아직 사용 안함
 	private RowMapper<MoviePlayDateVO> moviePlayDateRowMapper = (rs, idx) -> {
 		MoviePlayDateVO moviePlayDateVO = new MoviePlayDateVO();
 		
@@ -86,7 +90,7 @@ public class AdvanceDaoImpl implements AdvanceDao {
 		return moviePlayDateVO;
 		
 	};
-	
+	//아직 사용 안함
 	@Override
 	public List<MoviePlayDateVO> selectMoviePlayDateList() {
 		String sql = "select to_char(movie_play_start, 'yyyy')nyeon,"
@@ -97,7 +101,20 @@ public class AdvanceDaoImpl implements AdvanceDao {
 		return jdbcTemplate.query(sql, moviePlayDateRowMapper);
 	}
 	
+	private RowMapper<MoviePlayStartVO> moviePlayStartMapper = (rs, idx) -> {
+		MoviePlayStartVO moviePlayStartVO = new MoviePlayStartVO();
+		
+		moviePlayStartVO.setMPS(rs.getDate("MPS"));
+		
+		return moviePlayStartVO;
+	};
+	
+	@Override
+	public List<MoviePlayStartVO> selectCinemaChoiceList(int movieNumber, String cinemaName) {
+		// 
+		return null;
+	}
 	
 	
 
-}
+}//AdvanceDao end
