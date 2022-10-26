@@ -3,6 +3,8 @@
 <jsp:include page="/WEB-INF/views/admin/admin-template/adminHeader.jsp">
 	<jsp:param value="관리자계정 추가" name="title"/>
 </jsp:include>
+<script src="/js/adminAccountCheck.js"></script>
+
 <section class="w-980 test-css">
 	
 	
@@ -13,12 +15,17 @@
 			<span>관리자계정 추가</span>
 		</div>
 		<div class="row mt-50">
-			<label class="ms-10">ID</label>
+			<label class="ms-10">ID</label> <!-- join.css사용 안함 -->
 			<input class="input input-line w-100" name="adminId" type="text" required autocomplete="off">
+			<span class="NNNNN-message">이미 사용중인 아이디입니다</span>
+            <span class="NNNNY-message">사용 가능한 아이디입니다!</span>
+            <span class="fail-message">영문과 숫자 5~10글자로 작성해주세요</span>
 		</div>
-		<div class="row mt-20">
+        <div class="row mt-20">
 			<label class="ms-10">PW</label>
 			<input class="input input-line w-100" name="adminPw" type="password" required autocomplete="off">
+            <span class="NNNNY-message">사용 가능한 비밀번호입니다!</span>
+			<span class="fail-message">8~16자로 반드시 영문 대/소문자, 숫자, 특수문자가 포함되어야 합니다</span>
 		</div>
 		<div class="row mt-20">
 			<label class="ms-10">사원번호</label>
