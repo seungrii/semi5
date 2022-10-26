@@ -57,6 +57,12 @@
             <div class="right header-menu">
                 <ul>
                     <li>
+                        <a href="/admin/home">
+                            <i class="fa-solid fa-screwdriver-wrench"></i>
+                            <span>관리자</span>
+                        </a>
+                    </li>
+                    <li>
                         <a href="#">
                             <i class="fa-solid fa-user"></i>
                             <span>로그인</span>
