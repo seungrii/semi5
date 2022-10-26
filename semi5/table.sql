@@ -294,7 +294,6 @@ create table admin(
 alter table admin modify admin_id varchar2(7);
 alter table admin add admin_addMemo varchar2(150);
 alter table admin add admin_addDate date default sysdate not null;
-alter table admin modify aemployee_no
 -- admin 관리자 테이블 기본데이터 1개 추가       
 insert into admin(admin_id, admin_pw, employee_no) values('admin01', 'Admin01!', 1);
 
