@@ -5,7 +5,7 @@ import java.util.List;
 import com.victory.semi5.entity.BoardDto;
 import com.victory.semi5.vo.BoardListSearchVO;
 
-
+ 
 public interface BoardDao {
 	
 	//1. 등록
