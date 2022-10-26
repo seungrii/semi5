@@ -10,5 +10,7 @@ public interface UserDao {
 	void join(UserDto userDto);
 	
 	UserDto selectId(String userName, String userTel);
+	
+	UserDto selectPw(String userId, String userName, String userTel);
 
 }

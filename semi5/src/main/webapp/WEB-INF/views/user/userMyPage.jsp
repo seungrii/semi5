@@ -8,6 +8,9 @@
 		<div class="row center">
 			<h1>마이페이지</h1>
 		</div>
+		<div class="row">
+			<a href="#">회원탈퇴</a>
+		</div>
 		<div>
 			<img src="download?userId=${userDto.userId}" width="100" height="100">
 		</div>

@@ -64,4 +64,12 @@ public class UserDaoImpl implements UserDao{
  
 	}
 
+	@Override
+	public UserDto selectPw(String userId, String userName, String userTel) {
+		String sql = "select * from user_information where user_id=? and "
+				+ "user_name=? and user_tel=?";
+		Object[] param = {userId, userName, userTel};
+		return jdbcTemplate.query(sql, userExtractor, param);
+	}
+
 }

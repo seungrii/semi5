@@ -37,5 +37,16 @@ public class UserRestController {
 			return "NNNNY";
 		}
 	}
+	@GetMapping("/userPwFind")
+	public String pwFind(@RequestParam String userId,
+			@RequestParam String userName,
+			@RequestParam String userTel) {
+		UserDto findDto = userDao.selectPw(userId, userName, userTel);
+		if(findDto != null) {
+			return findDto.getUserPw();
+		}else {
+			return "NNNNY";
+		}
+	}
 	
 }

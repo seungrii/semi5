@@ -37,7 +37,7 @@
 				<div class="row">
 					<a href="idFind">아이디 찾기</a>
 					/
-					<a href="#">비밀번호 찾기</a>
+					<a href="pwFind">비밀번호 찾기</a>
 				</div>
 			</div>
 		</form>
