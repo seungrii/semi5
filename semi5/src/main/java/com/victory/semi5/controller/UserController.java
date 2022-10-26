@@ -2,6 +2,7 @@ package com.victory.semi5.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -18,8 +19,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.victory.semi5.entity.AdminDto;
+import com.victory.semi5.entity.BoardDto;
 import com.victory.semi5.entity.UserDto;
 import com.victory.semi5.repository.AdminDao;
 import com.victory.semi5.repository.BoardDao;
@@ -43,8 +46,8 @@ public class UserController {
 	
 	@PostMapping("/login")
 	public String login(@ModelAttribute UserDto userDto, 
-			HttpSession session, @RequestParam(required = false) String rank) {
-		if(rank == null) {
+			HttpSession session, @RequestParam String rank) {
+		if(rank.equals("off")) {
 			UserDto findDto = userDao.selectOne(userDto.getUserId());
 			if(findDto==null) {
 				return "redirect:login?error";
@@ -56,7 +59,7 @@ public class UserController {
 			}else {
 				return "redirect:login?error";
 			}			
-		}else {
+		}else if(rank.equals("on")){
 			AdminDto findDto = adminDao.selectOne(userDto.getUserId());
 			if(findDto == null) {
 				return "redirect:login?error";
@@ -64,10 +67,13 @@ public class UserController {
 			boolean passwordMatch = userDto.getUserPw().equals(findDto.getAdminPw());
 			if(passwordMatch) {
 				session.setAttribute("LoginId", userDto.getUserId());
+				session.setAttribute("loginGrade", "관리자");	//관리자로그인시, session추가
 				return "redirect:/";
 			}else {
 				return "redirect:login?error";
 			}		
+		}else {
+			return "redirect:login?error";
 		}
 	}
 	
@@ -119,10 +125,34 @@ public class UserController {
 	
 	@GetMapping("/mypage")
 	public String mypage(Model model,
-			HttpSession session) {
+			HttpSession session, RedirectAttributes attr) {
 		String userId = (String)session.getAttribute("LoginId");
-		UserDto userDto = userDao.selectOne(userId);
-		model.addAttribute("userDto", userDto);
-		return "user/userMyPage";
+		String loginGrade = (String)session.getAttribute("loginGrade");
+		
+		if(loginGrade.equals("관리자")) {	//관리자 로그인일 경우
+			attr.addAttribute("adminId", userId);
+			return "redirect:/admin/detailAdmin";
+		}
+		else {			
+			UserDto userDto = userDao.selectOne(userId);
+			List<BoardDto> boardDto = boardDao.selectIdList(userId);
+			model.addAttribute("userDto", userDto);
+			model.addAttribute("boardDto", boardDto);	
+			return "user/userMyPage";
+		}
+	}
+	
+	@RequestMapping("/userFind")
+	public String userFind() {
+		return "user/userFind";
+	}
+	@GetMapping("/idFind")
+	public String idFind() {
+		return "user/idFind";
+	}
+	
+	@GetMapping("/pwFind")
+	public String pwFind() {
+		return "user/pwFind";
 	}
 }

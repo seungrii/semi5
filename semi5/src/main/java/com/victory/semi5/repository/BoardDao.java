@@ -19,6 +19,7 @@ public interface BoardDao {
 	//검색
 //	List<BoardDto> selectList(String type, String keyword);
 	List<BoardDto> selectList(BoardListSearchVO vo);
+
 	//목록
 	List<BoardDto> list(BoardListSearchVO vo);
 	//검색
@@ -28,6 +29,9 @@ public interface BoardDao {
 	int count(BoardListSearchVO vo);
 	int searchCount(BoardListSearchVO vo);
 	int listCount(BoardListSearchVO vo);
+	
+	// 아이디 조회
+	List<BoardDto> selectIdList(String userId);
 
 	//3. 상세
 	BoardDto selectOne(int boardNo);
