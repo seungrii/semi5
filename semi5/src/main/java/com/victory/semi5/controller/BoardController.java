@@ -19,6 +19,7 @@ import com.victory.semi5.constant.SessionConstant;
 import com.victory.semi5.entity.BoardDto;
 import com.victory.semi5.error.TargetNotFoundException;
 import com.victory.semi5.repository.BoardDao;
+import com.victory.semi5.repository.ReplyDao;
 import com.victory.semi5.vo.BoardListSearchVO;
 
 @Controller
@@ -28,6 +29,8 @@ public class BoardController {
 	@Autowired
 	private BoardDao boardDao;
 	
+	@Autowired
+	private ReplyDao replyDao;
 	
 	//등록 
 	@GetMapping("/write")
@@ -117,7 +120,9 @@ public class BoardController {
 			model.addAttribute("boardDto", boardDao.selectOne(boardNo));
 		}
 		session.setAttribute("history", history);
-		
+//		(+추가) 댓글 목록을 조회하여 첨부
+		model.addAttribute("replyList", replyDao.selectList(boardNo));
+
 		return "board/detail";
 
 	}

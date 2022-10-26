@@ -187,6 +187,34 @@
 		</table>		
 	</div>
 	
+		<table class="table table-slit table-hover table-reply-list">
+		<!-- 댓글 목록 -->
+		<tbody>
+			<c:forEach var="replyDto" items="${replyList}">
+			<tr>
+				<td width="90%">
+					${replyDto.replyWriter}<br><br>
+					<pre>${replyDto.replyContent}</pre>
+					<fmt:formatDate value="${replyDto.replyWriteTime}" pattern="yyyy-MM-dd HH:mm"/>				
+				</td>
+				<th>
+					수정
+					<br>
+					삭제
+				</th>
+				
+			</tr>
+			</c:forEach>
+		</tbody>
+		<tfoot>
+		
+		</tfoot>
+	
+	</table>
+	
+	
+	
+	
 	<div class="row">
 	<h2>상태창</h2>	
 	</div>
