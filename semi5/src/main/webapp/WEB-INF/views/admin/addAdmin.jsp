@@ -15,7 +15,7 @@
 			<span>관리자계정 추가</span>
 		</div>
 		<div class="row mt-50">
-			<label class="ms-10">ID</label> <!-- join.css사용 안함 -->
+			<label class="ms-10">ID</label>
 			<input class="input input-line w-100" name="adminId" type="text" required autocomplete="off">
 			<span class="NNNNN-message">이미 사용중인 아이디입니다</span>
             <span class="NNNNY-message">사용 가능한 아이디입니다!</span>
