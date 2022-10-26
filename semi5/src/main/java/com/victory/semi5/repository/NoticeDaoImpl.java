@@ -5,7 +5,9 @@ import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
@@ -20,22 +22,22 @@ public class NoticeDaoImpl implements NoticeDao{
 	
 	//등록
 	@Override
-	public void write(NoticeDto noticeDto) {
+	public void insert(NoticeDto noticeDto) {
 		
-		String sql = "insert into notice_board(notice_no, admin_id, notice_title, notice_contents) values(notice_board_seq.nextval, ?,?,?)";
+		String sql = "insert into notice_board(notice_no, admin_id, notice_title, notice_contents) values(notice_board_seq.nextval,?,?,?)";
 		Object[] param = {noticeDto.getAdminId(), noticeDto.getNoticeTitle(), noticeDto.getNoticeContents()};
 		jdbcTemplate.update(sql, param);
 	}
 	
 	//등록에서 리스트가 아닌 상세로
 	@Override
-	public int write2(NoticeDto noticeDto) {
+	public int insert2(NoticeDto noticeDto) {
 		String sql = "select notice_board_seq.nextval from dual";
 		int noticeNo = jdbcTemplate.queryForObject(sql, int.class);
-		sql = "insert into notice_board(notice_no, admin_id, notice_title, notice_contents) values(?,?,?,?)";
+		
+		sql = "insert into notice_board(notice_no, notice_title, notice_contents) values(?,?,?)";
 		Object[] param = {
-				noticeNo, noticeDto.getAdminId(), 
-				noticeDto.getNoticeTitle(), noticeDto.getNoticeContents()
+				noticeNo,noticeDto.getNoticeTitle(), noticeDto.getNoticeContents()
 		};
 		jdbcTemplate.update(sql, param);
 		return noticeNo;
@@ -121,6 +123,78 @@ public class NoticeDaoImpl implements NoticeDao{
 		return jdbcTemplate.queryForObject(sql, int.class, param);
 		}
 	
+	@Override
+	public void clear() {
+		String sql = "delete notice_board";
+		jdbcTemplate.update(sql);
+	}
 	
+	@Override
+	public boolean delete(int noticeNo) {
+		String sql = "delete notice_board where notice_no=?";
+		Object[] param = {noticeNo};
+		return jdbcTemplate.update(sql, param)>0;
+	}
 	
+	//detail을 위한 ResultSetExtractor
+	private ResultSetExtractor<NoticeDto> extractor = new ResultSetExtractor<NoticeDto>() {
+		@Override
+		public NoticeDto extractData(ResultSet rs) throws SQLException, DataAccessException {
+			if(rs.next()) {
+				return NoticeDto.builder()
+						.noticeNo(rs.getInt("notice_no"))
+						.adminId(rs.getString("admin_id"))
+						.noticeTitle(rs.getString("notice_title"))
+						.noticeContents(rs.getString("notice_contents"))
+						.noticeWriteTime(rs.getDate("notice_write_time"))
+						.noticeUpdateTime(rs.getDate("notice_update_time"))
+						.noticeRead(rs.getInt("notice_read"))
+						.build();
+			}
+			else {
+				return null;
+			}
+		}
+	};
+	//detail
+	@Override
+	public NoticeDto selectOne(int noticeNo) {
+		String sql = "select * from notice_board where notice_no=?";
+		Object[] param = {noticeNo};
+		return jdbcTemplate.query(sql, extractor, param);
+	}
+	@Override
+	public boolean update(NoticeDto noticeDto) {
+		String sql = "update notice_board set "
+				+ "notice_title=?, notice_contents=? "
+				+ "notice_update_time=sysdate "
+				+ "where notice_no=?";
+		Object[] param = {
+				noticeDto.getNoticeTitle(),
+				noticeDto.getNoticeContents(),
+				noticeDto.getNoticeNo(),
+		};
+		return jdbcTemplate.update(sql, param)>0;
+	}
+	
+	//조회수
+	@Override
+	public boolean updateReadcount(int noticeNo) {
+		String sql = "update notice_board set notice_read=notice_read+1 where notice_no=?";
+		Object[] param= {noticeNo};
+		return jdbcTemplate.update(sql, param)>0;
+	}
+	
+	//조회수 증가
+	@Override
+	public NoticeDto read(int noticeNo) {
+		this.updateReadcount(noticeNo);
+		return this.selectOne(noticeNo);
+	}
+	@Override
+	public int sequence() {
+		String sql = "select notice_board_seq.nextval from dual";
+		int noticeNo = jdbcTemplate.queryForObject(sql, int.class);
+		return noticeNo;
+	}
 }

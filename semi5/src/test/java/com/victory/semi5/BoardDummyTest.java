@@ -8,6 +8,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import com.victory.semi5.entity.BoardDto;
 import com.victory.semi5.repository.BoardDao;
 
+
+
 @SpringBootTest
 public class BoardDummyTest {
 
@@ -32,10 +34,3 @@ public class BoardDummyTest {
 	}
 	
 }
-
-
-
-
-
-
-

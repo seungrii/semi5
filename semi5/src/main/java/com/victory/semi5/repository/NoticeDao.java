@@ -8,11 +8,12 @@ import com.victory.semi5.vo.NoticeListSearchVO;
 public interface NoticeDao {
 	
 	//등록
-	void write(NoticeDto noticeDto);
-	int write2(NoticeDto noticeDto);//번호까지 합쳐서 등록하는 메소드(등록에서 상세로)
+	void insert(NoticeDto noticeDto);
+	int sequence();//시퀀스 발행 메소드
+	int insert2(NoticeDto noticeDto);//번호까지 합쳐서 등록하는 메소드(등록에서 상세로)
 
 	//통합 검색 메소드 (목록+검색)
-	List<NoticeDto> selectList();
+	List<NoticeDto> selectList();//사용ㄴㄴ
 	List<NoticeDto> selectList(NoticeListSearchVO vo);
 	List<NoticeDto> list(NoticeListSearchVO vo);
 	List<NoticeDto> search(NoticeListSearchVO vo);
@@ -22,5 +23,19 @@ public interface NoticeDao {
 	int searchCount(NoticeListSearchVO vo);
 	int listCount(NoticeListSearchVO vo);
 	
+	void clear();
+	boolean delete(int noticeNo);
 	
+	//상세
+	NoticeDto selectOne(int noticeNo);
+
+	//조회수
+	boolean updateReadcount(int noticeNo);
+		
+	//조회수 증가까지
+	NoticeDto read(int noticeNo);
+	
+	//수정
+	boolean update(NoticeDto noticeNo);
+
 }

@@ -10,12 +10,13 @@ public interface BoardDao {
 	
 	//1. 등록
 	void insert(BoardDto boardDto);
+	int sequence();//시퀀스 발행 메소드
 	int insert2(BoardDto boardDto);//번호까지 합쳐서 등록하는 메소드(등록에서 상세로)
 
 
 	// 목록
 	List<BoardDto> selectList(); //안쓰는데 왜 있냐고
-	//통합 검색 메소드(목록+검색)
+	//검색
 //	List<BoardDto> selectList(String type, String keyword);
 	List<BoardDto> selectList(BoardListSearchVO vo);
 	//목록

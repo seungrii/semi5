@@ -25,15 +25,6 @@
             width:100%;
             font-size: 16px;
         }
-        /* 
-            방법 1 : .table 안에 있는 모든 th와 모든 td를 선택(후손선택자) 
-            - 내부에 있는 모든 요소를 선택하므로 테이블이 중첩되는 경우 문제가 발생
-        */
-        .table th, 
-        .table td {
-            /* border: 1px solid black; */
-        }
-
         /* 방법 2 : .table 부터 시작하는 모든 경로를 제시하여 th와 td를 선택(자식선택자) */
         .table > thead > tr > th,
         .table > thead > tr > td,
@@ -43,34 +34,6 @@
         .table > tfoot > tr > td {  
             padding:0.5em;
         }
-
-        /* 확장스타일 : 테두리가 있는 테이블 */
-        .table.table-border {
-            border:1px solid gray;
-        }
-        .table.table-border > thead > tr > th,
-        .table.table-border > thead > tr > td,
-        .table.table-border > tbody > tr > th,
-        .table.table-border > tbody > tr > td,
-        .table.table-border > tfoot > tr > th,
-        .table.table-border > tfoot > tr > td {  
-            border: 1px solid gray;
-        }
-
-        /* 확장 스타일 : 줄무늬 테이블*/
-        .table.table-stripe > thead > tr,
-        .table.table-stripe > tbody > tr:nth-child(2n)
-        {
-            background-color: #dfe6e9;
-        }
-
-        /* 확장 스타일 : 마우스에 반응하는 테이블*/
-        .table.table-hover > thead > tr:hover,
-        .table.table-hover > tbody > tr:hover,
-        .table.table-hover > tfoot > tr:hover {
-            background-color: #dfe6e9;
-        }
-
         /* 확장스타일 : 옆트임 테이블 */
         .table.table-slit {
             border: 3px solid gray;
@@ -89,13 +52,13 @@
 		color:black;
 	}
 	.table a:hover {
-		color:red;
+		color:gray;
 	}
     </style>
 
 <div class="container mt-40">
 	<div class="row center mt-40 mb-40">
-		<h1>공지사항 게시 💬</h1>
+		<h1>공지사항 💬</h1>
 	</div>
 	
 	
@@ -104,6 +67,8 @@
 		<thead>
 			<td align="right" colspan="5">
 				<a href="/">홈으로</a>
+				<a href="write">글쓰기</a>
+				
 			</td>
 		
 			<tr>

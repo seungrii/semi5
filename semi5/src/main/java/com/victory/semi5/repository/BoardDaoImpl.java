@@ -265,6 +265,12 @@ public class BoardDaoImpl implements BoardDao{
 		
 		return boardNo;
 	}
-	
+	@Override
+	public int sequence() {
+		String sql = "select board_seq.nextval from dual";
+		int boardNo = jdbcTemplate.queryForObject(sql, int.class);
+		return boardNo;
+
+	}
 	
 }
