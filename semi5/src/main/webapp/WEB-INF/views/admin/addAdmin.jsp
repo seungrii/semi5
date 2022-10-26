@@ -29,7 +29,7 @@
 		</div>
 		<div class="row mt-20">
 			<label class="ms-10">사원번호</label>
-			<input class="input input-line w-100" name="EmployeeNo" type="number" required autocomplete="off">
+			<input class="input input-line w-100" name="EmployeeNo" type="number" min="1" required autocomplete="off">
 		</div>
 		<div class="row mt-20">
 			<label class="ms-10">메모사항</label>

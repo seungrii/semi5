@@ -18,20 +18,19 @@
 			<label class="ms-10">ID</label>
 			<input class="input input-line w-100" name="adminId" type="text" readonly
 					value="${adminDto.adminId}">
-			<span class="NNNNN-message">이미 사용중인 아이디입니다</span>
-            <span class="NNNNY-message">사용 가능한 아이디입니다!</span>
-            <span class="fail-message">영문과 숫자 5~10글자로 작성해주세요</span>
 		</div>
 		<!-- loginId일 경우, PW 수정가능 -->
 		<c:if test="${LoginId == adminDto.adminId}">
 			<div class="row mt-20">
 				<label class="ms-10">PW</label>
 				<input class="input input-line w-100" name="adminPw" type="password" required>
+           	<span class="NNNNY-message">사용 가능한 비밀번호입니다!</span>
+			<span class="fail-message">8~16자로 반드시 영문 대/소문자, 숫자, 특수문자가 포함되어야 합니다</span>
 			</div>
 		</c:if>
 		<div class="row mt-20">
 			<label class="ms-10">사원번호</label>
-			<input class="input input-line w-100" name="EmployeeNo" type="number" required
+			<input class="input input-line w-100" name="EmployeeNo" type="number" min="1" required
 					value="${adminDto.employeeNo}">
 		</div>
 		<div class="row mt-20">
