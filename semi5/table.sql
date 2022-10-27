@@ -29,7 +29,6 @@ insert into user_information values (
 
 --영화
 create table movie(
-
 movie_number number primary key,
 movie_name varchar2(30),
 opening_date date,
@@ -37,13 +36,10 @@ screening_end date,
 movie_summary varchar2(3000),
 movie_play_time number(3),
 movie_age_limit number(2)
-
-
 );
 
---인물2 
+--인물
 create table character(
-
 character_number number primary key,
 movie_number references movie(movie_number) on delete set null,
 charater_name number,
@@ -55,6 +51,8 @@ character_nationality varchar2(36)
 );
 
 alter table character modify (charater_name varchar2(21));
+
+create sequence character_seq;
 
 ---영화 장르 
 create table genre(
@@ -81,7 +79,6 @@ cinema_porin varchar2(45) primary key,
 cinema_base_address varchar2(150),
 cinema_detail_address varchar2(50),
 cinema_tel varchar2(45)
-
 );
 
 ------음식
@@ -110,6 +107,9 @@ create table image(
  file_size varchar2(7) not null,
  file_time date not null
  );
+-- image 테이블 수정 구문
+alter table image modify file_size number check(file_size >=0);
+alter table image modify file_time default sysdate;
 
 ----회원 프로필 사진  
 create table profile_image(
@@ -117,13 +117,10 @@ user_id references user_information(user_id) on delete cascade,
 file_number references image(file_number) on delete cascade
 );
 
- ---------영화 포스터
- create table poster(
- movie_number references movie(movie_number) on delete cascade,
- file_number references image(file_number) on delete cascade
- 
-
- 
+---------영화 포스터
+create table poster(
+movie_number references movie(movie_number) on delete cascade,
+file_number references image(file_number) on delete cascade
 );
 
 ----가격표
@@ -187,14 +184,13 @@ theater_num references theater(theater_num) on delete cascade
 create table cinema_image(
 cinema_porin references cinema(cinema_porin) on delete cascade,
 file_number references image(file_number) on delete cascade
-
 );
 
- -------인물 이미지 
- create table character_image(
- character_number references character(character_number) on delete cascade,
- file_number references image(file_number) on delete cascade
- );
+--인물 이미지 
+create table character_image(
+character_number references character(character_number) on delete cascade,
+file_number references image(file_number) on delete cascade
+);
 
 
 
@@ -317,4 +313,4 @@ alter table movie_play drop column movie_date;
 
 --date format 변경 (시간까지 저장하기 위해서 변경)
 alter session set nls_date_format = 'yyyy-MM-dd hh24:mi';
-
+--dd

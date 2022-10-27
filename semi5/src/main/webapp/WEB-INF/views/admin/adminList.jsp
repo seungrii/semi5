@@ -2,31 +2,31 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:include page="/WEB-INF/views/admin/admin-template/adminHeader.jsp">
-	<jsp:param value="회원 목록" name="title"/>
+	<jsp:param value="관리자계정 목록" name="title"/>
 </jsp:include>
 <section class="w-980 test-css">
 
 <div class="container">
 
 	<div class="row center">
-		<h1>회원 목록</h1>
+		<h1>관리자계정 조회</h1>
 	</div>
 	
 	<!-- 키워드 검색 -->
 	<div class="row center">
-	<form action="list" method="get">
+	<form action="adminList" method="get">
 		<!-- type 선택목록 -->
 		<c:choose>
-			<c:when test="${param.type == 'user_name'}">
+			<c:when test="${param.type == 'employee_no'}">
 				<select class="input input-line" name="type" required>
-					<option value="user_id">아이디</option>
-					<option value="user_name" selected>이름</option>
+					<option value="admin_id">아이디</option>
+					<option value="employee_no" selected>사원번호</option>
 				</select>
 			</c:when>
 			<c:otherwise>
 				<select class="input input-line" name="type" required>
-					<option value="user_id" selected>아이디</option>
-					<option value="user_name">이름</option>
+					<option value="admin_id" selected>아이디</option>
+					<option value="employee_no">사원번호</option>
 				</select>
 			</c:otherwise>
 		</c:choose>
@@ -42,29 +42,33 @@
 		<thead>
 			<tr>
 				<td>아이디</td>
-				<td>이름</td>
-				<td>등급</td>
-				<td>연락처</td>
-				<td>수신동의</td>
-				<td>관리</td>
+				<td>사원번호</td>
+				<td>생성일</td>
+				<td colspan="1">관리</td>
 			</tr>
 		</thead>
 		<tbody align="center">
-			<c:forEach var="userDto" items="${listUser}">
+			<c:forEach var="adminDto" items="${adminList}">
 			<tr>
-				<td>${userDto.userId}</td>
-				<td>${userDto.userName}</td>
-				<td>${userDto.userRank}</td>
-				<td>${userDto.userTel}</td>
-				<td>${userDto.userBlurb}</td>
+				<td>${adminDto.adminId}</td>
+				<td>${adminDto.employeeNo}</td>
+				<td>${adminDto.adminAddDate}</td>
 				<td>
 					<a class="btn btn-neutral" 
-						href="detail?userId=${userDto.userId}">상세</a>
+						href="adminDetail?adminId=${adminDto.adminId}">상세</a>
+				</td>
+				<td>
+					<a class="btn btn-negative" 
+						href="adminDelete?adminId=${adminDto.adminId}">삭제</a>
 				</td>
 			</tr>
 			</c:forEach>
 		</tbody>
 	</table>
+	</div>
+	
+	<div class="center">
+		<a class="btn btn-positive" href="adminAdd">추가</a>
 	</div>
 
 </div>
