@@ -187,16 +187,16 @@
 	    			<a href="/admin/adminList">관리자 계정</a>
 	     		</div>
 	     		<div class="row">
-	     			<a href="/admin/userList">회원 관리</a>
+	     			<a href="/admin/userList">회원 정보</a>
 	     		</div>
 	     		<div class="row">
-	     			<a href="/admin/cinemaList">지점 정보</a>
+	     			<a href="/admin/cinemaList">지점 관리</a>
 	     		</div>
 	     		<div class="row">
-	     			<a href="/admin/movieList">영화 정보</a>
+	     			<a href="/admin/movieList">영화정보 관리</a>
 	     		</div>
 	     		<div class="row">
-	     			<a href="/admin/moviePlayList">영화 스케쥴</a>
+	     			<a href="/admin/moviePlayList">영화스케쥴 관리</a>
 	     		</div>
   			     <div class="row">
 	     			<a href="/community">커뮤니티</a>

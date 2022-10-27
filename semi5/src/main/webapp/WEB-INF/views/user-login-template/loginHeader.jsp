@@ -18,7 +18,7 @@
     <link rel="stylesheet" type="text/css" href="/css/reset.css">
     <link rel="stylesheet" type="text/css" href="/css/semi-layout.css">
     <link rel="stylesheet" type="text/css" href="/css/join.css">
-    <link rel="stylesheet" type="text/css" href="/css/login.css">
+    <!-- <link rel="stylesheet" type="text/css" href="/css/login.css">  login.css 어디..? -->
 
     <!-- 폰트어썸 -->
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"/>
