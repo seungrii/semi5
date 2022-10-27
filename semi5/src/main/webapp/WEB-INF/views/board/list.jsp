@@ -125,7 +125,11 @@
 						<!-- 말머리 출력(있을 경우에만) -->
 						<c:if test="${boardDto.boardHead != null}">
 							[${boardDto.boardHead}]
-						</c:if>				
+						</c:if>	
+						<!-- 댓글 개수 출력 -->
+						<c:if test="${boardDto.replyCount > 0}">
+							[${boardDto.replyCount}]
+						</c:if>			
 						<!-- 제목을 누르면 상세 페이지로 이동하도록 처리 -->
 						<a href="detail?boardNo=${boardDto.boardNo}">
 							${boardDto.boardTitle}
