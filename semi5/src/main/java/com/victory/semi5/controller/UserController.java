@@ -159,33 +159,7 @@ public class UserController {
 	public String pwFind() {
 		return "user/pwFind";
 	}
-	
-	
-	
-	
-	//user 계정조회
-	@GetMapping("/list")
-	public String list(
-			Model model,
-			@RequestParam(required = false) String type,
-			@RequestParam(required = false) String keyword) {
-		boolean isSearch = type != null && keyword != null;
-		if(isSearch) {
-			model.addAttribute("listUser", userDao.selectList(type, keyword));
-		}
-		else {
-			model.addAttribute("listUser", userDao.selectList());
-		}
-		return "user/list";
-	}
-	@GetMapping("/detail")
-	public String datail(
-			Model model,
-			@RequestParam String userId) {
-		UserDto userDto = userDao.selectOne(userId);
-		model.addAttribute("userDto", userDto);
-		return "user/detail";
-	}
+
 	
 	
 }

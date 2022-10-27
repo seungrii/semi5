@@ -10,7 +10,7 @@
 	
 <div class="container-400">
 	
-	<form action="addAdmin" method="post">
+	<form action="adminAdd" method="post">
 		<div class="row center fs-28">
 			<span>관리자계정 추가</span>
 		</div>

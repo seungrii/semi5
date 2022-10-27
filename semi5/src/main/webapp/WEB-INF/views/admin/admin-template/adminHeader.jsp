@@ -184,19 +184,19 @@
     				<h2>관리자메뉴</h2>
     			</div>
 	 		    <div class="row">
-	    			<a href="/admin/listAdmin">관리자 계정</a>
+	    			<a href="/admin/adminList">관리자 계정</a>
 	     		</div>
 	     		<div class="row">
-	     			<a href="/user/list">회원 관리</a>
+	     			<a href="/admin/userList">회원 관리</a>
 	     		</div>
 	     		<div class="row">
-	     			<a href="/cinema/listAdmin">지점 정보</a>
+	     			<a href="/admin/cinemaList">지점 정보</a>
 	     		</div>
 	     		<div class="row">
-	     			<a href="/movie/listAdmin">영화 정보</a>
+	     			<a href="/admin/movieList">영화 정보</a>
 	     		</div>
 	     		<div class="row">
-	     			<a href="/advance/moviePlayAdmin">영화 스케쥴</a>
+	     			<a href="/admin/moviePlayList">영화 스케쥴</a>
 	     		</div>
   			     <div class="row">
 	     			<a href="/community">커뮤니티</a>

@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.victory.semi5.entity.AdminDto;
+import com.victory.semi5.entity.UserDto;
 import com.victory.semi5.repository.AdminDao;
+import com.victory.semi5.repository.UserDao;
 
 @Controller
 @RequestMapping("/admin")
@@ -21,6 +23,8 @@ public class AdminController {
 	
 	@Autowired
 	private AdminDao adminDao;
+	@Autowired
+	private UserDao userDao;
 	
 	//admin home
 	@GetMapping("/home")
@@ -29,19 +33,19 @@ public class AdminController {
 	}
 	
 	//admin 계정추가
-	@GetMapping("/addAdmin")
+	@GetMapping("/adminAdd")
 	public String addAdmin() {
-		return "admin/addAdmin";
+		return "admin/adminAdd";
 	}
-	@PostMapping("/addAdmin")
+	@PostMapping("/adminAdd")
 	public String addAdmin(
 			@ModelAttribute AdminDto adminDto) {
 		adminDao.addAdmin(adminDto);
-		return "redirect:addAdmin";
+		return "redirect:adminAdd";
 	}
 	
 	//admin 계정조회
-	@GetMapping("/listAdmin")
+	@GetMapping("/adminList")
 	public String listAdmin(
 			Model model,
 			@RequestParam(required = false) String type,
@@ -53,36 +57,36 @@ public class AdminController {
 		else {
 			model.addAttribute("listAdmin", adminDao.selectList());
 		}
-		return "admin/listAdmin";
+		return "admin/adminList";
 	}
-	@GetMapping("/detailAdmin")
+	@GetMapping("/adminDetail")
 	public String datailAdmin(
 			Model model,
 			@RequestParam String adminId) {
 		AdminDto adminDto = adminDao.selectOne(adminId);
 		model.addAttribute("adminDto", adminDto);
-		return "admin/detailAdmin";
+		return "admin/adminDetail";
 	}
 	
 	//admin 계정수정
-	@GetMapping("/changeAdmin")
+	@GetMapping("/adminChange")
 	public String changeAdmin(
 			Model model,
 			@RequestParam String adminId) {
 		model.addAttribute("adminDto", adminDao.selectOne(adminId));
-		return "admin/changeAdmin";
+		return "admin/adminChange";
 	}
-	@PostMapping("/changeAdmin")
+	@PostMapping("/adminChange")
 	public String changeAdmin(
 			@ModelAttribute AdminDto adminDto,
 			RedirectAttributes attr) {
 		adminDao.changeAdmin(adminDto);
 		attr.addAttribute("adminId", adminDto.getAdminId());
-		return "redirect:detailAdmin";
+		return "redirect:adminDetail";
 	}
 	
 	//admin 계정삭제
-	@GetMapping("deleteAdmin")
+	@GetMapping("adminDelete")
 	public String deleteAdmin(
 		HttpSession session, @RequestParam String adminId) {
 		adminDao.deleteAdmin(adminId);
@@ -94,12 +98,39 @@ public class AdminController {
 			return "redirect:/";
 		}
 		else {
-			return "redirect:listAdmin";
+			return "redirect:adminList";
 		}
 	}
 	
 	
-
+	//회원관리
+	//회원관리 - 회원목록
+	@GetMapping("/userList")
+	public String list(
+			Model model,
+			@RequestParam(required = false) String type,
+			@RequestParam(required = false) String keyword) {
+		boolean isSearch = type != null && keyword != null;
+		if(isSearch) {
+			model.addAttribute("listUser", userDao.selectList(type, keyword));
+		}
+		else {
+			model.addAttribute("listUser", userDao.selectList());
+		}
+		return "admin/userList";
+	}
+		
+	//회원관리 - 회원상세
+	@GetMapping("/userDetail")
+	public String datail(
+			Model model,
+			@RequestParam String userId) {
+		UserDto userDto = userDao.selectOne(userId);
+		model.addAttribute("userDto", userDto);
+		return "admin/userDetail";
+	}
+	
+	
 	//admin 추가 및 수정 시, id pw 정규표현식 추가
 	
 	//추가사항 : table 디자인css 작성
