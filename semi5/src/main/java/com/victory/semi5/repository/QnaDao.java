@@ -9,8 +9,8 @@ public interface QnaDao {
 
 	//등록
 	void insert(QnaDto qnaDto);
-	int sequence();//시퀀스 발행 메소드
-	int insert2(QnaDto qnaDto);//번호까지 합쳐서 등록하는 메소드(등록에서 상세로)
+//	int sequence();//시퀀스 발행 메소드
+//	int insert2(QnaDto qnaDto);//번호까지 합쳐서 등록하는 메소드(등록에서 상세로)
 
 	//통합 검색 메소드 (목록+검색)
 	List<QnaDto> selectList();//사용ㄴㄴ

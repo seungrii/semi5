@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Data @NoArgsConstructor @AllArgsConstructor @Builder
 public class QnaDto {
 
-	private int qna_no, qna_read;
-	private String qna_writer, admin_id, qna_title, qna_contents, qna_answer;
-	private Date qna_write_time, qna_answer_time;
+	private int qnaNo, qnaRead;
+	private String qnaWriter, adminId, qnaTitle, qnaContents, qnaAnswer;
+	private Date qnaWriteTime, qnaAnswerTime;
 }
