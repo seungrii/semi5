@@ -10,7 +10,7 @@
 	
 <div class="container-400">
 	
-	<form action="addAdmin" method="post">
+	<form action="adminAdd" method="post">
 		<div class="row center fs-28">
 			<span>관리자계정 추가</span>
 		</div>
@@ -36,23 +36,14 @@
 			<textarea class="input textarea-line fix-width w-100" rows="8" cols="10" name="adminAddMemo"></textarea>
 		</div>
 		<div class="row center mt-30">
-			<a class="btn btn-neutral" href="listAdmin">목록</a>
+			<a class="btn btn-neutral" href="adminList">목록</a>
 			<button class="btn btn-positive" type="submit">추가</button>
 		</div>
 	</form>
 	
 </div>
 	
-    <div class="row">
-		<input type="text" id="id" name="userId" class="login-input w-100" placeholder="아이디">
-		<span class="success-message">사용 가능한 아이디 입니다.</span>
-		<span class="fail-message">사용할 수 없는 아이디 입니다.</span>
-	</div>
-	<div class="row">
-		<input type="password" name="userPw" class="login-input" placeholder="비밀번호">
-		<span class="success-message">올바른 비밀번호의 형식입니다.</span>
-		<span class="fail-message">8~16자로 반드시 영문 대/소문자, 숫자, 특수문자가 포함되어야 합니다</span>
-	</div>
+ 
 	
 	
 </section>

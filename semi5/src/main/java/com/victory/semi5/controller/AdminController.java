@@ -1,5 +1,8 @@
 package com.victory.semi5.controller;
 
+import java.io.File;
+import java.io.IOException;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,10 +13,17 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.victory.semi5.entity.AdminDto;
+import com.victory.semi5.entity.CinemaDto;
+import com.victory.semi5.entity.ImageDto;
+import com.victory.semi5.entity.UserDto;
 import com.victory.semi5.repository.AdminDao;
+import com.victory.semi5.repository.CinemaDao;
+import com.victory.semi5.repository.ImageDao;
+import com.victory.semi5.repository.UserDao;
 
 @Controller
 @RequestMapping("/admin")
@@ -21,6 +31,12 @@ public class AdminController {
 	
 	@Autowired
 	private AdminDao adminDao;
+	@Autowired
+	private UserDao userDao;
+	@Autowired
+	private CinemaDao cinemaDao;
+	@Autowired
+	private ImageDao imageDao;
 	
 	//admin home
 	@GetMapping("/home")
@@ -28,62 +44,63 @@ public class AdminController {
 		return "admin/home";
 	}
 	
+//	관리자계정
 	//admin 계정추가
-	@GetMapping("/addAdmin")
-	public String addAdmin() {
-		return "admin/addAdmin";
+	@GetMapping("/adminAdd")
+	public String adminAdd() {
+		return "admin/adminAdd";
 	}
-	@PostMapping("/addAdmin")
-	public String addAdmin(
+	@PostMapping("/adminAdd")
+	public String adminAdd(
 			@ModelAttribute AdminDto adminDto) {
 		adminDao.addAdmin(adminDto);
-		return "redirect:addAdmin";
+		return "redirect:adminAdd";
 	}
-	
+
 	//admin 계정조회
-	@GetMapping("/listAdmin")
-	public String listAdmin(
+	@GetMapping("/adminList")
+	public String adminList(
 			Model model,
 			@RequestParam(required = false) String type,
 			@RequestParam(required = false) String keyword) {
 		boolean isSearch = type != null && keyword != null;
 		if(isSearch) {
-			model.addAttribute("listAdmin", adminDao.selectList(type, keyword));
+			model.addAttribute("adminList", adminDao.selectList(type, keyword));
 		}
 		else {
-			model.addAttribute("listAdmin", adminDao.selectList());
+			model.addAttribute("adminList", adminDao.selectList());
 		}
-		return "admin/listAdmin";
+		return "admin/adminList";
 	}
-	@GetMapping("/detailAdmin")
-	public String datailAdmin(
+	@GetMapping("/adminDetail")
+	public String adminDetail(
 			Model model,
 			@RequestParam String adminId) {
 		AdminDto adminDto = adminDao.selectOne(adminId);
 		model.addAttribute("adminDto", adminDto);
-		return "admin/detailAdmin";
+		return "admin/adminDetail";
 	}
 	
 	//admin 계정수정
-	@GetMapping("/changeAdmin")
-	public String changeAdmin(
+	@GetMapping("/adminChange")
+	public String adminChange(
 			Model model,
 			@RequestParam String adminId) {
 		model.addAttribute("adminDto", adminDao.selectOne(adminId));
-		return "admin/changeAdmin";
+		return "admin/adminChange";
 	}
-	@PostMapping("/changeAdmin")
-	public String changeAdmin(
+	@PostMapping("/adminChange")
+	public String adminChange(
 			@ModelAttribute AdminDto adminDto,
 			RedirectAttributes attr) {
 		adminDao.changeAdmin(adminDto);
 		attr.addAttribute("adminId", adminDto.getAdminId());
-		return "redirect:detailAdmin";
+		return "redirect:adminDetail";
 	}
 	
 	//admin 계정삭제
-	@GetMapping("deleteAdmin")
-	public String deleteAdmin(
+	@GetMapping("adminDelete")
+	public String adminDelete(
 		HttpSession session, @RequestParam String adminId) {
 		adminDao.deleteAdmin(adminId);
 		String userId = (String)session.getAttribute("LoginId");
@@ -94,13 +111,120 @@ public class AdminController {
 			return "redirect:/";
 		}
 		else {
-			return "redirect:listAdmin";
+			return "redirect:adminList";
 		}
 	}
 	
 	
+//	회원정보 조회
+	//회원목록
+	@GetMapping("/userList")
+	public String userList(
+			Model model,
+			@RequestParam(required = false) String type,
+			@RequestParam(required = false) String keyword) {
+		boolean isSearch = type != null && keyword != null;
+		if(isSearch) {
+			model.addAttribute("userList", userDao.selectList(type, keyword));
+		}
+		else {
+			model.addAttribute("userList", userDao.selectList());
+		}
+		return "admin/userList";
+	}
+	//회원상세
+	@GetMapping("/userDetail")
+	public String userDatail(
+			Model model,
+			@RequestParam String userId) {
+		UserDto userDto = userDao.selectOne(userId);
+		model.addAttribute("userDto", userDto);
+		return "admin/userDetail";
+	}
+	
+	
+//	지점관리
+	//지점관리 - 추가
+	@GetMapping("/cinemaAdd")
+	public String cinemaAdd() {
+		return "admin/cinemaAdd";
+	}
+	@PostMapping("/cinemaAdd")
+	public String cinemaAdd(
+			@ModelAttribute CinemaDto cinemaDto,
+			@RequestParam MultipartFile imageCinema) 
+					throws IllegalStateException, IOException {
+//		cinemaDao.addCinema(cinemaDto);
+		cinemaDao.addCinema(cinemaDto);
+		
+		if(!imageCinema.isEmpty()) {
+			int imageNumber = imageDao.sequence();
+			imageDao.insert(
+				ImageDto.builder()
+					.fileNumber(imageNumber)
+					.fileName(imageCinema.getOriginalFilename())
+					.fileType(imageCinema.getContentType())
+					.fileSize(imageCinema.getSize())
+					.build());
+			File dir = new File("C:\\study\\vic\\upload");
+			dir.mkdirs();
+			File target = new File(dir, String.valueOf(imageNumber));
+			imageCinema.transferTo(target);
+			
+			imageDao.addCinemaImage(cinemaDto, imageNumber);
+		}
+		return "redirect:cinemaAdd";
+	}
 
-	//admin 추가 및 수정 시, id pw 정규표현식 추가
+	//지점관리 - 조회
+	@GetMapping("/cinemaList")
+	public String cinemaList() {
+		return "";
+	}
+	//지점관리 - 수정
+	@GetMapping("cinemaChange")
+	public String cinemaChange() {
+		return "";
+	}
+	//지점관리 - 삭제
+	@GetMapping ("cinemaDelete") 
+	public String cinemaDelete() {
+		return "";
+	}
+	
+	
+//	영화정보 관리
+	//영화정보 - 추가
+	//영화정보 - 조회
+	//영화정보 - 수정
+	//영화정보 - 삭제
+	
+	
+	
+//	영화스케쥴 관리
+	//영화스케쥴 - 추가
+	@GetMapping("/moviePlayAdd")
+	public String moviePlayAdd() {
+		return "";
+	}
+	//영화스케쥴 - 조회
+	@GetMapping("/moviePlayList")
+	public String moviePlayList() {
+		return "";
+	}
+	//영화스케쥴 - 수정
+	@GetMapping("/moviePlayChange")
+	public String moviePlayChange() {
+		return "";	
+	}
+	//영화스케쥴 - 삭제
+	@GetMapping("/moviePlayDelete")
+	public String moviePlayDelete() {
+		return "";
+	}
+	
+	
+
 	
 	//추가사항 : table 디자인css 작성
 	//재확인 알람창 필요 (ex. 정말 삭제하시겠습니까?)

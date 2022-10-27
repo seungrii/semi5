@@ -10,7 +10,7 @@
 	
 <div class="container-400">
 	
-	<form action="changeAdmin" method="post">
+	<form action="adminChange" method="post">
 		<div class="row center fs-28">
 			<span>관리자계정 수정</span>
 		</div>
@@ -39,9 +39,9 @@
 					>${adminDto.adminAddMemo}</textarea>
 		</div>
 		<div class="row center mt-30">
-			<a class="btn btn-neutral" href="listAdmin">목록</a>
+			<a class="btn btn-neutral" href="adminList">목록</a>
 			<button class="btn btn-neutral" type="submit">수정</button>
-			<a class="btn btn-negative" href="deleteAdmin?adminId=${adminDto.adminId}">삭제</a>
+			<a class="btn btn-negative" href="adminDelete?adminId=${adminDto.adminId}">삭제</a>
 		</div>
 	</form>
 	

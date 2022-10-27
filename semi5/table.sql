@@ -81,7 +81,6 @@ cinema_porin varchar2(45) primary key,
 cinema_base_address varchar2(150),
 cinema_detail_address varchar2(50),
 cinema_tel varchar2(45)
-
 );
 
 ------음식
@@ -110,6 +109,9 @@ create table image(
  file_size varchar2(7) not null,
  file_time date not null
  );
+-- image 테이블 수정 구문
+alter table image modify file_size number check(file_size >=0);
+alter table image modify file_time default sysdate;
 
 ----회원 프로필 사진  
 create table profile_image(
@@ -187,14 +189,13 @@ theater_num references theater(theater_num) on delete cascade
 create table cinema_image(
 cinema_porin references cinema(cinema_porin) on delete cascade,
 file_number references image(file_number) on delete cascade
-
 );
 
- -------인물 이미지 
- create table character_image(
- character_number references character(character_number) on delete cascade,
- file_number references image(file_number) on delete cascade
- );
+--인물 이미지 
+create table character_image(
+character_number references character(character_number) on delete cascade,
+file_number references image(file_number) on delete cascade
+);
 
 
 
