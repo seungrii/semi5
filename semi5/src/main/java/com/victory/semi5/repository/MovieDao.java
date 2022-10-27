@@ -16,4 +16,5 @@ public interface MovieDao {
     boolean update(MovieDto dto);//수정
     boolean delete(int movieNumber);
 
+    void insertHashtagVO(int movieNumber, int genreNo);
 }

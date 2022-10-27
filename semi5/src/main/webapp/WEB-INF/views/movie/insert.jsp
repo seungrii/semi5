@@ -22,10 +22,10 @@
 <%--영화포스터! --%>
 감독<input name="charaterName" type="text"required><br><br>
 배우<input name="charaterName" type="text"required><br><br>
-배우<input name="charaterName" type="text"required><br><br>
-배우<input name="charaterName" type="text"required><br><br>
-배우<input name="charaterName" type="text"required><br><br>
-
+배우<input name="charaterName" type="text"><br><br>
+배우<input name="charaterName" type="text"><br><br>
+배우<input name="charaterName" type="text"><br><br>
+장르<input name="genreName" type="text" required><br><br>
 <%--
 파일 이름 <input name="FileName" type="text"required><br><br>
 파일 타입<input name="FileType" type="text"required><br><br>

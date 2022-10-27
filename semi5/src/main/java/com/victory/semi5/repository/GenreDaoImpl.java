@@ -29,4 +29,26 @@ public class GenreDaoImpl implements GenreDao {
 		
 	}
 
+	@Override
+	public int insert2(GenreDto dto) {
+		// TODO Auto-generated method stub
+		String sql="select genre_seq.nextval from dual";
+		int genreNo=jdbcTemplate.queryForObject(sql, int.class);
+		
+		 sql="insert into Genre("
+				+"genre_no,genre_name"
+				+") values("
+				+"?,?"
+				+")";
+		
+		Object[] param= {
+				genreNo,
+				dto.getGenreName()
+		};
+		jdbcTemplate.update(sql,param);
+		
+		return genreNo;
+		
+	}
+
 }

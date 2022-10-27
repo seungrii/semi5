@@ -1,5 +1,6 @@
 package com.victory.semi5.controller;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,11 +12,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.victory.semi5.entity.CharacterDto;
-import com.victory.semi5.entity.ImageDto;
+import com.victory.semi5.entity.GenreDto;
 import com.victory.semi5.entity.MovieDto;
 import com.victory.semi5.repository.CharacterDao;
-import com.victory.semi5.repository.ImageDao;
+import com.victory.semi5.repository.GenreDao;
 import com.victory.semi5.repository.MovieDao;
+import com.victory.semi5.vo.HashtagVO;
 
 
 @Controller
@@ -31,6 +33,13 @@ public class MovieController {
 	@Autowired 
 	CharacterDao characterDao;
 	
+	@Autowired
+	GenreDao genreDao;
+	
+
+	
+	
+	
 	
 	@GetMapping("/insert")
 	public String insert() {
@@ -40,7 +49,7 @@ public class MovieController {
 //insert시작
 	
 	@PostMapping("/insert")
-	public String insert(@ModelAttribute MovieDto moviedto,CharacterDto characterDto,RedirectAttributes attr)  {
+	public String insert(@ModelAttribute MovieDto moviedto,CharacterDto characterDto,GenreDto genredto,RedirectAttributes attr)  {
 //		DB insert
 		
 	
@@ -50,11 +59,18 @@ public class MovieController {
 		//시퀀스 번호 생성하며 등록하기
 		int movieNumber=movieDao.insert2(moviedto);
 		attr.addAttribute("movieNumber",movieNumber);
+		
+		
 		characterDto.setMovieNumber(movieNumber);
 		
 		//imageDao.insert(imageDto);
 		characterDao.insert(characterDto);
 		
+		int genreNo=genreDao.insert2(genredto);
+		attr.addAttribute("genreNo",genreNo);
+		
+		//hashtagVo
+		movieDao.insertHashtagVO(movieNumber, genreNo);
 		
 		
 		
@@ -175,6 +191,9 @@ public class MovieController {
 			return "movie/editFail";
 		}
 	}
+	
+	
+	
 	
 	//model은 jsp 불러 올 때 데이터 전달
 	//redirect는 다른 컨트롤러를 불러 오는 것
