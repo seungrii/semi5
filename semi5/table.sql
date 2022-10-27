@@ -29,7 +29,6 @@ insert into user_information values (
 
 --영화
 create table movie(
-
 movie_number number primary key,
 movie_name varchar2(30),
 opening_date date,
@@ -37,13 +36,10 @@ screening_end date,
 movie_summary varchar2(3000),
 movie_play_time number(3),
 movie_age_limit number(2)
-
-
 );
 
---인물2 
+--인물
 create table character(
-
 character_number number primary key,
 movie_number references movie(movie_number) on delete set null,
 charater_name number,
@@ -55,6 +51,8 @@ character_nationality varchar2(36)
 );
 
 alter table character modify (charater_name varchar2(21));
+
+create sequence character_seq;
 
 ---영화 장르 
 create table genre(
@@ -119,13 +117,10 @@ user_id references user_information(user_id) on delete cascade,
 file_number references image(file_number) on delete cascade
 );
 
- ---------영화 포스터
- create table poster(
- movie_number references movie(movie_number) on delete cascade,
- file_number references image(file_number) on delete cascade
- 
-
- 
+---------영화 포스터
+create table poster(
+movie_number references movie(movie_number) on delete cascade,
+file_number references image(file_number) on delete cascade
 );
 
 ----가격표

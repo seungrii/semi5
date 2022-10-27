@@ -12,7 +12,7 @@ public class CharacterDto {
 	
 	private int characterNumber;
 	private int movieNumber;
-	private String charaterName;
+	private String charaterName1, charaterName2, charaterName3, charaterName4, charaterName5;
 	private int characterAge;
 	private String characterAwards;
 	private String characterFilmography;
