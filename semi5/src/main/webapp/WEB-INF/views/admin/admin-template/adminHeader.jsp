@@ -30,7 +30,7 @@
     <link rel="stylesheet" type="text/css" href="/css/semi-commons.css">
     <link rel="stylesheet" type="text/css" href="/css/reset.css">
     <link rel="stylesheet" type="text/css" href="/css/semi-layout.css">
-    <link rel="stylesheet" type="text/css" href="/css/join.css">
+    <link rel="stylesheet" type="text/css" href="/css/admin.css">
 
     <!-- 폰트어썸 -->
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"/>
@@ -40,11 +40,7 @@
 
     <!-- js 파일 -->
     <script src="/js/navigator.js"></script>
-    <script src="/js/adminAccountCheck.js"></script>
-    <script type="text/javascript">
-
-
-        
+    <script type="text/javascript">  
     </script>
 </head>
 <body>
@@ -54,26 +50,26 @@
         <!-- 헤더 영역 -->
         <div class="flex-container">
             <div class="left">
-                <a href="#" id="logo">
+                <a href="/" id="logo">
                     <img id="logo" src="/image/logo.png">
                 </a>
             </div>
             <div class="right header-menu">
                 <ul>
                     <li>
-                        <a href="#">
-                            <i class="fa-solid fa-user"></i>
-                            <span>로그인</span>
+                        <a href="/admin/home">
+                            <i class="fa-solid fa-screwdriver-wrench"></i>
+                            <span>관리자</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#">
-                            <i class="fa-solid fa-arrow-right-to-bracket"></i>
-                            <span>회원가입</span>
-                        </a>
-                    </li>
+                       	<a href="/user/logout">
+                           <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                           <span>로그아웃</span>
+                       	</a>
+                 	</li>
                     <li>
-                        <a href="#">
+                        <a href="/user/mypage">
                             <i class="fa-solid fa-gear"></i>
                             <span>마이페이지</span>
                         </a>

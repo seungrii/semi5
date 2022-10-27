@@ -2,10 +2,7 @@
 create user semi5 identified by semi55555;
 grant connect, resource to semi5; 
 
-
-
-
-
+-- user 회원 테이블 생성
 create table user_information(
     user_id varchar2(20) primary key check(regexp_like(user_id, '^[a-z0-9]{5,20}$')),
     user_pw varchar2(16) not null check(
