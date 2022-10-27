@@ -10,7 +10,6 @@ import org.springframework.stereotype.Repository;
 import com.victory.semi5.entity.CinemaDto;
 import com.victory.semi5.entity.MovieDto;
 import com.victory.semi5.vo.CinemaNameVO;
-import com.victory.semi5.vo.MoviePlayDateVO;
 import com.victory.semi5.vo.MoviePlayStartVO;
 
 @Repository
@@ -62,7 +61,7 @@ public class AdvanceDaoImpl implements AdvanceDao {
 	private RowMapper<CinemaNameVO> cinemaNameMapper = (rs, idx) -> {
 		CinemaNameVO cinemaNameVO = new CinemaNameVO();
 		
-		cinemaNameVO.setCiName(rs.getString("CINAME"));
+		cinemaNameVO.setCinemaName(rs.getString("CINAME"));
 		
 		return cinemaNameVO;
 	};
@@ -70,36 +69,13 @@ public class AdvanceDaoImpl implements AdvanceDao {
 	
 	@Override
 	public List<CinemaNameVO> selectMovieChoiceList(int movieNumber) {
-		String sql = "select CI.cinema_porin CINAME from movie M "
-				+ "right join movie_play MP on M.movie_number = MP.movie_number "
-				+ "left join theater TH on MP.theater_num = TH.theater_num "
-				+ "left join cinema CI on TH.cinema_porin = CI.cinema_porin "
-				+ "where M.movie_number = ? group by CI.cinema_porin";
+		String sql = "select distinct cinema_porin CINAME from theater where theater_num in("
+				+ " select distinct theater_num from movie_play where movie_number = ?"
+				+ ")";
 		Object[] param = {movieNumber};
 		return jdbcTemplate.query(sql, cinemaNameMapper, param);
 	}
-	//아직 사용 안함
-	private RowMapper<MoviePlayDateVO> moviePlayDateRowMapper = (rs, idx) -> {
-		MoviePlayDateVO moviePlayDateVO = new MoviePlayDateVO();
-		
-		moviePlayDateVO.setNyeon(rs.getString("nyeon"));
-		moviePlayDateVO.setWoar(rs.getString("woar"));
-		moviePlayDateVO.setIl(rs.getString("il"));
-		moviePlayDateVO.setYoil(rs.getString("yoil"));
-		
-		return moviePlayDateVO;
-		
-	};
-	//아직 사용 안함
-	@Override
-	public List<MoviePlayDateVO> selectMoviePlayDateList() {
-		String sql = "select to_char(movie_play_start, 'yyyy')nyeon,"
-				+ "to_char(movie_play_start, 'mm')woar,"
-				+ "to_char(movie_play_start, 'dd')il,"
-				+ "to_char(movie_play_start, 'dy')yoil "
-				+ "from movie_play";
-		return jdbcTemplate.query(sql, moviePlayDateRowMapper);
-	}
+	
 	
 	private RowMapper<MoviePlayStartVO> moviePlayStartMapper = (rs, idx) -> {
 		MoviePlayStartVO moviePlayStartVO = new MoviePlayStartVO();

@@ -7,6 +7,6 @@ import lombok.NoArgsConstructor;
 
 @Data @AllArgsConstructor @NoArgsConstructor @Builder
 public class CinemaNameVO {
-	private String ciName;
+	private String cinemaName;
 
 }

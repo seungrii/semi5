@@ -29,26 +29,28 @@ public class AdvanceRestController {
 		List<CinemaNameVO> cinemaNameVOs = advanceDao.selectMovieChoiceList(movieNumber);
 		
 		if(cinemaNameVOs != null) {
+//			System.out.println("성공");
 			return cinemaNameVOs; //성공
 		}
 		else {
-			return null; //실패			
+//			System.out.println("실패");
+			return null; //실패
 		}
 		
 	}//selectCinemaList() end
 	
-//	@GetMapping("/list")
-//	public List<MoviePlayStartVO> selectMoviePlayDays(@RequestParam int movieNumber,
-//			@RequestParam String cinemaName) {
-//		List<MoviePlayStartVO> moviePlayStartVOs = advanceDao.selectCinemaChoiceList(movieNumber, cinemaName);
-//		
-//		if(moviePlayStartVOs != null) {
-//			return moviePlayStartVOs; //성공
-//		}
-//		else {
-//			return null; //실패
-//		}
-//	}//selectMoviePlayDays() end
+	@GetMapping("/alist")
+	public List<MoviePlayStartVO> selectMoviePlayDays(@RequestParam int movieNumber,
+			@RequestParam String cinemaName) {
+		List<MoviePlayStartVO> moviePlayStartVOs = advanceDao.selectCinemaChoiceList(movieNumber, cinemaName);
+		
+		if(moviePlayStartVOs != null) {
+			return moviePlayStartVOs; //성공
+		}
+		else {
+			return null; //실패
+		}
+	}//selectMoviePlayDays() end
 	
 
 }//AdvanceRestController end
