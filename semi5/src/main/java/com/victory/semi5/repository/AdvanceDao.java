@@ -5,7 +5,6 @@ import java.util.List;
 import com.victory.semi5.entity.CinemaDto;
 import com.victory.semi5.entity.MovieDto;
 import com.victory.semi5.vo.CinemaNameVO;
-import com.victory.semi5.vo.MoviePlayStartVO;
 import com.victory.semi5.vo.MovieScheduleVO;
 
 public interface AdvanceDao {
@@ -16,7 +15,6 @@ public interface AdvanceDao {
 	
 	//조건부 List 출력
 	List<CinemaNameVO> selectMovieChoiceList(int movieNumber);
-	List<MoviePlayStartVO> selectCinemaChoiceList(int movieNumber, String cinemaName);
 	
 	
 

@@ -10,7 +10,6 @@ import org.springframework.stereotype.Repository;
 import com.victory.semi5.entity.CinemaDto;
 import com.victory.semi5.entity.MovieDto;
 import com.victory.semi5.vo.CinemaNameVO;
-import com.victory.semi5.vo.MoviePlayStartVO;
 import com.victory.semi5.vo.MovieScheduleVO;
 
 @Repository
@@ -75,21 +74,6 @@ public class AdvanceDaoImpl implements AdvanceDao {
 				+ ")";
 		Object[] param = {movieNumber};
 		return jdbcTemplate.query(sql, cinemaNameMapper, param);
-	}
-	
-	
-	private RowMapper<MoviePlayStartVO> moviePlayStartMapper = (rs, idx) -> {
-		MoviePlayStartVO moviePlayStartVO = new MoviePlayStartVO();
-		
-		moviePlayStartVO.setMPS(rs.getDate("MPS"));
-		
-		return moviePlayStartVO;
-	};
-	
-	@Override
-	public List<MoviePlayStartVO> selectCinemaChoiceList(int movieNumber, String cinemaName) {
-		// 
-		return null;
 	}
 	
 	private RowMapper<MovieScheduleVO> movieScheduleMapper = (rs, idx) -> {
