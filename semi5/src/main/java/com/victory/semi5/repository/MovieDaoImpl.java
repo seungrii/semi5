@@ -128,4 +128,29 @@ public class MovieDaoImpl implements MovieDao {
 		return jdbcTemplate.update(sql,param)>0;
 		
 	}
+
+	@Override
+	public int insert2(MovieDto dto) {
+		// TODO Auto-generated method stub
+	String sql="select movie_seq.nextval from dual";
+	int movieNumber=jdbcTemplate.queryForObject(sql, int.class);
+	
+	sql="insert into movie("
+			+"movie_number,movie_name,opening_date, "
+			+"screening_end, movie_summary,movie_play_time,movie_age_limit"
+			+ ") values("
+			+"?,?,?,?,?,?,?"
+			+")";
+	Object[] param= {
+			movieNumber,dto.getMovieName(),dto.getOpeningDate(),
+			dto.getScreeningEnd(),dto.getMovieSummary(),
+			dto.getMoviePlayTime(),dto.getMovieAgeLimit(),
+			
+	};
+		
+		jdbcTemplate.update(sql, param);
+		
+		return movieNumber;
+	}
+	
 }

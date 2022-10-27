@@ -18,18 +18,15 @@ import com.victory.semi5.repository.ImageDao;
 import com.victory.semi5.repository.MovieDao;
 
 
- 
-
-
 @Controller
 @RequestMapping("/movie")
 public class MovieController {
 	
 	@Autowired 
 	MovieDao movieDao;
-
-	@Autowired 
-	ImageDao imageDao;
+//
+//	@Autowired 
+//	ImageDao imageDao;
 	
 	@Autowired 
 	CharacterDao characterDao;
@@ -43,12 +40,25 @@ public class MovieController {
 //insert시작
 	
 	@PostMapping("/insert")
-	public String insert(@ModelAttribute MovieDto dto) {
+	public String insert(@ModelAttribute MovieDto moviedto,CharacterDto characterDto,RedirectAttributes attr)  {
 //		DB insert
 		
+	
+	
+		movieDao.insert(moviedto);
 		
-		//영화정보 inset
-		movieDao.insert(dto);
+		//시퀀스 번호 생성하며 등록하기
+		int movieNumber=movieDao.insert2(moviedto);
+		attr.addAttribute("movieNumber",movieNumber);
+		characterDto.setMovieNumber(movieNumber);
+		
+		//imageDao.insert(imageDto);
+		characterDao.insert(characterDto);
+		
+		
+		
+		
+		
 		
 	
 		
@@ -56,27 +66,27 @@ public class MovieController {
 		return "redirect:insert_success";
 	}
 	
-	@PostMapping("/insert")
-	public String insert(@ModelAttribute ImageDto dto) {
-//		DB insert
-		
-		imageDao.insert(dto);
-		
-//	insert_success 매핑으로 redirect(강제이동) 처리하세요
-		return "redirect:insert_success";
-	}
-	
-	@PostMapping("/insert")
-	public String insert(@ModelAttribute CharacterDto dto) {
-//		DB insert
-		
-	characterDao.insert(dto);
-	//void insert(CharacterDto dto);//데이터 넣기   
-	
-	
-//		insert_success 매핑으로 redirect(강제이동) 처리하세요
-		return "redirect:insert_success";
-	}
+//	@PostMapping("/insert")
+//	public String insert(@ModelAttribute ImageDto dto) {
+////		DB insert
+//		
+//		imageDao.insert(dto);
+//		
+////	insert_success 매핑으로 redirect(강제이동) 처리하세요
+//		return "redirect:insert_success";
+//	}
+//	
+//	@PostMapping("/insert")
+//	public String insert(@ModelAttribute CharacterDto dto) {
+////		DB insert
+//		
+//	characterDao.insert(dto);
+//	//void insert(CharacterDto dto);//데이터 넣기   
+//	
+//	
+////		insert_success 매핑으로 redirect(강제이동) 처리하세요
+//		return "redirect:insert_success";
+//	}
 	
 	
 	

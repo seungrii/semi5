@@ -29,39 +29,40 @@ public class ImageDaoImpl implements ImageDao {
 				dto.getFileName(),dto.getFileType(),
 				dto.getFileSize(),dto.getFileTime(),
 				
+				
 		};
 		jdbcTemplate.update(sql,param);
 		
 	}
 
-	@Override
-	public List<ImageDto> selectList() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<ImageDto> selectList(String type, String keyword) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ImageDto selectOne(int fileNumber) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public boolean update(ImageDto dto) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean delete(int fileNumber) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+//	@Override
+//	public List<ImageDto> selectList() {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	@Override
+//	public List<ImageDto> selectList(String type, String keyword) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	@Override
+//	public ImageDto selectOne(int fileNumber) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	@Override
+//	public boolean update(ImageDto dto) {
+//		// TODO Auto-generated method stub
+//		return false;
+//	}
+//
+//	@Override
+//	public boolean delete(int fileNumber) {
+//		// TODO Auto-generated method stub
+//		return false;
+//	}
 
 }

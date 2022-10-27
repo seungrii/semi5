@@ -18,26 +18,22 @@ public class CharacterDaoImpl implements CharacterDao {
 		
 		String sql="insert into character("
 				+"character_number,movie_number,charater_name, "
-				+"character_age,character_ awards,character_filmography, "
-				+"character_type,character_nationality,"
-				+") values("
-				+"character_seq.nextval,?,?,?,?,?"
+				+"character_age,character_awards,character_filmography, "
+				+"character_type,character_nationality"
+				+")values("
+				+ "character_seq.nextval,?,?,?,?,?,?,?"
 				+")";
 		
 		Object[] param= {
-				dto.getMovieNumber(), dto.getCharaterName(),
-				dto.getCharacterAge(), dto.getCharacterAge(),
-				dto.getCharacterAwards(), dto.getCharacterFilmography(),
-				dto.getCharacterType(),
+				dto.getMovieNumber(),
+				 dto.getCharaterName(),
+				dto.getCharacterAge(), dto.getCharacterAwards(),
+				dto.getCharacterFilmography(), dto.getCharacterType(),
 				dto.getCharacterNationality()
 		};
 		jdbcTemplate.update(sql,param);
 				
 	}
-	
-	
-	
-	
-	
-
 }
+//번호 생성하면서 등록
+//rowmapper는 list때문에
