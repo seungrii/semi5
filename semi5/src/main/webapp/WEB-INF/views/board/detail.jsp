@@ -86,6 +86,29 @@
             border-top: 2px solid gray;
         }
 </style> 
+
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script>
+	$(function(){
+		//목표 : 
+		//1. edit-btn을 누르면 view를 숨기고 editor를 보여준다
+		//2. cancel-btn을 누르면 editor를 숨기고 view를 보여준다
+		//3. 처음에는 view만 보여준다
+		//1
+		$(".edit-btn").click(function(){
+			$(this).parents(".view").hide();
+			$(this).parents(".view").next(".editor").show();
+		});
+		//2
+		$(".cancel-btn").click(function(){
+			$(this).parents(".editor").hide();
+			$(this).parents(".editor").prev(".view").show();
+		});
+		//3
+		$(".editor").hide();
+	});
+	
+</script>
     
 <div class="container mt-40 mb-40">
 	<div class="row center">
@@ -126,7 +149,7 @@
 				<tr>
 					<th>작성일</th>
 					<td>
-						<fmt:formatDate value="${boardDto.boardWriteTime}" pattern="y년 M월 d일 E요일 a h시 m분 s초"/>
+						<fmt:formatDate value="${boardDto.boardWriteTime}" pattern="yyyy-MM-dd HH:mm"/>
 					</td>
 				</tr>
 		
@@ -134,42 +157,29 @@
 				<tr>
 					<th>수정일</th>
 					<td>
-						<fmt:formatDate value="${boardDto.boardUpdateTime}" pattern="y년 M월 d일 E요일 a h시 m분 s초"/>
+						<fmt:formatDate value="${boardDto.boardUpdateTime}" pattern="yyyy-MM-dd HH:mm"/>
 					</td>
 				</tr>
 				</c:if>
 				
 				<!-- 첨부파일 -->
 				
-				
 			</tbody>
 			
 			<tfoot>
 				<tr>
 					<td colspan="2" align="right">
-			
-	<a class="btn btn-positive" href="write">글쓰기</a>
-	<a class="btn btn-positive" href="edit?boardNo=${boardDto.boardNo}">수정하기</a>
-	<a class="btn btn-negative" href="delete?boardNo=${boardDto.boardNo}">삭제하기</a>
-	<a class="btn btn-neutral" href="list">목록으로</a>
-	
-
-			
-			
-			
-			
-			
-						
-						<%-- <c:if test="${LoginId != null}">
+					
+						<c:if test="${LoginId != null}">
 						<a class="btn btn-positive" href="write">글쓰기</a>
-						<a class="btn btn-positive" href="write?boardParent=${dto.boardNo}">답글쓰기</a>
+						<a class="btn btn-positive" href="write?boardParent=${boardDto.boardNo}">답글쓰기</a>
 						</c:if>
 						
-						
+						<%--
 							관리자는 삭제만, 회원은 자신의 글만 수정/삭제 가능하도록 처리
-						
+						 --%>
 						<c:set var="owner" value="${LoginId == boardDto.boardWriter}"></c:set>
-						<c:set var="admin" value="${ug == '관리자'}"></c:set>
+						<c:set var="admin" value="${loginGrade == '관리자'}"></c:set>
 						
 						<c:if test="${owner}">
 						<a class="btn btn-negative" href="edit?boardNo=${boardDto.boardNo}">수정하기</a>
@@ -177,56 +187,173 @@
 						</c:if>
 						
 						<c:if test="${admin}">
-						<a class="btn btn-negative" href="delete?boardNo=${dto.boardNo}">삭제하기</a>
-						</c:if> --%>
+						<a class="btn btn-negative" href="delete?boardNo=${boardDto.boardNo}">삭제하기</a>
+						</c:if>
 						
+						<a class="btn btn-neutral" href="list">목록으로</a>
 					</td>
 				</tr>
-			
 			</tfoot>
 		</table>		
 	</div>
 	
+	<div class="row left">
 		<table class="table table-slit table-hover table-reply-list">
 		<!-- 댓글 목록 -->
+		
+		<thead>
+			<tr>
+					<td colspan="2">
+						총 ${replyList.size()}개의 댓글이 있습니다.
+					</td>
+				</tr>
+		</thead>
+		
 		<tbody>
 			<c:forEach var="replyDto" items="${replyList}">
-			<tr>
+			
+			<!-- 사용자에게 보여주는 화면 -->
+			<tr class="view">
 				<td width="90%">
-					${replyDto.replyWriter}<br><br>
-					<pre>${replyDto.replyContent}</pre>
+				<!-- 작성자 -->
+					${replyDto.replyWriter}
+					<c:if test="${boardDto.boardWriter ==  replyDto.replyWriter}">
+						(작성자)
+					</c:if>
+					<!-- 회원등급은 자유게시판에 안씀 위화감 조성ㅋ -->
+					<br>
+					
+					<!-- 블라인드 여부에 따라 다르게 표시 -->
+						<c:choose>
+							<c:when test="${replyDto.replyBlind}">
+								<pre>블라인드 처리된 게시물입니다</pre>
+							</c:when>
+							<c:otherwise>
+								<pre>${replyDto.replyContent}</pre>
+							</c:otherwise>
+						</c:choose>
+					
+					<br><br>
 					<fmt:formatDate value="${replyDto.replyWriteTime}" pattern="yyyy-MM-dd HH:mm"/>				
 				</td>
+
+
 				<th>
-					수정
-					<br>
-					삭제
+					<!-- 수정과 삭제는 현재 사용자가 남긴 댓글에만 표시 -->
+						<c:if test="${LoginId == replyDto.replyWriter}">
+							<a style="display:block; margin:10px 0px;" class="edit-btn">수정</a>
+							<a style="display:block; margin:10px 0px;" class="delete-btn" data-reply-origin="${replyDto.replyOrigin}" data-reply-no="${replyDto.replyNo}">삭제</a>
+						</c:if>
+					
+					<c:if test="${admin}">
+							<!-- 블라인드 여부에 따라 다르게 표시 -->
+							<c:choose>
+								<c:when test="${replyDto.replyBlind}">
+									<a style="display:block; margin:10px 0px;" href="reply/blind?replyNo=${replyDto.replyNo}&replyOrigin=${replyDto.replyOrigin}"><img src="/image/blind2.png" width="20" height="20"></a>
+								</c:when>
+								<c:otherwise>
+									<a style="display:block; margin:10px 0px;" href="reply/blind?replyNo=${replyDto.replyNo}&replyOrigin=${replyDto.replyOrigin}"><img src="/image/blind.png" width="20" height="20"></a>
+								</c:otherwise>
+							</c:choose>
+							
+					</c:if>
 				</th>
-				
 			</tr>
+			
+			
+			
+			<c:if test="${LoginId ==  replyDto.replyWriter}">
+				<!-- 수정하기 위한 화면 : 댓글 작성자 본인에게만 출력 -->
+				<tr class="editor">
+					<th colspan="2">
+						<form action="reply/edit" method="post">
+							<input type="hidden" name="replyNo" 
+														value="${replyDto.replyNo}">
+							<input type="hidden" name="replyOrigin"
+														value="${replyDto.replyOrigin}">
+							<textarea name="replyContent" rows="5" cols="50" 
+									required>${replyDto.replyContent}</textarea>
+							<button type="submit">변경</button>
+							<a class="cancel-btn">취소</a>
+						</form>
+					</th>
+				</tr>
+			</c:if>
+				
+				
+				
 			</c:forEach>
 		</tbody>
-		<tfoot>
-		
-		</tfoot>
-	
 	</table>
-	
-	
+</div>
+
+
+
+
+
+
+<div class="row center">
+		<%-- 회원일 경우와 아닐 경우 댓글 작성창이 다르게 보이도록 처리 --%>
+		<c:choose>
+			<c:when test="${LoginId != null}">
+				<!-- 댓글 작성 -->
+<!-- 			<form action="reply/write" method="post"> -->
+				<form class="reply-insert-form">
+				<input type="hidden" name="replyOrigin" value="${boardDto.boardNo}">
+				<table class="table">
+					<tbody>
+						<tr>
+							<th>
+								<textarea class="input w-100 fix-size" name="replyContent" rows="5" cols="55" 
+												placeholder="댓글 작성.." required></textarea>
+							</th>
+							<th valign="bottom">
+								<button class="btn btn-positive" type="submit">등록</button>
+							</th>
+						</tr>
+					</tbody>
+				</table>
+				</form>
+			</c:when>
+			
+			
+			<c:otherwise>
+				<table class="table">
+					<tbody>
+						<tr>
+							<th>
+								<textarea name="replyContent" rows="5" cols="55" 
+									placeholder="로그인 후 댓글 작성이 가능합니다" disabled></textarea>
+							</th>
+							<th>
+								<button type="submit" disabled>등록</button>
+							</th>
+						</tr>
+					</tbody>
+				</table>
+			
+			</c:otherwise>
+		</c:choose>
+</div>
+</div>
+
 	
 	
 	<div class="row">
 	<h2>상태창</h2>	
 	</div>
 	<div class="row">
-	loginId : ${sessionScope.LoginId}
+	LoginId : ${sessionScope.LoginId}
 	</div>
 	<div class="row">
 		로그인 : ${sessionScope.LoginId != null}
 	</div>
 	<div class="row">
-		mg : ${sessionScope.ug}
+		loginGrade : ${sessionScope.loginGrade}
 	</div>
 	<div class="row">
-		관리자 : ${sessionScope.ug == '관리자'}
+		관리자 : ${sessionScope.loginGrade == '관리자'}
 	</div>
+	
+	<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
+	

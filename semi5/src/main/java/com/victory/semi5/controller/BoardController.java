@@ -17,6 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.victory.semi5.constant.SessionConstant;
 import com.victory.semi5.entity.BoardDto;
+import com.victory.semi5.entity.ReplyDto;
 import com.victory.semi5.error.TargetNotFoundException;
 import com.victory.semi5.repository.BoardDao;
 import com.victory.semi5.repository.ReplyDao;
@@ -182,5 +183,39 @@ public class BoardController {
 			throw new TargetNotFoundException();
 		}
 	}
+	
+	//댓글은postmmappig만 잇음ㅋ
+	@PostMapping("/reply/write")
+	public String replyWrite(
+			@ModelAttribute ReplyDto replyDto,
+			RedirectAttributes attr, HttpSession session) {
+		String memberId = (String)session.getAttribute(SessionConstant.ID);
+		replyDto.setReplyWriter(memberId);
+		replyDao.insert(replyDto);
+		
+		attr.addAttribute("boardNo", replyDto.getReplyOrigin());
+//		return "redirect:../detail";//상대
+		return "redirect:/board/detail";//절대
+	}
+	@GetMapping("/reply/delete")
+	public String replyDelete(
+			@RequestParam int replyNo,
+			@RequestParam int replyOrigin,
+			RedirectAttributes attr) {
+		replyDao.delete(replyNo);
+		attr.addAttribute("boardNo", replyOrigin);
+		return "redirect:/board/detail";
+	}
+	
+	@PostMapping("/reply/edit")
+	public String replyEdit(
+			@ModelAttribute ReplyDto replyDto,
+			RedirectAttributes attr) {
+		replyDao.update(replyDto);
+		attr.addAttribute("boardNo", replyDto.getReplyOrigin());
+		return "redirect:/board/detail";
+	}
+	
+	
 	
 }

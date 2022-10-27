@@ -52,13 +52,20 @@ public class ReplyDaoImpl implements ReplyDao{
 	}
 	@Override
 	public boolean delete(int replyNo) {
-		// TODO Auto-generated method stub
-		return false;
+		String sql = "delete reply where reply_no = ?";
+		Object[] param = {replyNo};
+		return jdbcTemplate.update(sql, param) > 0;
 	}
+	
 	@Override
 	public boolean update(ReplyDto replyDto) {
-		// TODO Auto-generated method stub
-		return false;
+		String sql = "update reply "
+				+ "set reply_content=? "
+				+ "where reply_no=?";
+		Object[] param = {
+		replyDto.getReplyContent(), replyDto.getReplyNo()
+		};
+		return jdbcTemplate.update(sql, param) > 0;
 	}
 	
 }
