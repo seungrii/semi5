@@ -256,8 +256,12 @@ public class AdminController {
 	
 	//영화정보 - 삭제	- "/movieDelete"
 	
-	
-	//수정
+//	@GetMapping("/detailAdmin")
+//	public String detail(Model model,@RequestParam int movieNumber ) {
+//		model.addAttribute("dto", movieDao.selectOne(movieNumber));
+//		return "movie/detailAdmin";
+//	}
+//	//수정
 //	@GetMapping("/edit")
 //	public String edit(Model model, @RequestParam int movieNumber) {
 //		model.addAttribute("dto",movieDao.selectOne(movieNumber));

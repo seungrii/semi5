@@ -70,11 +70,7 @@ public class MovieController {
 //		
 //		return "movie/list";
 //	}
-	@GetMapping("/detailAdmin")
-	public String detail(Model model,@RequestParam int movieNumber ) {
-		model.addAttribute("dto", movieDao.selectOne(movieNumber));
-		return "movie/detailAdmin";
-	}
+
 	
 	
 	
