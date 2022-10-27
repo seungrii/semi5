@@ -14,6 +14,7 @@ import com.victory.semi5.entity.CinemaDto;
 import com.victory.semi5.repository.AdvanceDao;
 import com.victory.semi5.vo.CinemaNameVO;
 import com.victory.semi5.vo.MoviePlayStartVO;
+import com.victory.semi5.vo.MovieScheduleVO;
 
 //CrossOrigin 어노테이션을 붙이면 외부의 접근이 허용된다
 @CrossOrigin(origins = {"http://127.0.0.1:5500"})
@@ -39,7 +40,7 @@ public class AdvanceRestController {
 		
 	}//selectCinemaList() end
 	
-	@GetMapping("/alist")
+	@GetMapping("/qlist")
 	public List<MoviePlayStartVO> selectMoviePlayDays(@RequestParam int movieNumber,
 			@RequestParam String cinemaName) {
 		List<MoviePlayStartVO> moviePlayStartVOs = advanceDao.selectCinemaChoiceList(movieNumber, cinemaName);
@@ -51,6 +52,20 @@ public class AdvanceRestController {
 			return null; //실패
 		}
 	}//selectMoviePlayDays() end
+	
+	@GetMapping("/alist")
+	public List<MovieScheduleVO> selectDateList(@RequestParam int movieNumber, @RequestParam String cinemaName) {
+		
+		List<MovieScheduleVO> movieScheduleVOs = advanceDao.selectMoviePlayDate(movieNumber, cinemaName);
+		
+		if(movieScheduleVOs != null) {
+			return movieScheduleVOs; //성공
+		}
+		else {
+			return null; //실패
+		}
+		
+	}
 	
 
 }//AdvanceRestController end

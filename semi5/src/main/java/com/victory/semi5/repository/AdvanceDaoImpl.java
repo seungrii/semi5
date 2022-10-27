@@ -11,6 +11,7 @@ import com.victory.semi5.entity.CinemaDto;
 import com.victory.semi5.entity.MovieDto;
 import com.victory.semi5.vo.CinemaNameVO;
 import com.victory.semi5.vo.MoviePlayStartVO;
+import com.victory.semi5.vo.MovieScheduleVO;
 
 @Repository
 public class AdvanceDaoImpl implements AdvanceDao {
@@ -89,6 +90,34 @@ public class AdvanceDaoImpl implements AdvanceDao {
 	public List<MoviePlayStartVO> selectCinemaChoiceList(int movieNumber, String cinemaName) {
 		// 
 		return null;
+	}
+	
+	private RowMapper<MovieScheduleVO> movieScheduleMapper = (rs, idx) -> {
+		MovieScheduleVO movieScheduleVO = new MovieScheduleVO();
+		
+		movieScheduleVO.setCinemaPorin(rs.getString("cinema_porin"));
+		movieScheduleVO.setMovieNumber(rs.getInt("movie_number"));
+		movieScheduleVO.setMoviePlayNum(rs.getInt("moive_play_num"));
+		movieScheduleVO.setMoviePlayStart(rs.getDate("movie_play_start"));
+		movieScheduleVO.setTheaterHall(rs.getInt("theater_hall"));
+		movieScheduleVO.setTheaterNum(rs.getInt("theater_num"));
+		movieScheduleVO.setTheaterTotalSeat(rs.getInt("theater_total_seat"));
+		movieScheduleVO.setTheaterType(rs.getString("theater_type"));
+		
+		return movieScheduleVO;
+	};
+	
+	@Override
+	public List<MovieScheduleVO> selectMoviePlayDate(int movieNumber, String cinemaName) {
+		String sql = "select MP.movie_play_num, MP.movie_number, MP.theater_num, MP.movie_play_start, T.cinema_porin, T.theater_total_seat, T.theater_hall, T.theater_type "
+				+ "from movie_play MP "
+				+ "    left outer join theater T on MP.theater_num = T.theater_num "
+				+ "	where MP.movie_number=? "
+				+ "    and MP.theater_num in (select theater_num from theater where cinema_porin=?)"
+				+ "    and MP.movie_play_start > sysdate"
+				+ "    order by MP.movie_play_start asc";
+		Object[] param = {movieNumber, cinemaName};
+		return jdbcTemplate.query(sql, movieScheduleMapper, param);
 	}
 	
 	

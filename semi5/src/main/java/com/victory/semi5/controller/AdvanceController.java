@@ -21,6 +21,7 @@ public class AdvanceController {
 	
 	@GetMapping("/list")
 	public String movieList(Model model) {
+		
 		List<MovieDto> movieList = advanceDao.selectMovies();
 		List<CinemaDto> cinemaList = advanceDao.selectCinemaList();
 		
