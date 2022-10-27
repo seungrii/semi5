@@ -27,7 +27,7 @@
 
 <form action="edit" method="post">
 <!-- input[type=hidden]은 form 안에 위치해야 한다 -->
-<input type="hidden" name="boardNo" value="${boardDto.boardNo}">
+<input type="hidden" name="noticeNo" value="${noticeDto.noticeNo}">
 
 <div class="container mt-40">
 	<div class="row center">
