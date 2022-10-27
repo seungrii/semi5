@@ -82,13 +82,77 @@ public class BoardDaoImpl implements BoardDao{
 //	public List<BoardDto> selectList(String type, String keyword) {
 	public List<BoardDto> selectList(BoardListSearchVO vo) {
 	
-		String sql = "select * from board "
-				+ "where instr(#1, ?) > 0 "
-				+ "order by #1 desc";
+		if(vo.isSearch()) {//검색이라면
+			return search(vo);
+		}
+		else {//목록이라면
+			return list(vo);
+		}
+		
+//		String sql = "select * from board "
+//				+ "where instr(#1, ?) > 0 "
+//				+ "order by #1 desc";
+//		sql = sql.replace("#1", vo.getType());
+//		Object[] param = {vo.getKeyword()};
+//		return jdbcTemplate.query(sql, mapper, param);
+	}
+	//페이징~~~~~~~~~~~~~~~~아힘들어
+	@Override
+	public List<BoardDto> search(BoardListSearchVO vo) {
+		String sql = "select * from ("
+							+ "select rownum rn, TMP.* from ("
+								+ "select * from board "
+								+ "where instr(#1, ?) > 0 "
+								+ "order by board_no desc"
+							+ ")TMP"
+						+ ") where rn between ? and ?";
 		sql = sql.replace("#1", vo.getType());
-		Object[] param = {vo.getKeyword()};
+		Object[] param = {
+			vo.getKeyword(), vo.startRow(), vo.endRow()
+		};
 		return jdbcTemplate.query(sql, mapper, param);
 	}
+	
+	//페이징 리스트 ㅋㅋ ㅋㅋ ㅋ ㅋ ㅋ ㅋ ㅋ ㅋ 
+	@Override
+	public List<BoardDto> list(BoardListSearchVO vo) {
+		String sql = "select * from ("
+							+ "select rownum rn, TMP.* from ("
+								+ "select * from board "
+								+ "order by board_no desc"
+							+ ")TMP"
+						+ ") where rn between ? and ?";
+		Object[] param = {vo.startRow(), vo.endRow()};
+		return jdbcTemplate.query(sql, mapper, param);
+	}
+	
+	//검색 카운트 구하는 어쩌고 페이징 - 마지막 페이지 마지막 글이 몇번인지 구하는 어쩌고임
+	@Override
+	public int count(BoardListSearchVO vo) {
+		if(vo.isSearch()) {
+			return searchCount(vo);
+		}
+		else {
+			return listCount(vo);
+		}
+	}
+	
+	@Override
+	public int listCount(BoardListSearchVO vo) {
+		String sql = "select count(*) from board";
+		return jdbcTemplate.queryForObject(sql, int.class);
+	}
+	
+	@Override
+	public int searchCount(BoardListSearchVO vo) {
+		String sql = "select count(*) from board "
+						+ "where instr(#1, ?) > 0";
+		sql = sql.replace("#1", vo.getType());
+		Object[] param = {vo.getKeyword()};
+		return jdbcTemplate.queryForObject(sql, int.class, param);
+	}
+	
+	
 	
 	
 	//detail을 위한 ResultSetExtractor
@@ -211,6 +275,12 @@ public class BoardDaoImpl implements BoardDao{
 		
 		return boardNo;
 	}
-	
+	@Override
+	public int sequence() {
+		String sql = "select board_seq.nextval from dual";
+		int boardNo = jdbcTemplate.queryForObject(sql, int.class);
+		return boardNo;
+
+	}
 	
 }
