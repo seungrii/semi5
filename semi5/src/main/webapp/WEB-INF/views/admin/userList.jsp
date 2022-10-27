@@ -50,7 +50,7 @@
 			</tr>
 		</thead>
 		<tbody align="center">
-			<c:forEach var="userDto" items="${listUser}">
+			<c:forEach var="userDto" items="${userList}">
 			<tr>
 				<td>${userDto.userId}</td>
 				<td>${userDto.userName}</td>
@@ -59,7 +59,7 @@
 				<td>${userDto.userBlurb}</td>
 				<td>
 					<a class="btn btn-neutral" 
-						href="admin/userDetail?userId=${userDto.userId}">상세</a>
+						href="userDetail?userId=${userDto.userId}">상세</a>
 				</td>
 			</tr>
 			</c:forEach>

@@ -48,7 +48,7 @@
 			</tr>
 		</thead>
 		<tbody align="center">
-			<c:forEach var="adminDto" items="${listAdmin}">
+			<c:forEach var="adminDto" items="${adminList}">
 			<tr>
 				<td>${adminDto.adminId}</td>
 				<td>${adminDto.employeeNo}</td>

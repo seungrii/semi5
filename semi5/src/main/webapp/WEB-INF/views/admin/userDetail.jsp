@@ -22,7 +22,7 @@
 	<div class="row">${userDto.userTel}</div>
 	<div class="row">${userDto.userBirth}</div>
 	<div class="center">
-		<a class="btn btn-neutral" href="admin/userList">회원 목록</a>
+		<a class="btn btn-neutral" href="userList">회원 목록</a>
 	</div>
 
 

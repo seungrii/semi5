@@ -52,10 +52,10 @@ public class AdminController {
 			@RequestParam(required = false) String keyword) {
 		boolean isSearch = type != null && keyword != null;
 		if(isSearch) {
-			model.addAttribute("listAdmin", adminDao.selectList(type, keyword));
+			model.addAttribute("adminList", adminDao.selectList(type, keyword));
 		}
 		else {
-			model.addAttribute("listAdmin", adminDao.selectList());
+			model.addAttribute("adminList", adminDao.selectList());
 		}
 		return "admin/adminList";
 	}
@@ -112,10 +112,10 @@ public class AdminController {
 			@RequestParam(required = false) String keyword) {
 		boolean isSearch = type != null && keyword != null;
 		if(isSearch) {
-			model.addAttribute("listUser", userDao.selectList(type, keyword));
+			model.addAttribute("userList", userDao.selectList(type, keyword));
 		}
 		else {
-			model.addAttribute("listUser", userDao.selectList());
+			model.addAttribute("userList", userDao.selectList());
 		}
 		return "admin/userList";
 	}
