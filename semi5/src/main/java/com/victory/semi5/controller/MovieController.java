@@ -40,12 +40,17 @@ public class MovieController {
 
 		return "movie/insert";
 	}
+//insert시작
 	
 	@PostMapping("/insert")
 	public String insert(@ModelAttribute MovieDto dto) {
 //		DB insert
+		
+		
+		//영화정보 inset
 		movieDao.insert(dto);
 		
+	
 		
 //		insert_success 매핑으로 redirect(강제이동) 처리하세요
 		return "redirect:insert_success";
@@ -57,7 +62,7 @@ public class MovieController {
 		
 		imageDao.insert(dto);
 		
-//		insert_success 매핑으로 redirect(강제이동) 처리하세요
+//	insert_success 매핑으로 redirect(강제이동) 처리하세요
 		return "redirect:insert_success";
 	}
 	
@@ -65,10 +70,10 @@ public class MovieController {
 	public String insert(@ModelAttribute CharacterDto dto) {
 //		DB insert
 		
-		characterDao.insert(dto);
-		//void insert(CharacterDto dto);//데이터 넣기   
-		
-		
+	characterDao.insert(dto);
+	//void insert(CharacterDto dto);//데이터 넣기   
+	
+	
 //		insert_success 매핑으로 redirect(강제이동) 처리하세요
 		return "redirect:insert_success";
 	}
@@ -82,6 +87,9 @@ public class MovieController {
 		return "movie/insertSuccess";
 	}
 
+
+	
+//list시작
 	
 	@GetMapping("/list")//목록
 	public String list(Model model,
@@ -99,6 +107,21 @@ public class MovieController {
 		return "movie/list";
 	}
 	
+//	@GetMapping("/list")//목록
+//	public String list(Model model,
+//								@RequestParam(required=false) String type,
+//								@RequestParam(required=false) String keyword){
+//		boolean isSearch = type != null && keyword != null;
+//		if(isSearch) {//검색
+//			model.addAttribute("list",imageDao.selectList(type,keyword));
+//		}
+//		else {
+//			model.addAttribute("list",movieDao.selectList());
+//		}
+//		
+//		
+//		return "movie/list";
+//	}
 	@GetMapping("/detailAdmin")
 	public String detail(Model model,@RequestParam int movieNumber ) {
 		model.addAttribute("dto", movieDao.selectOne(movieNumber));

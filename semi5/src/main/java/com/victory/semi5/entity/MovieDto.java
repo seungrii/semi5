@@ -11,10 +11,16 @@ import lombok.NoArgsConstructor;
 @Data @NoArgsConstructor @AllArgsConstructor @Builder
 public class MovieDto {
 	
+	
+	
+	
 	private int movieNumber;
 	private String movieName, movieSummary;
 	private Date openingDate,screeningEnd;
 	private int moviePlayTime;
 	private int movieAgeLimit;
 
+	
+	
+	
 }

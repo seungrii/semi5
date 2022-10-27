@@ -1,5 +1,7 @@
 package com.victory.semi5.repository;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -30,6 +32,36 @@ public class ImageDaoImpl implements ImageDao {
 		};
 		jdbcTemplate.update(sql,param);
 		
+	}
+
+	@Override
+	public List<ImageDto> selectList() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<ImageDto> selectList(String type, String keyword) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ImageDto selectOne(int fileNumber) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean update(ImageDto dto) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean delete(int fileNumber) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }
