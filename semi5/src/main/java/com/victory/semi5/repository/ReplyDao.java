@@ -8,6 +8,8 @@ import com.victory.semi5.entity.ReplyDto;
 public interface ReplyDao {
 	void insert(ReplyDto replyDro);
 	List<ReplyDto> selectList(int replyOrigin);
+	ReplyDto selectOne(int replyNo);
 	boolean update(ReplyDto replyDto);
 	boolean delete(int replyNo);
+	void clear();
 }

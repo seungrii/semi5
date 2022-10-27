@@ -5,7 +5,9 @@ import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
@@ -67,5 +69,37 @@ public class ReplyDaoImpl implements ReplyDao{
 		};
 		return jdbcTemplate.update(sql, param) > 0;
 	}
+	
+	@Override
+	public ReplyDto selectOne(int replyNo) {
+		String sql = "select * from reply where reply_no = ?";
+		Object[] param = {replyNo};
+		return jdbcTemplate.query(sql, extractor, param);
+	}
+	private ResultSetExtractor<ReplyDto> extractor = new ResultSetExtractor<ReplyDto>() {
+		@Override
+		public ReplyDto extractData(ResultSet rs) throws SQLException, DataAccessException {
+			if(rs.next()) {
+				return ReplyDto.builder()
+						.replyNo(rs.getInt("reply_no"))
+						.replyWriter(rs.getString("reply_writer"))
+						.replyContent(rs.getString("reply_content"))
+						.replyOrigin(rs.getInt("reply_origin"))
+						.replyWriteTime(rs.getDate("reply_writetime"))
+						.replyBlind(rs.getString("reply_blind") != null)
+					.build();
+			}
+			else {
+				return null;
+			}
+		}
+	};
+	
+	@Override
+	public void clear() {
+		String sql = "delete reply";
+		jdbcTemplate.update(sql);
+	}
+	
 	
 }

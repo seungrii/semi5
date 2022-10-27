@@ -17,24 +17,29 @@ public class ReplyTest {
 	@Autowired
 	private ReplyDao replyDao;
 	
-	@BeforeEach
-	public void before() {
-		//insert
-		for(int i=1; i <= 100; i++) {
-			replyDao.insert(ReplyDto.builder()
-										.replyWriter("hello1234")
-										.replyOrigin(520)
-										.replyContent("댓글테스트"+i)
-									.build());
-		}
-	}
+//	@BeforeEach
+//	public void before() {
+//		//insert
+//		for(int i=1; i <= 100; i++) {
+//			replyDao.insert(ReplyDto.builder()
+//										.replyWriter("hello1234")
+//										.replyOrigin(520)
+//										.replyContent("댓글테스트"+i)
+//									.build());
+//		}
+//	}
+//	
+//	@Test
+//	public void test() {
+//		//select
+//		List<ReplyDto> list = replyDao.selectList(520);
+//		for(ReplyDto replyDto : list) {
+//			System.out.println(replyDto);
+//		}
+//	}
 	
 	@Test
-	public void test() {
-		//select
-		List<ReplyDto> list = replyDao.selectList(520);
-		for(ReplyDto replyDto : list) {
-			System.out.println(replyDto);
-		}
+	public void after() {
+		replyDao.clear();
 	}
 }
