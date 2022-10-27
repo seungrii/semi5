@@ -72,4 +72,33 @@ public class UserDaoImpl implements UserDao{
 		return jdbcTemplate.query(sql, userExtractor, param);
 	}
 
+	@Override
+	public boolean delete(String userId) {
+		String sql = "delete user_information where user_id=?";
+		Object[] param = {userId};
+		return jdbcTemplate.update(sql, param)>0;
+	}
+
+	@Override
+	public boolean update(UserDto userDto) {
+		String sql = "update user_information set "
+				+ "user_email=?, user_tel=? "
+				+ "where user_id=?";
+		Object[] param = {
+				userDto.getUserEmail(), userDto.getUserTel(),
+				userDto.getUserId()
+		};
+		return jdbcTemplate.update(sql, param)>0;
+	}
+
+	@Override
+	public boolean pwupdate(UserDto userDto) {
+		String sql = "update user_information set "
+				+ "user_pw=? where user_id=?";
+		Object[] param = {
+				userDto.getUserPw(), userDto.getUserId()
+		};
+		return jdbcTemplate.update(sql, param)>0;
+	}
+
 }

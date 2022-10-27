@@ -12,5 +12,11 @@ public interface UserDao {
 	UserDto selectId(String userName, String userTel);
 	
 	UserDto selectPw(String userId, String userName, String userTel);
+	
+	boolean delete(String userId);
+	
+	boolean update(UserDto userDto);
+	
+	boolean pwupdate(UserDto userDto);
 
 }
