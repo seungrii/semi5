@@ -12,14 +12,17 @@
 			<a href="delete">회원탈퇴</a>
 		</div>
 		<div class="row">
-			<a href="changePw">비밀번호 변경</a>
+			<a href="changePwFind">비밀번호 변경</a>
 		</div>
 		<div class="row">
 			<a href="change">개인정보 수정</a>
 		</div>
-		<div>
-			<img src="download?userId=${userDto.userId}" width="100" height="100">
+		<div class="row">
+			<a href="oneQna">1:1 문의</a>
 		</div>
+		<!--<div>
+			<img src="download?userId=${userDto.userId}" width="100" height="100">
+		</div> -->
 		<div class="row">${userDto.userId}</div>
 		<div class="row">${userDto.userName}</div>
 		<div class="row">${userDto.userGender}</div>
@@ -37,7 +40,7 @@
 					${boardDto.boardHead}
 				</div>
 				<div class="row">
-					${boardDto.boardTitle}
+					<a href="../board/detail?boardNo=${boardDto.boardNo}">${boardDto.boardTitle}</a>
 				</div>
 				<div class="row">
 					${boardDto.boardWriter}

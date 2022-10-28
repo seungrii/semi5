@@ -69,6 +69,7 @@ public class UserController {
 			boolean passwordMatch = userDto.getUserPw().equals(findDto.getAdminPw());
 			if(passwordMatch) {
 				session.setAttribute("LoginId", userDto.getUserId());
+				session.setAttribute(SessionConstant.GRADE, userDto.getUserRank());
 				return "redirect:/";
 			}else {
 				return "redirect:login?error";
@@ -183,13 +184,22 @@ public class UserController {
 		}
 	}
 	@GetMapping("/changePw")
-	public String changePw(@RequestParam String userPw,
-			@RequestParam(required = false) String inputId,
-			HttpSession session) {
-		if(inputId == null) {
-			String userId = (String) session.getAttribute("LoginId");
+	public String changePw() {
+		return "user/changePw";
+	}
+	@PostMapping("changePw")
+	public String changePw(HttpSession session,
+			@RequestParam String userPw) {
+		String userId = (String)session.getAttribute("LoginId");
+		UserDto userDto = userDao.selectOne(userId);
+		userDto.setUserPw(userPw);
+		
+		boolean result = userDao.pwupdate(userDto);
+		if(result) {
+			return "redirect:logout";			
+		}else {
+			return "redirect:changePw?error";
 		}
-		return "";
 	}
 	
 	@GetMapping("/change")
@@ -230,6 +240,14 @@ public class UserController {
 			return "redirect:userChange?error";
 		}
 	}
+	@GetMapping("/oneQna")
+	public String oneQna() {
+		return "user/oneQna";
+	}
+//	@PostMapping("/oneQna")
+//	public String oneQna(@ModelAttribute) {
+//		
+//	}
 }
 
 
