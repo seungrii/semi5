@@ -209,7 +209,15 @@ public class QnaDaoImpl implements QnaDao{
 		return qnaNo;
 	}
 	
-	
+	@Override
+	public void insertReply(QnaDto qnaDto) {
+		String sql = "insert into qna_board(admin_id, qna_answer, qna_answer_time) "
+				+ "values(?,?,sysdate)";
+		Object[] param = {
+				qnaDto.getAdminId(), qnaDto.getQnaAnswer()
+		};
+		jdbcTemplate.update(sql, param);
+	}
 	
 	
 	

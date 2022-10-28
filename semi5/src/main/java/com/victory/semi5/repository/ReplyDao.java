@@ -6,7 +6,7 @@ import com.victory.semi5.entity.ReplyDto;
 
 
 public interface ReplyDao {
-	void insert(ReplyDto replyDro);
+	void insert(ReplyDto replyDto);
 	List<ReplyDto> selectList(int replyOrigin);
 	ReplyDto selectOne(int replyNo);
 	boolean update(ReplyDto replyDto);

@@ -41,4 +41,7 @@ public interface QnaDao {
 	//수정
 	boolean update(QnaDto qnaNo);
 	
+	//댓글추가
+	void insertReply(QnaDto qnaDto);
+	
 }

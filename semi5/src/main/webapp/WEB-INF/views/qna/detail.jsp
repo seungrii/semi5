@@ -89,25 +89,25 @@
 
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script>
-	$(function(){
-		//목표 : 
-		//1. edit-btn을 누르면 view를 숨기고 editor를 보여준다
-		//2. cancel-btn을 누르면 editor를 숨기고 view를 보여준다
-		//3. 처음에는 view만 보여준다
-		//1
-		$(".edit-btn").click(function(){
-			$(this).parents(".view").hide();
-			$(this).parents(".view").next(".editor").show();
-		});
-		//2
-		$(".cancel-btn").click(function(){
-			$(this).parents(".editor").hide();
-			$(this).parents(".editor").prev(".view").show();
-		});
-		//3
-		$(".editor").hide();
+$(function(){
+	//목표 : 
+	//1. edit-btn을 누르면 view를 숨기고 editor를 보여준다
+	//2. cancel-btn을 누르면 editor를 숨기고 view를 보여준다
+	//3. 처음에는 view만 보여준다
+	//1
+	$(".edit-btn").click(function(){
+		$(this).parents(".view").hide();
+		$(this).parents(".view").next(".editor").show();
 	});
-	
+	//2
+	$(".cancel-btn").click(function(){
+		$(this).parents(".editor").hide();
+		$(this).parents(".editor").prev(".view").show();
+	});
+	//3
+	$(".editor").hide();
+});
+
 </script>
     
 <div class="container mt-40 mb-40">
@@ -282,17 +282,19 @@
 
 <div class="row center">
 		<%-- 회원일 경우와 아닐 경우 댓글 작성창이 다르게 보이도록 처리 --%>
+			<c:set var="admin" value="${loginGrade == '관리자'}"></c:set>
 		<c:choose>
-			<c:when test="${LoginId != null}">
+			<c:when test="${admin}">
 				<!-- 댓글 작성 -->
 <!-- 			<form action="reply/write" method="post"> -->
 				<form class="reply-insert-form">
-				<input type="hidden" name="replyOrigin" value="${qnaDto.qnaNo}">
+				<input type="hidden" name="qnaNo" value="${qnaDto.qnaNo}">
 				<table class="table">
 					<tbody>
+
 						<tr>
 							<th>
-								<textarea class="input w-100 fix-size" name="replyContent" rows="5" cols="55" 
+								<textarea class="input w-100 fix-size" name="qnaAnswer" rows="5" cols="55" 
 												placeholder="댓글 작성.." required></textarea>
 							</th>
 							<th valign="bottom">
@@ -310,8 +312,8 @@
 					<tbody>
 						<tr>
 							<th>
-								<textarea name="replyContent" rows="5" cols="55" 
-									placeholder="로그인 후 댓글 작성이 가능합니다" disabled></textarea>
+								<textarea name="qnaAnswer" rows="5" cols="55" 
+									placeholder="관리자만 댓글 작성이 가능합니다" disabled></textarea>
 							</th>
 							<th>
 								<button type="submit" disabled>등록</button>

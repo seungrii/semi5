@@ -105,5 +105,18 @@ public class QnaController {
 		}
 	}
 	
+	@PostMapping("/qnaReply/write")
+	public String qnaReplyWrite(
+			@ModelAttribute QnaDto qnaDto,
+			RedirectAttributes attr, HttpSession session) {
+		String admin = (String)session.getAttribute(SessionConstant.GRADE);
+		qnaDto.setAdminId(admin);
+		qnaDao.insertReply(qnaDto);
+		
+		attr.addAttribute("qnaNo", qnaDto.getQnaNo());
+		return "redirect:/qna/detail";
+	}
+	
+	
 	
 }
