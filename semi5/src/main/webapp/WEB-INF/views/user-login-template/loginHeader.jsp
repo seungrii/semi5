@@ -17,7 +17,7 @@
     <link rel="stylesheet" type="text/css" href="/css/semi-commons.css">
     <link rel="stylesheet" type="text/css" href="/css/reset.css">
     <link rel="stylesheet" type="text/css" href="/css/semi-layout.css">
-    <link rel="stylesheet" type="text/css" href="/css/join.css">
+    <link rel="stylesheet" type="text/css" href="/css/userChange.css">
 
     <!-- 폰트어썸 -->
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"/>
@@ -28,6 +28,7 @@
     <!-- js 파일 -->
     <script src="/js/navigator.js"></script>
     <script src="/js/idfind.js"></script>
+    <script src="/js/findMessage.js"></script>
     <script type="text/javascript">
 
         

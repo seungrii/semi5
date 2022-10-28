@@ -10,10 +10,13 @@
 		</div>
 		<form action="changePw" method="post">
 			<div class="row">
-				<input type="password" name="userPw">
+				<input class="change-input" id="change-pw" type="password" name="userPw">
+				<span class="find-fail">사용할 수 없는 형식입니다.</span>
 			</div>
 			<div class="row">
-				<input type="password" name="userPwFind">	
+				<input class="change-input" id="change-pw-find" type="password" name="userPwFind">
+				<span class="find-success">비밀번호가 일치합니다.</span>
+				<span class="find-fail">비밀번호가 일치하지 않습니다.</span>	
 			</div>
 			<div>
 				<button type="submit">변경</button>
