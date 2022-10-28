@@ -121,7 +121,8 @@ public class BoardController {
 			model.addAttribute("boardDto", boardDao.selectOne(boardNo));
 		}
 		session.setAttribute("history", history);
-//		(+추가) 댓글 목록을 조회하여 첨부
+
+		//(+추가) 댓글 목록을 조회하여 첨부
 		model.addAttribute("replyList", replyDao.selectList(boardNo));
 
 		return "board/detail";
@@ -184,7 +185,6 @@ public class BoardController {
 		}
 	}
 	
-	//댓글은postmmappig만 잇음ㅋ
 	@PostMapping("/reply/write")
 	public String replyWrite(
 			@ModelAttribute ReplyDto replyDto,
@@ -197,6 +197,7 @@ public class BoardController {
 //		return "redirect:../detail";//상대
 		return "redirect:/board/detail";//절대
 	}
+	
 	@GetMapping("/reply/delete")
 	public String replyDelete(
 			@RequestParam int replyNo,
