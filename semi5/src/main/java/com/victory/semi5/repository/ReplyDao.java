@@ -12,4 +12,6 @@ public interface ReplyDao {
 	boolean update(ReplyDto replyDto);
 	boolean delete(int replyNo);
 	void clear();
+	
+	//블라인드
 }

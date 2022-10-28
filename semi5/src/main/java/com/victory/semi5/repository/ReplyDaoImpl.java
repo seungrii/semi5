@@ -44,6 +44,7 @@ public class ReplyDaoImpl implements ReplyDao{
 		};
 		jdbcTemplate.update(sql, param);
 	}
+	
 	@Override
 	public List<ReplyDto> selectList(int replyOrigin) {
 		String sql = "select * from reply "
