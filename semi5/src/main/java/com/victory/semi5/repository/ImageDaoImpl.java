@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
 
 import com.victory.semi5.entity.CinemaDto;
 import com.victory.semi5.entity.ImageDto;
+import com.victory.semi5.entity.MovieDto;
 import com.victory.semi5.vo.CinemaImageVO;
 
 @Repository
@@ -44,13 +45,12 @@ public class ImageDaoImpl implements ImageDao{
 		}
 	};	
 	
-	@Override
+	@Override	//번호생성
 	public int sequence() {
 		String sql = "select image_seq.nextval from dual";
 		return jdbcTemplate.queryForObject(sql, int.class);
 	}
-
-	@Override
+	@Override	//insert
 	public void insert(ImageDto imageDto) {
 		String sql = "insert into image("
 				+ "file_number, file_name, file_type, file_size"
@@ -63,7 +63,6 @@ public class ImageDaoImpl implements ImageDao{
 		};
 		jdbcTemplate.update(sql, param);
 	}
-
 
 //	@Override
 //	public List<ImageDto> selectList() {
@@ -84,11 +83,9 @@ public class ImageDaoImpl implements ImageDao{
 	@Override
 	public void addCinemaImage(CinemaDto cinemaDto, int imageNumber) {
 		String sql = "insert into cinema_image ("
-				+ "cinema_porin, file_number) vlues(?, ?)";
-		Object[] param = {
-			cinemaDto.getCinemaPorin(), imageNumber
-		};
-		
+				+ "cinema_porin, file_number) values(?, ?)";
+		Object[] param = {cinemaDto.getCinemaPorin(), imageNumber};
+		jdbcTemplate.update(sql, param);
 	}
 //	@Override
 //	public List<AttachmentDto> selectBoardAttachmentList(int boardNo) {
@@ -97,6 +94,14 @@ public class ImageDaoImpl implements ImageDao{
 //		Object[] param = {boardNo};
 //		return jdbcTemplate.query(sql, mapper, param);
 //	}
+	@Override
+	public void addPoster(int movieNumber, int imageNumber) {
+		String sql = "insert into poster ("
+				+ "movie_number, file_number) values(?, ?)";
+		Object[] param = {movieNumber, imageNumber};
+		jdbcTemplate.update(sql, param);
+	}
 
+	
 
 }

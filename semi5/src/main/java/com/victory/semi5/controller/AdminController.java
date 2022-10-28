@@ -30,6 +30,7 @@ import com.victory.semi5.repository.GenreDao;
 import com.victory.semi5.repository.ImageDao;
 import com.victory.semi5.repository.MovieDao;
 import com.victory.semi5.repository.UserDao;
+import com.victory.semi5.service.ImageService;
 
 @Controller
 @RequestMapping("/admin")
@@ -48,7 +49,7 @@ public class AdminController {
 	@Autowired
 	private CharacterDao characterDao;
 	@Autowired
-	private GenreDao genreDao;
+	private ImageService imageService;
 	
 	//admin home
 	@GetMapping("/home")
@@ -164,26 +165,15 @@ public class AdminController {
 	@PostMapping("/cinemaAdd")
 	public String cinemaAdd(
 			@ModelAttribute CinemaDto cinemaDto,
-			@RequestParam MultipartFile imageCinema) 
+			@RequestParam MultipartFile image) 
 					throws IllegalStateException, IOException {
-//		cinemaDao.addCinema(cinemaDto);
-		cinemaDao.addCinema(cinemaDto);
 		
-		if(!imageCinema.isEmpty()) {
-			int imageNumber = imageDao.sequence();
-			imageDao.insert(
-				ImageDto.builder()
-					.fileNumber(imageNumber)
-					.fileName(imageCinema.getOriginalFilename())
-					.fileType(imageCinema.getContentType())
-					.fileSize(imageCinema.getSize())
-					.build());
-			File dir = new File("C:\\study\\vic\\upload");
-			dir.mkdirs();
-			File target = new File(dir, String.valueOf(imageNumber));
-			imageCinema.transferTo(target);
-			
-			imageDao.addCinemaImage(cinemaDto, imageNumber);
+		cinemaDao.addCinema(cinemaDto);	//지점추가
+		
+		//파일첨부
+		if(!image.isEmpty()) {
+			int imageNumber = imageService.imageUp(image);	//이미지 추가
+			imageDao.addCinemaImage(cinemaDto, imageNumber); //지점이미지 추가
 		}
 		return "redirect:cinemaAdd";
 	}
@@ -216,10 +206,9 @@ public class AdminController {
 			@ModelAttribute MovieDto moviedto, 
 			CharacterDto characterDto, GenreDto genredto, 
 			@RequestParam String charaterName1, String charaterName2, 
-			String charaterName3, String charaterName4, String charaterName5
-			) {
-	
-		movieDao.insert(moviedto);
+			String charaterName3, String charaterName4, String charaterName5,
+			@RequestParam MultipartFile image) 
+					throws IllegalStateException, IOException {
 		
 		//시퀀스 번호 생성하며 등록하기
 		int movieNumber=movieDao.insert2(moviedto);
@@ -240,21 +229,23 @@ public class AdminController {
 		
 		//hashtagVo
 		movieDao.insertHashtagVO(movieNumber, genredto.getGenreNo());
-
+		
+		//파일첨부
+		if(!image.isEmpty()) {
+			int imageNumber = imageService.imageUp(image);	//이미지 추가
+			imageDao.addPoster(movieNumber, imageNumber); //영화포스터 추가
+		}
 		return "redirect:movieAdd";
 	}
-	
 
 	//영화정보 - 조회
 	//목록			-"/movieList" 
 	//상세			-"/movieDetail"
 	
-	
-	
 	//영화정보 - 수정	-"/movieChange"
 	
-	
 	//영화정보 - 삭제	- "/movieDelete"
+	
 	
 //	@GetMapping("/detailAdmin")
 //	public String detail(Model model,@RequestParam int movieNumber ) {
