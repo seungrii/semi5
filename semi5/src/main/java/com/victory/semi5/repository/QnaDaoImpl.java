@@ -210,15 +210,25 @@ public class QnaDaoImpl implements QnaDao{
 	}
 	
 	@Override
-	public void insertReply(QnaDto qnaDto) {
-		String sql = "insert into qna_board(admin_id, qna_answer, qna_answer_time) "
-				+ "values(?,?,sysdate)";
+	public boolean insertReply(QnaDto qnaDto) {
+		String sql = "update qna_board set "
+				+ "admin_id=?, qna_answer=? "
+				+ "qna_answer_time=sysdate "
+				+ "where qna_no=?";
 		Object[] param = {
-				qnaDto.getAdminId(), qnaDto.getQnaAnswer()
+				qnaDto.getQnaAnswer(),
+				qnaDto.getQnaNo()
 		};
-		jdbcTemplate.update(sql, param);
+		return jdbcTemplate.update(sql, param)>0;
 	}
-	
+	@Override
+	public List<QnaDto> selectList(int qnaNo) {
+		String sql = "select * from qna_board "
+				+ "where qna_no=? "
+				+ "order by qna_anwer asc";
+		Object[] param = {qnaNo};
+		return jdbcTemplate.query(sql, mapper, param);
+	}
 	
 	
 	

@@ -105,7 +105,7 @@ public class QnaController {
 		}
 	}
 	
-	@PostMapping("/qnaReply/write")
+	@PostMapping("/qna/reply/write")
 	public String qnaReplyWrite(
 			@ModelAttribute QnaDto qnaDto,
 			RedirectAttributes attr, HttpSession session) {

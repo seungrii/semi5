@@ -192,20 +192,20 @@ $(function(){
 		<thead>
 			<tr>
 					<td colspan="2">
-						총 ${replyList.size()}개의 댓글이 있습니다.
+						총 ${qnaList.size()}개의 댓글이 있습니다.
 					</td>
 				</tr>
 		</thead>
 		
 		<tbody>
-			<c:forEach var="replyDto" items="${replyList}">
+			<c:forEach var="qnaDto" items="${qnaAnswerList}">
 			
 			<!-- 사용자에게 보여주는 화면 -->
 			<tr class="view">
 				<td width="90%">
 				<!-- 작성자 -->
-					${replyDto.replyWriter}
-					<c:if test="${boardDto.boardWriter ==  replyDto.replyWriter}">
+					${qnaDto.adminId}
+					<c:if test="${qnaDto.adminId ==  adminDto.adminId}">
 						(작성자)
 					</c:if>
 					<!-- 회원등급은 자유게시판에 안씀 위화감 조성ㅋ -->
@@ -222,15 +222,15 @@ $(function(){
 						</c:choose>
 					
 					<br><br>
-					<fmt:formatDate value="${replyDto.replyWriteTime}" pattern="yyyy-MM-dd HH:mm"/>				
+					<fmt:formatDate value="${qnaDto.qnaWriteTime}" pattern="yyyy-MM-dd HH:mm"/>				
 				</td>
 
 
 				<th>
 					<!-- 수정과 삭제는 현재 사용자가 남긴 댓글에만 표시 -->
-						<c:if test="${LoginId == replyDto.replyWriter}">
+						<c:if test="${LoginId == qnaDto.adminId}">
 							<a style="display:block; margin:10px 0px;" class="edit-btn">수정</a>
-							<a style="display:block; margin:10px 0px;" class="delete-btn" data-reply-origin="${replyDto.replyOrigin}" data-reply-no="${replyDto.replyNo}">삭제</a>
+							<a style="display:block; margin:10px 0px;" class="delete-btn" data-reply-origin="${qnaDto.qnaNo}" data-reply-no="${qnaDto.qnaNo}">삭제</a>
 						</c:if>
 					
 					<c:if test="${admin}">
@@ -254,7 +254,7 @@ $(function(){
 				<!-- 수정하기 위한 화면 : 댓글 작성자 본인에게만 출력 -->
 				<tr class="editor">
 					<th colspan="2">
-						<form action="reply/edit" method="post">
+						<form action="qnaReply/write" method="post">
 							<input type="hidden" name="replyNo" 
 														value="${replyDto.replyNo}">
 							<input type="hidden" name="replyOrigin"
@@ -286,8 +286,8 @@ $(function(){
 		<c:choose>
 			<c:when test="${admin}">
 				<!-- 댓글 작성 -->
-<!-- 			<form action="reply/write" method="post"> -->
-				<form class="reply-insert-form">
+				<form action="/qna/reply/write" method="post">
+				<!-- <form class="reply-insert-form"> -->
 				<input type="hidden" name="qnaNo" value="${qnaDto.qnaNo}">
 				<table class="table">
 					<tbody>
