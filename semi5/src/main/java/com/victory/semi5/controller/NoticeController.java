@@ -91,6 +91,7 @@ public class NoticeController {
 			throw new TargetNotFoundException();
 		}
 	}
+	
 	@GetMapping("/delete")
 	public String delete(@RequestParam int noticeNo) {
 		boolean result = noticeDao.delete(noticeNo);

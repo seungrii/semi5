@@ -86,14 +86,16 @@
             border-top: 2px solid gray;
         }
 </style> 
-    
+   
+   
+
 <div class="container mt-40 mb-40">
 	<div class="row center">
-		<h1>게시글 보기</h1>
+		<h1>공지사항</h1>
 	</div>
 	
 	<div class="row center">
-		<table class="table">
+		<table class="table table-slit">
 			<tbody>
 				<tr>
 					<th width="25%">번호</th>
@@ -101,8 +103,7 @@
 				</tr>
 				<tr>
 					<th>제목</th>
-					<td>
-						${noticeDto.noticeTitle}</td>
+					<td>${noticeDto.noticeTitle}</td>
 				</tr>	
 			
 				<tr height="200" valign="top">
@@ -119,7 +120,7 @@
 				<tr>
 					<th>작성일</th>
 					<td>
-						<fmt:formatDate value="${noticeDto.noticeWriteTime}" pattern="y년 M월 d일 E요일 a h시 m분 s초"/>
+						<fmt:formatDate value="${noticeDto.noticeWriteTime}" pattern="yyyy-MM-dd HH:mm"/>
 					</td>
 				</tr>
 		
@@ -127,7 +128,7 @@
 				<tr>
 					<th>수정일</th>
 					<td>
-						<fmt:formatDate value="${noticeDto.noticeUpdateTime}" pattern="y년 M월 d일 E요일 a h시 m분 s초"/>
+						<fmt:formatDate value="${noticeDto.noticeUpdateTime}" pattern="yyyy-MM-dd HH:mm"/>
 					</td>
 				</tr>
 				</c:if>
@@ -140,58 +141,23 @@
 			<tfoot>
 				<tr>
 					<td colspan="2" align="right">
-			
-	<a class="btn btn-positive" href="write">글쓰기</a>
-	<a class="btn btn-positive" href="edit?noticeNo=${noticeDto.noticeNo}">수정하기</a>
-	<a class="btn btn-negative" href="delete?noticeNo=${noticeDto.noticeNo}">삭제하기</a>
-	<a class="btn btn-neutral" href="list">목록으로</a>
-	
-
-			
-			
-			
-			
-			
-						
-						<%-- <c:if test="${LoginId != null}">
-						<a class="btn btn-positive" href="write">글쓰기</a>
-						<a class="btn btn-positive" href="write?boardParent=${dto.boardNo}">답글쓰기</a>
-						</c:if>
-						
-						
-							관리자는 삭제만, 회원은 자신의 글만 수정/삭제 가능하도록 처리
-						
-						<c:set var="owner" value="${LoginId == boardDto.boardWriter}"></c:set>
-						<c:set var="admin" value="${ug == '관리자'}"></c:set>
-						
-						<c:if test="${owner}">
-						<a class="btn btn-negative" href="edit?boardNo=${boardDto.boardNo}">수정하기</a>
-						<a class="btn btn-negative" href="delete?boardNo=${boardDto.boardNo}">삭제하기</a>
-						</c:if>
-						
+						<c:set var="admin" value="${loginGrade == '관리자'}"></c:set>
 						<c:if test="${admin}">
-						<a class="btn btn-negative" href="delete?boardNo=${dto.boardNo}">삭제하기</a>
-						</c:if> --%>
-						
+							<a class="btn btn-positive" href="write">글쓰기</a>
+							<a class="btn btn-positive" href="edit?noticeNo=${noticeDto.noticeNo}">수정하기</a>
+						</c:if>		
+							
+						<%-- <a class="btn btn-negative" href="delete?noticeNo=${noticeDto.noticeNo}">삭제하기</a> --%>
+						<a class="btn btn-neutral" href="list">목록으로</a>
 					</td>
 				</tr>
 			
 			</tfoot>
 		</table>		
 	</div>
+</div>
+
+
+
 	
-	<div class="row">
-	<h2>상태창</h2>	
-	</div>
-	<div class="row">
-	loginId : ${sessionScope.LoginId}
-	</div>
-	<div class="row">
-		로그인 : ${sessionScope.LoginId != null}
-	</div>
-	<div class="row">
-		mg : ${sessionScope.ug}
-	</div>
-	<div class="row">
-		관리자 : ${sessionScope.ug == '관리자'}
-	</div>
+<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

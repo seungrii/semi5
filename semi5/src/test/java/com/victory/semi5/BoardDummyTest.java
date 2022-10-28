@@ -16,19 +16,19 @@ public class BoardDummyTest {
 	@Autowired
 	private BoardDao boardDao;
 	
-	@Test
-	public void before() {
-		for(int i=1; i <= 371; i++) {
-			boardDao.insert(BoardDto.builder()
-									.boardHead(null)
-									.boardTitle("테스트"+i)
-									.boardContents("테스트"+i)
-									.boardWriter("hello1234")
-								.build());
-		}
-	}
+//	@Test
+//	public void before() {
+//		for(int i=1; i <= 371; i++) {
+//			boardDao.insert(BoardDto.builder()
+//									.boardHead(null)
+//									.boardTitle("테스트"+i)
+//									.boardContents("테스트"+i)
+//									.boardWriter("hello1234")
+//								.build());
+//		}
+//	}
 	
-	@BeforeEach
+	@Test
 	public void after() {
 		boardDao.clear();
 	}
