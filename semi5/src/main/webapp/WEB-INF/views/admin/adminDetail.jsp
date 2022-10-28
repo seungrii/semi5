@@ -28,9 +28,9 @@
 					>${adminDto.adminAddMemo}</textarea>
 		</div>
 		<div class="row center mt-30">
-			<a class="btn btn-neutral" href="listAdmin">목록</a>
-			<a class="btn btn-neutral" href="changeAdmin?adminId=${adminDto.adminId}">수정</a>
-			<a class="btn btn-negative" href="deleteAdmin?adminId=${adminDto.adminId}">삭제</a>
+			<a class="btn btn-neutral" href="adminList">목록</a>
+			<a class="btn btn-neutral" href="adminChange?adminId=${adminDto.adminId}">수정</a>
+			<a class="btn btn-negative" href="adminDelete?adminId=${adminDto.adminId}">삭제</a>
 		</div>
 	
 	

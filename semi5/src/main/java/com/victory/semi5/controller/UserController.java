@@ -45,7 +45,7 @@ public class UserController {
 	}
 	
 	@PostMapping("/login")
-	public String login(@ModelAttribute UserDto userDto, 
+	public String login(@ModelAttribute UserDto userDto,
 			HttpSession session, @RequestParam String rank) {
 		if(rank.equals("off")) {
 			UserDto findDto = userDao.selectOne(userDto.getUserId());
@@ -80,10 +80,7 @@ public class UserController {
 	@GetMapping("/logout")
 	public String logout(HttpSession session) {
 		session.removeAttribute("LoginId");
-		String loginGrade = (String)session.getAttribute("loginGrade");
-		if(loginGrade.equals("관리자")) {	//관리자 로그인일 경우
-			session.removeAttribute("loginGrade");
-		}
+		session.removeAttribute("loginGrade");
 		return "redirect:/";
 	}
 	
@@ -131,11 +128,12 @@ public class UserController {
 	public String mypage(Model model,
 			HttpSession session, RedirectAttributes attr) {
 		String userId = (String)session.getAttribute("LoginId");
-		String loginGrade = (String)session.getAttribute("loginGrade");
+//		boolean admin = session.getAttribute("loginGrade") != null;
+		boolean admin = session.getAttribute("loginGrade") == "관리자";
 		
-		if(loginGrade.equals("관리자")) {	//관리자 로그인일 경우
+		if(admin) {	//관리자 로그인일 경우
 			attr.addAttribute("adminId", userId);
-			return "redirect:/admin/detailAdmin";
+			return "redirect:/admin/adminDetail";
 		}
 		else {			
 			UserDto userDto = userDao.selectOne(userId);
@@ -159,4 +157,7 @@ public class UserController {
 	public String pwFind() {
 		return "user/pwFind";
 	}
+
+	
+	
 }
