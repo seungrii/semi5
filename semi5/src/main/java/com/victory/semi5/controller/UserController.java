@@ -133,9 +133,7 @@ public class UserController {
 			HttpSession session) {
 		String userId = (String)session.getAttribute("LoginId");
 		UserDto userDto = userDao.selectOne(userId);
-		List<BoardDto> boardDto = boardDao.selectIdList(userId);
 		model.addAttribute("userDto", userDto);
-		model.addAttribute("boardDto", boardDto);
 		return "user/userMyPage";
 	}
 	@GetMapping("/idFind")
@@ -255,6 +253,14 @@ public class UserController {
 		oneQnaDto.setUserId(userId);
 		oneQnaDao.insert(oneQnaDto);
 		return "redirect:mypage";
+	}
+	@GetMapping("/boardList")
+	public String boardList(Model model,
+			HttpSession session) {
+		String userId = (String)session.getAttribute("LoginId");
+		List<BoardDto> boardDto = boardDao.selectIdList(userId);
+		model.addAttribute("boardDto", boardDto);
+		return "user/boardList";
 	}
 }
 

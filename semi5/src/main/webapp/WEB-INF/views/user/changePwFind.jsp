@@ -6,7 +6,7 @@
 </jsp:include>
 	<section class="w-980">
 		<div class="row mt-20">
-			<h1>개인정보 수정</h1>
+			<h1>비밀번호 변경</h1>
 		</div>
 		<div class="row center">
 			<h2>비밀번호 확인</h2>

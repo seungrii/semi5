@@ -17,6 +17,7 @@
     <link rel="stylesheet" type="text/css" href="/css/semi-commons.css">
     <link rel="stylesheet" type="text/css" href="/css/reset.css">
     <link rel="stylesheet" type="text/css" href="/css/semi-layout.css">
+    <link rel="stylesheet" type="text/css" href="/css/join.css">
     <link rel="stylesheet" type="text/css" href="/css/userChange.css">
 
     <!-- 폰트어썸 -->

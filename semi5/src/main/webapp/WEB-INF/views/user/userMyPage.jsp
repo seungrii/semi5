@@ -32,23 +32,9 @@
 		<div class="row">${userDto.userBirth}</div>
 		<div class="row">
 		<hr>
-			<c:forEach var="boardDto" items="${boardDto}">
-				<div class="row">
-					${boardDto.boardNo}
-				</div>
-				<div class="row">
-					${boardDto.boardHead}
-				</div>
-				<div class="row">
-					<a href="../board/detail?boardNo=${boardDto.boardNo}">${boardDto.boardTitle}</a>
-				</div>
-				<div class="row">
-					${boardDto.boardWriter}
-				</div>
-				<div class="row">
-					${boardDto.boardWriteTime}
-				</div>
-			</c:forEach>
+		<div class="row">
+			<a href="boardList">내가 작성한 글</a>
+		</div>
 		</div>
 	</section>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
