@@ -1,5 +1,6 @@
 package com.victory.semi5.controller;
 
+import java.sql.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.victory.semi5.repository.AdvanceDao;
+import com.victory.semi5.vo.AdvanceTimeVO;
 import com.victory.semi5.vo.CinemaNameVO;
 import com.victory.semi5.vo.MovieScheduleVO;
 
@@ -46,15 +48,31 @@ public class AdvanceRestController {
 		List<MovieScheduleVO> movieScheduleVOs = advanceDao.selectMoviePlayDate(movieNumber, cinemaName);
 		
 		if(movieScheduleVOs != null) {
-			System.out.println("성공");
-			System.out.println(movieScheduleVOs);
+//			System.out.println("성공");
+//			System.out.println(movieScheduleVOs);
 			return movieScheduleVOs; //성공
+		}
+		else {
+//			System.out.println("실패");
+			return null; //실패
+		}
+		
+	}// selectDateList() end
+	
+	
+	@GetMapping("/timelist")
+	public List<AdvanceTimeVO> selectTimeList(@RequestParam int movieNumber, @RequestParam String cinemaName, @RequestParam String moviePlayDate) {
+		List<AdvanceTimeVO> advanceTimeVOs = advanceDao.selectAdvanceTime(movieNumber, cinemaName, moviePlayDate);
+		
+		if(advanceTimeVOs != null) {
+			System.out.println("성공");
+//			System.out.println(advanceTimeVOs);
+			return advanceTimeVOs; //성공
 		}
 		else {
 			System.out.println("실패");
 			return null; //실패
 		}
-		
 	}
 	
 

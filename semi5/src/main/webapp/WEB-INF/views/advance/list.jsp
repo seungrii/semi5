@@ -43,16 +43,17 @@
 
 <script type="text/javascript">
 $(function(){
+    var movieNumber;
     $(".advance-movie").find("li").click(function(){
         // $(".advance-theater").css("color","red");
         // console.log($(this).text()); //text 확인
 
-        var movieNumber = $(this).data("no");
+        movieNumber = $(this).data("no");
         // console.log($(this).data("no"));
         if(!movieNumber) return;
 
         $.ajax({
-            url:"http://localhost:8888/rest/advance/list?movieNumber="+$(this).data("no"),//moiveNumber,
+            url:"http://localhost:8888/rest/advance/cinemalist?movieNumber="+$(this).data("no"),//moiveNumber,
             method:"get",
             success:function(resp){
                 // console.log(resp);// list값 제대로 넘어옴
@@ -66,36 +67,38 @@ $(function(){
                 
             }
         }); //ajax end
-
+        return movieNumber;
     }); //click function end
 
 
     $(document).on("click",".advance-cinema li",function(){
-        console.log(movieNumber);
-        console.log($(this).text()); //text 확인
-        // $(this).css("color" , "red");
+        // console.log(movieNumber); //movieNumber 확인
+        // console.log($(this).text()); //text 확인
+        console.log($(this).data("cinemaName"));
+        console.log($(this).text());
 
-        // $.ajax({
-        //     url:"http://localhost:8888/rest/advance/alist?movieNumber="+$(this).data("no"),//moiveNumber,
-        //     method:"get",
-        //     success:function(resp){
-        //         // console.log(resp);// list값 제대로 넘어옴
-        //         $(".advance-cinema").find("li").remove();
-        //         $.each(resp, function(index, item){
-        //             $(".advance-cinema").find("ul").append("<li>"+item.ciName+"</li>");
-        //             // $(".advance-cinema").find("ul").append(item.ciName);
-        //             // $(".advance-cinema").find("ul").append("</li>");
+        $.ajax({
+            url:"http://localhost:8888/rest/advance/datelist?movieNumber=" + movieNumber + "&cinemaName=" + $(this).text(),//moiveNumber,
+            method:"get",
+            success:function(resp){
+                // console.log(resp);// list값 제대로 넘어옴
+                $(".advance-date").find("li").remove();
+                $.each(resp, function(index, item){
+                    $(".advance-date").find("ul").append("<li>"+item.moviePlayStart+"</li>");
+                    // $(".advance-cinema").find("ul").append(item.ciName);
+                    // $(".advance-cinema").find("ul").append("</li>");
                     
-        //         });
-                
-        //     }
-        // }); //ajax end
+                });
+                // console.log("통신완료");
+            }
+        }); //ajax end
 
         
     });// click function end
 
 
 });
+// text나 html로 뿌려줄때 리스트를 풀어서 찍어주면 됨
 
         
     </script>
