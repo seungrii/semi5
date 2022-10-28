@@ -51,4 +51,10 @@ public class GenreDaoImpl implements GenreDao {
 		
 	}
 
+	@Override
+	public GenreDto selectOne() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

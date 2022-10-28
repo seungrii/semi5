@@ -1,6 +1,7 @@
 package com.victory.semi5.repository;
 
 import com.victory.semi5.entity.CharacterDto;
+import com.victory.semi5.entity.MovieDto;
 
 public interface CharacterDao {
 	
@@ -10,5 +11,6 @@ public interface CharacterDao {
 	void insertActor2(CharacterDto characterDto,String charaterName3);
 	void insertActor3(CharacterDto characterDto,String charaterName4);
 	void insertActor4(CharacterDto characterDto,String charaterName5);
+	CharacterDto selectOne(int movieNumber);
 
 }

@@ -80,7 +80,7 @@ public class MovieDaoImpl implements MovieDao {
 	}
 
 	@Override
-	public List<MovieDto> selectList() {
+	public List<MovieDto> selectList() {//목록
 		  String sql="select*from movie order by movie_number asc";
 			return jdbcTemplate.query(sql, mapper);
 	}
@@ -96,7 +96,7 @@ public class MovieDaoImpl implements MovieDao {
 	}
 
 	@Override
-	public MovieDto selectOne(int movieNumber) {
+	public MovieDto selectOne(int movieNumber) {//상세 조회
 		// TODO Auto-generated method stub
 	    String sql="select*from movie where movie_number=?";
 	    Object[]param= {movieNumber};

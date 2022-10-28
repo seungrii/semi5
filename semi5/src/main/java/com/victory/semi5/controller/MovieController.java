@@ -16,6 +16,7 @@ import com.victory.semi5.entity.GenreDto;
 import com.victory.semi5.entity.MovieDto;
 import com.victory.semi5.repository.CharacterDao;
 import com.victory.semi5.repository.GenreDao;
+import com.victory.semi5.repository.ImageDao;
 import com.victory.semi5.repository.MovieDao;
 import com.victory.semi5.vo.HashtagVO;
 
@@ -26,9 +27,9 @@ public class MovieController {
 	
 	@Autowired 
 	MovieDao movieDao;
-//
-//	@Autowired 
-//	ImageDao imageDao;
+
+	@Autowired 
+	ImageDao imageDao;
 	
 	@Autowired 
 	CharacterDao characterDao;
@@ -43,16 +44,45 @@ public class MovieController {
 	public String list(Model model,
 								@RequestParam(required=false) String type,
 								@RequestParam(required=false) String keyword){
-		boolean isSearch = type != null && keyword != null;
-		if(isSearch) {//검색
-			model.addAttribute("list",movieDao.selectList(type,keyword));
-		}
-		else {
-			model.addAttribute("list",movieDao.selectList());
-		}
+//		boolean isSearch = type != null && keyword != null;
+//		if(isSearch) {//검색
+//			model.addAttribute("list",movieDao.selectList(type,keyword));
+//		}
+//		else {
+//			model.addAttribute("list",movieDao.selectList());
+//		}
+		
+		model.addAttribute("list",movieDao.selectList());
 		
 		
 		return "movie/list";
+	}
+	
+	@GetMapping("/detail")
+	public String detail(@RequestParam int movieNumber,Model model,
+			@ModelAttribute CharacterDto characterdto,GenreDto genredto
+			
+//		@RequestParam String charaterName1, String charaterName2, 
+//			String charaterName3, String charaterName4, String charaterName5
+			){
+		
+//        model.addAttribute("dto", movieDao.selectOne(movieNumber));
+//		//model.addAttribute("movieDto", movieDao.selectOne(movieNumber));
+//      	model.getAttribute(null);
+////		model.addAttribute("characterDto", characterDto);
+		
+		
+		model.addAttribute("dto", movieDao.selectOne(movieNumber));
+		
+		model.addAttribute("characterdto",characterDao.selectOne(movieNumber));//캐릭터 selectOne
+		
+		model.addAttribute("genredto",genreDao.selectOne());
+	//	model.addAttribute("genreDto",genreDto);
+		
+		
+	//movieDao.insert(moviedto);
+		
+		return "movie/detail";
 	}
 	
 //	@GetMapping("/list")//목록
@@ -70,6 +100,8 @@ public class MovieController {
 //		
 //		return "movie/list";
 //	}
+	
+	
 
 	
 	

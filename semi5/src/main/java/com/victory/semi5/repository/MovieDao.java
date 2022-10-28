@@ -7,7 +7,8 @@ import com.victory.semi5.entity.MovieDto;
 
 
 public interface MovieDao {
-	
+
+		
 	void insert(MovieDto dto);//데이터 넣기
 	int insert2(MovieDto dto);
     List<MovieDto> selectList();//목록
@@ -17,4 +18,8 @@ public interface MovieDao {
     boolean delete(int movieNumber);
 
     void insertHashtagVO(int movieNumber, int genreNo);
+    
+    
+    
+    
 }

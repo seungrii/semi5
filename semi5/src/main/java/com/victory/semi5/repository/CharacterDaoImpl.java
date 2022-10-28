@@ -1,10 +1,18 @@
 package com.victory.semi5.repository;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.stereotype.Repository;
 
 import com.victory.semi5.entity.CharacterDto;
+import com.victory.semi5.entity.MovieDto;
+
+
 @Repository
 public class CharacterDaoImpl implements CharacterDao {
 	
@@ -32,6 +40,36 @@ public class CharacterDaoImpl implements CharacterDao {
 //		};
 //		jdbcTemplate.update(sql,param);	
 //	}
+	
+	
+//조회위한
+	private ResultSetExtractor<CharacterDto> extractor = new ResultSetExtractor<CharacterDto>() {
+		@Override
+		public CharacterDto extractData(ResultSet rs) throws SQLException, DataAccessException {
+			if(rs.next()) {
+			    CharacterDto dto = new CharacterDto();
+				dto.setCharacterNumber(rs.getInt("character_number"));
+				dto.setMovieNumber(rs.getInt("movie_number"));
+			    dto.setCharaterName1(rs.getString("charater_name"));
+			    dto.setCharaterName2(rs.getString("charater_name"));
+			    dto.setCharaterName3(rs.getString("charater_name"));
+			    dto.setCharaterName4(rs.getString("charater_name"));
+				dto.setCharacterAge(rs.getInt("character_age"));
+				dto.setCharacterAwards(rs.getString("character_awards"));
+				dto.setCharacterFilmography(rs.getString("character_filmography"));
+				dto.setCharacterType(rs.getString("character_type"));
+				dto.setCharacterNationality(rs.getString("character_nationality"));
+				return dto;
+				
+				
+				
+			}
+			else {
+				return null;
+			}
+		}
+	};
+	
 
 	@Override
 	public void insertDirector(CharacterDto characterDto, String charaterName1) {
@@ -96,6 +134,17 @@ public class CharacterDaoImpl implements CharacterDao {
 			characterDto.getMovieNumber(), charaterName5, "배우"
 		};
 		jdbcTemplate.update(sql,param);	
+	}
+	
+	
+    //상세 조회
+	@Override
+	public CharacterDto selectOne(int movieNumber) {
+		
+		String sql="select*from character where character_number=?";
+		Object[]param= {movieNumber};
+		return jdbcTemplate.query(sql, extractor,param);
+		
 	}
 
 
