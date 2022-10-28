@@ -2,7 +2,6 @@ package com.victory.semi5.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.lang.ProcessBuilder.Redirect;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -25,9 +24,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.victory.semi5.constant.SessionConstant;
 import com.victory.semi5.entity.AdminDto;
 import com.victory.semi5.entity.BoardDto;
+import com.victory.semi5.entity.OneQnaDto;
 import com.victory.semi5.entity.UserDto;
 import com.victory.semi5.repository.AdminDao;
 import com.victory.semi5.repository.BoardDao;
+import com.victory.semi5.repository.OneQnaDao;
 import com.victory.semi5.repository.UserDao;
 
 @Controller
@@ -40,6 +41,8 @@ public class UserController {
 	private AdminDao adminDao;
 	@Autowired
 	private BoardDao boardDao;
+	@Autowired
+	private OneQnaDao oneQnaDao;
 	
 	@GetMapping("/login")
 	public String login() { 
@@ -68,7 +71,7 @@ public class UserController {
 			}
 			boolean passwordMatch = userDto.getUserPw().equals(findDto.getAdminPw());
 			if(passwordMatch) {
-				session.setAttribute("LoginId", userDto.getUserId());
+				session.setAttribute(SessionConstant.ID, userDto.getUserId());
 				session.setAttribute(SessionConstant.GRADE, userDto.getUserRank());
 				return "redirect:/";
 			}else {
@@ -244,10 +247,15 @@ public class UserController {
 	public String oneQna() {
 		return "user/oneQna";
 	}
-//	@PostMapping("/oneQna")
-//	public String oneQna(@ModelAttribute) {
-//		
-//	}
+	
+	@PostMapping("/oneQna")
+	public String oneQna(@ModelAttribute OneQnaDto oneQnaDto,
+			HttpSession session) {
+		String userId = (String)session.getAttribute(SessionConstant.ID);
+		oneQnaDto.setUserId(userId);
+		oneQnaDao.insert(oneQnaDto);
+		return "redirect:mypage";
+	}
 }
 
 

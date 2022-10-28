@@ -3,6 +3,7 @@
 <jsp:include page="/WEB-INF/views/user-login-template/loginHeader.jsp">    
 	<jsp:param value="메인화면" name="title"/>
 </jsp:include>
+
 	<section class="w-980">
 		<div class="row mt-20 center">
 			<h1>비밀번호 변경</h1>
@@ -12,7 +13,7 @@
 				<input type="password" name="userPw">
 			</div>
 			<div class="row">
-				<input type="password" name="userPwFind">
+				<input type="password" name="userPwFind">	
 			</div>
 			<div>
 				<button type="submit">변경</button>
