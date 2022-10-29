@@ -1,6 +1,7 @@
 package com.victory.semi5.controller;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.servlet.http.HttpSession;
@@ -207,6 +208,7 @@ public class BoardController {
 		attr.addAttribute("boardNo", replyOrigin);
 		return "redirect:/board/detail";
 	}
+	
 	
 	@PostMapping("/reply/edit")
 	public String replyEdit(

@@ -230,7 +230,7 @@
 	</div>
 	
 	<div class="row center">
-		<table class="table">
+		<table class="table table-slit">
 			<tbody>
 				<tr>
 					<th width="25%">번호</th>
@@ -241,14 +241,14 @@
 					<td>${boardDto.boardHead}</td>
 				</tr>
 				<tr>
+					<th>작성자</th>
+					<td>${boardDto.boardWriter}</td>
+				</tr>
+				<tr>
 					<th>제목</th>
 					<td>
 						${boardDto.boardTitle}</td>
 				</tr>	
-				<tr>
-					<th>작성자</th>
-					<td>${boardDto.boardWriter}</td>
-				</tr>
 				<tr height="200" valign="top">
 					<th>내용</th>
 					<td>
@@ -286,7 +286,6 @@
 					
 						<c:if test="${LoginId != null}">
 						<a class="btn btn-positive" href="write">글쓰기</a>
-						<a class="btn btn-positive" href="write?boardParent=${boardDto.boardNo}">답글쓰기</a>
 						</c:if>
 						
 						<%--
@@ -387,7 +386,7 @@
 				<!-- 댓글 작성 -->
 			<form action="reply/write" method="post">
 				<input type="hidden" name="replyOrigin" value="${boardDto.boardNo}">
-				<table class="table">
+				<table class="table table-slit">
 					<tbody>
 						<tr>
 							<th>
@@ -405,7 +404,7 @@
 			
 			
 			<c:otherwise>
-				<table class="table">
+				<table class="table table-slit">
 					<tbody>
 						<tr>
 							<th>
@@ -424,22 +423,5 @@
 </div>
 
 	
-	
-	<div class="row">
-	<h2>상태창</h2>	
-	</div>
-	<div class="row">
-	LoginId : ${sessionScope.LoginId}
-	</div>
-	<div class="row">
-		로그인 : ${sessionScope.LoginId != null}
-	</div>
-	<div class="row">
-		loginGrade : ${sessionScope.loginGrade}
-	</div>
-	<div class="row">
-		관리자 : ${sessionScope.loginGrade == '관리자'}
-	</div>
-	
-	<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
 	

@@ -209,12 +209,12 @@
 	<div class="row center mt-20">
 	<form action="list" method="get">
 		<input type="hidden" name="size" value="${vo.size}">
-		<select class="input" name="type" required>
+		<select class="input input-line" name="type" required>
 			<option value="board_title" <c:if test="${vo.type == 'board_title'}">selected</c:if>>제목</option>
 			<option value="board_writer" <c:if test="${vo.type == 'board_writer'}">selected</c:if>>작성자</option>
 	 	</select>
 	 	
-		<input class="input" type="search" name="keyword" placeholder="검색어" required value="${vo.keyword}">
+		<input class="input input-line" type="search" name="keyword" placeholder="검색어" required value="${vo.keyword}">
 		<button class="btn btn-positive" type="submit">검색</button>
 	 	
 	 </form>
@@ -222,19 +222,4 @@
 </div>
 
 
-
-<div class="row">
-	<h2>상태창</h2>	
-	</div>
-	<div class="row">
-	loginId : ${sessionScope.LoginId}
-	</div>
-	<div class="row">
-		로그인 : ${sessionScope.LoginId != null}
-	</div>
-	<div class="row">
-		mg : ${sessionScope.ug}
-	</div>
-	<div class="row">
-		관리자 : ${sessionScope.ug == '관리자'}
-	</div>
+<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

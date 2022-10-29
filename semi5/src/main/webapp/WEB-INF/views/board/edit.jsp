@@ -3,6 +3,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
+<jsp:include page="/WEB-INF/views/template/header.jsp">
+	<jsp:param value="자유 게시판" name="title"/>
+</jsp:include>
+ 
+ 
+<link rel="stylesheet" type="text/css" href="/css/semi-commons.css">
+
 
 <form action="edit" method="post">
 <!-- input[type=hidden]은 form 안에 위치해야 한다 -->
@@ -41,3 +48,5 @@
 </div>
 
 </form>
+
+<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
