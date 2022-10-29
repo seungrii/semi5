@@ -32,7 +32,7 @@
 		<!-- 지점 이미지 첨부 -->
 		<div class="row left mt-20">
 			<label>첨부파일(1개당 1MB. 최대 10MB 가능)</label>
-			<input class="input input-line w-100" type="file" name="image" accept=".png,.jpg">
+			<input class="input input-line w-100" type="file" name="attachments" multiple>
 		</div>
 		
 		<div class="row center mt-30">

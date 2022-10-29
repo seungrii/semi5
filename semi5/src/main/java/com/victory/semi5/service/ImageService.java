@@ -1,10 +1,10 @@
 package com.victory.semi5.service;
 
 import java.io.IOException;
-
-import org.springframework.web.bind.annotation.RequestParam;
+import java.util.List;
 import org.springframework.web.multipart.MultipartFile;
 
 public interface ImageService {
-	public int imageUp(@RequestParam MultipartFile image) throws IllegalStateException, IOException;
+	public int attachmentsUp(List<MultipartFile> attachments, MultipartFile file)
+			throws IllegalStateException, IOException;
 }
