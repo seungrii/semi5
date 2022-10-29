@@ -31,7 +31,7 @@ import com.victory.semi5.repository.CharacterDao;
 import com.victory.semi5.repository.CinemaDao;
 import com.victory.semi5.repository.MovieDao;
 import com.victory.semi5.repository.UserDao;
-import com.victory.semi5.service.ImageService;
+import com.victory.semi5.service.AttachmentService;
 
 @Controller
 @RequestMapping("/admin")
@@ -50,7 +50,7 @@ public class AdminController {
 	@Autowired
 	private CharacterDao characterDao;
 	@Autowired
-	private ImageService imageService;
+	private AttachmentService attachmentService;
 	
 	private final File dir = new File("C:\\study\\vic\\upload"); //파일경로
 	@PostConstruct //최초 실행 시, 딱 한번만 실행되는 메소드
@@ -177,7 +177,7 @@ public class AdminController {
 		//파일첨부
 		for(MultipartFile file : attachments) {
 			if(!file.isEmpty()) {
-				int fileNumber = imageService.attachmentsUp(attachments, file);	//이미지 추가 service로
+				int fileNumber = attachmentService.attachmentsUp(attachments, file);	//이미지 추가 service로
 
 				String cinemaPorin = cinemaDto.getCinemaPorin(); //지점명 꺼내기
 				attachmentDao.addCinemaImage(cinemaPorin, fileNumber); //지점이미지에 저장						
@@ -218,18 +218,30 @@ public class AdminController {
 	
 	//지점관리 - 수정
 	@GetMapping("/cinemaChange")
-	public String cinemaChange() {
+	public String cinemaChange() {		
 		return "admin/cinemaChange";
 	}
 	@PostMapping("/cinemaChange")
 	public String cinemaChange(
-			RedirectAttributes attr) {
+			RedirectAttributes attr) {		
 		return "redirect:cinemaDetail";
 	}
 	//지점관리 - 삭제
 	@GetMapping ("/cinemaDelete") 
-	public String cinemaDelete() {
-		return "redirect:cinemaList";
+	public String cinemaDelete(@RequestParam String cinemaPorin) {
+		//지점삭제 전, 첨부파일 조회
+		List<ImageDto> attachments = attachmentDao.selectCinemaImageList(cinemaPorin);
+		
+		//지점삭제(DB: cinema_image 자동삭제)
+		boolean result = cinemaDao.deleteCinema(cinemaPorin);
+		
+		if(result) { //지점삭제 성공
+			//실제파일 삭제
+			attachmentService.attachmentsDelete(attachments);
+			return "redirect:cinemaList";
+		}
+		
+		return "redirect:cinemaList";	//삭제실패시, 알람창 필요
 	}
 	
 	

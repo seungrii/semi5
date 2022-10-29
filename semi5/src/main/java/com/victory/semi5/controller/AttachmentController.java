@@ -3,6 +3,7 @@ package com.victory.semi5.controller;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.util.List;
 
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,15 +22,16 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.victory.semi5.entity.ImageDto;
 import com.victory.semi5.repository.AttachmentDao;
+import com.victory.semi5.service.AttachmentService;
 
 @RestController	//화면반환x
 @RequestMapping("/attachment")
 public class AttachmentController {
 
-//	<img src="download?memberId=${memberDto.memberId}" width="100" height="100">
-
 	@Autowired
 	private AttachmentDao attachmentDao;
+	@Autowired
+	private AttachmentService attachmentService;
 	
 	private final File dir = new File("C:\\study\\vic\\upload"); //파일경로
 		
@@ -68,5 +70,14 @@ public class AttachmentController {
 								.build().toString())
 				.body(resource);
 	}
+	
+	@GetMapping("/delete/{fileNumber}")	//이미지 삭제
+	public void delete(@PathVariable int fileNumber) {
+		List<ImageDto> attachments = attachmentDao.selectList(fileNumber);
+		attachmentService.attachmentsDelete(attachments);
+	}
+
+		
+
 	
 }

@@ -63,6 +63,13 @@ public class AttachmentDaoImpl implements AttachmentDao{
 		return jdbcTemplate.query(sql, mapper);
 	}
 	@Override
+	public List<ImageDto> selectList(int fileNumber) {
+		String sql = "select * "
+				+ "from image where file_number = ?";
+		Object[] param = {fileNumber};
+		return jdbcTemplate.query(sql, mapper, param);
+	}
+	@Override
 	public ImageDto selectOne(int fileNumber) {
 		String sql = "select * "
 				+ "from image where file_number = ?";

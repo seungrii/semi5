@@ -80,11 +80,13 @@ public class CinemaDaoImpl implements CinemaDao {
 //		// TODO Auto-generated method stub
 //		return false;
 //	}
-//
-//	@Override
-//	public boolean deleteCinema(String adminId) {
-//		// TODO Auto-generated method stub
-//		return false;
-//	}
+
+	@Override
+	public boolean deleteCinema(String cinemaPorin) {
+		String sql = "delete cinema "
+						+ "where Cinema_Porin = ?";
+		Object[] param = {cinemaPorin};
+		return jdbcTemplate.update(sql, param) >0;
+	}
 
 }

@@ -42,6 +42,7 @@
 					<span class="ms-10 mt-10">
 					<img src="/attachment/download/${imageDto.fileNumber}" width="100" height="100">
 					<a href="/attachment/download/${imageDto.fileNumber}">다운로드</a>
+					<%-- <a href="/attachment/delete/${imageDto.fileNumber}">삭제</a> 	삭제는 비동기로 구현해야함 --%>
 					</span>
 				</c:forEach>
 				</div>

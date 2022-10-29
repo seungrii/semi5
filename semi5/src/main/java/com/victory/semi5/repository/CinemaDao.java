@@ -12,7 +12,7 @@ public interface CinemaDao {
 	CinemaDto selectOne(String cinemaPorin);
 	
 //	boolean changeCinema(CinemaDto cinemaDto);
-//	
-//	boolean deleteCinema(String adminId);
+
+	boolean deleteCinema(String cinemaPorin);
 	
 }

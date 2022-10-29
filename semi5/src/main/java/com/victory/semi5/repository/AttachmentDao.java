@@ -11,6 +11,7 @@ public interface AttachmentDao {
 	void insert(ImageDto imageDto);	
 	List<ImageDto> selectList();
 	ImageDto selectOne(int fileNumber);
+	List<ImageDto> selectList(int fileNumber);
 	boolean delete(int fileNumber);
 	
 	

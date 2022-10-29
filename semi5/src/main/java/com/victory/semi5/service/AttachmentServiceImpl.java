@@ -18,7 +18,7 @@ import com.victory.semi5.entity.ImageDto;
 import com.victory.semi5.repository.AttachmentDao;
 
 @Service
-public class ImageServiceImpl implements ImageService{
+public class AttachmentServiceImpl implements AttachmentService{
 
 	@Autowired
 	private AttachmentDao attachmentDao;
@@ -47,6 +47,16 @@ public class ImageServiceImpl implements ImageService{
 		return fileNumber;
 	}
 	
+	public void attachmentsDelete(List<ImageDto> attachments) {
+		for(ImageDto imageDto : attachments) {
+			//첨부파일 삭제 (DB: image)
+			attachmentDao.delete(imageDto.getFileNumber());
+			//실제파일 삭제
+			String filename = String.valueOf(imageDto.getFileNumber());
+			File target = new File(dir, filename);
+			target.delete();
+		}
+	}
 		
 	
 }
