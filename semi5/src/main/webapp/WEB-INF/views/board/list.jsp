@@ -103,7 +103,11 @@
 	<table class="table table-slit">
 		<thead>
 			<td align="right" colspan="5">
+			
+			<!-- 회원만 글쓰기 -->
+			<c:if test="${LoginId != null}">
 				<a href="write">글쓰기</a>
+			</c:if>
 				<a href="/">홈으로</a>
 			</td>
 		
@@ -131,6 +135,11 @@
 						<a href="detail?boardNo=${boardDto.boardNo}">
 							${boardDto.boardTitle}
 						</a>
+						
+						 <!-- 댓글 개수 출력 -->
+						<c:if test="${boardDto.replyCount > 0}">
+							[${boardDto.replyCount}]
+						</c:if>
 					</td>
 					<td>${boardDto.boardWriter}</td>
 					<td>${boardDto.boardWriteTime}</td>

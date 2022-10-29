@@ -189,13 +189,7 @@ $(function(){
 		<table class="table table-slit table-hover table-reply-list">
 		<!-- 댓글 목록 -->
 		
-		<thead>
-			<tr>
-					<td colspan="2">
-						총 ${qnaList.size()}개의 댓글이 있습니다.
-					</td>
-				</tr>
-		</thead>
+
 		
 		<tbody>
 			<c:forEach var="qnaDto" items="${qnaAnswerList}">
@@ -211,15 +205,7 @@ $(function(){
 					<!-- 회원등급은 자유게시판에 안씀 위화감 조성ㅋ -->
 					<br>
 					
-					<!-- 블라인드 여부에 따라 다르게 표시 -->
-						<c:choose>
-							<c:when test="${replyDto.replyBlind}">
-								<pre>블라인드 처리된 게시물입니다</pre>
-							</c:when>
-							<c:otherwise>
-								<pre>${replyDto.replyContent}</pre>
-							</c:otherwise>
-						</c:choose>
+					
 					
 					<br><br>
 					<fmt:formatDate value="${qnaDto.qnaWriteTime}" pattern="yyyy-MM-dd HH:mm"/>				
@@ -289,7 +275,7 @@ $(function(){
 				<form action="/qna/reply/write" method="post">
 				<!-- <form class="reply-insert-form"> -->
 				<input type="hidden" name="qnaNo" value="${qnaDto.qnaNo}">
-				<table class="table">
+				<table class="table table-slit">
 					<tbody>
 
 						<tr>
@@ -312,7 +298,7 @@ $(function(){
 					<tbody>
 						<tr>
 							<th>
-								<textarea name="qnaAnswer" rows="5" cols="55" 
+								<textarea class="input input-line" name="qnaAnswer" rows="5" cols="55" 
 									placeholder="관리자만 댓글 작성이 가능합니다" disabled></textarea>
 							</th>
 							<th>
