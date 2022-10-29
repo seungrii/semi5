@@ -74,12 +74,18 @@ public class CinemaDaoImpl implements CinemaDao {
 		Object[] param = {cinemaPorin};
 		return jdbcTemplate.query(sql, extractor, param);
 	}
-//
-//	@Override
-//	public boolean changeCinema(CinemaDto cinemaDto) {
-//		// TODO Auto-generated method stub
-//		return false;
-//	}
+
+	@Override
+	public boolean changeCinema(CinemaDto cinemaDto) {
+		String sql = "update cinema set "
+				+ "cinema_base_address = ?, cinema_detail_address = ?, cinema_tel = ? "
+				+ "where cinema_porin = ?";
+		Object[] param = {
+			cinemaDto.getCinemaBaseAddress(), cinemaDto.getCinemaDetailAddress(), 
+			cinemaDto.getCinemaTel(), cinemaDto.getCinemaPorin()
+		};
+		return jdbcTemplate.update(sql, param) >0;
+	}
 
 	@Override
 	public boolean deleteCinema(String cinemaPorin) {

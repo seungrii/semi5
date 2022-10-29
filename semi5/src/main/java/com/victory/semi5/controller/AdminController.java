@@ -76,7 +76,6 @@ public class AdminController {
 		adminDao.addAdmin(adminDto);
 		return "redirect:adminAdd";
 	}
-
 	//admin 계정조회
 	@GetMapping("/adminList")
 	public String adminList(
@@ -99,7 +98,6 @@ public class AdminController {
 		model.addAttribute("adminDto", adminDto);
 		return "admin/adminDetail";
 	}
-	
 	//admin 계정수정
 	@GetMapping("/adminChange")
 	public String adminChange(
@@ -115,7 +113,6 @@ public class AdminController {
 		attr.addAttribute("adminId", adminDto.getAdminId());
 		return "redirect:adminDetail";
 	}
-	
 	//admin 계정삭제
 	@GetMapping("adminDelete")
 	public String adminDelete(
@@ -182,11 +179,9 @@ public class AdminController {
 				String cinemaPorin = cinemaDto.getCinemaPorin(); //지점명 꺼내기
 				attachmentDao.addCinemaImage(cinemaPorin, fileNumber); //지점이미지에 저장						
 			}
-			
 		}
 		return "redirect:cinemaAdd";
 	}
-
 	//지점관리 - 조회(목록)
 	@GetMapping("/cinemaList")
 	public String cinemaList(
@@ -215,19 +210,47 @@ public class AdminController {
 		
 		return "admin/cinemaDetail";
 	}
-	
 	//지점관리 - 수정
 	@GetMapping("/cinemaChange")
-	public String cinemaChange() {		
+	public String cinemaChange(Model model, 
+			@RequestParam String cinemaPorin) {		
+		model.addAttribute("cinemaDto", cinemaDao.selectOne(cinemaPorin));
+		model.addAttribute("attachments", attachmentDao.selectCinemaImageList(cinemaPorin));
 		return "admin/cinemaChange";
 	}
 	@PostMapping("/cinemaChange")
-	public String cinemaChange(
-			RedirectAttributes attr) {		
+	public String cinemaChange(@ModelAttribute CinemaDto cinemaDto,
+			RedirectAttributes attr,
+			@RequestParam List<MultipartFile> attachments) 
+				throws IllegalStateException, IOException {
+		cinemaDao.changeCinema(cinemaDto);
+		attr.addAttribute("cinemaPorin", cinemaDto.getCinemaPorin());
+		
+		//파일첨부
+		for(MultipartFile file : attachments) {
+			if(!file.isEmpty()) {
+				int fileNumber = attachmentService.attachmentsUp(attachments, file);	//이미지 추가 service로
+
+				String cinemaPorin = cinemaDto.getCinemaPorin(); //지점명 꺼내기
+				attachmentDao.addCinemaImage(cinemaPorin, fileNumber); //지점이미지에 저장						
+			}
+		}
 		return "redirect:cinemaDetail";
 	}
+	//지점이미지만 삭제
+	@GetMapping("/cinemaImageDelete")
+	public String cinemaImageDelete(
+			@RequestParam String cinemaPorin,int fileNumber,
+			RedirectAttributes attr) {
+		//실제파일 삭제(cinema_image 자동삭제)
+		List<ImageDto> attachments = attachmentDao.selectList(fileNumber);
+		attachmentService.attachmentsDelete(attachments);
+		
+		attr.addAttribute("cinemaPorin",cinemaPorin);
+		return "redirect:cinemaChange";
+	}
 	//지점관리 - 삭제
-	@GetMapping ("/cinemaDelete") 
+	@GetMapping("/cinemaDelete") 
 	public String cinemaDelete(@RequestParam String cinemaPorin) {
 		//지점삭제 전, 첨부파일 조회
 		List<ImageDto> attachments = attachmentDao.selectCinemaImageList(cinemaPorin);

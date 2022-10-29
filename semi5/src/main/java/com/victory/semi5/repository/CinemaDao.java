@@ -11,7 +11,7 @@ public interface CinemaDao {
 	List<CinemaDto> selectList(String type, String keyword);
 	CinemaDto selectOne(String cinemaPorin);
 	
-//	boolean changeCinema(CinemaDto cinemaDto);
+	boolean changeCinema(CinemaDto cinemaDto);
 
 	boolean deleteCinema(String cinemaPorin);
 	
