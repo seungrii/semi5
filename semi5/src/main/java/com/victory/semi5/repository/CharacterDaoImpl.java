@@ -50,10 +50,12 @@ public class CharacterDaoImpl implements CharacterDao {
 			    CharacterDto dto = new CharacterDto();
 				dto.setCharacterNumber(rs.getInt("character_number"));
 				dto.setMovieNumber(rs.getInt("movie_number"));
-			    dto.setCharaterName1(rs.getString("charater_name"));
-			    dto.setCharaterName2(rs.getString("charater_name"));
-			    dto.setCharaterName3(rs.getString("charater_name"));
-			    dto.setCharaterName4(rs.getString("charater_name"));
+				
+			    dto.setCharaterName1(rs.getString("charater_name1"));
+			    dto.setCharaterName2(rs.getString("charater_name2"));
+			    dto.setCharaterName3(rs.getString("charater_name3"));
+			    dto.setCharaterName4(rs.getString("charater_name4"));
+			    dto.setCharaterName5(rs.getString("charater_name5"));
 				dto.setCharacterAge(rs.getInt("character_age"));
 				dto.setCharacterAwards(rs.getString("character_awards"));
 				dto.setCharacterFilmography(rs.getString("character_filmography"));
@@ -147,6 +149,42 @@ public class CharacterDaoImpl implements CharacterDao {
 		
 	}
 
+	@Override
+	public CharacterDto selectOneDirector(String charaterName1) {
+		String sql="select*from character where character_number=?";
+		Object[]param= {charaterName1};
+		return jdbcTemplate.query(sql, extractor,param);
+	}
+
+	@Override
+	public CharacterDto selectOneActor1(String charaterName2) {
+		String sql="select*from character where character_number=?";
+		Object[]param= {charaterName2};
+		return jdbcTemplate.query(sql, extractor,param);
+	}
+
+	@Override
+	public CharacterDto selectOneActor2(String charaterName3) {
+		String sql="select*from character where character_number=?";
+		Object[]param= {charaterName3};
+		return jdbcTemplate.query(sql, extractor,param);
+	}
+
+	@Override
+	public CharacterDto selectOneActor3(String charaterName4) {
+		String sql="select*from character where character_number=?";
+		Object[]param= {charaterName4};
+		return jdbcTemplate.query(sql, extractor,param);
+	}
+
+	@Override
+	public CharacterDto selectOneActor4(String charaterName5) {
+		String sql="select*from character where character_number=?";
+		Object[]param= {charaterName5};
+		return jdbcTemplate.query(sql, extractor,param);
+	}
+
+	
 
 
 

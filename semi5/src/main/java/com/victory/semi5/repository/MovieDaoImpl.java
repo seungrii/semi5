@@ -18,7 +18,7 @@ public class MovieDaoImpl implements MovieDao {
 	
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
-	
+	//목록 위한
 	private RowMapper<MovieDto> mapper = new RowMapper<MovieDto>() {
 		@Override
 		public MovieDto mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -85,7 +85,7 @@ public class MovieDaoImpl implements MovieDao {
 			return jdbcTemplate.query(sql, mapper);
 	}
 
-	@Override
+	@Override//검색
 	public List<MovieDto> selectList(String type, String keyword) {
 		String sql="select*from movie "
 				+"where instr(#1,?)>0"

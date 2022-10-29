@@ -1,11 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%--JSTL 사용 선언 --%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="/WEB-INF/views/admin/admin-template/adminHeader.jsp">
-	<jsp:param value="영화 추가" name="title"/>
+	<jsp:param value="영화 목록" name="title"/>
 </jsp:include>
 
 <section class="w-980 test-css">
-	
+  
 <div class="container-400">
 
 
@@ -13,8 +15,35 @@
 
 	<form action="movieAdd" method="post" enctype="multipart/form-data">
 		<div class="row center fs-28">
-			<span>영화 추가</span>
+			<span>영화 목록</span>
 		</div>
+		<!-- 검색을 위한 검색 창 -->
+		<form action="list" method="get">
+		<select name="type" required>
+		<option>movieNumber</option>
+		<option>movieName</option>
+		</select>
+		<input name="keyword" required>
+		<button>검색</button>
+		</form>
+		
+		<table border="1" width="400">
+		<tbody>
+		<c:forEach var="dto" items="${list}">	
+		<tr>
+		<th>${dto.movieNumber}</th>
+		<td>${dto.movieName}</td>
+		
+		</tr>
+		</c:forEach>		
+		</tbody>
+		</table>
+		
+			<!-- 
+		
+		
+		</table>
+		
 		<div class="row mt-50">
 			<label class="ms-10">영화이름</label>
 			<input class="input input-line w-100" name="movieName" type="text" required autocomplete="off">
@@ -66,7 +95,7 @@
 			<span>1: 공포, .. 추가 해야 함</span>
 		</div>		
 		
-		<!-- 영화 포스터 첨부 -->
+		
 		<div class="row left mt-20">
 			<label>첨부파일(1개당 1MB. 최대 10MB 가능)</label>
 			<input class="input input-line w-100" type="file" name="imageCinema" accept=".png,.jpg">
@@ -76,6 +105,11 @@
 			<a class="btn btn-neutral" href="movieList">목록</a>
 			<button class="btn btn-positive" type="submit">추가</button>
 		</div>
+		
+		-->
+		
+		
+
 	</form>
 	
 </div>

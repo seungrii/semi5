@@ -36,6 +36,8 @@ public class MovieController {
 	
 	@Autowired
 	GenreDao genreDao;
+
+	
 	
 
 //list시작
@@ -59,32 +61,96 @@ public class MovieController {
 	}
 	
 	@GetMapping("/detail")
-	public String detail(@RequestParam int movieNumber,Model model,
-			@ModelAttribute CharacterDto characterdto,GenreDto genredto
-			
-//		@RequestParam String charaterName1, String charaterName2, 
-//			String charaterName3, String charaterName4, String charaterName5
-			){
+	public String detail(
+			Model model,@RequestParam int movieNumber,
+			@ModelAttribute MovieDto moviedto, 
+			CharacterDto characterDto, GenreDto genredto, 
+			@RequestParam String charaterName1, String charaterName2, 
+			String charaterName3, String charaterName4, String charaterName5	
+	) {
+	
 		
-//        model.addAttribute("dto", movieDao.selectOne(movieNumber));
-//		//model.addAttribute("movieDto", movieDao.selectOne(movieNumber));
-//      	model.getAttribute(null);
-////		model.addAttribute("characterDto", characterDto);
+		//시퀀스 번호 생성하며 등록하기
+	
+		model.addAttribute("moviedto", movieDao.selectOne(movieNumber));
+		model.addAttribute("characterdto", movieDao.selectOne(movieNumber));
+		
+		model.addAttribute("characterdto", characterDao.selectOneDirector(charaterName1));
+		model.addAttribute("characterdto", characterDao.selectOneActor1(charaterName2));
+		//characterDao.insertDirector(characterDto, charaterName1);
+		//characterDao.insertActor1(characterDto, charaterName2);
 		
 		
-		model.addAttribute("dto", movieDao.selectOne(movieNumber));
 		
-		model.addAttribute("characterdto",characterDao.selectOne(movieNumber));//캐릭터 selectOne
+//		void insertDirector(CharacterDto characterDto, String charaterName1);
+//		void insertActor1(CharacterDto characterDto,String charaterName2);
+//		void insertActor2(CharacterDto characterDto,String charaterName3);
+//		void insertActor3(CharacterDto characterDto,String charaterName4);
+//		void insertActor4(CharacterDto characterDto,String charaterName5);
+//		CharacterDto selectOne(int movieNumber);
+
+		if(!charaterName3.isEmpty()) {			
+			//characterDao.insertActor2(characterDto, charaterName3);
+			model.addAttribute("characterdto", characterDao.selectOneActor2(charaterName3));
+		}
+		if(!charaterName4.isEmpty()) {			
+			model.addAttribute("characterdto", characterDao.selectOneActor3(charaterName4));
+		}
+		if(!charaterName5.isEmpty()) {			
+			model.addAttribute("characterdto", characterDao.selectOneActor4(charaterName5));
+		}
 		
-		model.addAttribute("genredto",genreDao.selectOne());
-	//	model.addAttribute("genreDto",genreDto);
+		
+	   model.addAttribute("hashtagvo", movieDao.selectOne(movieNumber));
 		
 		
-	//movieDao.insert(moviedto);
+		int genreNo = genredto.getGenreNo();		
+		model.addAttribute("hashtagvo",genreDao.selectOne(genreNo));
+		
+		
+		
 		
 		return "movie/detail";
+		
 	}
 	
+	
+	
+	
+
+//	
+//	@GetMapping("/detail")
+//	public String detail(@RequestParam int movieNumber,Model model,
+//			@ModelAttribute CharacterDto characterdto , GenreDto genredto			
+//		     
+//			) {
+//		
+//
+//	
+//		//@RequestParam String charaterName1, String charaterName2, 
+//		//String charaterName3, String charaterName4, String charaterName5
+//		
+//		model.addAttribute("moviedto", movieDao.selectOne(movieNumber));
+//		
+//		
+//		
+//		model.addAttribute("characterdto", movieDao.selectOne(movieNumber));
+//		
+//		model.addAttribute("hashtagvo", movieDao.selectOne(movieNumber));
+//		
+//		
+//		int genreNo = genredto.getGenreNo();
+//		model.addAttribute("hashtagvo",genreDao.selectOne(genreNo));
+//	
+//		
+//
+//		
+//		return "movie/detail";
+//	}
+	
+
+}	
+
 //	@GetMapping("/list")//목록
 //	public String list(Model model,
 //								@RequestParam(required=false) String type,
@@ -97,7 +163,11 @@ public class MovieController {
 //			model.addAttribute("list",movieDao.selectList());
 //		}
 //		
-//		
+//			//	model.addAttribute("genreDto",genreDto);
+	
+	
+//movieDao.insert(moviedto);
+	
 //		return "movie/list";
 //	}
 	
@@ -113,4 +183,3 @@ public class MovieController {
 	//redirect전용 어트리부트가 나옴
 	
 	
-}

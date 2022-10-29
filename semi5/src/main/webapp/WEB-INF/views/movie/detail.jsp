@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <jsp:include page="/WEB-INF/views/template/header.jsp">
-	<jsp:param value="영화정보" name="title"/>
+	<jsp:param value="${dto.movieNumber}번 영화 정보" name="title"/>
 </jsp:include>
 
 
@@ -61,12 +61,13 @@
 </style>
 
    <div class="container-980">
+   
         <table class="whole">
          
         
             <tr>
                 <td rowspan="6" ><a href="#"><img src="./image/insta.png" class="image"></a> </td>
-                <td ><h1>${dto.movieName}</h1></td>
+                <td ><h1>${moviedto.movieName}</h1></td>
                 <td >상영여부</td>
                 
             </tr>
@@ -77,17 +78,17 @@
             </tr>
             <tr>
                 
-                <td>감독:${dto.charaterName1}</td>
-                <td>배우:${dto.charaterName2},${dto.charaterName3},${dto.charaterName4},${dto.charaterName5}</td>
+                <td>감독:${charaterdto.charaterName}</td>
+                <td>배우:${characterdto.charaterName}${characterdto.charaterName3}${characterdto.charaterName4}${characterdto.charaterName5}</td>
             </tr>
             <tr>
                 
-                <td>장르:${dto.movieName}</td>
-                <td>기본:${dto.moviePlayTime}</td>
+                <td>장르:${genredto.movieName}</td>
+                <td>기본:${moviedto.moviePlayTime}</td>
             </tr>
             <tr>
                
-                <td>개봉:${dto.openingDate}</td>
+                <td>개봉:${moviedto.openingDate}</td>
                 
             </tr>
             <tr>
@@ -96,7 +97,8 @@
 
           </table>
 
-          <p class="content">
+          <table>
+          <tr>
             “부서진 차… 손에 묻은 피… 권총 한 자루… 내가 왜 여기에 있는 거지?”
             뇌종양 말기, 80대 알츠하이머 환자인 한필주. 일제강점기 때 친일파들에게 가족을 모두 잃었다.
             아내가 세상을 떠나자 필주는 60여 년을 계획해 온 복수를 감행하려고 한다.
@@ -108,9 +110,9 @@
             경찰은 수사망을 좁혀오고 사라져가는 기억과 싸우며 필주는 복수를 이어가는데…
             
             60년의 계획, 복수를 위한 위험한 동행이 시작된다!
-
-
-          </p>
+            </tr>
+	      </table>
+          
       </div>
       
 

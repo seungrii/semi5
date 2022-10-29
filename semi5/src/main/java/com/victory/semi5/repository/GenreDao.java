@@ -6,6 +6,13 @@ public interface GenreDao {
 	
 	void insert(GenreDto dto);//데이터 넣기
 	int insert2(GenreDto dto);
-	GenreDto selectOne();
+	GenreDto selectOne(int genreNo);
     
+	
+	
+	
+	
+	
+	
+	
 }

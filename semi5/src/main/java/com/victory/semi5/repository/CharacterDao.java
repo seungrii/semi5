@@ -12,5 +12,9 @@ public interface CharacterDao {
 	void insertActor3(CharacterDto characterDto,String charaterName4);
 	void insertActor4(CharacterDto characterDto,String charaterName5);
 	CharacterDto selectOne(int movieNumber);
-
+	CharacterDto selectOneDirector(String charaterName1);
+	CharacterDto selectOneActor1(String charaterName2);
+	CharacterDto selectOneActor2(String charaterName3);
+	CharacterDto selectOneActor3(String charaterName4);
+	CharacterDto selectOneActor4(String charaterName5);
 }

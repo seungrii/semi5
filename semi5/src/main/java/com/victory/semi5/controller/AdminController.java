@@ -127,7 +127,7 @@ public class AdminController {
 		}
 	}
 	
-	
+
 //	회원정보 조회
 	//회원목록
 	@GetMapping("/userList")
@@ -244,9 +244,29 @@ public class AdminController {
 		return "redirect:movieAdd";
 	}
 	
+	
+	
 
 	//영화정보 - 조회
 	//목록			-"/movieList" 
+	                   //@GetMapping("/detailAdmin")
+	@GetMapping("/movieList")
+	public String list(Model model,
+			@RequestParam(required=false)String type,
+			@RequestParam(required=false) String keyword) {
+		
+		boolean isSearch=type !=null&&keyword !=null;
+		if(isSearch) {//검색
+			model.addAttribute("list",movieDao.selectList(type,keyword));
+		}
+		else {//목롤
+			model.addAttribute("list",movieDao.selectList());
+		}
+		return "admin/movieList";
+	}
+	
+	
+	
 	//상세			-"/movieDetail"
 	
 	
