@@ -36,7 +36,7 @@
 	</form>
 	</div>
 	
-	<!-- 관리자계정 목록 -->
+	<!-- 목록 -->
 	<div class="row center">
 	<table>
 		<thead>

@@ -2,6 +2,9 @@ package com.victory.semi5.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -24,14 +27,17 @@ import com.victory.semi5.entity.CinemaDto;
 import com.victory.semi5.entity.GenreDto;
 import com.victory.semi5.entity.ImageDto;
 import com.victory.semi5.entity.MovieDto;
+import com.victory.semi5.entity.MoviePlayDto;
 import com.victory.semi5.entity.UserDto;
 import com.victory.semi5.repository.AdminDao;
 import com.victory.semi5.repository.AttachmentDao;
 import com.victory.semi5.repository.CharacterDao;
 import com.victory.semi5.repository.CinemaDao;
 import com.victory.semi5.repository.MovieDao;
+import com.victory.semi5.repository.MoviePlayDao;
 import com.victory.semi5.repository.UserDao;
 import com.victory.semi5.service.AttachmentService;
+import com.victory.semi5.vo.MoviePlayListVO;
 
 @Controller
 @RequestMapping("/admin")
@@ -42,15 +48,17 @@ public class AdminController {
 	@Autowired
 	private UserDao userDao;
 	@Autowired
-	private CinemaDao cinemaDao;
-	@Autowired
 	private AttachmentDao attachmentDao;
+	@Autowired
+	private AttachmentService attachmentService;
+	@Autowired
+	private CinemaDao cinemaDao;
 	@Autowired
 	private MovieDao movieDao;
 	@Autowired
 	private CharacterDao characterDao;
 	@Autowired
-	private AttachmentService attachmentService;
+	private MoviePlayDao moviePlayDao;
 	
 	private final File dir = new File("C:\\study\\vic\\upload"); //파일경로
 	@PostConstruct //최초 실행 시, 딱 한번만 실행되는 메소드
@@ -74,7 +82,7 @@ public class AdminController {
 	public String adminAdd(
 			@ModelAttribute AdminDto adminDto) {
 		adminDao.addAdmin(adminDto);
-		return "redirect:adminAdd";
+		return "redirect:adminList";
 	}
 	//admin 계정조회
 	@GetMapping("/adminList")
@@ -308,12 +316,13 @@ public class AdminController {
 //			int imageNo = imageService.imageUp(image);	//이미지 추가
 //			imageDao.addPoster(movieNumber, imageNo); //영화포스터 추가
 //		}
-		return "redirect:movieAdd";
+		return "redirect:movieList";
 	}
 
 	//영화정보 - 조회(목록)
 	@GetMapping("/movieList")
 	public String movieList() {
+		
 		return "admin/movieList";
 	}
 	//영화정보 - 조회(상세)
@@ -399,11 +408,47 @@ public class AdminController {
 	public String moviePlayAdd() {
 		return "admin/moviePlayAdd";
 	}
+	@PostMapping("/moviePlayAdd")
+	public String moviePlayAdd(
+			@ModelAttribute MoviePlayDto moviePlayDto) throws ParseException {
+
+		String moviePlayStartDate = moviePlayDto.getMoviePlayStartDate();
+		String moviePlayStartTime = moviePlayDto.getMoviePlayStartTime();		
+		String start = moviePlayStartDate +" "+ moviePlayStartTime;
+		
+		SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		Date moviePlayStart = transFormat.parse(start);
+		moviePlayDto.setMoviePlayStart(moviePlayStart);
+		
+		moviePlayDao.addMoviePlay(moviePlayDto);
+		return "redirect:moviePlayList";
+	}
 	//영화스케쥴 - 조회(목록)
 	@GetMapping("/moviePlayList")
-	public String moviePlayList() {
+	public String moviePlayList(
+			Model model,
+			@RequestParam(required = false) String type,
+			@RequestParam(required = false) String keyword) {
+		boolean isSearch = type != null && keyword != null;
+		if(isSearch) {
+			//뷰 조회) 상영스케쥴-영화정보-상영관정보
+			model.addAttribute("moviePlayList", moviePlayDao.selectMoviePlayView(type, keyword));
+		}
+		else {
+			//뷰 조회) 상영스케쥴-영화정보-상영관정보
+			model.addAttribute("moviePlayList", moviePlayDao.selectMoviePlayView());
+			
+			
+			-- 시도!
+			상세조회에 필요한 것까지 모두 MoviePlayListVO에 변수 생성해서,
+			moviePlayDao 실행 시, List<MoviePlayListVO>에 담는다!
+			
+			
+			
+		}
 		return "admin/moviePlayList";
 	}
+	
 	//영화정보 - 조회(상세)
 	@GetMapping("/moviePlayDetail")
 	public String moviePlayDetail() {
@@ -419,7 +464,7 @@ public class AdminController {
 			RedirectAttributes attr) {
 		return "redirect:moviePlayDetail";
 	}
-	//영화스케쥴 - 삭제
+	//상영스케쥴 - 삭제
 	@GetMapping("/moviePlayDelete")
 	public String moviePlayDelete() {
 		return "redirect:moviePlayList";
