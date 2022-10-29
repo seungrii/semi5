@@ -352,7 +352,8 @@
 					<!-- 수정과 삭제는 현재 사용자가 남긴 댓글에만 표시 -->
 					<c:if test="${LoginId == replyDto.replyWriter}">
 						<a style="display:block; margin:10px 0px;" class="edit-btn">수정</a>
-						<a style="display:block; margin:10px 0px;" class="delete-btn" data-reply-origin="${replyDto.replyOrigin}" data-reply-no="${replyDto.replyNo}">삭제</a>
+						<!-- <a style="display:block; margin:10px 0px;" class="delete-btn" data-reply-origin="${replyDto.replyOrigin}" data-reply-no="${replyDto.replyNo}">삭제</a> -->
+						<a href="reply/delete?replyNo=${replyDto.replyNo}&replyOrigin=${replyDto.replyOrigin}">삭제</a>
 					</c:if>
 					
 					<c:if test="${admin}">
