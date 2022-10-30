@@ -7,7 +7,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.victory.semi5.entity.QnaDto;
 import com.victory.semi5.entity.ReplyDto;
+import com.victory.semi5.repository.QnaDao;
 import com.victory.semi5.repository.ReplyDao;
 
 

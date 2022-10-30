@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 </div>
-    <footer class="">
+    <footer class="container">
         <!-- 풋터 영역 -->
         
-<div>	
+<div class="left">	
 	<div class="row">
 		<h2>상태창</h2>	
 	</div>

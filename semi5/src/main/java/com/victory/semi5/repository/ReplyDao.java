@@ -14,4 +14,6 @@ public interface ReplyDao {
 	void clear();
 	
 	//블라인드
+	boolean updateBlind(int replyNo, boolean blind);
+
 }

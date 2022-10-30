@@ -323,10 +323,13 @@ create sequence theater_seat_seq;
 create sequence ticketing_seq;
 create sequence review_seq;
 
-
-
 --date format 변경 (시간까지 저장하기 위해서 변경)
 alter session set nls_date_format = 'yyyy-MM-dd hh24:mi';
+
+-- 문의게시판 컬럼 수정 
+alter table qna_board modify(qna_answer_time null);
+alter table qna_board modify(qna_answer_time default null);
+
 
 
 

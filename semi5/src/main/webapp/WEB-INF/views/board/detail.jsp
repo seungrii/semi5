@@ -230,7 +230,7 @@
 	</div>
 	
 	<div class="row center">
-		<table class="table">
+		<table class="table table-slit">
 			<tbody>
 				<tr>
 					<th width="25%">번호</th>
@@ -241,14 +241,14 @@
 					<td>${boardDto.boardHead}</td>
 				</tr>
 				<tr>
+					<th>작성자</th>
+					<td>${boardDto.boardWriter}</td>
+				</tr>
+				<tr>
 					<th>제목</th>
 					<td>
 						${boardDto.boardTitle}</td>
 				</tr>	
-				<tr>
-					<th>작성자</th>
-					<td>${boardDto.boardWriter}</td>
-				</tr>
 				<tr height="200" valign="top">
 					<th>내용</th>
 					<td>
@@ -286,7 +286,6 @@
 					
 						<c:if test="${LoginId != null}">
 						<a class="btn btn-positive" href="write">글쓰기</a>
-						<a class="btn btn-positive" href="write?boardParent=${boardDto.boardNo}">답글쓰기</a>
 						</c:if>
 						
 						<%--
@@ -333,18 +332,43 @@
 					<c:if test="${boardDto.boardWriter ==  replyDto.replyWriter}">
 					(작성자)
 					</c:if>
-					<pre>${replyDto.replyContent}</pre>
+					
+					<!-- 블라인드 여부에 따라 다르게 표시 -->
+					<c:choose>
+						<c:when test="${replyDto.replyBlind}">
+							<pre>블라인드 처리된 게시물입니다</pre>
+						</c:when>
+						<c:otherwise>
+							<pre>${replyDto.replyContent}</pre>
+						</c:otherwise>
+					</c:choose>
+					
+					
 					<br>
 					<fmt:formatDate value="${replyDto.replyWriteTime}" pattern="yyyy-MM-dd HH:mm"/>				
 				</td>
 
 				<th>
-				
 					<!-- 수정과 삭제는 현재 사용자가 남긴 댓글에만 표시 -->
-						<c:if test="${LoginId == replyDto.replyWriter}">
-							<a style="display:block; margin:10px 0px;" class="edit-btn">수정</a>
-							<a style="display:block; margin:10px 0px;" class="delete-btn" data-reply-origin="${replyDto.replyOrigin}" data-reply-no="${replyDto.replyNo}">삭제</a>
-						</c:if>
+					<c:if test="${LoginId == replyDto.replyWriter}">
+						<a style="display:block; margin:10px 0px;" class="edit-btn">수정</a>
+						<!-- <a style="display:block; margin:10px 0px;" class="delete-btn" data-reply-origin="${replyDto.replyOrigin}" data-reply-no="${replyDto.replyNo}">삭제</a> -->
+						<a href="reply/delete?replyNo=${replyDto.replyNo}&replyOrigin=${replyDto.replyOrigin}">삭제</a>
+					</c:if>
+					
+					<c:if test="${admin}">
+					<!-- 블라인드 여부에 따라 다르게 표시 -->
+					<c:choose>
+						<c:when test="${replyDto.replyBlind}">
+							<a style="display:block; margin:10px 0px;" href="reply/blind?replyNo=${replyDto.replyNo}&replyOrigin=${replyDto.replyOrigin}">블라인드 해제</a>
+						</c:when>
+						<c:otherwise>
+							<a style="display:block; margin:10px 0px;" href="reply/blind?replyNo=${replyDto.replyNo}&replyOrigin=${replyDto.replyOrigin}">블라인드</a>
+						</c:otherwise>
+					</c:choose>
+							
+						</c:if>						
+						
 				</th>
 			</tr>
 			
@@ -387,7 +411,7 @@
 				<!-- 댓글 작성 -->
 			<form action="reply/write" method="post">
 				<input type="hidden" name="replyOrigin" value="${boardDto.boardNo}">
-				<table class="table">
+				<table class="table table-slit">
 					<tbody>
 						<tr>
 							<th>
@@ -405,7 +429,7 @@
 			
 			
 			<c:otherwise>
-				<table class="table">
+				<table class="table table-slit">
 					<tbody>
 						<tr>
 							<th>
@@ -424,22 +448,5 @@
 </div>
 
 	
-	
-	<div class="row">
-	<h2>상태창</h2>	
-	</div>
-	<div class="row">
-	LoginId : ${sessionScope.LoginId}
-	</div>
-	<div class="row">
-		로그인 : ${sessionScope.LoginId != null}
-	</div>
-	<div class="row">
-		loginGrade : ${sessionScope.loginGrade}
-	</div>
-	<div class="row">
-		관리자 : ${sessionScope.loginGrade == '관리자'}
-	</div>
-	
-	<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
 	

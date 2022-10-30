@@ -12,79 +12,7 @@
 
 
 <style>
-	.heart {
-		text-decoration: none;
-		color:red;
-	}
-	.attachment-list {
-		margin:0;
-		padding:0;
-		list-style:none;
-	}
 	
-	.table {
-            border-collapse: collapse;/*테두리 병합*/
-            width:100%;
-            font-size: 16px;
-        }
-        /* 
-            방법 1 : .table 안에 있는 모든 th와 모든 td를 선택(후손선택자) 
-            - 내부에 있는 모든 요소를 선택하므로 테이블이 중첩되는 경우 문제가 발생
-        */
-        .table th, 
-        .table td {
-            /* border: 1px solid black; */
-        }
-
-        /* 방법 2 : .table 부터 시작하는 모든 경로를 제시하여 th와 td를 선택(자식선택자) */
-        .table > thead > tr > th,
-        .table > thead > tr > td,
-        .table > tbody > tr > th,
-        .table > tbody > tr > td,
-        .table > tfoot > tr > th,
-        .table > tfoot > tr > td {  
-            padding:0.5em;
-        }
-
-        /* 확장스타일 : 테두리가 있는 테이블 */
-        .table.table-border {
-            border:1px solid gray;
-        }
-        .table.table-border > thead > tr > th,
-        .table.table-border > thead > tr > td,
-        .table.table-border > tbody > tr > th,
-        .table.table-border > tbody > tr > td,
-        .table.table-border > tfoot > tr > th,
-        .table.table-border > tfoot > tr > td {  
-            border: 1px solid gray;
-        }
-
-        /* 확장 스타일 : 줄무늬 테이블*/
-        .table.table-stripe > thead > tr,
-        .table.table-stripe > tbody > tr:nth-child(2n)
-        {
-            background-color: #dfe6e9;
-        }
-
-        /* 확장 스타일 : 마우스에 반응하는 테이블*/
-        .table.table-hover > thead > tr:hover,
-        .table.table-hover > tbody > tr:hover,
-        .table.table-hover > tfoot > tr:hover {
-            background-color: #dfe6e9;
-        }
-
-        /* 확장스타일 : 옆트임 테이블 */
-        .table.table-slit {
-            border: 3px solid gray;
-            border-left: none;
-            border-right: none;
-        }
-        .table.table-slit > thead {
-            border-bottom: 2px solid gray;
-        }
-        .table.table-slit > tfoot {
-            border-top: 2px solid gray;
-        }
 </style> 
 
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
@@ -107,7 +35,92 @@ $(function(){
 	//3
 	$(".editor").hide();
 });
-
+//댓글 등록 처리
+$(function(){
+	$(".reply-insert-form").submit(function(e){
+		//기본 이벤트를 차단한다(form을 사용하지 않을 예정)
+		e.preventDefault();
+		
+		//댓글 입력값을 가져와서 검사 후 전송
+		var text = $(this).find("[name=replyContent]").val();
+		if(!text){
+			alert("내용을 작성해주세요");
+			return;
+		}
+		
+		var form = this;
+		
+		//정상적으로 입력되었다면 비동기 통신으로 등록 요청
+		$.ajax({
+			url:"http://localhost:8888/rest/reply/insert",
+			method:"post",
+			//data:{
+			//	replyOrigin:$(this).find("[name=replyOrigin]").val(),
+			//	replyContent:text
+			//},
+			data:$(form).serialize(),//form을 전송 가능한 형태의 문자로 변환한다
+			success:function(resp){
+				listHandler(resp);
+				
+				//입력창 초기화(= 폼 초기화) - 자바스크립트로 처리
+				form.reset();
+			}
+		});
+	});
+	
+	//댓글 삭제버튼을 누르면 삭제 후 목록 갱신
+	$(".delete-btn").click(deleteHandler);
+	
+	function deleteHandler(e){
+		e.preventDefault();
+		
+		console.log(this);
+		
+		$.ajax({
+			url:"/rest/reply/delete",
+			method:"post",
+			data:{
+				replyOrigin:$(this).data("reply-origin"),
+				replyNo:$(this).data("reply-no")
+			},
+			success:function(resp){
+				listHandler(resp);
+			}
+//				success:listHandler
+		});
+	}
+	function listHandler(resp){
+		//원래 있던 댓글 삭제
+		$(".table-reply-list").empty();//태그는 유지하고 내부를 삭제
+		
+		//헤더 생성
+		var header = $("#reply-list-header").text();
+		header = header.replace("{{size}}", resp.length);
+		$(".table-reply-list").append(header);
+		
+		//바디 생성
+		$(".table-reply-list").append("<tbody>");
+		
+		//현재 resp는 배열이다.
+		//미리 댓글 형식을 만들어두고 값만 바꿔치기해서 댓글 목록에 추가하도록 구현
+		for(var i=0; i < resp.length; i++){
+			//console.log(resp[i]);
+			var item = $("#reply-list-item").text();
+			item = item.replace("{{memberNick}}", resp[i].memberNick);
+			item = item.replace("{{replyWriter}}", resp[i].replyWriter);
+			item = item.replace("{{memberGrade}}", resp[i].memberGrade);
+			item = item.replace("{{replyContent}}", resp[i].replyContent);
+			item = item.replace("{{replyWritetime}}", resp[i].replyWritetime);
+			item = item.replace("{{replyNo}}", resp[i].replyNo);
+			item = item.replace("{{replyOrigin}}", resp[i].replyOrigin);
+			var result  = $(item);
+			result.find(".delete-btn").click(deleteHandler);//개별 추가
+			console.log("result", result.find(".delete-btn"));
+			$(".table-reply-list").children("tbody").append(result);
+		}
+		
+	}
+});
 </script>
     
 <div class="container mt-40 mb-40">
@@ -116,7 +129,7 @@ $(function(){
 	</div>
 	
 	<div class="row center">
-		<table class="table table-slit">
+		<table class="table table-border">
 			<tbody>
 				<tr>
 					<th width="25%">번호</th>
@@ -186,16 +199,10 @@ $(function(){
 	</div>
 	
 	<div class="row left">
-		<table class="table table-slit table-hover table-reply-list">
+		<table class="table table-border table-hover table-reply-list">
 		<!-- 댓글 목록 -->
 		
-		<thead>
-			<tr>
-					<td colspan="2">
-						총 ${qnaList.size()}개의 댓글이 있습니다.
-					</td>
-				</tr>
-		</thead>
+
 		
 		<tbody>
 			<c:forEach var="qnaDto" items="${qnaAnswerList}">
@@ -211,15 +218,7 @@ $(function(){
 					<!-- 회원등급은 자유게시판에 안씀 위화감 조성ㅋ -->
 					<br>
 					
-					<!-- 블라인드 여부에 따라 다르게 표시 -->
-						<c:choose>
-							<c:when test="${replyDto.replyBlind}">
-								<pre>블라인드 처리된 게시물입니다</pre>
-							</c:when>
-							<c:otherwise>
-								<pre>${replyDto.replyContent}</pre>
-							</c:otherwise>
-						</c:choose>
+					
 					
 					<br><br>
 					<fmt:formatDate value="${qnaDto.qnaWriteTime}" pattern="yyyy-MM-dd HH:mm"/>				
@@ -286,10 +285,10 @@ $(function(){
 		<c:choose>
 			<c:when test="${admin}">
 				<!-- 댓글 작성 -->
-				<form action="/qna/reply/write" method="post">
+				<form action="qnaReply/write" method="post">
 				<!-- <form class="reply-insert-form"> -->
 				<input type="hidden" name="qnaNo" value="${qnaDto.qnaNo}">
-				<table class="table">
+				<table class="table table-border">
 					<tbody>
 
 						<tr>
@@ -312,7 +311,7 @@ $(function(){
 					<tbody>
 						<tr>
 							<th>
-								<textarea name="qnaAnswer" rows="5" cols="55" 
+								<textarea class="input input-line" name="qnaAnswer" rows="5" cols="55" 
 									placeholder="관리자만 댓글 작성이 가능합니다" disabled></textarea>
 							</th>
 							<th>
