@@ -122,12 +122,13 @@
             <h1>무비차트</h1>
         </div>
         <hr>
+        <!--  
         <select class="select"  >
             <option value="popular" selected><a href="#">예매율순</a></option>
             <option value="reservation"><a href="#">별점순</a></option>
             <option value="star"><a href="#">관람객순</a></option>
         </select>
-
+        -->
        
         
             	<c:forEach var="dto" items="${list}">
@@ -146,7 +147,7 @@
                             <td class="content" >
                                 <ul >
                                     <li >${dto.movieName}</li>
-                                    <li>예매율:%<span ></span></li>
+                                   
                                     <li>개봉일:${dto.openingDate}</li>
                                      <a href="#"><button class="btn btn-neutral" type="submit">예매하기</button></a>
                                 </ul>

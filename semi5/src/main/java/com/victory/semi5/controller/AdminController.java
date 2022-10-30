@@ -251,7 +251,7 @@ public class AdminController {
 	//목록			-"/movieList" 
 	                   //@GetMapping("/detailAdmin")
 	@GetMapping("/movieList")
-	public String list(Model model,
+	public String movieList(Model model,
 			@RequestParam(required=false)String type,
 			@RequestParam(required=false) String keyword) {
 		
@@ -267,20 +267,51 @@ public class AdminController {
 	
 	
 	
-	//상세			-"/movieDetail"
+	//상세"/movieDetail"
+	@GetMapping("/movieDetail")
+	public String movieDetail(Model model,@RequestParam int movieNumber ) {
+		model.addAttribute("dto", movieDao.selectOne(movieNumber));
+		return "admin/movieDetail";
+	}
 	
 	
-	
-	//영화정보 - 수정	-"/movieChange"
+//	//영화정보 - 수정	-"/movieChange"
+//	@GetMapping("/movieChange")
+//	public String movieChange(Model model, @RequestParam int movieNumber) {
+//		model.addAttribute("dto",movieDao.selectOne(movieNumber));
+//		return "admin/movieChange";
+//	}
+
+//
+//	@PostMapping("/movieChange")
+//	public String movieChange(@ModelAttribute MovieDto dto,RedirectAttributes attr) {
+//	boolean result=movieDao.update(dto);
+//	if(result) {
+//		attr.addAttribute("movieNumber",dto.getMovieNumber());
+//		//return "redirect:detail?movieNumber="+dto.getMovieNumber();
+//		return "redirect:admin/movieDetail";
+//	}
+//	
+////	else {//리스트에 있는 movieNumber가 아니면  edit_fail 페이지로
+////    
+////		return "redirect:edit_fail";
+////   }
+//}
+	@GetMapping("/movieDelete")
+	public String delete(@RequestParam int movieNumber) {
+		boolean result=movieDao.delete(movieNumber);
+		if(result) {
+			return "redirect:list";
+		}
+		else {
+			return "movie/editFail";
+		}
+	}
 	
 	
 	//영화정보 - 삭제	- "/movieDelete"
 	
-//	@GetMapping("/detailAdmin")
-//	public String detail(Model model,@RequestParam int movieNumber ) {
-//		model.addAttribute("dto", movieDao.selectOne(movieNumber));
-//		return "movie/detailAdmin";
-//	}
+
 //	//수정
 //	@GetMapping("/edit")
 //	public String edit(Model model, @RequestParam int movieNumber) {

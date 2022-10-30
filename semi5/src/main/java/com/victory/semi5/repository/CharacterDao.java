@@ -1,5 +1,7 @@
 package com.victory.semi5.repository;
 
+import java.util.List;
+
 import com.victory.semi5.entity.CharacterDto;
 import com.victory.semi5.entity.MovieDto;
 
@@ -17,4 +19,5 @@ public interface CharacterDao {
 	CharacterDto selectOneActor2(String charaterName3);
 	CharacterDto selectOneActor3(String charaterName4);
 	CharacterDto selectOneActor4(String charaterName5);
+	List<CharacterDto> selectList(int movieNumber);
 }

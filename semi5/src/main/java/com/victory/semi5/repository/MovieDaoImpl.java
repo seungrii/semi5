@@ -96,9 +96,9 @@ public class MovieDaoImpl implements MovieDao {
 	}
 
 	@Override
-	public MovieDto selectOne(int movieNumber) {//상세 조회
+	public MovieDto selectOne(int movieNumber) {//상세 조회 (인물)
 		// TODO Auto-generated method stub
-	    String sql="select*from movie where movie_number=?";
+	    String sql="select*from character where movie_number=?";
 	    Object[]param= {movieNumber};
 	    return jdbcTemplate.query(sql, extractor, param);
 	 }
@@ -159,5 +159,13 @@ public class MovieDaoImpl implements MovieDao {
 		Object[] param = {movieNumber, genreNo};
 		jdbcTemplate.update(sql, param);
 	}
+	
+	
+
+	
+	
+	
+	
+	
 	
 }

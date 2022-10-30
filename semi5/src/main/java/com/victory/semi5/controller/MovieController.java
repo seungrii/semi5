@@ -25,6 +25,9 @@ import com.victory.semi5.vo.HashtagVO;
 @RequestMapping("/movie")
 public class MovieController {
 	
+	
+	
+	
 	@Autowired 
 	MovieDao movieDao;
 
@@ -43,9 +46,7 @@ public class MovieController {
 //list시작
 	
 	@GetMapping("/list")//목록
-	public String list(Model model,
-								@RequestParam(required=false) String type,
-								@RequestParam(required=false) String keyword){
+	public String list(Model model){
 //		boolean isSearch = type != null && keyword != null;
 //		if(isSearch) {//검색
 //			model.addAttribute("list",movieDao.selectList(type,keyword));
@@ -53,7 +54,7 @@ public class MovieController {
 //		else {
 //			model.addAttribute("list",movieDao.selectList());
 //		}
-		
+	
 		model.addAttribute("list",movieDao.selectList());
 		
 		
@@ -62,21 +63,35 @@ public class MovieController {
 	
 	@GetMapping("/detail")
 	public String detail(
-			Model model,@RequestParam int movieNumber,
-			@ModelAttribute MovieDto moviedto, 
-			CharacterDto characterDto, GenreDto genredto, 
-			@RequestParam String charaterName1, String charaterName2, 
-			String charaterName3, String charaterName4, String charaterName5	
-	) {
+			Model model,@RequestParam int movieNumber
+//			@ModelAttribute MovieDto moviedto, 
+//			CharacterDto characterDto, GenreDto genredto, 
+//			@RequestParam String charaterName1, String charaterName2, 
+//			String charaterName3, String charaterName4, String charaterName5	
 	
-		
-		//시퀀스 번호 생성하며 등록하기
+			
+			) {
 	
+	    
 		model.addAttribute("moviedto", movieDao.selectOne(movieNumber));
-		model.addAttribute("characterdto", movieDao.selectOne(movieNumber));
+		model.addAttribute("characterdto",characterDao.selectList(movieNumber));
 		
-		model.addAttribute("characterdto", characterDao.selectOneDirector(charaterName1));
-		model.addAttribute("characterdto", characterDao.selectOneActor1(charaterName2));
+	//	model.addAttribute("moviedto",characterDao.selectList(movieNumber));
+	 //   model.addAttribute("characterdto",characterDao.selectList(movieNumber));
+		
+//	    model.addAttribute("hashtagvo", movieDao.selectOne(movieNumber));
+//	    int genreNo = genredto.getGenreNo();	
+//	    model.addAttribute("hashtagvo", genreDao.selectOne(genreNo));	
+//			
+//		int genreNo = genredto.getGenreNo();		
+//		model.addAttribute("hashtagvo",genreDao.selectOne(genreNo));
+			
+			
+		
+		//model.addAttribute("characterdto", movieDao.selectOne(movieNumber));
+		
+//		model.addAttribute("characterdto", characterDao.selectOneDirector(charaterName1));
+//		model.addAttribute("characterdto", characterDao.selectOneActor1(charaterName2));
 		//characterDao.insertDirector(characterDto, charaterName1);
 		//characterDao.insertActor1(characterDto, charaterName2);
 		
@@ -89,26 +104,23 @@ public class MovieController {
 //		void insertActor4(CharacterDto characterDto,String charaterName5);
 //		CharacterDto selectOne(int movieNumber);
 
-		if(!charaterName3.isEmpty()) {			
-			//characterDao.insertActor2(characterDto, charaterName3);
-			model.addAttribute("characterdto", characterDao.selectOneActor2(charaterName3));
-		}
-		if(!charaterName4.isEmpty()) {			
-			model.addAttribute("characterdto", characterDao.selectOneActor3(charaterName4));
-		}
-		if(!charaterName5.isEmpty()) {			
-			model.addAttribute("characterdto", characterDao.selectOneActor4(charaterName5));
-		}
-		
-		
-	   model.addAttribute("hashtagvo", movieDao.selectOne(movieNumber));
-		
-		
-		int genreNo = genredto.getGenreNo();		
-		model.addAttribute("hashtagvo",genreDao.selectOne(genreNo));
-		
-		
-		
+//		if(!charaterName3.isEmpty()) {			
+//			//characterDao.insertActor2(characterDto, charaterName3);
+//			model.addAttribute("characterdto", characterDao.selectOneActor2(charaterName3));
+//		}
+//		if(!charaterName4.isEmpty()) {			
+//			model.addAttribute("characterdto", characterDao.selectOneActor3(charaterName4));
+//		}
+//		if(!charaterName5.isEmpty()) {			
+//			model.addAttribute("characterdto", characterDao.selectOneActor4(charaterName5));
+//		}
+//		
+//		
+//	   model.addAttribute("hashtagvo", movieDao.selectOne(movieNumber));
+//		
+//		
+//		int genreNo = genredto.getGenreNo();		
+//		model.addAttribute("hashtagvo",genreDao.selectOne(genreNo));
 		
 		return "movie/detail";
 		

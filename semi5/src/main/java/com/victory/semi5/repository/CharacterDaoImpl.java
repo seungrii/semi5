@@ -2,11 +2,13 @@ package com.victory.semi5.repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.victory.semi5.entity.CharacterDto;
@@ -40,6 +42,29 @@ public class CharacterDaoImpl implements CharacterDao {
 //		};
 //		jdbcTemplate.update(sql,param);	
 //	}
+	
+	private RowMapper<CharacterDto> mapper = new RowMapper<CharacterDto>() {
+		@Override
+		public CharacterDto mapRow(ResultSet rs, int rowNum) throws SQLException {
+			
+			CharacterDto dto = new CharacterDto();
+			dto.setCharacterNumber(rs.getInt("character_number"));
+			dto.setMovieNumber(rs.getInt("movie_number"));
+			
+		    dto.setCharaterName1(rs.getString("charater_name1"));
+		    dto.setCharaterName2(rs.getString("charater_name2"));
+		    dto.setCharaterName3(rs.getString("charater_name3"));
+		    dto.setCharaterName4(rs.getString("charater_name4"));
+		    dto.setCharaterName5(rs.getString("charater_name5"));
+			dto.setCharacterAge(rs.getInt("character_age"));
+			dto.setCharacterAwards(rs.getString("character_awards"));
+			dto.setCharacterFilmography(rs.getString("character_filmography"));
+			dto.setCharacterType(rs.getString("character_type"));
+			dto.setCharacterNationality(rs.getString("character_nationality"));
+			return dto;
+	
+		}
+	};
 	
 	
 //조회위한
@@ -151,7 +176,7 @@ public class CharacterDaoImpl implements CharacterDao {
 
 	@Override
 	public CharacterDto selectOneDirector(String charaterName1) {
-		String sql="select*from character where character_number=?";
+		String sql="select*from character where movie_number=?";
 		Object[]param= {charaterName1};
 		return jdbcTemplate.query(sql, extractor,param);
 	}
@@ -184,15 +209,25 @@ public class CharacterDaoImpl implements CharacterDao {
 		return jdbcTemplate.query(sql, extractor,param);
 	}
 
-	
+	@Override
+	public List<CharacterDto> selectList(int movieNumber) {
+    String sql="select*from character where movie_number=?";
+    Object[]param= {movieNumber};
+    return jdbcTemplate.query(sql, mapper, param);
+	}
 
 
 
+
+
+}	
+
+//    String sql="select*from character where movie_number=?";
+//    Object[]param= {movieNumber};
+//    return jdbcTemplate.query(sql, extractor, param);
 	
 	
-	
-	
-}
+
 //번호 생성하면서 등록
 //rowmapper는 list때문에
 
