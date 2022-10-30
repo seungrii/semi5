@@ -147,9 +147,7 @@ public class MovieDaoImpl implements MovieDao {
 			dto.getMoviePlayTime(),dto.getMovieAgeLimit(),
 			
 	};
-		
 		jdbcTemplate.update(sql, param);
-		
 		return movieNumber;
 	}
 

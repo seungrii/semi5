@@ -1,0 +1,25 @@
+.find-success,
+.find-fail { 
+    display: none;
+}
+
+.find-success {
+    color:green;
+}
+.find-fail {
+    color:red;
+}
+
+/* 입력창의 상태에 따라 특정 메세지를 표시 */
+.change-input.success {
+    border-color: green;
+}
+.change-input.success ~ .find-success {
+    display: block;
+}
+.change-input.fail {
+    border-color: red;
+}
+.change-input.fail ~ .find-fail {
+    display: block;
+}

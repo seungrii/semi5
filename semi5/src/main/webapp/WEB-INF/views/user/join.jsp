@@ -4,7 +4,7 @@
 	<jsp:param value="회원가입" name="title"/>
 </jsp:include>
 	<section class="w-980">
-	<form action="" method="post" enctype="multipart/form-data">
+	<form action="join" method="post" enctype="multipart/form-data">
 		<div class="join-page">
             <div class="row mt-30 left">
                 <h1>이용약관</h1>

@@ -34,7 +34,11 @@
 			</div>
 			<div class="row">
 				<button type="submit" class="btn btn-positive login-btn">로그인</button>
-				<button id="id-pw" type="button" class="btn btn-neutral login-btn">ID/PW 찾기</button>
+				<div class="row">
+					<a href="idFind">아이디 찾기</a>
+					/
+					<a href="pwFind">비밀번호 찾기</a>
+				</div>
 			</div>
 		</form>
 	</div>

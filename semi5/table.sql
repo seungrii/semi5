@@ -1,6 +1,7 @@
 -- DB 계정 생성, 권한 부여
 create user semi5 identified by semi55555;
 grant connect, resource to semi5; 
+grant create view to semi5;
 
 -- user 회원 테이블 생성
 create table user_information(
@@ -98,6 +99,8 @@ theater_total_seat number(3),
 theater_hall number(2),
 theater_type char(9)
 );
+--상영관 타입 자료형 변경 char(9) -> varchar2(12)로 변경
+alter table theater modify(theater_type varchar2(12));
 
 ---------------이미지
 create table image(
@@ -145,8 +148,17 @@ movie_number references movie(movie_number) on delete cascade,
 theater_num references theater(theater_num) on delete cascade,
 movie_play_start date,
 movie_date date
-
 );
+--상영일 컬럼 삭제 (날짜, 시간 따로 저장 하는 방법을 도저히 모르겠음)
+alter table movie_play drop column movie_date;
+-- view 테이블 생성 : 상영스케쥴-영화정보-상영관 join
+create view movieplay_movie_theater_view as
+select
+    P.movie_play_num, movie_play_start, M.*, T.*
+from movie_play P, movie M, theater T
+    where P.movie_number = M.movie_number
+                and P.theater_num = T.theater_num;
+
 ------------예매내역 
 create table ticketing(
 ticketing_num number primary key,
@@ -185,7 +197,14 @@ create table cinema_image(
 cinema_porin references cinema(cinema_porin) on delete cascade,
 file_number references image(file_number) on delete cascade
 );
-
+-- view 테이블 생성 : 지점이미지-이미지 join
+create view cinema_image_view as
+select
+    C.cinema_porin, A.*
+from
+    cinema_image C inner join image A
+    on C.file_number = A.file_number;
+    
 --인물 이미지 
 create table character_image(
 character_number references character(character_number) on delete cascade,
@@ -304,19 +323,13 @@ create sequence theater_seat_seq;
 create sequence ticketing_seq;
 create sequence review_seq;
 
---상영관 타입 자료형 변경 char(9) -> varchar2(12)로 변경
-alter table theater modify(theater_type varchar2(12));
-
---상영일 컬럼 삭제 (날짜, 시간 따로 저장 하는 방법을 도저히 모르겠음)
-alter table movie_play drop column movie_date;
-
-
 --date format 변경 (시간까지 저장하기 위해서 변경)
 alter session set nls_date_format = 'yyyy-MM-dd hh24:mi';
---dd
-
 
 -- 문의게시판 컬럼 수정 
 alter table qna_board modify(qna_answer_time null);
 alter table qna_board modify(qna_answer_time default null);
+
+
+
 
