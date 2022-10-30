@@ -299,7 +299,11 @@ public class AdminController {
 //			return "movie/editFail";
 //		}
 //	}
-	
+	// Q&A 답변
+	@GetMapping("/qnaAsking")
+	public String qnaAsking() {
+		return "admin/askingList";
+	}
 	
 	
 	

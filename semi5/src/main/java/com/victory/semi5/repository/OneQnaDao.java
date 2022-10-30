@@ -10,4 +10,6 @@ public interface OneQnaDao {
 	List<OneQnaDto> selectIdList(String userId);
 	
 	OneQnaDto selectOne(int askingNo);
+	
+	List<OneQnaDto> selectList();
 }

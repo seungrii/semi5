@@ -69,4 +69,11 @@ public class OneQnaDaoImpl implements OneQnaDao{
 		return jdbcTemplate.query(sql, selectOne, param);
 	}
 
+	@Override
+	public List<OneQnaDto> selectList() {
+		String sql = "select * from asking order by asking_no desc";
+		return jdbcTemplate.query(sql, mapper);
+	}
+	
+
 }
