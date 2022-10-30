@@ -21,12 +21,12 @@ public class AdvanceController {
 	
 	@GetMapping("/list")
 	public String movieList(Model model) {
+		
 		List<MovieDto> movieList = advanceDao.selectMovies();
-		List<CinemaDto> cinemaList = advanceDao.selectCinemaList(); 
+		List<CinemaDto> cinemaList = advanceDao.selectCinemaList();
 		
 		model.addAttribute("movieList", movieList);
 		model.addAttribute("cinemaList", cinemaList);
-	
 		
 		return "advance/list";
 	}

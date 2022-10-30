@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
 
 import com.victory.semi5.entity.BoardDto;
 import com.victory.semi5.vo.BoardListSearchVO;
+import com.victory.semi5.vo.BoardListVO;
 
 @Repository
 public class BoardDaoImpl implements BoardDao{
@@ -70,6 +71,23 @@ public class BoardDaoImpl implements BoardDao{
 		}
 	};
 	
+	private RowMapper<BoardListVO> listMapper = new RowMapper<BoardListVO>() {
+	
+		@Override
+		public BoardListVO mapRow (ResultSet rs, int rowNum) throws SQLException {
+			return BoardListVO.builder()
+					.boardNo(rs.getInt("board_no"))
+					.boardWriter(rs.getString("board_writer"))
+					.boardTitle(rs.getString("board_title"))
+					.boardWriteTime(rs.getDate("board_write_time"))
+					.boardRead(rs.getInt("board_read"))
+					.boardHead(rs.getString("board_head"))
+					.boardLike(rs.getInt("board_like"))
+					.replyCount(rs.getInt("reply_count"))
+					.build();
+		}
+	};
+	
 	//목록
 	@Override
 	public List<BoardDto> selectList() {
@@ -80,7 +98,7 @@ public class BoardDaoImpl implements BoardDao{
 	//검색
 	@Override
 //	public List<BoardDto> selectList(String type, String keyword) {
-	public List<BoardDto> selectList(BoardListSearchVO vo) {
+	public List<BoardListVO> selectList(BoardListSearchVO vo) {
 	
 		if(vo.isSearch()) {//검색이라면
 			return search(vo);
@@ -98,10 +116,13 @@ public class BoardDaoImpl implements BoardDao{
 	}
 	//페이징~~~~~~~~~~~~~~~~아힘들어
 	@Override
-	public List<BoardDto> search(BoardListSearchVO vo) {
+	public List<BoardListVO> search(BoardListSearchVO vo) {
 		String sql = "select * from ("
 							+ "select rownum rn, TMP.* from ("
-								+ "select * from board "
+							+ "select * from ("
+							+ "select distinct B.*, count(R.reply_no) over(partition by B.board_no) reply_count "
+							+ "from board B left outer join reply R on B.board_no = R. reply_origin"
+							+ ")"								
 								+ "where instr(#1, ?) > 0 "
 								+ "order by board_no desc"
 							+ ")TMP"
@@ -110,20 +131,21 @@ public class BoardDaoImpl implements BoardDao{
 		Object[] param = {
 			vo.getKeyword(), vo.startRow(), vo.endRow()
 		};
-		return jdbcTemplate.query(sql, mapper, param);
+		return jdbcTemplate.query(sql,listMapper, param);
 	}
 	
 	//페이징 리스트 ㅋㅋ ㅋㅋ ㅋ ㅋ ㅋ ㅋ ㅋ ㅋ 
 	@Override
-	public List<BoardDto> list(BoardListSearchVO vo) {
+	public List<BoardListVO> list(BoardListSearchVO vo) {
 		String sql = "select * from ("
 							+ "select rownum rn, TMP.* from ("
-								+ "select * from board "
+								+ "select distinct B.*, count(R.reply_no) over(partition by B.board_no) reply_count "
+								+ "from board B left outer join reply R on B.board_no = R. reply_origin "
 								+ "order by board_no desc"
 							+ ")TMP"
 						+ ") where rn between ? and ?";
 		Object[] param = {vo.startRow(), vo.endRow()};
-		return jdbcTemplate.query(sql, mapper, param);
+		return jdbcTemplate.query(sql, listMapper, param);
 	}
 	
 	//검색 카운트 구하는 어쩌고 페이징 - 마지막 페이지 마지막 글이 몇번인지 구하는 어쩌고임

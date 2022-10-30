@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	${userDto.userId}
+
 </body>
 </html>

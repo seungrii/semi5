@@ -7,12 +7,12 @@ public interface CinemaDao {
 	
 	void addCinema(CinemaDto cinemaDto);
 	
-//	List<CinemaDto> selectList();
-//	List<CinemaDto> selectList(String type, String keyword);
-//	CinemaDto selectOne(String adminId);
-//	
-//	boolean changeCinema(CinemaDto cinemaDto);
-//	
-//	boolean deleteCinema(String adminId);
+	List<CinemaDto> selectList();
+	List<CinemaDto> selectList(String type, String keyword);
+	CinemaDto selectOne(String cinemaPorin);
+	
+	boolean changeCinema(CinemaDto cinemaDto);
+
+	boolean deleteCinema(String cinemaPorin);
 	
 }

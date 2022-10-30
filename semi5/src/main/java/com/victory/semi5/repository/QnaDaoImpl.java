@@ -183,7 +183,7 @@ public class QnaDaoImpl implements QnaDao{
 		// TODO Auto-generated method stub
 		return null;
 	}
-	//등록에서 상세 - 안해
+	//등록에서 상세
 	@Override
 	public int insert2(QnaDto qnaDto) {
 		String sql = "select qna_board_seq.nextval from dual";
@@ -209,13 +209,15 @@ public class QnaDaoImpl implements QnaDao{
 		return qnaNo;
 	}
 	
+	
 	@Override
 	public boolean insertReply(QnaDto qnaDto) {
 		String sql = "update qna_board set "
-				+ "admin_id=?, qna_answer=? "
+				+ "admin_id=?, qna_answer=?, "
 				+ "qna_answer_time=sysdate "
 				+ "where qna_no=?";
 		Object[] param = {
+				qnaDto.getAdminId(),
 				qnaDto.getQnaAnswer(),
 				qnaDto.getQnaNo()
 		};
@@ -224,8 +226,7 @@ public class QnaDaoImpl implements QnaDao{
 	@Override
 	public List<QnaDto> selectList(int qnaNo) {
 		String sql = "select * from qna_board "
-				+ "where qna_no=? "
-				+ "order by qna_anwer asc";
+				+ "where qna_no=?";
 		Object[] param = {qnaNo};
 		return jdbcTemplate.query(sql, mapper, param);
 	}

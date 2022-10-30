@@ -8,12 +8,12 @@ $(function(){
         var regex = /^[a-z][a-z0-9]{5,20}$/;
 
 		if(!userId) return;
+		userId.removeClass("success fail");
 		$.ajax({
 			url:"http://localhost:8888/rest/user/id?userId="+userId.val(),
 			method:"get",
 			success:function(resp){
 				if(resp=="NNNNY"){
-					userId.removeClass("success fail");
 					if (regex.test(userId.val())) {
 						userId.addClass("success");
 					} else {
