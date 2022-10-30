@@ -8,8 +8,11 @@
 		<div class="row">
 			${oneQnaDto.askingNo}
 		</div>
+		<div class="row">
+			${oneQnaDto.askingContents}
+		</div>
 		<c:if test="${loginGrade == '관리자' && oneQnaDto.askingAnswer == null}">
-			<form action="">
+			<form action="oneQnaDetail" method="get">
 				<div class="row">
 					<textarea rows="5" cols="30"></textarea>	
 				</div>

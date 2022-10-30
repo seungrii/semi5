@@ -281,8 +281,18 @@ public class UserController {
 	}
 	@GetMapping("/oneQnaDetail")
 	public String oneQnaDetail(Model model,
-			@RequestParam int askingNo, HttpSession session) {
+			@RequestParam int askingNo, HttpSession session, 
+			@RequestParam(required = false) String askingAnswer,
+			RedirectAttributes attr) {
 		model.addAttribute("oneQnaDto", oneQnaDao.selectOne(askingNo));
+		if(askingAnswer != null) {
+			OneQnaDto oneQnaDto = null;
+			String adminId = (String)session.getAttribute(SessionConstant.ID);
+			oneQnaDto.setAdminId(adminId);
+			oneQnaDto.setAskingAnswer(askingAnswer);
+			attr.addAttribute(askingNo);
+			oneQnaDao.insertAnswer(oneQnaDto);
+		}
 		return "user/qnaDetail";
 	}
 	

@@ -399,10 +399,6 @@ public class AdminController {
 		model.addAttribute("oneQnaDto",oneQnaDao.selectList());
 		return "admin/askingList";
 	}
-//	@PostMapping("/askingList")
-//	public String askingList(Model model) {
-//		return "admin/askingList";
-//	}
 	
 	
 	
