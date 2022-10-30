@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -37,7 +38,7 @@ import com.victory.semi5.repository.MovieDao;
 import com.victory.semi5.repository.MoviePlayDao;
 import com.victory.semi5.repository.UserDao;
 import com.victory.semi5.service.AttachmentService;
-import com.victory.semi5.vo.MoviePlayListVO;
+import com.victory.semi5.vo.MoviePlayVO;
 
 @Controller
 @RequestMapping("/admin")
@@ -192,8 +193,7 @@ public class AdminController {
 	}
 	//지점관리 - 조회(목록)
 	@GetMapping("/cinemaList")
-	public String cinemaList(
-			Model model,
+	public String cinemaList(Model model,
 			@RequestParam(required = false) String type,String keyword) {
 		boolean isSearch = type != null && keyword != null;
 		if(isSearch) {
@@ -206,8 +206,8 @@ public class AdminController {
 	}
 	//지점관리 - 조회(상세)
 	@GetMapping("/cinemaDetail")
-	public String cinemaDetail(
-		Model model, @RequestParam String cinemaPorin) {
+	public String cinemaDetail(Model model, 
+			@RequestParam String cinemaPorin) {
 		
 		//지점정보 첨부
 		CinemaDto cinemaDto = cinemaDao.selectOne(cinemaPorin);
@@ -425,49 +425,79 @@ public class AdminController {
 	}
 	//영화스케쥴 - 조회(목록)
 	@GetMapping("/moviePlayList")
-	public String moviePlayList(
-			Model model,
+	public String moviePlayList( Model model,
 			@RequestParam(required = false) String type,
 			@RequestParam(required = false) String keyword) {
 		boolean isSearch = type != null && keyword != null;
 		if(isSearch) {
 			//뷰 조회) 상영스케쥴-영화정보-상영관정보
-			model.addAttribute("moviePlayList", moviePlayDao.selectMoviePlayView(type, keyword));
+			model.addAttribute("moviePlayList", moviePlayDao.selectMoviePlayViewList(type, keyword));
 		}
 		else {
 			//뷰 조회) 상영스케쥴-영화정보-상영관정보
-			model.addAttribute("moviePlayList", moviePlayDao.selectMoviePlayView());
-			
-			
-			-- 시도!
-			상세조회에 필요한 것까지 모두 MoviePlayListVO에 변수 생성해서,
-			moviePlayDao 실행 시, List<MoviePlayListVO>에 담는다!
-			
-			
-			
+			model.addAttribute("moviePlayList", moviePlayDao.selectMoviePlayViewList());		
 		}
 		return "admin/moviePlayList";
 	}
-	
-	//영화정보 - 조회(상세)
+	//영화스케쥴 - 조회(상세)
 	@GetMapping("/moviePlayDetail")
-	public String moviePlayDetail() {
-		return "admin/movieDetail";
+	public String moviePlayDetail(Model model,
+			@RequestParam int moviePlayNum) {
+		
+		MoviePlayVO moviePlayVO = moviePlayDao.selectMoviePlayView(moviePlayNum);
+
+	    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+	    String moviePlayStart = format.format(moviePlayVO.getMoviePlayStart());
+		String moviePlayStartDate = moviePlayStart.substring(0,10);
+		String moviePlayStartTime = moviePlayStart.substring(11);
+		
+		moviePlayVO.setMoviePlayStartDate(moviePlayStartDate);
+		moviePlayVO.setMoviePlayStartTime(moviePlayStartTime);
+		
+		model.addAttribute("moviePlayVO", moviePlayVO);
+		
+		return "admin/moviePlayDetail";
 	}
 	//영화스케쥴 - 수정
 	@GetMapping("/moviePlayChange")
-	public String moviePlayChange() {
+	public String moviePlayChange(Model model, 
+			@RequestParam int moviePlayNum) {
+		
+		MoviePlayDto moviePlayDto = moviePlayDao.selectOne(moviePlayNum);
+		
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		String moviePlayStart = format.format(moviePlayDto.getMoviePlayStart());
+		String moviePlayStartDate = moviePlayStart.substring(0,10);
+		String moviePlayStartTime = moviePlayStart.substring(11);
+		
+		moviePlayDto.setMoviePlayStartDate(moviePlayStartDate);
+		moviePlayDto.setMoviePlayStartTime(moviePlayStartTime);
+		
+		model.addAttribute("moviePlayDto", moviePlayDto);
 		return "admin/moviePlayChange";	
 	}
 	@PostMapping("/moviePlayChange")
-	public String moviePlayChange(
-			RedirectAttributes attr) {
+	public String moviePlayChange(@ModelAttribute MoviePlayDto moviePlayDto,
+			RedirectAttributes attr) throws ParseException {
+		
+		String moviePlayStartDate = moviePlayDto.getMoviePlayStartDate();
+		String moviePlayStartTime = moviePlayDto.getMoviePlayStartTime();		
+		String start = moviePlayStartDate +" "+ moviePlayStartTime;
+		
+		SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		Date moviePlayStart = transFormat.parse(start);
+		moviePlayDto.setMoviePlayStart(moviePlayStart);
+		
+		moviePlayDao.changeMoviePlay(moviePlayDto);
+		
+		attr.addAttribute("moviePlayNum", moviePlayDto.getMoviePlayNum());
 		return "redirect:moviePlayDetail";
 	}
 	//상영스케쥴 - 삭제
 	@GetMapping("/moviePlayDelete")
-	public String moviePlayDelete() {
-		return "redirect:moviePlayList";
+	public String moviePlayDelete(@RequestParam int moviePlayNum) {
+		moviePlayDao.deleteMoviePlay(moviePlayNum);
+		return "redirect:moviePlayList";	//삭제실패시, 알람창 필요
 	}
 	
 	

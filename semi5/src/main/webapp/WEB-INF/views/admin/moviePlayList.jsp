@@ -33,20 +33,12 @@
 					<option value="moviePlayStartDate">상영일자</option>
 				</select>
 			</c:when>
-			<c:when test="${param.type == 'moviePlayStartDate'}">
+			<c:when test="${param.type == 'movie_play_start_date'}">
 				<select class="input input-line" name="type" required>
 					<option value="movie_play_num">스케쥴번호</option>
 					<option value="movie_name">영화명</option>
 					<option value="cinema_porin">지점명</option>
 					<option value="moviePlayStartDate" selected>상영일자</option>
-				</select>
-			</c:when>
-			<c:when test="${param.type == 'movie_name'}">
-				<select class="input input-line" name="type" required>
-					<option value="movie_play_num">스케쥴번호</option>
-					<option value="movie_name" selected>영화명</option>
-					<option value="cinema_porin">지점명</option>
-					<option value="moviePlayStartDate">상영일자</option>
 				</select>
 			</c:when>
 			<c:otherwise>
@@ -74,7 +66,7 @@
 				<td>지점명</td>
 				<td>상영관번호</td>
 				<td>상영일자</td>
-				<!-- <td>상영시간</td> -->
+				<td>상영시간</td>
 				<td colspan="1">관리</td>
 			</tr>
 		</thead>
@@ -86,14 +78,14 @@
 					<td>${moviePlayListDto.cinemaPorin}</td>
 					<td>${moviePlayListDto.theaterHall}</td>
 					<td>${moviePlayListDto.moviePlayStart}</td>
-					<%-- <td>${moviePlayListDto.theaterHall}</td> --%>
+					<td>${moviePlayListDto.theaterHall}</td>
 					<td>
 						<a class="btn btn-neutral" 
-							href="moviePlayDetail?moviePlayNum=${moviePlayDto.moviePlayNum}">상세</a>
+							href="moviePlayDetail?moviePlayNum=${moviePlayListDto.moviePlayNum}">상세</a>
 					</td>
 					<td>
 						<a class="btn btn-negative" 
-							href="moviePlayDelete?moviePlayNum=${moviePlayDto.moviePlayNum}">삭제</a>
+							href="moviePlayDelete?moviePlayNum=${moviePlayListDto.moviePlayNum}">삭제</a>
 					</td>
 				</tr>
 			</c:forEach>
