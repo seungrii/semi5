@@ -108,7 +108,7 @@
                     <a href="#">
                         <li>극장</li>
                     </a>
-                    <a href="#">
+                    <a href="/notice/list">
                         <li>커뮤니티</li>
                     </a>
                     <li>
@@ -162,13 +162,13 @@
                         </li>
                         <li>
                             <ul>
-                                <a href="#">
-                                    <li>커뮤니티</li>
-                                </a>
-                                <a href="#">
+                                <a href="/notice/list">
                                     <li>공지사항</li>
                                 </a>
-                                <a href="#">
+                                <a href="/qna/list">
+                                    <li>문의게시판</li>
+                                </a>
+                                <a href="/board/list">
                                     <li>자유게시판</li>
                                 </a>
                             </ul>

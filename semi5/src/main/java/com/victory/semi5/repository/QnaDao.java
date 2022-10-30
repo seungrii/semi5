@@ -41,10 +41,8 @@ public interface QnaDao {
 	//수정
 	boolean update(QnaDto qnaNo);
 	
-	//댓글추가
+	//댓글
 	boolean insertReply(QnaDto qnaDto);
-	
 	List<QnaDto> selectList(int qnaNo);
-	
 	
 }

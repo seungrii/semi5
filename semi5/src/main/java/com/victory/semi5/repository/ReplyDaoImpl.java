@@ -77,6 +77,7 @@ public class ReplyDaoImpl implements ReplyDao{
 		Object[] param = {replyNo};
 		return jdbcTemplate.query(sql, extractor, param);
 	}
+	
 	private ResultSetExtractor<ReplyDto> extractor = new ResultSetExtractor<ReplyDto>() {
 		@Override
 		public ReplyDto extractData(ResultSet rs) throws SQLException, DataAccessException {
@@ -86,7 +87,7 @@ public class ReplyDaoImpl implements ReplyDao{
 						.replyWriter(rs.getString("reply_writer"))
 						.replyContent(rs.getString("reply_content"))
 						.replyOrigin(rs.getInt("reply_origin"))
-						.replyWriteTime(rs.getDate("reply_writetime"))
+						.replyWriteTime(rs.getDate("reply_write_time"))
 						.replyBlind(rs.getString("reply_blind") != null)
 					.build();
 			}
@@ -101,6 +102,15 @@ public class ReplyDaoImpl implements ReplyDao{
 		String sql = "delete reply";
 		jdbcTemplate.update(sql);
 	}
-	
+	@Override
+	public boolean updateBlind(int replyNo, boolean blind) {
+		String sql = "update reply "
+						+ "set reply_blind = ? "
+						+ "where reply_no = ?";
+		String replyBlind = blind ? "Y" : null;//삼항연산
+		//if(blind) {replyBlind = "Y";}else {replyBlind=null;}
+		Object[] param = {replyBlind, replyNo};
+		return jdbcTemplate.update(sql, param) > 0;
+	}
 	
 }

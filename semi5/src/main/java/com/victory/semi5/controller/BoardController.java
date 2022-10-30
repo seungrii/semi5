@@ -1,6 +1,7 @@
 package com.victory.semi5.controller;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.servlet.http.HttpSession;
@@ -208,6 +209,7 @@ public class BoardController {
 		return "redirect:/board/detail";
 	}
 	
+	
 	@PostMapping("/reply/edit")
 	public String replyEdit(
 			@ModelAttribute ReplyDto replyDto,
@@ -217,6 +219,16 @@ public class BoardController {
 		return "redirect:/board/detail";
 	}
 	
+	@GetMapping("/reply/blind")
+	public String replyBlind(
+			@RequestParam int replyNo,
+			@RequestParam int replyOrigin,
+			RedirectAttributes attr) {
+		ReplyDto replyDto = replyDao.selectOne(replyNo);
+		replyDao.updateBlind(replyNo, !replyDto.isReplyBlind());
+		attr.addAttribute("boardNo", replyOrigin);
+		return "redirect:/board/detail";
+	}
 	
 	
 }
