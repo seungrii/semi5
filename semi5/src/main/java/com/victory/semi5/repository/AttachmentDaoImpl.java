@@ -1,22 +1,17 @@
 package com.victory.semi5.repository;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
-import com.victory.semi5.entity.CinemaDto;
 import com.victory.semi5.entity.ImageDto;
-import com.victory.semi5.vo.CinemaImageVO;
 
 @Repository
-public class ImageDaoImpl implements ImageDao{
+public class AttachmentDaoImpl implements AttachmentDao{
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 
@@ -44,13 +39,12 @@ public class ImageDaoImpl implements ImageDao{
 		}
 	};	
 	
-	@Override
+	@Override	//번호생성
 	public int sequence() {
 		String sql = "select image_seq.nextval from dual";
 		return jdbcTemplate.queryForObject(sql, int.class);
 	}
-
-	@Override
+	@Override	//insert
 	public void insert(ImageDto imageDto) {
 		String sql = "insert into image("
 				+ "file_number, file_name, file_type, file_size"
@@ -63,40 +57,61 @@ public class ImageDaoImpl implements ImageDao{
 		};
 		jdbcTemplate.update(sql, param);
 	}
-
-
-//	@Override
-//	public List<ImageDto> selectList() {
-//		return null;
-//	}
-//	@Override
-//	public ImageDto selectOne(int imageNo) {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
-//	@Override
-//	public boolean delete(int imageNo) {
-//		// TODO Auto-generated method stub
-//		return false;
-//	}
+	@Override
+	public List<ImageDto> selectList() {
+		String sql = "select * from image";
+		return jdbcTemplate.query(sql, mapper);
+	}
+	@Override
+	public List<ImageDto> selectList(int fileNumber) {
+		String sql = "select * "
+				+ "from image where file_number = ?";
+		Object[] param = {fileNumber};
+		return jdbcTemplate.query(sql, mapper, param);
+	}
+	@Override
+	public ImageDto selectOne(int fileNumber) {
+		String sql = "select * "
+				+ "from image where file_number = ?";
+		Object[] param = {fileNumber};
+		return jdbcTemplate.query(sql, extractor, param);
+	}
+	@Override
+	public boolean delete(int fileNumber) {
+		String sql = "delete image where file_number = ?";
+		Object[] param = {fileNumber};
+		return jdbcTemplate.update(sql, param) >0;
+	}
 	
 
+//	지점 이미지
 	@Override
-	public void addCinemaImage(CinemaDto cinemaDto, int imageNumber) {
+	public void addCinemaImage(String cinemaPorin, int fileNumber) {
 		String sql = "insert into cinema_image ("
-				+ "cinema_porin, file_number) vlues(?, ?)";
-		Object[] param = {
-			cinemaDto.getCinemaPorin(), imageNumber
-		};
-		
+				+ "cinema_porin, file_number) values(?, ?)";
+		Object[] param = {cinemaPorin, fileNumber};
+		jdbcTemplate.update(sql, param);
 	}
-//	@Override
-//	public List<AttachmentDto> selectBoardAttachmentList(int boardNo) {
-//		String sql = "select * from board_attachment_view "
-//						+ "where board_no = ?";
-//		Object[] param = {boardNo};
-//		return jdbcTemplate.query(sql, mapper, param);
-//	}
+	@Override
+	public List<ImageDto> selectCinemaImageList(String cinemaPorin) {
+		String sql = "select * from cinema_image_view "
+					+ "where cinema_porin= ? order by file_time asc";
+		Object[] param = {cinemaPorin};
+		return jdbcTemplate.query(sql, mapper, param);
+	}
 
+	
+//	영화 포스터
+	@Override
+	public void addPoster(int movieNumber, int imageNo) {
+		String sql = "insert into poster ("
+				+ "movie_number, file_number) values(?, ?)";
+		Object[] param = {movieNumber, imageNo};
+		jdbcTemplate.update(sql, param);
+	}
+
+
+
+	
 
 }

@@ -16,6 +16,10 @@
 			<span>영화 추가</span>
 		</div>
 		<div class="row mt-50">
+			<label class="ms-10">상영스케쥴 번호</label>
+			<input class="input input-line w-100" name="adminId" type="text" readonly>
+		</div>
+		<div class="row mt-50">
 			<label class="ms-10">영화이름</label>
 			<input class="input input-line w-100" name="movieName" type="text" required autocomplete="off">
 		</div>
