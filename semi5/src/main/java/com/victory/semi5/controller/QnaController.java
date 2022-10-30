@@ -93,7 +93,7 @@ public class QnaController {
 //			return "redirect:edit_fail";
 		}
 	}
-	
+	 
 	@GetMapping("/delete")
 	public String delete(@RequestParam int qnaNo) {
 		boolean result = qnaDao.delete(qnaNo);
