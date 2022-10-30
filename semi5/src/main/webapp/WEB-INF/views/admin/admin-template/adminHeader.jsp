@@ -201,6 +201,9 @@
   			     <div class="row">
 	     			<a href="/community">커뮤니티</a>
 	     		</div>
+	     		<div class="row">
+	     			<a href="/admin/qnaAsking">1:1 문의내역</a>
+	     		</div>
     		</div>
     	</aside>
     </div>
