@@ -314,3 +314,9 @@ alter table movie_play drop column movie_date;
 --date format 변경 (시간까지 저장하기 위해서 변경)
 alter session set nls_date_format = 'yyyy-MM-dd hh24:mi';
 --dd
+
+
+-- 문의게시판 컬럼 수정 
+alter table qna_board modify(qna_answer_time null);
+alter table qna_board modify(qna_answer_time default null);
+
