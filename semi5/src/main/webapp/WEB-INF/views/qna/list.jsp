@@ -120,6 +120,11 @@
 						<!-- 제목을 누르면 상세 페이지로 이동하도록 처리 -->
 						<a href="detail?qnaNo=${qnaDto.qnaNo}">
 							${qnaDto.qnaTitle}
+						</a>
+						 <!-- 댓글 개수 출력 -->
+						<c:if test="${qnaDto.qnaReplyCount > 0}">
+							[${qnaDto.qnaReplyCount}]
+						</c:if>	
 					</td>
 					<td>${qnaDto.qnaWriter}</td>
 					<td>

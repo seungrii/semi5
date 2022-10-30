@@ -13,4 +13,5 @@ public class QnaDto {
 	private int qnaNo, qnaRead;
 	private String qnaWriter, adminId, qnaTitle, qnaContents, qnaAnswer;
 	private Date qnaWriteTime, qnaAnswerTime;
+	private int qnaReplyCount;
 }
