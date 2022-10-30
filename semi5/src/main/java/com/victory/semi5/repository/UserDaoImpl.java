@@ -36,18 +36,6 @@ public class UserDaoImpl implements UserDao{
 		}
 	};
 	
-	private ResultSetExtractor<UserDto> userIdExtractor = rs -> {
-		if(rs.next()) {
-			return UserDto.builder()
-					.userName(rs.getString("user_name"))
-					.userBirth(rs.getDate("user_birth"))
-					.userEmail(rs.getString("user_email"))
-					.userTel(rs.getString("user_tel"))
-				.build();
-		}else {
-			return null;
-		}
-	};
 	
 	@Override
 	public UserDto selectOne(String userId) {
@@ -72,6 +60,52 @@ public class UserDaoImpl implements UserDao{
 		jdbcTemplate.update(sql, param);
 	}
 
+
+	@Override
+	public UserDto selectId(String userName, String userTel) {
+		String sql = "select * from user_information where user_name=? and user_tel=?";
+		Object[] param = {userName, userTel};
+		
+		return jdbcTemplate.query(sql, userExtractor, param);
+ 
+	}
+
+	@Override
+	public UserDto selectPw(String userId, String userName, String userTel) {
+		String sql = "select * from user_information where user_id=? and "
+				+ "user_name=? and user_tel=?";
+		Object[] param = {userId, userName, userTel};
+		return jdbcTemplate.query(sql, userExtractor, param);
+	}
+
+	@Override
+	public boolean delete(String userId) {
+		String sql = "delete user_information where user_id=?";
+		Object[] param = {userId};
+		return jdbcTemplate.update(sql, param)>0;
+	}
+
+	@Override
+	public boolean update(UserDto userDto) {
+		String sql = "update user_information set "
+				+ "user_email=?, user_tel=? "
+				+ "where user_id=?";
+		Object[] param = {
+				userDto.getUserEmail(), userDto.getUserTel(),
+				userDto.getUserId()
+		};
+		return jdbcTemplate.update(sql, param)>0;
+	}
+
+	@Override
+	public boolean pwupdate(UserDto userDto) {
+		String sql = "update user_information set "
+				+ "user_pw=? where user_id=?";
+		Object[] param = {
+				userDto.getUserPw(), userDto.getUserId()
+		};
+		return jdbcTemplate.update(sql, param)>0;
+	}
 	private RowMapper<UserDto> mapper = (rs, idx) -> {
 		return UserDto.builder()
 					.userId(rs.getString("user_id"))

@@ -67,8 +67,11 @@
 		<thead>
 			<td align="right" colspan="5">
 				<a href="/">홈으로</a>
-				<a href="write">글쓰기</a>
 				
+				<c:set var="admin" value="${loginGrade == '관리자'}"></c:set>
+				<c:if test="${admin}">
+				<a href="write">글쓰기</a>
+				</c:if>
 			</td>
 		
 			<tr>

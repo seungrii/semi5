@@ -17,8 +17,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.victory.semi5.constant.SessionConstant;
 import com.victory.semi5.entity.BoardDto;
+import com.victory.semi5.entity.ReplyDto;
 import com.victory.semi5.error.TargetNotFoundException;
 import com.victory.semi5.repository.BoardDao;
+import com.victory.semi5.repository.ReplyDao;
 import com.victory.semi5.vo.BoardListSearchVO;
 
 @Controller
@@ -28,6 +30,8 @@ public class BoardController {
 	@Autowired
 	private BoardDao boardDao;
 	
+	@Autowired
+	private ReplyDao replyDao;
 	
 	//등록 
 	@GetMapping("/write")
@@ -117,7 +121,10 @@ public class BoardController {
 			model.addAttribute("boardDto", boardDao.selectOne(boardNo));
 		}
 		session.setAttribute("history", history);
-		
+
+		//(+추가) 댓글 목록을 조회하여 첨부
+		model.addAttribute("replyList", replyDao.selectList(boardNo));
+
 		return "board/detail";
 
 	}
@@ -177,5 +184,39 @@ public class BoardController {
 			throw new TargetNotFoundException();
 		}
 	}
+	
+	@PostMapping("/reply/write")
+	public String replyWrite(
+			@ModelAttribute ReplyDto replyDto,
+			RedirectAttributes attr, HttpSession session) {
+		String memberId = (String)session.getAttribute(SessionConstant.ID);
+		replyDto.setReplyWriter(memberId);
+		replyDao.insert(replyDto);
+		
+		attr.addAttribute("boardNo", replyDto.getReplyOrigin());
+//		return "redirect:../detail";//상대
+		return "redirect:/board/detail";//절대
+	}
+	
+	@GetMapping("/reply/delete")
+	public String replyDelete(
+			@RequestParam int replyNo,
+			@RequestParam int replyOrigin,
+			RedirectAttributes attr) {
+		replyDao.delete(replyNo);
+		attr.addAttribute("boardNo", replyOrigin);
+		return "redirect:/board/detail";
+	}
+	
+	@PostMapping("/reply/edit")
+	public String replyEdit(
+			@ModelAttribute ReplyDto replyDto,
+			RedirectAttributes attr) {
+		replyDao.update(replyDto);
+		attr.addAttribute("boardNo", replyDto.getReplyOrigin());
+		return "redirect:/board/detail";
+	}
+	
+	
 	
 }

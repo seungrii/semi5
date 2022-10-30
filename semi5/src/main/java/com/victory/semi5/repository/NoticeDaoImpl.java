@@ -166,7 +166,7 @@ public class NoticeDaoImpl implements NoticeDao{
 	@Override
 	public boolean update(NoticeDto noticeDto) {
 		String sql = "update notice_board set "
-				+ "notice_title=?, notice_contents=? "
+				+ "notice_title=?, notice_contents=?, "
 				+ "notice_update_time=sysdate "
 				+ "where notice_no=?";
 		Object[] param = {

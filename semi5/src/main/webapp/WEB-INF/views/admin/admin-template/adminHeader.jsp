@@ -196,10 +196,13 @@
 	     			<a href="/admin/movieList">영화정보 관리</a>
 	     		</div>
 	     		<div class="row">
-	     			<a href="/admin/moviePlayList">영화스케쥴 관리</a>
+	     			<a href="/admin/moviePlayList">상영스케쥴 관리</a>
 	     		</div>
   			     <div class="row">
 	     			<a href="/community">커뮤니티</a>
+	     		</div>
+	     		<div class="row">
+	     			<a href="/admin/qnaAsking">1:1 문의내역</a>
 	     		</div>
     		</div>
     	</aside>
