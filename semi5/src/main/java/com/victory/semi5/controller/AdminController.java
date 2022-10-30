@@ -36,6 +36,7 @@ import com.victory.semi5.repository.CharacterDao;
 import com.victory.semi5.repository.CinemaDao;
 import com.victory.semi5.repository.MovieDao;
 import com.victory.semi5.repository.MoviePlayDao;
+import com.victory.semi5.repository.OneQnaDao;
 import com.victory.semi5.repository.UserDao;
 import com.victory.semi5.service.AttachmentService;
 import com.victory.semi5.vo.MoviePlayVO;
@@ -60,6 +61,8 @@ public class AdminController {
 	private CharacterDao characterDao;
 	@Autowired
 	private MoviePlayDao moviePlayDao;
+	@Autowired
+	private OneQnaDao oneQnaDao;
 	
 	private final File dir = new File("C:\\study\\vic\\upload"); //파일경로
 	@PostConstruct //최초 실행 시, 딱 한번만 실행되는 메소드
@@ -391,10 +394,15 @@ public class AdminController {
 //		}
 //	}
 	// Q&A 답변
-	@GetMapping("/qnaAsking")
-	public String qnaAsking() {
+	@GetMapping("/askingList")
+	public String askingList(Model model) {
+		model.addAttribute("oneQnaDto",oneQnaDao.selectList());
 		return "admin/askingList";
 	}
+//	@PostMapping("/askingList")
+//	public String askingList(Model model) {
+//		return "admin/askingList";
+//	}
 	
 	
 	
