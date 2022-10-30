@@ -122,9 +122,9 @@
 							${qnaDto.qnaTitle}
 						</a>
 						 <!-- 댓글 개수 출력 -->
-						<c:if test="${qnaDto.qnaReplyCount > 0}">
-							[${qnaDto.qnaReplyCount}]
-						</c:if>	
+						 <c:if  test="${qnaDto.qnaAnswer != null}">
+						 	[1]
+						 </c:if>
 					</td>
 					<td>${qnaDto.qnaWriter}</td>
 					<td>
