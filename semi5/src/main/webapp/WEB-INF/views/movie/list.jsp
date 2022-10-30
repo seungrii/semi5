@@ -37,7 +37,7 @@
      
      .image{
      float: left;  
-      display: inline-block; 
+     display: inline-block; 
      width: 200px;
      height: 280px;
      /* margin: 0px 45px 0px 0px; */
@@ -46,6 +46,7 @@
      box-sizing: border-box;
      background-color: aqua;
      /* margin-bottom: 70px; */
+     
     
      } 
     
@@ -158,21 +159,7 @@
                 
                   </c:forEach>   
             
-               
-                 
-                
-
-
-
-
-
-
-
-            
-
-          
-         
-         <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
+   <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
          
           </div>
     

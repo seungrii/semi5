@@ -20,4 +20,10 @@ public interface CharacterDao {
 	CharacterDto selectOneActor3(String charaterName4);
 	CharacterDto selectOneActor4(String charaterName5);
 	List<CharacterDto> selectList(int movieNumber);
+	
+	
+	
+	
+	
+	
 }

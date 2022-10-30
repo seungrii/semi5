@@ -113,6 +113,9 @@ public class CharacterDaoImpl implements CharacterDao {
 
 	@Override
 	public void insertActor1(CharacterDto characterDto, String charaterName2) {
+		
+		
+		
 		String sql="insert into character("
 		+"character_number, movie_number, charater_name, character_type"
 		+")values("
@@ -211,10 +214,17 @@ public class CharacterDaoImpl implements CharacterDao {
 
 	@Override
 	public List<CharacterDto> selectList(int movieNumber) {
+		
     String sql="select*from character where movie_number=?";
     Object[]param= {movieNumber};
     return jdbcTemplate.query(sql, mapper, param);
+    
+    
 	}
+	
+	
+	
+	
 
 
 

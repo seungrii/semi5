@@ -122,6 +122,11 @@ public class MovieController {
 //		int genreNo = genredto.getGenreNo();		
 //		model.addAttribute("hashtagvo",genreDao.selectOne(genreNo));
 		
+		
+		
+		
+		
+		
 		return "movie/detail";
 		
 	}
