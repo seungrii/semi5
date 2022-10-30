@@ -17,14 +17,17 @@ public class OneQnaDaoImpl implements OneQnaDao{
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	
-	private ResultSetExtractor<OneQnaDto> selectId = rs -> {
+	private ResultSetExtractor<OneQnaDto> selectOne = rs -> {
 		if(rs.next()) {
 			return OneQnaDto.builder()
-					.askingNo(rs.getInt("asking_no"))
 					.userId(rs.getString("user_id"))
+					.askingNo(rs.getInt("asking_no"))
+					.AdminId(rs.getString("Admin_id"))
 					.askingTitle(rs.getString("asking_title"))
 					.askingContents(rs.getString("asking_contents"))
+					.askingAnswer(rs.getString("asking_answer"))
 					.askingWriteTime(rs.getDate("asking_write_time"))
+					.askingAnswerTime(rs.getDate("asking_answer_time"))
 				.build();
 		}else {
 			return null;
@@ -57,6 +60,13 @@ public class OneQnaDaoImpl implements OneQnaDao{
 		String sql = "select * from asking where user_id= ?";
 		Object[] param = {userId};
 		return jdbcTemplate.query(sql, mapper, param);
+	}
+
+	@Override
+	public OneQnaDto selectOne(int askingNo) {
+		String sql = "select * from asking where asking_no=?";
+		Object[] param = {askingNo};
+		return jdbcTemplate.query(sql, selectOne, param);
 	}
 
 }

@@ -8,4 +8,6 @@ public interface OneQnaDao {
 	void insert(OneQnaDto oneQnaDto);
 	
 	List<OneQnaDto> selectIdList(String userId);
+	
+	OneQnaDto selectOne(int askingNo);
 }

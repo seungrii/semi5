@@ -279,6 +279,12 @@ public class UserController {
 		model.addAttribute("oneQnaDto", oneQnaDao.selectIdList(userId));
 		return "user/oneQnaList";
 	}
+	@GetMapping("/oneQnaDetail")
+	public String oneQnaDetail(Model model,
+			@RequestParam int askingNo, HttpSession session) {
+		model.addAttribute("oneQnaDto", oneQnaDao.selectOne(askingNo));
+		return "user/qnaDetail";
+	}
 	
 	@GetMapping("/boardList")
 	public String boardList(Model model,

@@ -13,7 +13,7 @@
 				${oneQnaDto.userId}
 			</div>
 			<div class="row">
-				<a href="#">${oneQnaDto.askingTitle}</a>
+				<a href="oneQnaDetail?askingNo=${oneQnaDto.askingNo}">${oneQnaDto.askingTitle}</a>
 			</div>
 			<div class="row">
 				${oneQnaDto.askingWriteTime}
