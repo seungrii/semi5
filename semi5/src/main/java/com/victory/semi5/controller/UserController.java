@@ -50,7 +50,7 @@ public class UserController {
 	}
 	
 	@PostMapping("/login")
-	public String login(@ModelAttribute UserDto userDto, 
+	public String login(@ModelAttribute UserDto userDto,
 			HttpSession session, @RequestParam String rank) {
 		if(rank.equals("off")) {
 			UserDto findDto = userDao.selectOne(userDto.getUserId());
@@ -71,8 +71,10 @@ public class UserController {
 			}
 			boolean passwordMatch = userDto.getUserPw().equals(findDto.getAdminPw());
 			if(passwordMatch) {
+
 				session.setAttribute(SessionConstant.ID, userDto.getUserId());
-				session.setAttribute(SessionConstant.GRADE, userDto.getUserRank());
+				session.setAttribute(SessionConstant.GRADE, "관리자");
+
 				return "redirect:/";
 			}else {
 				return "redirect:login?error";
@@ -85,6 +87,7 @@ public class UserController {
 	@GetMapping("/logout")
 	public String logout(HttpSession session) {
 		session.removeAttribute("LoginId");
+		session.removeAttribute("loginGrade");
 		return "redirect:/";
 	}
 	
@@ -130,11 +133,24 @@ public class UserController {
 	
 	@GetMapping("/mypage")
 	public String mypage(Model model,
-			HttpSession session) {
+			HttpSession session, RedirectAttributes attr) {
 		String userId = (String)session.getAttribute("LoginId");
+
 		UserDto userDto = userDao.selectOne(userId);
 		model.addAttribute("userDto", userDto);
-		return "user/userMyPage";
+
+//		boolean admin = session.getAttribute("loginGrade") != null;
+		boolean admin = session.getAttribute("loginGrade") == "관리자";
+		
+		if(admin) {	//관리자 로그인일 경우
+			attr.addAttribute("adminId", userId);
+			return "redirect:/admin/adminDetail";
+		}
+		else {			
+			model.addAttribute("userDto", userDto);
+			return "user/userMyPage";
+		}
+
 	}
 	@GetMapping("/idFind")
 	public String idFind() {
@@ -144,6 +160,7 @@ public class UserController {
 	public String pwFind() {
 		return "user/pwFind";
 	}
+
 	@GetMapping("/delete")
 	public String delete() {
 		return "user/delete";
@@ -254,6 +271,15 @@ public class UserController {
 		oneQnaDao.insert(oneQnaDto);
 		return "redirect:mypage";
 	}
+	
+	@GetMapping("/oneQnaList")
+	public String oneQnaList(Model model
+			,HttpSession session) {
+		String userId = (String)session.getAttribute(SessionConstant.ID);
+		model.addAttribute("oneQnaDto", oneQnaDao.selectIdList(userId));
+		return "user/oneQnaList";
+	}
+	
 	@GetMapping("/boardList")
 	public String boardList(Model model,
 			HttpSession session) {

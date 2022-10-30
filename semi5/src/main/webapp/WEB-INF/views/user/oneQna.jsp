@@ -21,16 +21,5 @@
 				<button type="submit">문의하기</button>
 			</div>
 		</form>
-		<c:if test="${ug != null}">
-			<form action="">
-				<div class="row">
-					<label>답변</label>
-					<textarea rows="10" cols="20"></textarea>
-				</div>
-				<div class="row">
-					<button type="submit">답변하기</button>
-				</div>
-			</form>
-		</c:if>
 	</section>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

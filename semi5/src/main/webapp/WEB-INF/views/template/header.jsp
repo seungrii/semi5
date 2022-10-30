@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="login" value="${LoginId != null}"></c:set>
+<c:set var="admin" value="${loginGrade == '관리자'}"></c:set>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -38,29 +41,47 @@
         <!-- 헤더 영역 -->
         <div class="flex-container">
             <div class="left">
-                <a href="#" id="logo">
+                <a href="/" id="logo">
                     <img id="logo" src="/image/logo.png">
                 </a>
             </div>
-            <div>
-            	<a href="/user/logout">로그아웃</a>
-            </div>
             <div class="right header-menu">
                 <ul>
+                	<!-- 관리자일 경우, 관리자 아이콘 -->
+					<c:if test="${admin}">
+	    	           	<li>
+	                        <a href="/admin/home">
+	                            <i class="fa-solid fa-screwdriver-wrench"></i>
+	                            <span>관리자</span>
+	                        </a>
+	                    </li>
+                    </c:if>
+                    <c:choose>
+	                    <c:when test="${login}">
+	                    	<li>
+		                        <a href="/user/logout">
+		                            <i class="fa-solid fa-arrow-right-from-bracket"></i>
+		                            <span>로그아웃</span>
+		                        </a>
+                    		</li>
+	                    </c:when>
+                    	<c:otherwise>
+                			<li>
+		                        <a href="/user/login">
+		                            <i class="fa-solid fa-arrow-right-to-bracket"></i>
+		                            <span>로그인</span>
+		                        </a>
+                    		</li>
+                    		<li>
+		                        <a href="/user/join">
+		                            <i class="fa-solid fa-user-plus"></i>
+		                            <span>회원가입</span>
+		                        </a>
+		                    </li>
+                    	</c:otherwise>
+                    </c:choose>
                     <li>
-                        <a href="/user/login">
-                            <i class="fa-solid fa-user"></i>
-                            <span>로그인</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/user/join">
-                            <i class="fa-solid fa-arrow-right-to-bracket"></i>
-                            <span>회원가입</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
+                        <a href="/user/mypage">
                             <i class="fa-solid fa-gear"></i>
                             <span>마이페이지</span>
                         </a>

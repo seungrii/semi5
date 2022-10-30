@@ -1,8 +1,13 @@
 package com.victory.semi5.repository;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.victory.semi5.entity.UserDto;
@@ -55,6 +60,7 @@ public class UserDaoImpl implements UserDao{
 		jdbcTemplate.update(sql, param);
 	}
 
+
 	@Override
 	public UserDto selectId(String userName, String userTel) {
 		String sql = "select * from user_information where user_name=? and user_tel=?";
@@ -99,6 +105,33 @@ public class UserDaoImpl implements UserDao{
 				userDto.getUserPw(), userDto.getUserId()
 		};
 		return jdbcTemplate.update(sql, param)>0;
+	}
+	private RowMapper<UserDto> mapper = (rs, idx) -> {
+		return UserDto.builder()
+					.userId(rs.getString("user_id"))
+					.userPw(rs.getString("user_pw"))
+					.userName(rs.getString("user_name"))
+					.userGender(rs.getString("user_gender"))
+					.userBirth(rs.getDate("user_birth"))
+					.userEmail(rs.getString("user_email"))
+					.userRank(rs.getString("user_rank"))
+					.userTel(rs.getString("user_tel"))
+					.userBlurb(rs.getString("user_blurb"))
+				.build();
+	};
+	@Override
+	public List<UserDto> selectList() {
+		String sql = "select * from user_information order by user_id asc";
+		return jdbcTemplate.query(sql, mapper);
+	}
+	@Override
+	public List<UserDto> selectList(String type, String keyword) {
+		String sql = "select * from user_information "
+				+ "where instr(#1, ?) >0 "
+				+ "order by user_id asc";
+		sql = sql.replace("#1", type);
+		Object[] param = {keyword};
+		return jdbcTemplate.query(sql, mapper, param);
 	}
 
 }

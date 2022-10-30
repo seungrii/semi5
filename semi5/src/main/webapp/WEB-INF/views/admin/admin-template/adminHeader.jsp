@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:set var="login" value="${loginId != null}"></c:set>
-<c:set var="admin" value="${loginAdmin == '관리자'}"></c:set>
+<c:set var="login" value="${LoginId != null}"></c:set>
+<c:set var="admin" value="${loginGrade == '관리자'}"></c:set>
 
 <html>
 <html lang="ko">
@@ -30,6 +30,7 @@
     <link rel="stylesheet" type="text/css" href="/css/semi-commons.css">
     <link rel="stylesheet" type="text/css" href="/css/reset.css">
     <link rel="stylesheet" type="text/css" href="/css/semi-layout.css">
+    <link rel="stylesheet" type="text/css" href="/css/admin.css">
 
     <!-- 폰트어썸 -->
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"/>
@@ -39,10 +40,7 @@
 
     <!-- js 파일 -->
     <script src="/js/navigator.js"></script>
-    <script type="text/javascript">
-
-
-        
+    <script type="text/javascript">  
     </script>
 </head>
 <body>
@@ -52,26 +50,26 @@
         <!-- 헤더 영역 -->
         <div class="flex-container">
             <div class="left">
-                <a href="#" id="logo">
+                <a href="/" id="logo">
                     <img id="logo" src="/image/logo.png">
                 </a>
             </div>
             <div class="right header-menu">
                 <ul>
                     <li>
-                        <a href="#">
-                            <i class="fa-solid fa-user"></i>
-                            <span>로그인</span>
+                        <a href="/admin/home">
+                            <i class="fa-solid fa-screwdriver-wrench"></i>
+                            <span>관리자</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#">
-                            <i class="fa-solid fa-arrow-right-to-bracket"></i>
-                            <span>회원가입</span>
-                        </a>
-                    </li>
+                       	<a href="/user/logout">
+                           <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                           <span>로그아웃</span>
+                       	</a>
+                 	</li>
                     <li>
-                        <a href="#">
+                        <a href="/user/mypage">
                             <i class="fa-solid fa-gear"></i>
                             <span>마이페이지</span>
                         </a>
@@ -174,23 +172,35 @@
     	<aside>
     		<div class="container-150">
     			<div class="row">
+    				<h2>상태창</h2>
+    			</div>
+    			<div class="row">
+    				login : ${sessionScope.LoginId}
+    			</div>
+    			<div class="row">
+    				admin : ${sessionScope.loginGrade}
+    			</div>
+    			<div class="row">
     				<h2>관리자메뉴</h2>
     			</div>
- 		    <div class="row">
-    			<a href="/admin/listAdmin">관리자계정</a>
-     		</div>
-     		<div class="row">
-     			<a href="/user/list">회원목록</a>
-     		</div>
-     		<div class="row">
-     			<a href="/admin/home">???</a>
-     		</div>
-     		<div class="row">
-     			<a href="/admin/home">???</a>
-     		</div>
-     		<div class="row">
-     			<a href="/admin/home">???</a>
-     		</div>
+	 		    <div class="row">
+	    			<a href="/admin/adminList">관리자 계정</a>
+	     		</div>
+	     		<div class="row">
+	     			<a href="/admin/userList">회원 정보</a>
+	     		</div>
+	     		<div class="row">
+	     			<a href="/admin/cinemaList">지점 관리</a>
+	     		</div>
+	     		<div class="row">
+	     			<a href="/admin/movieList">영화정보 관리</a>
+	     		</div>
+	     		<div class="row">
+	     			<a href="/admin/moviePlayList">영화스케쥴 관리</a>
+	     		</div>
+  			     <div class="row">
+	     			<a href="/community">커뮤니티</a>
+	     		</div>
     		</div>
     	</aside>
     </div>

@@ -1,5 +1,8 @@
 package com.victory.semi5.repository;
 
+import java.util.List;
+
+import com.victory.semi5.entity.AdminDto;
 import com.victory.semi5.entity.UserDto;
 
 public interface UserDao {
@@ -18,5 +21,9 @@ public interface UserDao {
 	boolean update(UserDto userDto);
 	
 	boolean pwupdate(UserDto userDto);
+
+//	회원 테이블 조회
+	List<UserDto> selectList();
+	List<UserDto> selectList(String type, String keyword);
 
 }
