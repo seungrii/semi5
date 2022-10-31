@@ -243,7 +243,4 @@ public class QnaDaoImpl implements QnaDao{
 	
 	
 	
-	
-	
-	
 }

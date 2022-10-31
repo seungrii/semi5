@@ -145,6 +145,11 @@ footer .info >p{
     border-bottom: 1px solid #ebebeb;
 }
 
+.nav-list {
+	background-color: white;
+	position: relative;
+}
+
 .nav-list > li {
     border-left: 1px solid #ebebeb;
     border-right: 1px solid #ebebeb;
@@ -152,7 +157,6 @@ footer .info >p{
     padding-left: 20px;
     /* text-align: center; */
     flex-grow: 1;
-    background-color: white;
     min-height: 200px;
 }
 

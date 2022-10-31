@@ -183,20 +183,4 @@
 	</div>	 
 </div>
 
-
-
-<div class="row">
-	<h2>상태창</h2>	
-	</div>
-	<div class="row">
-	loginId : ${sessionScope.LoginId}
-	</div>
-	<div class="row">
-		로그인 : ${sessionScope.LoginId != null}
-	</div>
-	<div class="row">
-		mg : ${sessionScope.ug}
-	</div>
-	<div class="row">
-		관리자 : ${sessionScope.ug == '관리자'}
-	</div>
+<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

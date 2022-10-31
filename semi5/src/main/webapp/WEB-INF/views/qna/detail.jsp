@@ -201,75 +201,19 @@ $(function(){
 	<div class="row left">
 		<table class="table table-border table-hover table-reply-list">
 		<!-- 댓글 목록 -->
-		
-
-		
 		<tbody>
-			<c:forEach var="qnaDto" items="${qnaAnswerList}">
-			
-			<!-- 사용자에게 보여주는 화면 -->
 			<tr class="view">
+				<!-- 사용자에게 보여주는 화면 -->
 				<td width="90%">
-				<!-- 작성자 -->
+					<!-- 작성자 -->
 					${qnaDto.adminId}
-					<c:if test="${qnaDto.adminId ==  adminDto.adminId}">
-						(작성자)
-					</c:if>
-					<!-- 회원등급은 자유게시판에 안씀 위화감 조성ㅋ -->
-					<br>
-					
-					
-					
 					<br><br>
-					<fmt:formatDate value="${qnaDto.qnaWriteTime}" pattern="yyyy-MM-dd HH:mm"/>				
+					<pre>${qnaDto.qnaAnswer}</pre>					
+					<br><br>
+					<fmt:formatDate value="${qnaDto.qnaAnswerTime}" pattern="yyyy-MM-dd HH:mm"/>				
 				</td>
-
-
-				<th>
-					<!-- 수정과 삭제는 현재 사용자가 남긴 댓글에만 표시 -->
-						<c:if test="${LoginId == qnaDto.adminId}">
-							<a style="display:block; margin:10px 0px;" class="edit-btn">수정</a>
-							<a style="display:block; margin:10px 0px;" class="delete-btn" data-reply-origin="${qnaDto.qnaNo}" data-reply-no="${qnaDto.qnaNo}">삭제</a>
-						</c:if>
-					
-					<c:if test="${admin}">
-							<!-- 블라인드 여부에 따라 다르게 표시 -->
-							<c:choose>
-								<c:when test="${replyDto.replyBlind}">
-									<a style="display:block; margin:10px 0px;" href="reply/blind?replyNo=${replyDto.replyNo}&replyOrigin=${replyDto.replyOrigin}">블</a>
-								</c:when>
-								<c:otherwise>
-									<a style="display:block; margin:10px 0px;" href="reply/blind?replyNo=${replyDto.replyNo}&replyOrigin=${replyDto.replyOrigin}">블</a>
-								</c:otherwise>
-							</c:choose>
-							
-					</c:if>
-				</th>
+				
 			</tr>
-			
-			
-			
-			<c:if test="${LoginId ==  replyDto.replyWriter}">
-				<!-- 수정하기 위한 화면 : 댓글 작성자 본인에게만 출력 -->
-				<tr class="editor">
-					<th colspan="2">
-						<form action="qnaReply/write" method="post">
-							<input type="hidden" name="replyNo" 
-														value="${replyDto.replyNo}">
-							<input type="hidden" name="replyOrigin"
-														value="${replyDto.replyOrigin}">
-							<textarea name="replyContent" rows="5" cols="50" 
-									required>${replyDto.replyContent}</textarea>
-							<button type="submit">변경</button>
-							<a class="cancel-btn">취소</a>
-						</form>
-					</th>
-				</tr>
-			</c:if>
-				
-				
-				
-			</c:forEach>
 		</tbody>
 	</table>
 </div>
