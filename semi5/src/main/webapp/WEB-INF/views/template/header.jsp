@@ -99,7 +99,7 @@
                             <img id="nav-logo" src="/image/logo.png">
                         </li>
                     </a>
-                    <a href="#">
+                    <a href="/movie/list">
                         <li>영화</li>
                     </a>
                     <a href="/advance/list">
@@ -123,39 +123,39 @@
                     <ul class="nav-list">
                         <li>
                             <ul>
-                                <a href="#">
+                                <a href="/movie/list">
                                     <li>영화</li>
                                 </a>
-                                <a href="#">
+                                <a href="/movie/list">
                                     <li>무비차트</li>
                                 </a>
-                                <a href="#">
+                                <a href="/movie/list">
                                     <li>상영중</li>
                                 </a>
-                                <a href="#">
+                                <a href="/movie/list">
                                     <li>상영 예정</li>
                                 </a>
                             </ul>
                         </li>
                         <li>
                             <ul>
-                                <a href="#">
+                                <a href="/advance/list">
                                     <li>예매</li>
                                 </a>
-                                <a href="#">
+                                <a href="/advance/list">
                                     <li>예매하기</li>
                                 </a>
                             </ul>
                         </li>
                         <li>
                             <ul>
-                                <a href="#">
+                                <a href="/theater/home">
                                     <li>극장</li>
                                 </a>
-                                <a href="#">
+                                <a href="/theater/home">
                                     <li>상영관 종류</li>
                                 </a>
-                                <a href="#">
+                                <a href="/cinema/home">
                                     <li>지점 안내</li>
                                 </a>
                             </ul>
