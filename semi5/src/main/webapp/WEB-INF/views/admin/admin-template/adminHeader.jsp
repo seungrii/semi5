@@ -87,16 +87,16 @@
                             <img id="nav-logo" src="/image/logo.png">
                         </li>
                     </a>
-                    <a href="#">
+                    <a href="/movie/list">
                         <li>영화</li>
                     </a>
-                    <a href="#">
+                    <a href="/advance/list">
                         <li>예매</li>
                     </a>
-                    <a href="#">
+                    <a href="/theater/home">
                         <li>극장</li>
                     </a>
-                    <a href="#">
+                    <a href="/notice/list">
                         <li>커뮤니티</li>
                     </a>
                     <li>
@@ -111,52 +111,52 @@
                     <ul class="nav-list">
                         <li>
                             <ul>
-                                <a href="#">
+                                <a href="/movie/list">
                                     <li>영화</li>
                                 </a>
-                                <a href="#">
+                                <a href="/movie/list">
                                     <li>무비차트</li>
                                 </a>
-                                <a href="#">
+                                <a href="/movie/list">
                                     <li>상영중</li>
                                 </a>
-                                <a href="#">
+                                <a href="/movie/list">
                                     <li>상영 예정</li>
                                 </a>
                             </ul>
                         </li>
                         <li>
                             <ul>
-                                <a href="#">
+                                <a href="/advance/list">
                                     <li>예매</li>
                                 </a>
-                                <a href="#">
+                                <a href="/advance/list">
                                     <li>예매하기</li>
                                 </a>
                             </ul>
                         </li>
                         <li>
                             <ul>
-                                <a href="#">
+                                <a href="/theater/home">
                                     <li>극장</li>
                                 </a>
-                                <a href="#">
+                                <a href="/theater/home">
                                     <li>상영관 종류</li>
                                 </a>
-                                <a href="#">
+                                <a href="/cinema/home">
                                     <li>지점 안내</li>
                                 </a>
                             </ul>
                         </li>
                         <li>
                             <ul>
-                                <a href="#">
+                                <a href="/notice/list">
                                     <li>커뮤니티</li>
                                 </a>
-                                <a href="#">
+                                <a href="/qna/list">
                                     <li>공지사항</li>
                                 </a>
-                                <a href="#">
+                                <a href="/board/list">
                                     <li>자유게시판</li>
                                 </a>
                             </ul>
@@ -199,10 +199,14 @@
 	     			<a href="/admin/moviePlayList">상영스케쥴 관리</a>
 	     		</div>
   			     <div class="row">
-	     			<a href="/community">커뮤니티</a>
+	     			<a href="/notice/list">커뮤니티</a>
 	     		</div>
 	     		<div class="row">
+<<<<<<< HEAD
 	     			<a href="/admin/askingList">1:1 문의내역</a>
+=======
+	     			<a href="#">1:1 문의내역</a>
+>>>>>>> refs/remotes/origin/main
 	     		</div>
     		</div>
     	</aside>

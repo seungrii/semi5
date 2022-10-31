@@ -21,6 +21,9 @@ public interface AttachmentDao {
 	List<ImageDto> selectCinemaImageList(String cinemaPorin);
 	
 	//영화포스터
-	void addPoster(int movieNumber, int imageNo);
-
+	void addPoster(int movieNumber, int fileNumber);
+	
+	//회원프로필
+	void addProfileImage(String userId, int fileNumber);
+	List<ImageDto> selectProfileImageList(String userId);
 }

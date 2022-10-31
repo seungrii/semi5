@@ -12,6 +12,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.victory.semi5.entity.MovieDto;
+import com.victory.semi5.vo.MovieVO;
 
 @Repository
 public class MovieDaoImpl implements MovieDao {
@@ -130,7 +131,7 @@ public class MovieDaoImpl implements MovieDao {
 	}
 
 	@Override
-	public int insert2(MovieDto dto) {
+	public int insert2(MovieVO movieVO) {
 		// TODO Auto-generated method stub
 	String sql="select movie_seq.nextval from dual";
 	int movieNumber=jdbcTemplate.queryForObject(sql, int.class);
@@ -142,9 +143,9 @@ public class MovieDaoImpl implements MovieDao {
 			+"?,?,?,?,?,?,?"
 			+")";
 	Object[] param= {
-			movieNumber,dto.getMovieName(),dto.getOpeningDate(),
-			dto.getScreeningEnd(),dto.getMovieSummary(),
-			dto.getMoviePlayTime(),dto.getMovieAgeLimit(),
+			movieNumber,movieVO.getMovieName(),movieVO.getOpeningDate(),
+			movieVO.getScreeningEnd(),movieVO.getMovieSummary(),
+			movieVO.getMoviePlayTime(),movieVO.getMovieAgeLimit(),
 			
 	};
 		jdbcTemplate.update(sql, param);
@@ -152,7 +153,7 @@ public class MovieDaoImpl implements MovieDao {
 	}
 
 	@Override
-	public void insertHashtagVO(int movieNumber, int genreNo) {
+	public void insertHashtag(int movieNumber, int genreNo) {
 		String sql = "insert into hashtag values(?, ?)";
 		Object[] param = {movieNumber, genreNo};
 		jdbcTemplate.update(sql, param);

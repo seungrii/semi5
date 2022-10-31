@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.lang.ProcessBuilder.Redirect;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.FileUtils;
@@ -25,13 +26,16 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.victory.semi5.constant.SessionConstant;
 import com.victory.semi5.entity.AdminDto;
 import com.victory.semi5.entity.BoardDto;
+import com.victory.semi5.entity.ImageDto;
 import com.victory.semi5.entity.OneQnaDto;
 import com.victory.semi5.entity.UserDto;
 import com.victory.semi5.repository.AdminDao;
+import com.victory.semi5.repository.AttachmentDao;
 import com.victory.semi5.repository.BoardDao;
 import com.victory.semi5.repository.OneQnaDao;
 import com.victory.semi5.repository.TicketingDao;
 import com.victory.semi5.repository.UserDao;
+import com.victory.semi5.service.AttachmentService;
 
 @Controller
 @RequestMapping("/user")
@@ -47,6 +51,16 @@ public class UserController {
 	private OneQnaDao oneQnaDao;
 	@Autowired
 	private TicketingDao ticketingDao;
+	@Autowired
+	private AttachmentDao attachmentDao;
+	@Autowired
+	private AttachmentService attachmentService;
+	
+	private final File dir = new File("C:\\study\\vic\\upload"); //파일경로
+	@PostConstruct //최초 실행 시, 딱 한번만 실행되는 메소드
+	public void prepare() {
+		dir.mkdirs();
+	}
 	
 	@GetMapping("/login")
 	public String login() { 
@@ -102,38 +116,49 @@ public class UserController {
 	
 	@PostMapping("/join")
 	public String join(@ModelAttribute UserDto userDto,
-			@RequestParam MultipartFile userProfile) throws IllegalStateException, IOException {
+			List<MultipartFile> attachments) 
+					throws IllegalStateException, IOException {
 		userDao.join(userDto);
 		
-		File directory = new File("C:/dev/user");
-		directory.mkdirs();
-		File target = new File(directory, userDto.getUserId());
-		userProfile.transferTo(target);
+		//파일첨부
+//		File directory = new File("C:/dev/user");
+//		directory.mkdirs();
+//		File target = new File(directory, userDto.getUserId());
+//		userProfile.transferTo(target);
+		for(MultipartFile file : attachments) {
+			if(!file.isEmpty()) {
+				//이미지 추가 service로
+				int fileNumber = attachmentService.attachmentsUp(attachments, file);	
+				
+				//회원아이디로 → 프로필이미지에 저장
+				attachmentDao.addProfileImage(userDto.getUserId(), fileNumber); 						
+			}
+		}
 		
 		return "redirect:login";
 	}
 	
-	@GetMapping("/download")
-	@ResponseBody
-	public ResponseEntity<ByteArrayResource> download(
-			@RequestParam String userId) throws IOException{
-		File directory = new File("C:/dev/user");
-		File target = new File(directory, userId);
-		
-		if(target.exists()) {
-			byte[] date = FileUtils.readFileToByteArray(target);
-			ByteArrayResource resource = new ByteArrayResource(date);
-			
-			return ResponseEntity.ok()
-					.header("Content-Encoding", "UTF-8")
-					.header("Content-Length", String.valueOf(date.length))
-					.header("Content-Disposition", "attachment; filename="+userId)
-					.header("Content-Type", "application/octet-stream")
-					.body(resource);
-		}else {
-			return ResponseEntity.notFound().build();
-		}
-	}
+//	@GetMapping("/download")
+//	@ResponseBody
+//	public ResponseEntity<ByteArrayResource> download(
+//			@RequestParam String userId) throws IOException{
+//		File directory = new File("C:/dev/user");
+//		File target = new File(directory, userId);
+//		
+//		if(target.exists()) {
+//			byte[] date = FileUtils.readFileToByteArray(target);
+//			ByteArrayResource resource = new ByteArrayResource(date);
+//			
+//			return ResponseEntity.ok()
+//					.header("Content-Encoding", "UTF-8")
+//					.header("Content-Length", String.valueOf(date.length))
+//					.header("Content-Disposition", "attachment; filename="+userId)
+//					.header("Content-Type", "application/octet-stream")
+//					.body(resource);
+//		}else {
+//			return ResponseEntity.notFound().build();
+//		}
+//	}
 	
 	@GetMapping("/mypage")
 	public String mypage(Model model,
@@ -152,6 +177,9 @@ public class UserController {
 		}
 		else {			
 			model.addAttribute("userDto", userDto);
+			
+			//첨부파일 조회하여 첨부
+			model.addAttribute("attachments", attachmentDao.selectProfileImageList(userId));
 			return "user/userMyPage";
 		}
 
@@ -178,10 +206,18 @@ public class UserController {
 			return "redirect:delete?error";
 		}
 		if(userPw.equals(userDto.getUserPw())) {
+			//1. 회원정보 삭제 전, 회원프로필 조회
+			List<ImageDto> attachments = attachmentDao.selectProfileImageList(userId);
+			
+			//2. 회원정보 삭제
 			userDao.delete(userId);
+
+			//3. 첨부파일 삭제
+			attachmentService.attachmentsDelete(attachments);
+			
 			session.removeAttribute(SessionConstant.ID);
 			session.removeAttribute(SessionConstant.GRADE);
-			
+
 			return "redirect:/";
 		}else {			
 			return "redirect:delete?error";
@@ -247,21 +283,49 @@ public class UserController {
 			HttpSession session) {
 		String userId = (String)session.getAttribute("LoginId");
 		model.addAttribute("userDto", userDao.selectOne(userId));
+		model.addAttribute("attachments", attachmentDao.selectProfileImageList(userId));
 		return "user/userChange";
 	}
 	@PostMapping("/userChange")
 	public String userChange(@ModelAttribute UserDto userDto,
-			HttpSession session,RedirectAttributes attr) {
+			@RequestParam List<MultipartFile> attachments, 
+			HttpSession session,RedirectAttributes attr)
+					throws IllegalStateException, IOException {
 		String userId = (String)session.getAttribute("LoginId");
 		userDto.setUserId(userId);
 		boolean result = userDao.update(userDto);
 		if(result) {
 			attr.addAttribute("userId", userId);
+			for(MultipartFile file : attachments) {
+				if(!file.isEmpty()) {
+					//기존이미지 삭제
+					List<ImageDto> attachments2 = attachmentDao.selectProfileImageList(userId);
+					attachmentService.attachmentsDelete(attachments2);
+					
+					//이미지 추가 service로
+					int fileNumber = attachmentService.attachmentsUp(attachments, file);	
+					
+					//회원아이디로 → 프로필이미지에 저장
+					attachmentDao.addProfileImage(userDto.getUserId(), fileNumber); 		
+				}
+			}
 			return "redirect:mypage";
 		}else {
 			return "redirect:userChange?error";
 		}
 	}
+//	회원프로필만 삭제
+	@GetMapping("/profileImageDelete")
+	public String profileImageDelete(@RequestParam String userId,
+			@RequestParam int fileNumber, RedirectAttributes attr) {
+		//실제파일 삭제(profile_image 자동삭제)
+		List<ImageDto> attachments = attachmentDao.selectList(fileNumber);
+		attachmentService.attachmentsDelete(attachments);
+		
+		attr.addAttribute("userId",userId);
+		return "redirect:/user/userChange";
+	}
+
 	@GetMapping("/oneQna")
 	public String oneQna() {
 		return "user/oneQna";
