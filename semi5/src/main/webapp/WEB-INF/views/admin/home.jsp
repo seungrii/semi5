@@ -5,7 +5,7 @@
 </jsp:include>
 <section class="w-980 test-css">
 	
-<div class="container">
+<div class="container mt-50">
 	<p1>관리자 home</p1>
 	
 </div>	

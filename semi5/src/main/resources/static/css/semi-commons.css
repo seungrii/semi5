@@ -480,3 +480,15 @@ textarea.fix-width {
 .table a:hover {
 	color:red;
 }
+aside{
+    padding: 20px;
+    float: left;
+    width: 25%;
+    min-height: 400px;
+}
+#yadoran{
+    padding: 20px;
+    float: left;
+    width: 75%;
+    min-height: 400px;
+}
