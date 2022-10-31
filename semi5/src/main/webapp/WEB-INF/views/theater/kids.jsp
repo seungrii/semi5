@@ -8,38 +8,27 @@
 
 <head>
 <jsp:include page="/WEB-INF/views/template/header.jsp">
-	<jsp:param value="일반관" name="title"/>
+	<jsp:param value="특별관" name="title"/>
 </jsp:include>
 <style>
-	#p-normal{
+	.p-kids{
 		font-size: 23px;
 		margin: 30px;
 	}
-	.btn-theater{
-	width: 200px;
-	height: 50px;
-	font-size: 20px;
-		
-}
 </style>
 
 </head>
 <body>
 
 	<div class="container mt-50">
-		<div>
-			<button class="btn btn-theater"><a href="home">&#60; 상영관 종류 보기</a></button>
-		</div>
-	
 		<div class="container mt-50">
-			<h1>일반관</h1>
+			<h1>키즈관</h1>
 		</div>
-		<div class="container mt-50">
-			<img alt="" src="/image/normal.jpeg">
-		</div>
-		<div class="container mt-50 mb-50">
-			<p id="p-normal">2d 일반 영화입니다.</p>
-					
+		<div class="container center mt-50">
+			<img width="900px" src="/image/kids.jpeg">
+			<div class="p-kids">
+				<p>어린이/가족 관람객을 위한 ‘자동차석’, ’어린이석’, ‘일반석’으로 구성된 상영관으로 아이들이 취향에 맞게 좌석을 선택하여 영화를 관람하고, 보호자는 일반석에서 아이와 함께 영화를 관람할 수 있습니다.</p>
+			</div>
 		</div>
 		
 	</div>

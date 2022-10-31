@@ -23,12 +23,15 @@
 		margin-bottom:50px;
 		float: left;
 		width:50%;
+		height:300px;
 	}
 	#special{
 		margin-top:10px;
 		margin-bottom:50px;
 		float: right;
 		width:50%;
+		height:300px;
+		
 	}
 	.bottom-left {
 	  position: absolute;
@@ -50,7 +53,7 @@
 					</div>
 					<div class="container">
 						<a href="special">
-						<img id="special" src="/image/normal.jpeg"><div class="bottom-left">특별관으로 이동</div>
+						<img id="special" src="/image/imax.jpeg"><div class="bottom-left">특별관으로 이동</div>
 						</a>
 					</div>
 					<div class="container" id="name">

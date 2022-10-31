@@ -17,10 +17,13 @@
       width: 100%;
       height: 450px;
       margin-top: 100px;
+      position: absolute;
+      z-index: 1;
   }
 	img{
 		width: 800px;
 		height: 600px;
+		
 	}
 	h1{
 		margin: 100px;

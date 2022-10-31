@@ -8,38 +8,28 @@
 
 <head>
 <jsp:include page="/WEB-INF/views/template/header.jsp">
-	<jsp:param value="일반관" name="title"/>
+	<jsp:param value="특별관" name="title"/>
 </jsp:include>
 <style>
-	#p-normal{
+	.p-imax{
 		font-size: 23px;
 		margin: 30px;
 	}
-	.btn-theater{
-	width: 200px;
-	height: 50px;
-	font-size: 20px;
-		
-}
 </style>
 
 </head>
 <body>
 
 	<div class="container mt-50">
-		<div>
-			<button class="btn btn-theater"><a href="home">&#60; 상영관 종류 보기</a></button>
-		</div>
-	
 		<div class="container mt-50">
-			<h1>일반관</h1>
+			<h1>Imax</h1>
 		</div>
-		<div class="container mt-50">
-			<img alt="" src="/image/normal.jpeg">
-		</div>
-		<div class="container mt-50 mb-50">
-			<p id="p-normal">2d 일반 영화입니다.</p>
-					
+		<div class="container center mt-50">
+			<img src="/image/imax.jpeg">
+			<div class="p-imax">
+				<p>대형 스크린에 맞는 맞춤형 설계로 모든 좌석에서 최고의 몰입 가능</p>
+				<p>완벽하게 조율된 소리와 핀 포인트 정확도로 최적의 사운드를 제공</p>		
+			</div>
 		</div>
 		
 	</div>

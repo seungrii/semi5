@@ -38,4 +38,9 @@ public class TheaterController {
 		return "theater/suite";
 	}
 	
+	@GetMapping("/kids")
+	public String kids() {
+		return "theater/kids";
+	}
+	
 }

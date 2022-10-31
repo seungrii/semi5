@@ -8,38 +8,28 @@
 
 <head>
 <jsp:include page="/WEB-INF/views/template/header.jsp">
-	<jsp:param value="일반관" name="title"/>
+	<jsp:param value="특별관" name="title"/>
 </jsp:include>
 <style>
-	#p-normal{
+	.p-4d{
 		font-size: 23px;
 		margin: 30px;
 	}
-	.btn-theater{
-	width: 200px;
-	height: 50px;
-	font-size: 20px;
-		
-}
 </style>
 
 </head>
 <body>
 
 	<div class="container mt-50">
-		<div>
-			<button class="btn btn-theater"><a href="home">&#60; 상영관 종류 보기</a></button>
-		</div>
-	
 		<div class="container mt-50">
-			<h1>일반관</h1>
+			<h1>4d</h1>
 		</div>
-		<div class="container mt-50">
-			<img alt="" src="/image/normal.jpeg">
-		</div>
-		<div class="container mt-50 mb-50">
-			<p id="p-normal">2d 일반 영화입니다.</p>
-					
+		<div class="container center mt-50">
+			<img src="/image/4d.jpeg" width="980px">
+			<div class="p-4d">
+				<p>4DX 상영관은 영화의 장면에 맞추어 움직이는 모션시트와 더불어</p>
+				<p>바람, 빛, 안개, 향기, 진동 등의 다양한 환경 효과를 느낄 수 있는 오감 체험 특별 상영관입니다.</p>		
+			</div>
 		</div>
 		
 	</div>

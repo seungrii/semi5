@@ -3,31 +3,6 @@
 </div>
     <footer class="container">
         <!-- 풋터 영역 -->
-        
-<div class="left">	
-	<div class="row">
-		<h2>상태창</h2>	
-	</div>
-	<div class="row">
-		loginId : ${sessionScope.LoginId}
-	</div>
-	<div class="row">
-		로그인 : ${sessionScope.LoginId != null}
-	</div>
-	<div class="row">
-		loginGrade : ${sessionScope.loginGrade}
-	</div>
-	<div class="row">
-		관리자 : ${sessionScope.loginGrade == '관리자'}
-	</div>
-</div>
-        
-        
-        
-        
-        
-        
-        
         <ul class="policy-list">
             <li>
                 <a href="#">이용약관</a>
