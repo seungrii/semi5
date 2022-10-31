@@ -36,6 +36,7 @@ import com.victory.semi5.repository.CharacterDao;
 import com.victory.semi5.repository.CinemaDao;
 import com.victory.semi5.repository.MovieDao;
 import com.victory.semi5.repository.MoviePlayDao;
+import com.victory.semi5.repository.OneQnaDao;
 import com.victory.semi5.repository.UserDao;
 import com.victory.semi5.service.AttachmentService;
 import com.victory.semi5.vo.MoviePlayVO;
@@ -61,6 +62,8 @@ public class AdminController {
 	private CharacterDao characterDao;
 	@Autowired
 	private MoviePlayDao moviePlayDao;
+	@Autowired
+	private OneQnaDao oneQnaDao;
 	
 	private final File dir = new File("C:\\study\\vic\\upload"); //파일경로
 	@PostConstruct //최초 실행 시, 딱 한번만 실행되는 메소드
@@ -349,7 +352,64 @@ public class AdminController {
 		return "redirect:movieList";
 	}
 	
-
+	
+//	@GetMapping("/detailAdmin")
+//	public String detail(Model model,@RequestParam int movieNumber ) {
+//		model.addAttribute("dto", movieDao.selectOne(movieNumber));
+//		return "movie/detailAdmin";
+//	}
+//	//수정
+//	@GetMapping("/edit")
+//	public String edit(Model model, @RequestParam int movieNumber) {
+//		model.addAttribute("dto",movieDao.selectOne(movieNumber));
+//		return "movie/edit";
+//	}
+//	@PostMapping("/edit")
+//	public String edit(@ModelAttribute MovieDto dto,
+//			//redirect 전용 저장소(Model의 자식 클래스),리다이렉트를 하는데 데이터를 넘길 경우
+//			RedirectAttributes attr) {
+//		boolean result=movieDao.update(dto);
+//	if(result) {
+//			attr.addAttribute("movieNumber",dto.getMovieNumber());
+//			//return "redirect:detail?movieNumber="+dto.getMovieNumber();
+//			return "redirect:detail";
+//		}
+//	else {//리스트에 있는 movieNumber가 아니면  edit_fail 페이지로
+//		    
+//			return "redirect:edit_fail";
+//	    }
+//  }
+//	
+//	@GetMapping("/edit_fail")
+//	public String editFail() {
+//		return "movie/editFail";
+//	}
+//	
+//	//삭제
+//	@GetMapping("/delete")
+//	public String delete(@RequestParam int movieNumber) {
+//		boolean result=movieDao.delete(movieNumber);
+//		if(result) {
+//			return "redirect:list";
+//		}
+//		else {
+//			return "movie/editFail";
+//		}
+//	}
+	// Q&A 답변
+	@GetMapping("/askingList")
+	public String askingList(Model model) {
+		model.addAttribute("oneQnaDto",oneQnaDao.selectList());
+		return "admin/askingList";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 
 	
 //	영화스케쥴 관리

@@ -202,7 +202,11 @@
 	     			<a href="/notice/list">커뮤니티</a>
 	     		</div>
 	     		<div class="row">
+<<<<<<< HEAD
+	     			<a href="/admin/askingList">1:1 문의내역</a>
+=======
 	     			<a href="#">1:1 문의내역</a>
+>>>>>>> refs/remotes/origin/main
 	     		</div>
     		</div>
     	</aside>

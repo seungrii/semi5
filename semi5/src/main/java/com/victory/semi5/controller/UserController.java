@@ -2,6 +2,7 @@ package com.victory.semi5.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.ProcessBuilder.Redirect;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -32,6 +33,7 @@ import com.victory.semi5.repository.AdminDao;
 import com.victory.semi5.repository.AttachmentDao;
 import com.victory.semi5.repository.BoardDao;
 import com.victory.semi5.repository.OneQnaDao;
+import com.victory.semi5.repository.TicketingDao;
 import com.victory.semi5.repository.UserDao;
 import com.victory.semi5.service.AttachmentService;
 
@@ -47,6 +49,8 @@ public class UserController {
 	private BoardDao boardDao;
 	@Autowired
 	private OneQnaDao oneQnaDao;
+	@Autowired
+	private TicketingDao ticketingDao;
 	@Autowired
 	private AttachmentDao attachmentDao;
 	@Autowired
@@ -345,9 +349,20 @@ public class UserController {
 	}
 	@GetMapping("/oneQnaDetail")
 	public String oneQnaDetail(Model model,
-			@RequestParam int askingNo, HttpSession session) {
+			@RequestParam int askingNo) {
 		model.addAttribute("oneQnaDto", oneQnaDao.selectOne(askingNo));
 		return "user/qnaDetail";
+	}
+	@PostMapping("/oneQnaDetail")
+	public String oneQnaDetail(@ModelAttribute OneQnaDto oneQnaDto,
+			RedirectAttributes attr) {
+		boolean result = oneQnaDao.insertAnswer(oneQnaDto);
+		if(result) {
+			attr.addAttribute("askingNo", oneQnaDto.getAskingNo());
+			return "redirect:oneQnaDetail";
+		}else {
+			return "redirect:oneQnaDetail";
+		}
 	}
 	
 	@GetMapping("/boardList")
@@ -357,6 +372,17 @@ public class UserController {
 		List<BoardDto> boardDto = boardDao.selectIdList(userId);
 		model.addAttribute("boardDto", boardDto);
 		return "user/boardList";
+	}
+	@GetMapping("/ticketing")
+	public String ticketing() {
+		return "user/ticketing";
+	}
+	@PostMapping("/ticketing")
+	public String ticketing(Model model,
+			HttpSession session) {
+		String userId = (String)session.getAttribute(SessionConstant.ID);
+		model.addAttribute("ticketingDto", ticketingDao.selectList(userId));
+		return "user/ticketing";
 	}
 }
 
