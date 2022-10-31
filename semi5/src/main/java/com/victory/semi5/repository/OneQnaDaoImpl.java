@@ -76,11 +76,12 @@ public class OneQnaDaoImpl implements OneQnaDao{
 	}
 
 	@Override
-	public void insertAnswer(OneQnaDto oneQnaDto) {
-		String sql = "insert into asking(admin_id, asking_answer, asking_answer_time) "
-				+ "values(?, ?, sysdate)";
-		Object[] param = {oneQnaDto.getAdminId(), oneQnaDto.getAskingAnswer()};
-		jdbcTemplate.update(sql, param); 
+	public boolean insertAnswer(OneQnaDto oneQnaDto) {
+		String sql = "update asking set admin_id=?, asking_answer=?, asking_answer_time=sysdate "
+				+ "where asking_no=?";
+		Object[] param = {oneQnaDto.getAdminId(), oneQnaDto.getAskingAnswer(), oneQnaDto.getAskingNo()};
+		int result = jdbcTemplate.update(sql, param); 
+		return result > 0;
 	}
 	
 

@@ -2,6 +2,7 @@ package com.victory.semi5.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.ProcessBuilder.Redirect;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -281,19 +282,20 @@ public class UserController {
 	}
 	@GetMapping("/oneQnaDetail")
 	public String oneQnaDetail(Model model,
-			@RequestParam int askingNo, HttpSession session, 
-			@RequestParam(required = false) String askingAnswer,
-			RedirectAttributes attr) {
+			@RequestParam int askingNo) {
 		model.addAttribute("oneQnaDto", oneQnaDao.selectOne(askingNo));
-		if(askingAnswer != null) {
-			OneQnaDto oneQnaDto = null;
-			String adminId = (String)session.getAttribute(SessionConstant.ID);
-			oneQnaDto.setAdminId(adminId);
-			oneQnaDto.setAskingAnswer(askingAnswer);
-			attr.addAttribute(askingNo);
-			oneQnaDao.insertAnswer(oneQnaDto);
-		}
 		return "user/qnaDetail";
+	}
+	@PostMapping("/oneQnaDetail")
+	public String oneQnaDetail(@ModelAttribute OneQnaDto oneQnaDto,
+			RedirectAttributes attr) {
+		boolean result = oneQnaDao.insertAnswer(oneQnaDto);
+		if(result) {
+			attr.addAttribute("askingNo", oneQnaDto.getAskingNo());
+			return "redirect:oneQnaDetail";
+		}else {
+			return "redirect:oneQnaDetail";
+		}
 	}
 	
 	@GetMapping("/boardList")

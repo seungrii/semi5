@@ -11,10 +11,16 @@
 		<div class="row">
 			${oneQnaDto.askingContents}
 		</div>
+		<div class="row">
+			${oneQnaDto.askingAnswer}
+		</div>
 		<c:if test="${loginGrade == '관리자' && oneQnaDto.askingAnswer == null}">
-			<form action="oneQnaDetail" method="get">
+			<form action="oneQnaDetail" method="post">
 				<div class="row">
-					<textarea rows="5" cols="30"></textarea>	
+					<input name="askingNo" readonly type="hidden" value="${oneQnaDto.askingNo}">
+				</div>
+				<div class="row">
+					<textarea name="askingAnswer" rows="5" cols="30"></textarea>	
 				</div>
 				<div class="row">
 					<button type="submit">답변하기</button>
