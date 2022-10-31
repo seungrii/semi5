@@ -23,9 +23,21 @@
 		<div class="row">
 			<a href="oneQnaList">1:1 문의내역</a>
 		</div>
+		<!-- 지점 이미지 첨부 -->
 		<!--<div>
 			<img src="download?userId=${userDto.userId}" width="100" height="100">
 		</div> -->
+		<c:if test="${!attachments.isEmpty()}">
+			<div class="row">
+				<div class="mt-10">
+				<c:forEach var="imageDto" items="${attachments}">
+					<span class="ms-10 mt-10">
+					<img src="/attachment/download/${imageDto.fileNumber}" width="100" height="100">
+					</span>
+				</c:forEach>
+				</div>
+			</div>
+		</c:if>
 		<div class="row">${userDto.userId}</div>
 		<div class="row">${userDto.userName}</div>
 		<div class="row">${userDto.userGender}</div>

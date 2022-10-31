@@ -39,6 +39,7 @@ import com.victory.semi5.repository.MoviePlayDao;
 import com.victory.semi5.repository.UserDao;
 import com.victory.semi5.service.AttachmentService;
 import com.victory.semi5.vo.MoviePlayVO;
+import com.victory.semi5.vo.MovieVO;
 
 @Controller
 @RequestMapping("/admin")
@@ -194,7 +195,8 @@ public class AdminController {
 	//지점관리 - 조회(목록)
 	@GetMapping("/cinemaList")
 	public String cinemaList(Model model,
-			@RequestParam(required = false) String type,String keyword) {
+			@RequestParam(required = false) String type,
+			@RequestParam(required = false) String keyword) {
 		boolean isSearch = type != null && keyword != null;
 		if(isSearch) {
 			model.addAttribute("cinemaList", cinemaDao.selectList(type, keyword));
@@ -228,8 +230,7 @@ public class AdminController {
 	}
 	@PostMapping("/cinemaChange")
 	public String cinemaChange(@ModelAttribute CinemaDto cinemaDto,
-			RedirectAttributes attr,
-			@RequestParam List<MultipartFile> attachments) 
+			@RequestParam List<MultipartFile> attachments, RedirectAttributes attr) 
 				throws IllegalStateException, IOException {
 		cinemaDao.changeCinema(cinemaDto);
 		attr.addAttribute("cinemaPorin", cinemaDto.getCinemaPorin());
@@ -247,9 +248,8 @@ public class AdminController {
 	}
 	//지점이미지만 삭제
 	@GetMapping("/cinemaImageDelete")
-	public String cinemaImageDelete(
-			@RequestParam String cinemaPorin,int fileNumber,
-			RedirectAttributes attr) {
+	public String cinemaImageDelete(@RequestParam String cinemaPorin,
+			@RequestParam int fileNumber, RedirectAttributes attr) {
 		//실제파일 삭제(cinema_image 자동삭제)
 		List<ImageDto> attachments = attachmentDao.selectList(fileNumber);
 		attachmentService.attachmentsDelete(attachments);
@@ -257,6 +257,7 @@ public class AdminController {
 		attr.addAttribute("cinemaPorin",cinemaPorin);
 		return "redirect:cinemaChange";
 	}
+	
 	//지점관리 - 삭제
 	@GetMapping("/cinemaDelete") 
 	public String cinemaDelete(@RequestParam String cinemaPorin) {
@@ -283,42 +284,44 @@ public class AdminController {
 		return "admin/movieAdd";
 	}
 	@PostMapping("/movieAdd")
-	public String movieAdd(
-			@ModelAttribute MovieDto moviedto, 
-			CharacterDto characterDto, GenreDto genredto, 
-			@RequestParam String charaterName1, String charaterName2, 
-			String charaterName3, String charaterName4, String charaterName5,
-			@RequestParam MultipartFile image) 
+	public String movieAdd(@ModelAttribute MovieVO movieVO,
+			List<MultipartFile> attachments) 
 					throws IllegalStateException, IOException {
 		
-		//시퀀스 번호 생성하며 등록하기
-		int movieNumber=movieDao.insert2(moviedto);
-		characterDto.setMovieNumber(movieNumber);
+		//영화테이블 - 시퀀스 번호 생성하며 추가하기
+		int movieNumber=movieDao.insert2(movieVO);
+		movieVO.setMovieNumber(movieNumber);
 		
-		//imageDao.insert(imageDto);			
-		characterDao.insertDirector(characterDto, charaterName1);
-		characterDao.insertActor1(characterDto, charaterName2);
-		if(!charaterName3.isEmpty()) {			
-			characterDao.insertActor2(characterDto, charaterName3);
+		//인물테이블 - 추가
+		characterDao.insertDirector1(movieVO);
+
+		characterDao.insertActor1(movieVO);
+		
+		if(!movieVO.getActorName2().isEmpty()) {			
+			characterDao.insertActor2(movieVO);
 		}
-		if(!charaterName4.isEmpty()) {			
-			characterDao.insertActor3(characterDto, charaterName4);
+		if(!movieVO.getActorName3().isEmpty()) {			
+			characterDao.insertActor3(movieVO);
 		}
-		if(!charaterName5.isEmpty()) {			
-			characterDao.insertActor4(characterDto, charaterName5);
+		if(!movieVO.getActorName4().isEmpty()) {			
+			characterDao.insertActor4(movieVO);
 		}
 		
-		//hashtagVo
-		movieDao.insertHashtagVO(movieNumber, genredto.getGenreNo());
+		//hashtag 테이블 - 추가
+		movieDao.insertHashtag(movieNumber, movieVO.getGenreNo());
 		
-//		//파일첨부
-//		if(!image.isEmpty()) {
-//			int imageNo = imageService.imageUp(image);	//이미지 추가
-//			imageDao.addPoster(movieNumber, imageNo); //영화포스터 추가
-//		}
+		//파일첨부
+		for(MultipartFile file : attachments) {
+			if(!file.isEmpty()) {
+				//이미지 추가 service로
+				int fileNumber = attachmentService.attachmentsUp(attachments, file);	
+				
+				//영화번호로 → 영화포스터에 저장
+				attachmentDao.addPoster(movieNumber, fileNumber); 						
+			}
+		}
 		return "redirect:movieList";
 	}
-
 	//영화정보 - 조회(목록)
 	@GetMapping("/movieList")
 	public String movieList() {
@@ -346,64 +349,7 @@ public class AdminController {
 		return "redirect:movieList";
 	}
 	
-	
-//	@GetMapping("/detailAdmin")
-//	public String detail(Model model,@RequestParam int movieNumber ) {
-//		model.addAttribute("dto", movieDao.selectOne(movieNumber));
-//		return "movie/detailAdmin";
-//	}
-//	//수정
-//	@GetMapping("/edit")
-//	public String edit(Model model, @RequestParam int movieNumber) {
-//		model.addAttribute("dto",movieDao.selectOne(movieNumber));
-//		return "movie/edit";
-//	}
-//	@PostMapping("/edit")
-//	public String edit(@ModelAttribute MovieDto dto,
-//			//redirect 전용 저장소(Model의 자식 클래스),리다이렉트를 하는데 데이터를 넘길 경우
-//			RedirectAttributes attr) {
-//		boolean result=movieDao.update(dto);
-//	if(result) {
-//			attr.addAttribute("movieNumber",dto.getMovieNumber());
-//			//return "redirect:detail?movieNumber="+dto.getMovieNumber();
-//			return "redirect:detail";
-//		}
-//	else {//리스트에 있는 movieNumber가 아니면  edit_fail 페이지로
-//		    
-//			return "redirect:edit_fail";
-//	    }
-//  }
-//	
-//	@GetMapping("/edit_fail")
-//	public String editFail() {
-//		return "movie/editFail";
-//	}
-//	
-//	//삭제
-//	@GetMapping("/delete")
-//	public String delete(@RequestParam int movieNumber) {
-//		boolean result=movieDao.delete(movieNumber);
-//		if(result) {
-//			return "redirect:list";
-//		}
-//		else {
-//			return "movie/editFail";
-//		}
-//	}
-	// Q&A 답변
-	@GetMapping("/qnaAsking")
-	public String qnaAsking() {
-		return "admin/askingList";
-	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 
 	
 //	영화스케쥴 관리
@@ -445,8 +391,7 @@ public class AdminController {
 	}
 	//영화스케쥴 - 조회(상세)
 	@GetMapping("/moviePlayDetail")
-	public String moviePlayDetail(Model model,
-			@RequestParam int moviePlayNum) {
+	public String moviePlayDetail(Model model, @RequestParam int moviePlayNum) {
 		
 		MoviePlayVO moviePlayVO = moviePlayDao.selectMoviePlayView(moviePlayNum);
 
@@ -464,8 +409,7 @@ public class AdminController {
 	}
 	//영화스케쥴 - 수정
 	@GetMapping("/moviePlayChange")
-	public String moviePlayChange(Model model, 
-			@RequestParam int moviePlayNum) {
+	public String moviePlayChange(Model model, @RequestParam int moviePlayNum) {
 		
 		MoviePlayDto moviePlayDto = moviePlayDao.selectOne(moviePlayNum);
 		
@@ -505,6 +449,17 @@ public class AdminController {
 	}
 	
 	
+
+
+	// Q&A 답변
+	@GetMapping("/qnaAsking")
+	public String qnaAsking() {
+		return "admin/askingList";
+	}
+	
+	
+
+
 
 	
 	//추가사항 : table 디자인css 작성

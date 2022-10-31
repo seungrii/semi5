@@ -463,8 +463,15 @@
 			<div class="row">
 				<input name="userBirth" type="date" class="login-input" placeholder="생년월일">
 			</div>
-			<div class="row">
+			<!-- 회원 프로필 첨부 -->
+			<!-- <div class="row">
 				<input name="userProfile" class="input" type="file" accept=".png, .jpg">
+			</div> -->
+			<div class="row">
+				<span>첨부파일(1개당 1MB. 최대 10MB 가능)</span>
+			</div>
+			<div class="row">
+				<input name="attachments" class="login-input" type="file" accept=".png, .jpg">
 			</div>
            	<div class="row">
                	<button type="reset" class="btn btn-neutral login-btn prev">이전으로 이동</button>
