@@ -19,6 +19,7 @@ header {
 
 nav {
     height: 50px;
+    z-index: 200000;
 }
 
 aside {

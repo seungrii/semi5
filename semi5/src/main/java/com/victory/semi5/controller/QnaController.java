@@ -66,7 +66,7 @@ public class QnaController {
 		}
 		session.setAttribute("history", history);
 //		(+추가) 댓글 목록을 조회하여 첨부
-		//model.addAttribute("replyList", qnaDao.selectList(qnaNo));
+		model.addAttribute("qnaReplyList", qnaDao.selectList(qnaNo));
 
 		return "qna/detail";
 	}
@@ -93,7 +93,7 @@ public class QnaController {
 //			return "redirect:edit_fail";
 		}
 	}
-	
+	 
 	@GetMapping("/delete")
 	public String delete(@RequestParam int qnaNo) {
 		boolean result = qnaDao.delete(qnaNo);
