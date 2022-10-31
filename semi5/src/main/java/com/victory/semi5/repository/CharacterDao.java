@@ -1,14 +1,13 @@
 package com.victory.semi5.repository;
 
-import com.victory.semi5.entity.CharacterDto;
+import com.victory.semi5.vo.MovieVO;
 
 public interface CharacterDao {
 	
 //	void insert(CharacterDto dto);//데이터 넣기
-	void insertDirector(CharacterDto characterDto, String charaterName1);
-	void insertActor1(CharacterDto characterDto,String charaterName2);
-	void insertActor2(CharacterDto characterDto,String charaterName3);
-	void insertActor3(CharacterDto characterDto,String charaterName4);
-	void insertActor4(CharacterDto characterDto,String charaterName5);
-
+	void insertDirector1(MovieVO movieVO);
+	void insertActor1(MovieVO movieVO);
+	void insertActor2(MovieVO movieVO);
+	void insertActor3(MovieVO movieVO);
+	void insertActor4(MovieVO movieVO);
 }

@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.victory.semi5.entity.CharacterDto;
+import com.victory.semi5.vo.MovieVO;
 @Repository
 public class CharacterDaoImpl implements CharacterDao {
 	
@@ -34,78 +34,69 @@ public class CharacterDaoImpl implements CharacterDao {
 //	}
 
 	@Override
-	public void insertDirector(CharacterDto characterDto, String charaterName1) {
+	public void insertDirector1(MovieVO movieVO) {
 		String sql="insert into character("
 		+"character_number, movie_number, charater_name, character_type"
 		+")values("
 		+ "character_seq.nextval,?,?,?)";
 
 		Object[] param= {
-			characterDto.getMovieNumber(), charaterName1, "감독"
+			movieVO.getMovieNumber(), movieVO.getDirectorName1(), "감독"
 		};
 		jdbcTemplate.update(sql,param);	
 	}
 
 	@Override
-	public void insertActor1(CharacterDto characterDto, String charaterName2) {
+	public void insertActor1(MovieVO movieVO) {
 		String sql="insert into character("
 		+"character_number, movie_number, charater_name, character_type"
 		+")values("
 		+ "character_seq.nextval,?,?,?)";
 
 		Object[] param= {
-			characterDto.getMovieNumber(), charaterName2, "배우"
+				movieVO.getMovieNumber(), movieVO.getActorName1(), "배우"
 		};
 		jdbcTemplate.update(sql,param);	
 	}
 	
 	@Override
-	public void insertActor2(CharacterDto characterDto, String charaterName3) {
+	public void insertActor2(MovieVO movieVO) {
 		String sql="insert into character("
 		+"character_number, movie_number, charater_name, character_type"
 		+")values("
 		+ "character_seq.nextval,?,?,?)";
 
 		Object[] param= {
-			characterDto.getMovieNumber(), charaterName3, "배우"
+				movieVO.getMovieNumber(), movieVO.getActorName2(), "배우"
 		};
 		jdbcTemplate.update(sql,param);	
 	}
 	
 	@Override
-	public void insertActor3(CharacterDto characterDto, String charaterName4) {
+	public void insertActor3(MovieVO movieVO) {
 		String sql="insert into character("
 		+"character_number, movie_number, charater_name, character_type"
 		+")values("
 		+ "character_seq.nextval,?,?,?)";
 
 		Object[] param= {
-			characterDto.getMovieNumber(), charaterName4, "배우"
+				movieVO.getMovieNumber(), movieVO.getActorName3(), "배우"
 		};
 		jdbcTemplate.update(sql,param);	
 	}
 	
 	@Override
-	public void insertActor4(CharacterDto characterDto, String charaterName5) {
+	public void insertActor4(MovieVO movieVO) {
 		String sql="insert into character("
 		+"character_number, movie_number, charater_name, character_type"
 		+")values("
 		+ "character_seq.nextval,?,?,?)";
 
 		Object[] param= {
-			characterDto.getMovieNumber(), charaterName5, "배우"
+				movieVO.getMovieNumber(), movieVO.getActorName4(), "배우"
 		};
 		jdbcTemplate.update(sql,param);	
 	}
 
-
-
-
-	
-	
-	
-	
 }
-//번호 생성하면서 등록
-//rowmapper는 list때문에
 

@@ -103,10 +103,10 @@ public class AttachmentDaoImpl implements AttachmentDao{
 	
 //	영화 포스터
 	@Override
-	public void addPoster(int movieNumber, int imageNo) {
+	public void addPoster(int movieNumber, int fileNumber) {
 		String sql = "insert into poster ("
 				+ "movie_number, file_number) values(?, ?)";
-		Object[] param = {movieNumber, imageNo};
+		Object[] param = {movieNumber, fileNumber};
 		jdbcTemplate.update(sql, param);
 	}
 
