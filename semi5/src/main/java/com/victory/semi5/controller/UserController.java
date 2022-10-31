@@ -30,6 +30,7 @@ import com.victory.semi5.entity.UserDto;
 import com.victory.semi5.repository.AdminDao;
 import com.victory.semi5.repository.BoardDao;
 import com.victory.semi5.repository.OneQnaDao;
+import com.victory.semi5.repository.TicketingDao;
 import com.victory.semi5.repository.UserDao;
 
 @Controller
@@ -44,6 +45,8 @@ public class UserController {
 	private BoardDao boardDao;
 	@Autowired
 	private OneQnaDao oneQnaDao;
+	@Autowired
+	private TicketingDao ticketingDao;
 	
 	@GetMapping("/login")
 	public String login() { 
@@ -305,6 +308,17 @@ public class UserController {
 		List<BoardDto> boardDto = boardDao.selectIdList(userId);
 		model.addAttribute("boardDto", boardDto);
 		return "user/boardList";
+	}
+	@GetMapping("/ticketing")
+	public String ticketing() {
+		return "user/ticketing";
+	}
+	@PostMapping("/ticketing")
+	public String ticketing(Model model,
+			HttpSession session) {
+		String userId = (String)session.getAttribute(SessionConstant.ID);
+		model.addAttribute("ticketingDto", ticketingDao.selectList(userId));
+		return "user/ticketing";
 	}
 }
 
