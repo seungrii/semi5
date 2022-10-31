@@ -19,8 +19,16 @@
 	width: 200px;
 	height: 50px;
 	font-size: 20px;
-		
-}
+	float: left;
+	margin-left: 100px;
+	margin-bottom: 100px;
+	}
+	h1{
+	display: inline;
+	}
+	.img{
+		margin-top: 50px;
+	}
 </style>
 
 </head>
@@ -30,15 +38,12 @@
 		<div>
 			<button class="btn btn-theater"><a href="home">&#60; 상영관 종류 보기</a></button>
 		</div>
-	
-		<div class="container mt-50">
-			<h1>일반관</h1>
-		</div>
-		<div class="container mt-50">
+		<div class="container img">
 			<img alt="" src="/image/normal.jpeg">
 		</div>
 		<div class="container mt-50 mb-50">
-			<p id="p-normal">2d 일반 영화입니다.</p>
+			<p id="p-normal">일반관</p>
+			<p id="p-normal">2d 일반 영화 상영관입니다.</p>
 					
 		</div>
 		

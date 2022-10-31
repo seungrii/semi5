@@ -18,7 +18,7 @@
       height: 450px;
       margin-top: 100px;
       position: absolute;
-      z-index: 1;
+      z-index: -3;
   }
 	img{
 		width: 800px;
@@ -114,28 +114,30 @@
             	<button class="btn btn-theater"><a href="imax">imax</a></button>
             	<button class="btn btn-theater"><a href="kids">kids</a></button>
             	<button class="btn btn-theater"><a href="suite">suite</a></button>
-            	
             </div>
+        		<br><br><br><br>
+            	<hr>
+            	
             
         </div>
         
         
 	<div class="container mt-50">
 		<div class="container">
+			<h1>&darr;4d</h1>
 			<img alt="" src="/image/4d.jpeg">
-			<h1>4d</h1>
 		</div>
 		<div class="container">
+			<h1>&darr;스위트</h1>
 			<img alt="" src="/image/suite.jpeg">
-			<h1>스위트</h1>
 		</div>
 		<div class="container">
+			<h1>&darr;아이맥스</h1>
 			<img alt="" src="/image/imax.jpeg">
-			<h1>아이맥스</h1>
 		</div>
 		<div class="container">
+			<h1>&darr;키즈</h1>
 			<img alt="" src="/image/kids.jpeg">
-			<h1>키즈</h1>
 		</div>
 	</div>
 </body>
