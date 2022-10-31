@@ -39,6 +39,9 @@ movie_play_time number(3),
 movie_age_limit number(2)
 );
 
+
+
+
 --인물
 create table character(
 character_number number primary key,
@@ -60,6 +63,7 @@ create table genre(
 genre_no number primary key,
 genre_name varchar2(24) unique not null
 );
+
 
 ---선호장르 
 create table category (
@@ -212,10 +216,30 @@ file_number references image(file_number) on delete cascade
 );
 
 
+--view 테이블 생성: 상영스케줄-영화정보-상영관
+create view movieplay_movie_theater_view as
+select
+    P.movie_play_num, movie_play_start, M.*, T.*
+from movie_play P, movie M, theater T
+    where P.movie_number = M.movie_number
+                and P.theater_num = T.theater_num;
 
-
-
-
+-- view 테이블 생성 : 영화정보-인물-해시태그 join
+create view movie_character_hashtag_view as
+select
+    M.*,
+    C.character_number,charater_name,character_age, character_awards,character_filmography, character_type,character_nationality,
+    H.genre_no
+from movie M, character C, hashtag H
+    where M.movie_number=C.movie_number
+        and M.movie_number=H.movie_number;
+-- view 테이블 생성 : 해시태그-장르 join
+create view Hashtag_genre_view as
+select
+    H.*,
+    G.genre_name
+from Hashtag H, genre G 
+    where H.genre_no=G.genre_no;
 
 
 -- 공지게시판 테이블

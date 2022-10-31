@@ -51,8 +51,8 @@ public class MovieController {
 	}
 	
 	@GetMapping("/detail")
-	public String detail(
-			Model model,@RequestParam int movieNumber
+	public String detail( Model model, 
+			@RequestParam int movieNumber
 //			@ModelAttribute MovieDto moviedto, 
 //			CharacterDto characterDto, GenreDto genredto, 
 //			@RequestParam String charaterName1, String charaterName2, 

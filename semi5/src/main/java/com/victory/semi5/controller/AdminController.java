@@ -44,6 +44,9 @@ import com.victory.semi5.vo.MoviePlayVO;
 @RequestMapping("/admin")
 public class AdminController {
 	
+	
+	
+	
 	@Autowired
 	private AdminDao adminDao;
 	@Autowired
@@ -285,7 +288,7 @@ public class AdminController {
 	@PostMapping("/movieAdd")
 	public String movieAdd(
 			@ModelAttribute MovieDto moviedto, 
-			CharacterDto characterDto, GenreDto genredto, 
+			@ModelAttribute CharacterDto characterDto, @ModelAttribute GenreDto genredto, 
 			@RequestParam String charaterName1, String charaterName2, 
 			String charaterName3, String charaterName4, String charaterName5,
 			@RequestParam MultipartFile image) 
@@ -308,8 +311,8 @@ public class AdminController {
 			characterDao.insertActor4(characterDto, charaterName5);
 		}
 		
-		//hashtagVo
-		movieDao.insertHashtagVO(movieNumber, genredto.getGenreNo());
+		//genreVo
+		movieDao.insertGenreVO(movieNumber, genredto.getGenreNo());
 		
 //		//파일첨부
 //		if(!image.isEmpty()) {
@@ -320,31 +323,35 @@ public class AdminController {
 	}
 
 	//영화정보 - 조회(목록)
-	@GetMapping("/movieList")
-	public String movieList() {
-		
-		return "admin/movieList";
-	}
-	//영화정보 - 조회(상세)
-	@GetMapping("/movieDetail")
-	public String movieDetail() {
-		return "admin/movieDetail";
-	}
-	//영화정보 - 수정
-	@GetMapping("/movieChange")
-	public String movieChange() {
-		return "admin/movieChange";
-	}
-	@PostMapping("/movieChange")
-	public String movieChange(
-			RedirectAttributes attr) {
-		return "redirect:movieDetail";
-	}
-	//영화정보 - 삭제
-	@GetMapping ("/movieDelete") 
-	public String movieDelete() {
-		return "redirect:movieList";
-	}
+//	@GetMapping("/movieList")
+//	public String movieList() {
+//	
+//		
+//		
+//	
+//		
+//		return "admin/movieList";
+////	}
+//	//영화정보 - 조회(상세)
+//	@GetMapping("/movieDetail")
+//	public String movieDetail() {
+//		return "admin/movieDetail";
+//	}
+//	//영화정보 - 수정
+//	@GetMapping("/movieChange")
+//	public String movieChange() {
+//		return "admin/movieChange";
+//	}
+//	@PostMapping("/movieChange")
+//	public String movieChange(
+//			RedirectAttributes attr) {
+//		return "redirect:movieDetail";
+//	}
+//	//영화정보 - 삭제
+//	@GetMapping ("/movieDelete") 
+//	public String movieDelete() {
+//		return "redirect:movieList";
+//	}
 	
 	
 	
@@ -361,7 +368,7 @@ public class AdminController {
 		if(isSearch) {//검색
 			model.addAttribute("list",movieDao.selectList(type,keyword));
 		}
-		else {//목롤
+		else {//목록
 			model.addAttribute("list",movieDao.selectList());
 		}
 		return "admin/movieList";

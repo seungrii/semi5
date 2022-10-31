@@ -152,7 +152,7 @@ public class MovieDaoImpl implements MovieDao {
 	}
 
 	@Override
-	public void insertHashtagVO(int movieNumber, int genreNo) {
+	public void insertGenreVO(int movieNumber, int genreNo) {
 		String sql = "insert into hashtag values(?, ?)";
 		Object[] param = {movieNumber, genreNo};
 		jdbcTemplate.update(sql, param);

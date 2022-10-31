@@ -19,4 +19,8 @@ public class CharacterDto {
 	private String characterType;
 	private String characterNationality;
 
+	
+	
+	
+	
 }

@@ -17,100 +17,74 @@
 		<div class="row center fs-28">
 			<span>영화 목록</span>
 		</div>
-		<!-- 검색을 위한 검색 창 -->
-		<form action="list" method="get">
-		<select name="type" required>
-		<option>movieNumber</option>
-		<option>movieName</option>
-		</select>
-		<input name="keyword" required>
-		<button>검색</button>
+		<!-- 키워드 검색 -->
+		<div class="row center">
+		<form action="movieList" method="get">
+			<!-- type 선택목록 -->
+			<c:choose>
+				<c:when test="${param.type == 'movie_number'}">
+					<select class="input input-line" name="type" required>
+						<option value="movie_number">영화번호</option>
+						<option value="movie_name" selected>영화이름</option>
+					</select>
+				</c:when>
+				<c:otherwise>
+					<select class="input input-line" name="type" required>
+						<option value="movie_number" selected>영화번호</option>
+						<option value="movie_name">영화이름</option>
+					</select>
+				</c:otherwise>
+			</c:choose>
+			<!-- keyword 입력 -->
+			<input class="input input-underline" type="search" name="keyword" required value="${param.keyword}">
+			<button class="btn btn-neutral" type="submit">검색</button>
 		</form>
-		
-		<table border="1" width="400">
-		<tbody>
-		<c:forEach var="dto" items="${list}">	
-		<tr>
-		<th>${dto.movieNumber}</th>
-		<td>${dto.movieName}</td>
-		
-		</tr>
-		</c:forEach>		
-		</tbody>
-		</table>
+		</div>
 		
 			<!-- 
-		
-		
-		</table>
-		
-		<div class="row mt-50">
-			<label class="ms-10">상영스케쥴 번호</label>
-			<input class="input input-line w-100" name="adminId" type="text" readonly>
-		</div>
-		<div class="row mt-50">
-			<label class="ms-10">영화이름</label>
-			<input class="input input-line w-100" name="movieName" type="text" required autocomplete="off">
-		</div>
-        <div class="row mt-20">
-			<label class="ms-10">개봉일</label>
-			<input class="input input-line w-100" name="openingDate" type="date" required>
-		</div>
-		<div class="row mt-20">
-			<label class="ms-10">상영종료일</label>
-			<input class="input input-line w-100" name="screeningEnd" type="date" required>
-		</div>
-		<div class="row mt-20">
-			<label class="ms-10">줄거리</label>
-			<textarea class="input textarea-line fix-width w-100" rows="8" cols="10" name="movieSummary" required></textarea>
-		</div>
-
-		<div class="row mt-20">
-			<label class="ms-10">연령등급</label>
-			<input class="input input-line w-100" name="movieAgeLimit" type="number" min="1" required autocomplete="off">
-		</div>
-		<div class="row mt-20">
-			<label class="ms-10">재생시간</label>
-			<input class="input input-line w-100" name="moviePlayTime" type="number" min="1" required autocomplete="off">
-		</div>
-		<div class="row mt-20">
-			<label class="ms-10">감독 (필수)</label>
-			<input class="input input-line w-100" name="charaterName1" type="text" required autocomplete="off">
-		</div>
-		<div class="row mt-20">
-			<label class="ms-10">배우1 (필수)</label>
-			<input class="input input-line w-100" name="charaterName2" type="text" required autocomplete="off">
-		</div>
-		<div class="row mt-20">
-			<label class="ms-10">배우2</label>
-			<input class="input input-line w-100" name="charaterName3" type="text" autocomplete="off">
-		</div>
-		<div class="row mt-20">
-			<label class="ms-10">배우3</label>
-			<input class="input input-line w-100" name="charaterName4" type="text" autocomplete="off">
-		</div>
-		<div class="row mt-20">
-			<label class="ms-10">배우4</label>
-			<input class="input input-line w-100" name="charaterName5" type="text" autocomplete="off">
-		</div>
-		<div class="row mt-20">
-			<label class="ms-10">장르</label>
-			<input class="input input-line w-100" name="genreNo" type="number" min="1" required autocomplete="off">
-			<span>1: 공포, .. 추가 해야 함</span>
-		</div>		
-		
-		
-		<div class="row left mt-20">
-			<label>첨부파일(1개당 1MB. 최대 10MB 가능)</label>
-			<input class="input input-line w-100" type="file" name="imageCinema" accept=".png,.jpg">
-		</div>
-		
-		<div class="row center mt-30">
-			<a class="btn btn-neutral" href="movieList">목록</a>
-			<button class="btn btn-positive" type="submit">추가</button>
-		</div>
-		
-		-->
+	
+	<-- List<MovieDto> selectList - for문으로 출력-->
+	
+	<!-- 관리자계정 목록 -->
+	<div class="row center">
+	<table>
+		<thead>
+			<tr>
+				<td>영화번호</td>
+				<td>영화이름</td>
+				<td>개봉일</td>
+				<td>상영종료일</td>
+				<td>연령등급</td>
+				<td>재생시간</td>
+				<!--<td colspan="1">관리</td>  -->
+			</tr>
+		</thead>
+		<tbody align="center">
+			<c:forEach var="movieDto" items="${movieList}">
+			<tr>
+				<td>${movieDto.movieNumber}</td>
+				<td>${movieDto.movieName}</td>
+				<td>${movieDto.openingDate}</td>
+				<td>${movieDto.screeningEnd}</td>
+				<td>${movieDto.movieAgeLimit}</td>
+				<td>${adminDto.moviePlayTime}</td>
+				<td>
+					<a class="btn btn-neutral" 
+						href="movieDetail?movieNumber=${movieDto.movieNumber}">상세</a>
+				</td>
+				<td>
+					<a class="btn btn-negative" 
+						href="movieDelete?movieNumber=${movieDto.movieNumber}">삭제</a>
+				</td>
+			</tr>
+			</c:forEach>
+		</tbody>
+	</table>
+	</div>
+	
+	<div class="center">
+		<a class="btn btn-positive" href="movieAdd">추가</a>
+	</div>
 		
 		
 
