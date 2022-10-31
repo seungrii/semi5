@@ -109,7 +109,22 @@ public class AttachmentDaoImpl implements AttachmentDao{
 		Object[] param = {movieNumber, fileNumber};
 		jdbcTemplate.update(sql, param);
 	}
-
+	
+//	회원 프로필
+	@Override
+	public void addProfileImage(String userId, int fileNumber) {
+		String sql = "insert into profile_image ("
+				+ "user_id, file_number) values(?, ?)";
+		Object[] param = {userId, fileNumber};
+		jdbcTemplate.update(sql, param);
+	}
+	@Override
+	public List<ImageDto> selectProfileImageList(String userId) {
+		String sql = "select * from profile_image_view "
+					+ "where user_id= ? order by file_time asc";
+		Object[] param = {userId};
+		return jdbcTemplate.query(sql, mapper, param);
+	}
 
 
 	

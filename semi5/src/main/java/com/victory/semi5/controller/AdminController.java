@@ -257,6 +257,7 @@ public class AdminController {
 		attr.addAttribute("cinemaPorin",cinemaPorin);
 		return "redirect:cinemaChange";
 	}
+	
 	//지점관리 - 삭제
 	@GetMapping("/cinemaDelete") 
 	public String cinemaDelete(@RequestParam String cinemaPorin) {
@@ -456,6 +457,38 @@ public class AdminController {
 		return "admin/askingList";
 	}
 	
+	
+
+	//지점이미지만 삭제
+//	@GetMapping("/cinemaImageDelete")
+//	public String cinemaImageDelete(@RequestParam String cinemaPorin,
+//			@RequestParam int fileNumber, RedirectAttributes attr) {
+//		//실제파일 삭제(cinema_image 자동삭제)
+//		List<ImageDto> attachments = attachmentDao.selectList(fileNumber);
+//		attachmentService.attachmentsDelete(attachments);
+//		
+//		attr.addAttribute("cinemaPorin",cinemaPorin);
+//		return "redirect:cinemaChange";
+//	}
+//	
+//	//지점관리 - 삭제
+//	@GetMapping("/cinemaDelete") 
+//	public String cinemaDelete(@RequestParam String cinemaPorin) {
+//		//지점삭제 전, 첨부파일 조회
+//		List<ImageDto> attachments = attachmentDao.selectCinemaImageList(cinemaPorin);
+//		
+//		//지점삭제(DB: cinema_image 자동삭제)
+//		boolean result = cinemaDao.deleteCinema(cinemaPorin);
+//		
+//		if(result) { //지점삭제 성공
+//			//실제파일 삭제
+//			attachmentService.attachmentsDelete(attachments);
+//			return "redirect:cinemaList";
+//		}
+//		
+//		return "redirect:cinemaList";	//삭제실패시, 알람창 필요
+//	}
+
 	
 	//추가사항 : table 디자인css 작성
 	//재확인 알람창 필요 (ex. 정말 삭제하시겠습니까?)

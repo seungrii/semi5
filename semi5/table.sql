@@ -119,6 +119,13 @@ create table profile_image(
 user_id references user_information(user_id) on delete cascade,
 file_number references image(file_number) on delete cascade
 );
+-- view 테이블 생성 : 회원프로필-이미지 join
+create view profile_image_view as
+select
+    P.user_id, A.*
+from
+    profile_image P inner join image A
+    on P.file_number = A.file_number;
 
 ---------영화 포스터
 create table poster(
