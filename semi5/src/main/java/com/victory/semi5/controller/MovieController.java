@@ -50,21 +50,27 @@ public class MovieController {
 		return "movie/list";
 	}
 	
-	@GetMapping("/detail")
-	public String detail( Model model, 
-			@RequestParam int movieNumber
-//			@ModelAttribute MovieDto moviedto, 
-//			CharacterDto characterDto, GenreDto genredto, 
-//			@RequestParam String charaterName1, String charaterName2, 
-//			String charaterName3, String charaterName4, String charaterName5	
+//	@GetMapping("/detail")
+//	public String detail( Model model, 
+//			@RequestParam int movieNumber
+////			@ModelAttribute MovieDto moviedto, 
+////			CharacterDto characterDto, GenreDto genredto, 
+////			@RequestParam String charaterName1, String charaterName2, 
+////			String charaterName3, String charaterName4, String charaterName5	
+//	
+//			
+//			) {
+//	
+//	    
+//		model.addAttribute("moviedto", movieDao.selectOne(movieNumber));
+//		model.addAttribute("characterdto",characterDao.selectList(movieNumber));
+//		
 	
-			
-			) {
 	
-	    
-		model.addAttribute("moviedto", movieDao.selectOne(movieNumber));
-		model.addAttribute("characterdto",characterDao.selectList(movieNumber));
-		
+	
+	
+	
+	
 	//	model.addAttribute("moviedto",characterDao.selectList(movieNumber));
 	 //   model.addAttribute("characterdto",characterDao.selectList(movieNumber));
 		
@@ -116,9 +122,9 @@ public class MovieController {
 		
 		
 		
-		return "movie/detail";
+		//return "movie/detail";
 		
-	}
+	
 	
 	
 	

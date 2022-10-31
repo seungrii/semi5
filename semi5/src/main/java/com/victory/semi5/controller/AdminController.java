@@ -38,7 +38,9 @@ import com.victory.semi5.repository.MovieDao;
 import com.victory.semi5.repository.MoviePlayDao;
 import com.victory.semi5.repository.UserDao;
 import com.victory.semi5.service.AttachmentService;
+import com.victory.semi5.vo.HashtagVO;
 import com.victory.semi5.vo.MoviePlayVO;
+import com.victory.semi5.vo.MovieVO;
 
 @Controller
 @RequestMapping("/admin")
@@ -279,48 +281,53 @@ public class AdminController {
 	}
 	
 	
-//	영화정보 관리
-	//영화정보 - 추가
-	@GetMapping("/movieAdd")
-	public String movieAdd() {
-		return "admin/movieAdd";
-	}
-	@PostMapping("/movieAdd")
-	public String movieAdd(
-			@ModelAttribute MovieDto moviedto, 
-			@ModelAttribute CharacterDto characterDto, @ModelAttribute GenreDto genredto, 
-			@RequestParam String charaterName1, String charaterName2, 
-			String charaterName3, String charaterName4, String charaterName5,
-			@RequestParam MultipartFile image) 
-					throws IllegalStateException, IOException {
-		
-		//시퀀스 번호 생성하며 등록하기
-		int movieNumber=movieDao.insert2(moviedto);
-		characterDto.setMovieNumber(movieNumber);
-		
-		//imageDao.insert(imageDto);			
-		characterDao.insertDirector(characterDto, charaterName1);
-		characterDao.insertActor1(characterDto, charaterName2);
-		if(!charaterName3.isEmpty()) {			
-			characterDao.insertActor2(characterDto, charaterName3);
-		}
-		if(!charaterName4.isEmpty()) {			
-			characterDao.insertActor3(characterDto, charaterName4);
-		}
-		if(!charaterName5.isEmpty()) {			
-			characterDao.insertActor4(characterDto, charaterName5);
-		}
-		
-		//genreVo
-		movieDao.insertGenreVO(movieNumber, genredto.getGenreNo());
-		
-//		//파일첨부
-//		if(!image.isEmpty()) {
-//			int imageNo = imageService.imageUp(image);	//이미지 추가
-//			imageDao.addPoster(movieNumber, imageNo); //영화포스터 추가
-//		}
-		return "redirect:movieList";
-	}
+//  영화정보 관리
+  //영화정보 - 추가
+  @GetMapping("/movieAdd")
+  public String movieAdd() {
+      return "admin/movieAdd";
+  }
+  @PostMapping("/movieAdd")
+  public String movieAdd(@ModelAttribute MovieVO movieVO,
+          List<MultipartFile> attachments) 
+                  throws IllegalStateException, IOException {
+
+      //영화테이블 - 시퀀스 번호 생성하며 추가하기
+      int movieNumber=movieDao.insert2(movieVO);
+      movieVO.setMovieNumber(movieNumber);
+
+      //인물테이블 - 추가
+      characterDao.insertDirector1(movieVO);
+
+      characterDao.insertActor1(movieVO);
+
+      if(!movieVO.getActorName2().isEmpty()) {
+          characterDao.insertActor2(movieVO);
+      }
+      if(!movieVO.getActorName3().isEmpty()) {
+          characterDao.insertActor3(movieVO);
+      }
+      if(!movieVO.getActorName4().isEmpty()) {
+          characterDao.insertActor4(movieVO);
+      }
+
+      //hashtag 테이블 - 추가
+      movieDao.insertHashtag(movieNumber, movieVO.getGenreNo());
+
+      //파일첨부
+      for(MultipartFile file : attachments) {
+          if(!file.isEmpty()) {
+              //이미지 추가 service로
+              int fileNumber = attachmentService.attachmentsUp(attachments, file);
+
+              //영화번호로 → 영화포스터에 저장
+              attachmentDao.addPoster(movieNumber, fileNumber);
+          }
+      }
+      return "redirect:movieList";
+  }
+  
+  
 
 	//영화정보 - 조회(목록)
 //	@GetMapping("/movieList")
@@ -356,9 +363,7 @@ public class AdminController {
 	
 	
 
-	//영화정보 - 조회
-	//목록			-"/movieList" 
-	                   //@GetMapping("/detailAdmin")
+	//영화정보 - 조회 (목록)
 	@GetMapping("/movieList")
 	public String movieList(Model model,
 			@RequestParam(required=false)String type,
@@ -366,24 +371,127 @@ public class AdminController {
 		
 		boolean isSearch=type !=null&&keyword !=null;
 		if(isSearch) {//검색
-			model.addAttribute("list",movieDao.selectList(type,keyword));
+			//model.addAttribute("list",movieDao.selectList(type,keyword));
+			model.addAttribute("movieList",movieDao.selectMovieViewList(type,keyword));
 		}
-		else {//목록
-			model.addAttribute("list",movieDao.selectList());
+		else {//목록) 뷰 조회
+			model.addAttribute("movieList",movieDao.selectList());
 		}
 		return "admin/movieList";
 	}
 	
+//	@GetMapping("/moviePlayList")
+//	public String moviePlayList( Model model,
+//			@RequestParam(required = false) String type,
+//			@RequestParam(required = false) String keyword) {
+//		boolean isSearch = type != null && keyword != null;
+//		if(isSearch) {
+//			//뷰 조회) 상영스케쥴-영화정보-상영관정보
+//			model.addAttribute("moviePlayList", moviePlayDao.selectMoviePlayViewList(type, keyword));
+//		}
+//		else {
+//			//뷰 조회) 상영스케쥴-영화정보-상영관정보
+//			model.addAttribute("moviePlayList", moviePlayDao.selectMoviePlayViewList());		
+//		}
+//		return "admin/moviePlayList";
+//	}
 	
 	
-	//상세"/movieDetail"
+//상세"/movieDetail"
 	@GetMapping("/movieDetail")
-	public String movieDetail(Model model,@RequestParam int movieNumber ) {
-		model.addAttribute("dto", movieDao.selectOne(movieNumber));
+	public String movieDetail(Model model,
+			@RequestParam int movieNumber ) {
+		//MovieVO movieVO = movieDao.selectMovieView(movieNumber);
+		//model.addAttribute("movieVO",movieVO)
+
+		MovieDto movieDto = movieDao.selectOne(movieNumber);
+		model.addAttribute("movieDto",movieDto);
+		
+		List<HashtagVO> hashtagVO = movieDao.selectListHashtagVO(movieNumber);
+		model.addAttribute("hashtagVOList",hashtagVO);
+
+//		List<CharacterDto> characterDto = characterDao.selectList(movieNumber);
+//		model.addAttribute("characterDtoList",characterDto);
+		List<CharacterDto> characterDtoDirector = characterDao.selectListDirector(movieNumber);
+		model.addAttribute("characterDtoListDirector",characterDtoDirector);
+		List<CharacterDto> characterDtoActor = characterDao.selectListActor(movieNumber);
+		model.addAttribute("characterDtoListActor",characterDtoActor);
+		
+		//System.out.println(movieVO.getMovieNumber());
 		return "admin/movieDetail";
 	}
+		///////////////////////////////////////////////////////////
+		//지점관리 - 조회(상세)
+//		@GetMapping("/cinemaDetail")
+//		public String cinemaDetail(Model model, 
+//				@RequestParam String cinemaPorin) {
+//			
+//			//지점정보 첨부
+//			CinemaDto cinemaDto = cinemaDao.selectOne(cinemaPorin);
+//			model.addAttribute("cinemaDto", cinemaDto);	
+//
+//			//첨부파일 조회하여 첨부
+//			model.addAttribute("attachments", attachmentDao.selectCinemaImageList(cinemaPorin));
+//			
+//			return "admin/cinemaDetail";
+//		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+
 	
 	
+	//영화스케쥴 - 조회(상세)
+//	@GetMapping("/moviePlayDetail")
+//	public String moviePlayDetail(Model model,
+//			@RequestParam int moviePlayNum) {
+//		
+//		MoviePlayVO moviePlayVO = moviePlayDao.selectMoviePlayView(moviePlayNum);
+//
+//	    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+//	    String moviePlayStart = format.format(moviePlayVO.getMoviePlayStart());
+//		String moviePlayStartDate = moviePlayStart.substring(0,10);
+//		String moviePlayStartTime = moviePlayStart.substring(11);
+//		
+//		moviePlayVO.setMoviePlayStartDate(moviePlayStartDate);
+//		moviePlayVO.setMoviePlayStartTime(moviePlayStartTime);
+//		
+//		model.addAttribute("moviePlayVO", moviePlayVO);
+//		
+//		return "admin/moviePlayDetail";
+//	}
 //	//영화정보 - 수정	-"/movieChange"
 //	@GetMapping("/movieChange")
 //	public String movieChange(Model model, @RequestParam int movieNumber) {
