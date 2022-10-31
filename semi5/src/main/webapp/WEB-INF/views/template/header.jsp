@@ -105,7 +105,7 @@
                     <a href="/advance/list">
                         <li>예매</li>
                     </a>
-                    <a href="#">
+                    <a href="/theater/home">
                         <li>극장</li>
                     </a>
                     <a href="/notice/list">

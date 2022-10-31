@@ -93,7 +93,7 @@
                     <a href="/advance/list">
                         <li>예매</li>
                     </a>
-                    <a href="#">
+                    <a href="/theater/home">
                         <li>극장</li>
                     </a>
                     <a href="/notice/list">
@@ -202,7 +202,7 @@
 	     			<a href="/notice/list">커뮤니티</a>
 	     		</div>
 	     		<div class="row">
-	     			<a href="/admin/qnaAsking">1:1 문의내역</a>
+	     			<a href="#">1:1 문의내역</a>
 	     		</div>
     		</div>
     	</aside>
