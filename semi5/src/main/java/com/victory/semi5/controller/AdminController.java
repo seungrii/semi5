@@ -37,6 +37,7 @@ import com.victory.semi5.repository.CinemaDao;
 import com.victory.semi5.repository.GenreDao;
 import com.victory.semi5.repository.MovieDao;
 import com.victory.semi5.repository.MoviePlayDao;
+import com.victory.semi5.repository.OneQnaDao;
 import com.victory.semi5.repository.UserDao;
 import com.victory.semi5.service.AttachmentService;
 import com.victory.semi5.vo.HashtagVO;
@@ -65,6 +66,8 @@ public class AdminController {
 	private MoviePlayDao moviePlayDao;
 	@Autowired
 	private GenreDao genreDao;
+	@Autowired
+	private OneQnaDao oneQnaDao;
 	
 	private final File dir = new File("C:\\study\\vic\\upload"); //파일경로
 	@PostConstruct //최초 실행 시, 딱 한번만 실행되는 메소드
