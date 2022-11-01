@@ -5,20 +5,23 @@
 	<jsp:param value="로그인" name="title"/>
 </jsp:include>
 	<section class="w-980">
-		<div class="row">
+		<div class="row center mt-40 mb-40">
 			<h1>1:1 문의</h1>
 		</div>
 		<form action="oneQna" method="post">
 			<div class="row">
-				<label>문의 제목</label>
-				<input type="text" name="askingTitle">
+				<label>문의 제목:</label>
+				<input class="input input-underline w-50" type="text" name="askingTitle">
 			</div>
 			<div class="row">
-				<label>문의 내용</label>
-				<textarea rows="10" cols="20" name="askingContents"></textarea>
+				<h2>문의 내용</h2>
 			</div>
 			<div class="row">
-				<button type="submit">문의하기</button>
+				<textarea class="fix-size" rows="20" cols="70%" name="askingContents"></textarea>
+			</div>
+			<div class="row">
+				<button class="btn btn-positive" type="submit">문의하기</button>
+				<button id="btn-qna-back" class="btn btn-neutral " type="button">뒤로가기</button>
 			</div>
 		</form>
 	</section>

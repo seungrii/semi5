@@ -19,5 +19,8 @@ $(function(){
             $(this).addClass("fail");
         }
     }
+    $("#btn-qna-back").click(function(){
+		
+	});
 
 });
