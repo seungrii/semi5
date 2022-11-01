@@ -12,12 +12,16 @@ public interface MovieDao {
 	int insert2(MovieVO movieVO);	//추가
 	
     List<MovieDto> selectList();//목록
-    List<MovieDto>selectList(String type, String keyword);//검색
+    List<MovieDto> selectList(String type, String keyword);//검색
+	List<MovieDto> selectListMoviePlayDate(String keyword);
+
    
     MovieDto selectOne(int movieNumber);//상세조회
     
     boolean delete(int movieNumber);//삭제
 
     void insertHashtag(int movieNumber, int genreNo);
+
+
     
 }

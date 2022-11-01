@@ -84,14 +84,24 @@ public class MovieDaoImpl implements MovieDao {
 			return jdbcTemplate.query(sql, mapper);
 	}
 	@Override
+	public List<MovieDto> selectListMoviePlayDate(String keyword) {
+		String sql="select * from movie "
+				+"where opening_date <= to_date(?, 'yyyy-mm-dd hh24:mi') "
+				+"and screening_end >= to_date(?, 'yyyy-mm-dd hh24:mi') "
+				+"order by movie_number asc";
+		Object[] param= {keyword, keyword};
+		return jdbcTemplate.query(sql, mapper,param);
+	}
+	@Override
 	public List<MovieDto> selectList(String type, String keyword) {
 		String sql="select*from movie "
 				+"where instr(#1,?)>0"
-				+"order by #1 asc";
+				+"order by movie_number asc";
 		sql=sql.replace("#1", type);
 		Object[] param= {keyword};
 		return jdbcTemplate.query(sql, mapper,param);
 	}
+	
 
 	@Override
 	public MovieDto selectOne(int movieNumber) {
@@ -114,6 +124,8 @@ public class MovieDaoImpl implements MovieDao {
 		Object[] param = {movieNumber, genreNo};
 		jdbcTemplate.update(sql, param);
 	}
+
+
 
 
 

@@ -19,14 +19,14 @@
 			<c:choose>
 				<c:when test="${param.type == 'movie_number'}">
 					<select class="input input-line" name="type" required>
-						<option value="movie_number">영화번호</option>
-						<option value="movie_name" selected>영화이름</option>
+						<option value="movie_number" selected>영화번호</option>
+						<option value="movie_name">영화이름</option>
 					</select>
 				</c:when>
 				<c:otherwise>
 					<select class="input input-line" name="type" required>
-						<option value="movie_number" selected>영화번호</option>
-						<option value="movie_name">영화이름</option>
+						<option value="movie_number">영화번호</option>
+						<option value="movie_name" selected>영화이름</option>
 					</select>
 				</c:otherwise>
 			</c:choose>
