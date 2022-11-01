@@ -18,4 +18,5 @@ public interface MovieDao {
     boolean delete(int movieNumber);
 
     void insertHashtag(int movieNumber, int genreNo);
+    
 }

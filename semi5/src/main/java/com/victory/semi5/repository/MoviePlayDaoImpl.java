@@ -117,18 +117,35 @@ public class MoviePlayDaoImpl implements MoviePlayDao {
 	@Override
 	public List<MoviePlayVO> selectMoviePlayViewList() {
 		String sql = "select * from movieplay_movie_theater_view "
-				+ "order by movie_play_start desc";
+				+ "order by movie_play_num desc";
 		return jdbcTemplate.query(sql, mapperMPVO);
 	}
 	@Override
 	public List<MoviePlayVO> selectMoviePlayViewList(String type, String keyword) {
 		String sql = "select * from movieplay_movie_theater_view "
 				+ "where instr(#1, ?) >0 "
-				+ "order by movie_play_start desc";
+				+ "order by movie_play_num desc";
 		sql = sql.replace("#1", type);
 		Object[] param = {keyword};
 		return jdbcTemplate.query(sql, mapperMPVO, param);
 	}
+	@Override
+	public List<MoviePlayVO> selectMoviePlayViewListDate(String type, String keyword) {
+		String sql = "select * from movieplay_movie_theater_view "
+				+ "where instr(to_char(#1, 'yyyy-mm-dd hh24:mi'), ?) >0 "
+				+ "order by movie_play_num desc";
+		sql = sql.replace("#1", type);
+		Object[] param = {keyword};
+		return jdbcTemplate.query(sql, mapperMPVO, param);
+	}
+	
+	
+//	select * from movieplay_movie_theater_view 
+//	where instr(movie_play_start, '11:11') >0 
+//	order by movie_play_num desc;
+	
+	
+	
 	private ResultSetExtractor<MoviePlayVO> extractorMPVO = (rs) -> {
 		if(rs.next()) {
 			return MoviePlayVO.builder()

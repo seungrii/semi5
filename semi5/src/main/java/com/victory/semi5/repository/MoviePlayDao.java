@@ -21,6 +21,7 @@ public interface MoviePlayDao {
 	//뷰 조회) 상영스케쥴-영화정보-상영관정보
 	List<MoviePlayVO> selectMoviePlayViewList();
 	List<MoviePlayVO> selectMoviePlayViewList(String type, String keyword);
+	List<MoviePlayVO> selectMoviePlayViewListDate(String type, String keyword);
 	MoviePlayVO selectMoviePlayView(int moviePlayNum);
 	
 }

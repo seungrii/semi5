@@ -1,7 +1,5 @@
 package com.victory.semi5.entity;
 
-import java.sql.Date;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,12 +9,14 @@ import lombok.NoArgsConstructor;
 public class CharacterDto {
 	
 	private int characterNumber;
-	private int movieNumber;
-	private String charaterName1, charaterName2, charaterName3, charaterName4, charaterName5;
-	private int characterAge;
-	private String characterAwards;
-	private String characterFilmography;
-	private String characterType;
-	private String characterNationality;
+    private int movieNumber;
+    private int characterAge;
+    private String characterAwards;
+    private String characterFilmography;
+    private String characterType;
+    private String characterNationality;
+    private String charaterName;
+//    private String directorName1,actorName1,actorName2,actorName3,actorName4;
+
 
 }
