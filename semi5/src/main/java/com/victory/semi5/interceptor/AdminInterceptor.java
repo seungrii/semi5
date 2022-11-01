@@ -19,8 +19,10 @@ public class AdminInterceptor implements HandlerInterceptor{
 		
 		HttpSession session = request.getSession();
 		String mg = (String)session.getAttribute(SessionConstant.GRADE);
-		boolean admin = mg != null && mg.equals("관리자");
 		
+		boolean admin = mg.equals("관리자");
+		//String mg=(String)session.getAttribute("LoginId");
+		//boolean admin = mg != null && mg.equals("admin01");
 		if(admin) {//관리자라면
 			return true;//통과
 		}

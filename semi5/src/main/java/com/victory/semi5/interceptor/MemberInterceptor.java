@@ -38,13 +38,13 @@ public class MemberInterceptor implements HandlerInterceptor {
 		
 		//1.세션이 없을 때는 HttpServletRequest에서 획득 가능
 		HttpSession session=request.getSession();
-		String loginId=(String) session.getAttribute("loginId");
+		String loginId=(String) session.getAttribute("LoginId");
 		if(loginId==null) {//비회원2-2
 			//선택지는 2가지가 있다
 			//1.로그인 페이지로 리다이렉트
 			response.sendRedirect("/user/login");
 			//2.http상태 코드 중에서 미인증(401)을 반환
-			
+			//response.sendError(401);
 			return false;//차단
 		}
 		else {//회원2-1
