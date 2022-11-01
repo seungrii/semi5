@@ -34,6 +34,7 @@
 			<label class="ms-10">줄거리</label>
 			<textarea class="input textarea-line fix-width w-100" rows="8" cols="10" name="movieSummary" required></textarea>
 		</div>
+
 		<div class="row mt-20">
 			<label class="ms-10">연령등급</label>
 			<input class="input input-line w-100" name="movieAgeLimit" type="number" min="1" required autocomplete="off">
@@ -44,34 +45,34 @@
 		</div>
 		<div class="row mt-20">
 			<label class="ms-10">감독 (필수)</label>
-			<input class="input input-line w-100" name="directorName1" type="text" required autocomplete="off">
+			<input class="input input-line w-100" name="charaterName1" type="text" required autocomplete="off">
 		</div>
 		<div class="row mt-20">
 			<label class="ms-10">배우1 (필수)</label>
-			<input class="input input-line w-100" name="actorName1" type="text" required autocomplete="off">
+			<input class="input input-line w-100" name="charaterName2" type="text" required autocomplete="off">
 		</div>
 		<div class="row mt-20">
 			<label class="ms-10">배우2</label>
-			<input class="input input-line w-100" name="actorName2" type="text" autocomplete="off">
+			<input class="input input-line w-100" name="charaterName3" type="text" autocomplete="off">
 		</div>
 		<div class="row mt-20">
 			<label class="ms-10">배우3</label>
-			<input class="input input-line w-100" name="actorName3" type="text" autocomplete="off">
+			<input class="input input-line w-100" name="charaterName4" type="text" autocomplete="off">
 		</div>
 		<div class="row mt-20">
 			<label class="ms-10">배우4</label>
-			<input class="input input-line w-100" name="actorName4" type="text" autocomplete="off">
+			<input class="input input-line w-100" name="charaterName5" type="text" autocomplete="off">
 		</div>
 		<div class="row mt-20">
 			<label class="ms-10">장르</label>
 			<input class="input input-line w-100" name="genreNo" type="number" min="1" required autocomplete="off">
-			<span>1:코미디, 2:로맨스, 3:스릴러, 4:스포츠, 5:음악, 6:액션, 7:범죄, 8:드라마, 9:애니메이션, 10:공포 </span>
+			<span>1: 공포, .. 추가 해야 함</span>
 		</div>		
 		
 		<!-- 영화 포스터 첨부 -->
 		<div class="row left mt-20">
 			<label>첨부파일(1개당 1MB. 최대 10MB 가능)</label>
-			<input class="input input-line w-100" type="file" name="attachments">
+			<input class="input input-line w-100" type="file" name="imageCinema" accept=".png,.jpg">
 		</div>
 		
 		<div class="row center mt-30">

@@ -24,4 +24,6 @@ public interface MovieDao {
 
 
     
+    
+    List<MovieDto> selectSearch(String movieName);
 }

@@ -437,7 +437,7 @@ textarea.fix-width {
 */
 .table {
     border-collapse: collapse;/*테두리 병합*/
-    width:100%;
+    width:980px;
     font-size: 16px;
 }
 /* 
@@ -507,20 +507,13 @@ textarea.fix-width {
 .table.table-chess > tbody > tr:nth-child(2n-1) > :nth-child(2n-1) {
     background-color: #dfe6e9;
 }
-aside{
-    padding: 20px;
-    float: left;
-    width: 25%;
-    min-height: 400px;
-}
+
 .sidebar-css{
 	text-align:center;
 	background-color: rgb(233, 233, 233);
 	border: 0;
 	border-radius: 15px;
 	outline: none;
-	padding-left: 10px;
-	
 }
 #yadoran{
     padding: 20px;
@@ -541,4 +534,8 @@ aside{
 }
 .float-right {
     float: right;
+}
+.admin-box {
+    position: relative;
+    width: 980px;
 }
