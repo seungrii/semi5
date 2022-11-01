@@ -16,4 +16,5 @@ public interface CharacterDao {
 	
 	List<CharacterDto> selectListDirector(int movieNumber);
     List<CharacterDto> selectListActor(int movieNumber);
+    
 }

@@ -109,6 +109,30 @@ public class AttachmentDaoImpl implements AttachmentDao{
 		Object[] param = {movieNumber, fileNumber};
 		jdbcTemplate.update(sql, param);
 	}
+	@Override
+	public List<ImageDto> selectPosterList(int movieNumber) {
+		String sql = "select * from poster_image_view "
+					+ "where movie_number= ? order by file_time asc";
+		Object[] param = {movieNumber};
+		return jdbcTemplate.query(sql, mapper, param);
+	}
+	//무비차트 조회용
+	@Override
+	public List<ImageDto> selectPosterList() {
+		String sql = "select * from poster_image_view "
+				+ "order by movie_number asc";
+		return jdbcTemplate.query(sql, mapper);
+	}
+//	@Override
+//	public List<ImageDto> selectPosterList(String keyword) {
+//		String sql="select * from movie "
+//				+"where opening_date <= to_date(?, 'yyyy-mm-dd hh24:mi') "
+//				+"and screening_end >= to_date(?, 'yyyy-mm-dd hh24:mi') "
+//				+"order by opening_date asc";
+//		Object[] param= {keyword, keyword};
+//		return jdbcTemplate.query(sql, mapper,param);
+//	}
+
 	
 //	회원 프로필
 	@Override
@@ -125,8 +149,11 @@ public class AttachmentDaoImpl implements AttachmentDao{
 		Object[] param = {userId};
 		return jdbcTemplate.query(sql, mapper, param);
 	}
-
-
-	
+	@Override
+	public List<ImageDto> fileNumber(int movieNumber) {
+		String sql = "select file_number from poster where movie_number=?";
+		Object[] param = {movieNumber};
+		return jdbcTemplate.query(sql, mapper, param);
+	}
 
 }

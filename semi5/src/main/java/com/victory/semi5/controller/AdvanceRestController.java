@@ -65,12 +65,12 @@ public class AdvanceRestController {
 		List<AdvanceTimeVO> advanceTimeVOs = advanceDao.selectAdvanceTime(movieNumber, cinemaName, moviePlayDate);
 		
 		if(advanceTimeVOs != null) {
-			System.out.println("성공");
+//			System.out.println("성공");
 //			System.out.println(advanceTimeVOs);
 			return advanceTimeVOs; //성공
 		}
 		else {
-			System.out.println("실패");
+//			System.out.println("실패");
 			return null; //실패
 		}
 	}
