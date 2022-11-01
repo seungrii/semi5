@@ -535,3 +535,7 @@ textarea.fix-width {
 .float-right {
     float: right;
 }
+.admin-box {
+    position: relative;
+    width: 980px;
+}
