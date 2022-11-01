@@ -31,12 +31,16 @@
         	color: #DD5657;
         }
         #chart{
-        	float: left;
         	font-size: 40px;
         	font-weight:bold; 
+        	margin-top: 50px;
+        	margin-bottom: 30px;
         }
         .movie-btn{
         	size: 100px;
+        }
+        #movieChart{
+        	width: 33%;
         }
         
         
@@ -79,7 +83,7 @@
 </head>
 
 <body>
-
+<div class="container">
 	<div class="container mt-50 mb-50">
         <div class="row">
             <!-- Slider main container -->
@@ -102,14 +106,93 @@
         </div>
     </div>
 	
-	<div class="container mt-50 mb-50">
+	<div class="container row mt-50 mb-50">
 		<div id="chart">무비차트</div>
 	</div>
-	<div class="row">
-		<div class="w-33">1</div>
-		<div class="w-33">2</div>
-		<div class="w-33">3</div>
+	<div class="container mt-50 mb-50">
+		<img id="movieChart" src="https://img.cgv.co.kr/Movie/Thumbnail/StillCut/000080/80489/80489152234_727.jpg">
+		<img id="movieChart" src="https://img.cgv.co.kr/Movie/Thumbnail/StillCut/000086/86276/86276206590_727.jpg">
+		<img id="movieChart" src="https://img.cgv.co.kr/Movie/Thumbnail/StillCut/000086/86271/86271206942_727.jpg">
 	</div>
+	
+	<div class="container mt-50 mb-50">
+	<div class="row float-container">
+		<div class="float-left w-50 p-20">
+			<div class="row">
+				<h2>
+					공지사항
+					<button class="btn"><a href="notice/list">go</a></button>
+				</h2>
+				<hr>
+			</div>
+			
+			<div class="row">
+				<table class="table"><!-- 
+					<thead>
+						<tr>
+							<th width="50%">제목</th>
+							<th>작성자</th>
+							<th>조회수</th>
+						</tr>
+					</thead> -->
+					<tbody align="center">
+						<c:forEach var="noticeDto" items="${list}">
+						<tr>
+							<td align="left">
+								<a href="notice/detail?noticeNo=${noticeDto.noticeNo}">
+									${noticeDto.noticeTitle}	
+								</a>
+							</td>
+							<td>${noticeDto.adminId}</td>
+							<td>${noticeDto.noticeRead}</td>
+						</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		
+		
+		<div class="float-left w-50 p-20">
+			<div class="row">
+				<h2>
+					자유게시판
+					<button class="btn"><a href="board/list">go</a></button>
+				</h2>
+				<hr>	
+			</div>
+			
+			<div class="row">
+				<table class="table">
+					<!-- <thead>
+						<tr>
+							<th width="50%">제목</th>
+							<th>작성자</th>
+							<th>조회수</th>
+						</tr>
+					</thead> -->
+					<tbody align="center">
+						<c:forEach var="boardDto" items="${boardList}">
+						<tr>
+							<td align="left">
+								<a href="board/detail?boardNo=${boardDto.boardNo}">
+									${boardDto.boardTitle}	
+								</a>
+							</td>
+							<td>${boardDto.boardWriter}</td>
+							<td>${boardDto.boardRead}</td>
+						</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+			</div>
+			
+		</div>
+	
+	
+</div>
+</div>
+</div>
 </body>	
 	
 	
