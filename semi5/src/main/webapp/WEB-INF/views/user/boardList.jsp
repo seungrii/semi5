@@ -5,22 +5,33 @@
 	<jsp:param value="메인화면" name="title"/>
 </jsp:include>
 	<section class="w-980">
-		<c:forEach var="boardDto" items="${boardDto}">
-				<div class="row">
-					${boardDto.boardNo}
-				</div>
-				<div class="row">
-					${boardDto.boardHead}
-				</div>
-				<div class="row">
-					<a href="../board/detail?boardNo=${boardDto.boardNo}">${boardDto.boardTitle}</a>
-				</div>
-				<div class="row">
-					${boardDto.boardWriter}
-				</div>
-				<div class="row">
-					${boardDto.boardWriteTime}
-				</div>
-			</c:forEach>
+		<div class="row center mt-40 mb-40">
+			<h1>내가 작성한 게시글</h1>
+		</div>
+		
+		<div class="row center">
+			<table class="table table-slit">
+				<thead>
+					<tr>
+						<th>글번호</th>
+						<th>분류</th>
+						<th>제목</th>
+						<th>작성자</th>
+						<th>작성일</th>
+					</tr>
+				</thead>
+				<tbody class="center">
+					<c:forEach var="boardDto" items="${boardDto}">
+						<tr>
+							<td>${boardDto.boardNo}</td>
+							<td>${boardDto.boardHead}</td>
+							<td><a href="../board/detail?boardNo=${boardDto.boardNo}">${boardDto.boardTitle}</a></td>
+							<td>${boardDto.boardWriter}</td>
+							<td>${boardDto.boardWriteTime}</td>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
+		</div>
 	</section>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

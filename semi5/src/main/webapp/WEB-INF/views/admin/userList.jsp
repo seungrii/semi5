@@ -6,14 +6,14 @@
 </jsp:include>
 <section class="w-980 test-css">
 
-<div class="container">
+<div class="container mt-50">
 
 	<div class="row center">
 		<h1>회원 목록</h1>
 	</div>
 	
 	<!-- 키워드 검색 -->
-	<div class="row center">
+	<div class="row center mt-30">
 	<form action="userList" method="get">
 		<!-- type 선택목록 -->
 		<c:choose>
@@ -38,7 +38,7 @@
 	
 	<!-- 관리자계정 목록 -->
 	<div class="row center">
-	<table>
+	<table class="table table-slit center mt-30">
 		<thead>
 			<tr>
 				<td>아이디</td>
