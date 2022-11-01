@@ -32,10 +32,6 @@
 		<div class="row">${userDto.userTel}</div>
 		<div class="row">${userDto.userBirth}</div>
 		<div class="row">
-		<hr>
-		<div class="row">
-			<a href="boardList">내가 작성한 글</a>
-		</div>
 
 
 </div>

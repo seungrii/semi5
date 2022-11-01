@@ -33,5 +33,8 @@
 					<div class="row">
 						<a href="ticketing">예매내역</a>
 					</div>
+					<div class="row">
+						<a href="boardList">내가 작성한 글</a>
+					</div>
     		</div>
     	</aside>
