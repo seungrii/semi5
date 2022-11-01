@@ -4,13 +4,15 @@
 	<jsp:param value="상영스케쥴 상세" name="title"/>
 </jsp:include>
 <section class="w-980 test-css">
+<div class="admin-box">
+
 <jsp:include page="/WEB-INF/views/template/sidebar.jsp"></jsp:include>
 	
 	
 <div class="container-400">
 	
 	
-		<div class="row center fs-28">
+		<div class="row center fs-28 mt-50">
 			<span>상영스케쥴 상세</span>
 		</div>
 		<div class="row mt-50">
@@ -91,6 +93,6 @@
 	
 	
 </div>
-	
+</div>	
 </section>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
