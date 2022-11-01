@@ -6,8 +6,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.victory.semi5.repository.BoardDao;
+import com.victory.semi5.repository.MovieDao;
 import com.victory.semi5.repository.NoticeDao;
 import com.victory.semi5.vo.BoardListSearchVO;
 import com.victory.semi5.vo.NoticeListSearchVO;
@@ -20,6 +22,9 @@ public class HomeController {
 	
 	@Autowired
 	private BoardDao boardDao;;
+	
+	@Autowired
+	private MovieDao movieDao;
 	
 	@RequestMapping("/")
 	public String Home(Model model,
@@ -37,6 +42,15 @@ public class HomeController {
 				model.addAttribute("boardList", boardDao.selectList(boardVo));
 		return "home";
 	}
-	
+	@GetMapping("/keywordSearch")
+	public String keywordSearch(Model model,
+			@RequestParam (required = false) String movieName) {
+		if(movieName != null) {
+			model.addAttribute("movieDto", movieDao.selectSearch(movieName));
+		}else {
+			model.addAttribute("movieDto", null);
+		}
+		return "movie/homeSearch";
+	}
 	
 }
