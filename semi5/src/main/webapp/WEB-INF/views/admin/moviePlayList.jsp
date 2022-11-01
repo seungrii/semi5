@@ -5,6 +5,10 @@
 	<jsp:param value="상영스케쥴 목록" name="title"/>
 </jsp:include>
 <section class="w-980 test-css">
+<div class="admin-box">
+
+<div class="admin-box">
+
 <jsp:include page="/WEB-INF/views/template/sidebar.jsp"></jsp:include>
 
 <div class="container">
@@ -99,6 +103,7 @@
 	</div>
 
 </div>
-
+</div>
+</div>
 </section>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

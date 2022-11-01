@@ -5,12 +5,14 @@
 </jsp:include>
 
 <section class="w-980 test-css">
+<div class="admin-box">
+
 <jsp:include page="/WEB-INF/views/template/sidebar.jsp"></jsp:include>
 	
 <div class="container-400">
 	
 	<form action="cinemaAdd" method="post" enctype="multipart/form-data">
-		<div class="row center fs-28">
+		<div class="row center fs-28 mt-50">
 			<span>지점 추가</span>
 		</div>
 		<div class="row mt-50">
@@ -46,6 +48,6 @@
 	
  
 	
-	
+</div>	
 </section>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
