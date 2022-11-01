@@ -105,8 +105,10 @@
                         <li>커뮤니티</li>
                     </a>
                     <li>
-                    	<input class="input">
-                    	<button type="button" class="btn btn-search"><i class="fa-solid fa-magnifying-glass"></i></button>
+						<form action="keywordSearch">
+    	                	<input name="movieName" class="input search-input-keyword">
+	                    	<button type="submit" class="btn btn-search"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    	</form>
                 	</li>
                 </ul>
             </div>

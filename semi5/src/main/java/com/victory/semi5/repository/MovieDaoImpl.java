@@ -149,5 +149,12 @@ public class MovieDaoImpl implements MovieDao {
 		jdbcTemplate.update(sql, param);
 	}
 
+	@Override
+	public List<MovieDto> selectSearch(String movieName) {
+		String sql = "select * from movie where instr(movie_name, ?)>0";
+		Object[] param = {movieName};
+		return jdbcTemplate.query(sql, mapper, param);
+	}
+
 	
 }

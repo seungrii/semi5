@@ -1,10 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<jsp:include page="/WEB-INF/views/admin/admin-template/adminHeader.jsp">
+<jsp:include page="/WEB-INF/views/template/header.jsp">
 	<jsp:param value="회원 목록" name="title"/>
 </jsp:include>
 <section class="w-980 test-css">
+<div class="admin-box">
+
+<jsp:include page="/WEB-INF/views/template/sidebar.jsp"></jsp:include>
 
 <div class="container mt-50">
 
@@ -68,6 +71,6 @@
 	</div>
 
 </div>
-
+</div>
 </section>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

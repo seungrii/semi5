@@ -1,7 +1,7 @@
 // 네비게이터 js (수정 필요)
 
 $(function(){
-    $(".nav-title-box").hover(function(e){
+    $(".nav-title-box").parent("div").hover(function(e){
         e.stopPropagation();
         $(".nav-list-box").slideToggle(200);
     });
@@ -17,4 +17,7 @@ $(function(){
             $(".nav-title").find("a").first().css("display", "none");
         }
     });
+    $(".btn-search").click(function(){
+		
+	});
 });

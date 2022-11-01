@@ -1,14 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<jsp:include page="/WEB-INF/views/admin/admin-template/adminHeader.jsp">
+<jsp:include page="/WEB-INF/views/template/header.jsp">
 	<jsp:param value="영화 목록" name="title"/>
 </jsp:include>
 <section class="w-980 test-css">
+<div class="admin-box">
+
+<jsp:include page="/WEB-INF/views/template/sidebar.jsp"></jsp:include>
 
 <div class="container">
 
-	<div class="row center">
+	<div class="row center mt-50">
 		<h1>영화 목록</h1>
 	</div>
 	
@@ -42,7 +45,7 @@
 	
 	<!-- 영화 목록 -->
 	<div class="row center">
-	<table>
+	<table class="table table-slit">
 		<thead>
 			<tr>
 				<td>영화번호</td>
@@ -85,6 +88,6 @@
 </div>
 
 	
-	
+</div>	
 </section>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

@@ -1,11 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="/WEB-INF/views/template/header.jsp">
 	<jsp:param value="관리자계정 추가" name="title"/>
 </jsp:include>
 <script src="/js/adminAccountCheck.js"></script>
 
 <section class="w-980 test-css">
+<div class="admin-box">
+
 <jsp:include page="/WEB-INF/views/template/sidebar.jsp"></jsp:include>
 	
 	
@@ -46,6 +49,6 @@
 	
  
 	
-	
+</div>	
 </section>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
