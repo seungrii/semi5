@@ -9,7 +9,7 @@
 <section class="w-980 test-css">
 <jsp:include page="/WEB-INF/views/template/sidebar.jsp"></jsp:include>
 
-<div class="container-650">
+<div class="container-980">
 	<div class="row center mt-50">
 		<h1>관리자계정 조회</h1>
 	</div>
