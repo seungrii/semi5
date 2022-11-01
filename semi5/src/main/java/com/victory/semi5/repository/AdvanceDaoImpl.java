@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import com.victory.semi5.entity.CinemaDto;
 import com.victory.semi5.entity.MovieDto;
+import com.victory.semi5.entity.TicketingDto;
 import com.victory.semi5.vo.AdvanceConfirmVO;
 import com.victory.semi5.vo.AdvanceTimeVO;
 import com.victory.semi5.vo.CinemaNameVO;
@@ -172,5 +173,16 @@ public class AdvanceDaoImpl implements AdvanceDao {
 		Object[] param = {moviePlayNum, seatNum};
 		return jdbcTemplate.query(sql, confirmExtractor, param);
 	}
+	
+	@Override
+	public void insertAdvance(TicketingDto ticketingDto) {
+		
+		String sql = "insert into ticketing values (ticketing_seq.nextval, ?, ?, ?, sysdate, ?)";
+		Object[] param = {ticketingDto.getUserId(), ticketingDto.getMoviePlayNum(),
+				ticketingDto.getSeatNum(), ticketingDto.getPriceTotal()};
+		jdbcTemplate.update(sql, param);
+	}
+	
+	
 
 }//AdvanceDao end

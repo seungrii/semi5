@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 
 @Data @AllArgsConstructor @NoArgsConstructor @Builder
 public class TicketingDto {
-	int ticketingNum, moviePlayNum, seatNum, priceTotal;
-	String userId;
-	Date ticketingTime;
+	private int ticketingNum, moviePlayNum, seatNum, priceTotal;
+	private String userId;
+	private Date ticketingTime;
 }

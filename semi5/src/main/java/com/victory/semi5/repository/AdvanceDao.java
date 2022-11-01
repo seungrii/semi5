@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.victory.semi5.entity.CinemaDto;
 import com.victory.semi5.entity.MovieDto;
+import com.victory.semi5.entity.TicketingDto;
 import com.victory.semi5.vo.AdvanceConfirmVO;
 import com.victory.semi5.vo.AdvanceTimeVO;
 import com.victory.semi5.vo.CinemaNameVO;
@@ -23,6 +24,9 @@ public interface AdvanceDao {
 	List<CinemaNameVO> selectMovieChoiceList(int movieNumber);
 	List<MovieScheduleVO> selectMoviePlayDate(int movieNumber, String cinemaName);
 	List<AdvanceTimeVO> selectAdvanceTime(int movieNumber, String cinemaName, String moviePlayDate);
+	
+	//예매
+	void insertAdvance(TicketingDto ticketingDto);
 	
 	
 
