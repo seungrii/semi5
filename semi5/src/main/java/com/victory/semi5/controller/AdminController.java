@@ -86,15 +86,13 @@ public class AdminController {
 		return "admin/adminAdd";
 	}
 	@PostMapping("/adminAdd")
-	public String adminAdd(
-			@ModelAttribute AdminDto adminDto) {
+	public String adminAdd(@ModelAttribute AdminDto adminDto) {
 		adminDao.addAdmin(adminDto);
 		return "redirect:adminList";
 	}
 	//admin 계정조회
 	@GetMapping("/adminList")
-	public String adminList(
-			Model model,
+	public String adminList(Model model,
 			@RequestParam(required = false) String type,
 			@RequestParam(required = false) String keyword) {
 		boolean isSearch = type != null && keyword != null;
@@ -121,8 +119,7 @@ public class AdminController {
 		return "admin/adminChange";
 	}
 	@PostMapping("/adminChange")
-	public String adminChange(
-			@ModelAttribute AdminDto adminDto,
+	public String adminChange(@ModelAttribute AdminDto adminDto,
 			RedirectAttributes attr) {
 		adminDao.changeAdmin(adminDto);
 		attr.addAttribute("adminId", adminDto.getAdminId());
@@ -130,8 +127,8 @@ public class AdminController {
 	}
 	//admin 계정삭제
 	@GetMapping("adminDelete")
-	public String adminDelete(
-		HttpSession session, @RequestParam String adminId) {
+	public String adminDelete(HttpSession session, 
+			@RequestParam String adminId) {
 		adminDao.deleteAdmin(adminId);
 		String userId = (String)session.getAttribute("LoginId");
 		if(userId.equals(adminId)) { //로그인한 관리자 본인이면
@@ -149,8 +146,7 @@ public class AdminController {
 //	회원정보 조회
 	//회원목록
 	@GetMapping("/userList")
-	public String userList(
-			Model model,
+	public String userList(Model model,
 			@RequestParam(required = false) String type,
 			@RequestParam(required = false) String keyword) {
 		boolean isSearch = type != null && keyword != null;
@@ -164,8 +160,7 @@ public class AdminController {
 	}
 	//회원상세
 	@GetMapping("/userDetail")
-	public String userDatail(
-			Model model, @RequestParam String userId) {
+	public String userDatail(Model model, @RequestParam String userId) {
 		UserDto userDto = userDao.selectOne(userId);
 		model.addAttribute("userDto", userDto);
 		return "admin/userDetail";
@@ -179,12 +174,11 @@ public class AdminController {
 		return "admin/cinemaAdd";
 	}
 	@PostMapping("/cinemaAdd")
-	public String cinemaAdd(
-			@ModelAttribute CinemaDto cinemaDto,
+	public String cinemaAdd(@ModelAttribute CinemaDto cinemaDto,
 			@RequestParam List<MultipartFile> attachments) 
 					throws IllegalStateException, IOException {
-		
-		cinemaDao.addCinema(cinemaDto);	//지점추가
+		//지점추가
+		cinemaDao.addCinema(cinemaDto);
 
 		//파일첨부
 		for(MultipartFile file : attachments) {
@@ -262,7 +256,6 @@ public class AdminController {
 		attr.addAttribute("cinemaPorin",cinemaPorin);
 		return "redirect:cinemaChange";
 	}
-	
 	//지점관리 - 삭제
 	@GetMapping("/cinemaDelete") 
 	public String cinemaDelete(@RequestParam String cinemaPorin) {
@@ -280,6 +273,9 @@ public class AdminController {
 		
 		return "redirect:cinemaList";	//삭제실패시, 알람창 필요
 	}
+	
+	
+	
 	
 	
 //	영화정보 관리
@@ -301,7 +297,6 @@ public class AdminController {
 		characterDao.insertDirector1(movieVO);
 
 		characterDao.insertActor1(movieVO);
-		
 		if(!movieVO.getActorName2().isEmpty()) {			
 			characterDao.insertActor2(movieVO);
 		}
@@ -343,8 +338,7 @@ public class AdminController {
     }
     //영화정보 - 상세
     @GetMapping("/movieDetail")
-    public String movieDetail(Model model,
-            @RequestParam int movieNumber ) {
+    public String movieDetail(Model model, @RequestParam int movieNumber) {
 
         //영화정보
         MovieDto movieDto = movieDao.selectOne(movieNumber);
@@ -355,91 +349,68 @@ public class AdminController {
         model.addAttribute("characterDtoListDirector",characterDtoDirector);
         List<CharacterDto> characterDtoActor = characterDao.selectListActor(movieNumber);
         model.addAttribute("characterDtoListActor",characterDtoActor);
-        System.out.println(characterDtoActor);
+//        System.out.println(characterDtoActor);
 
         //장르
         List<HashtagVO> hashtagVO = genreDao.selectListHashtagVO(movieNumber);
         model.addAttribute("ListHashtag", hashtagVO);
-        System.out.println(hashtagVO);
-
+//        System.out.println(hashtagVO);
+        
+        //첨부파일 조회하여 첨부
+        model.addAttribute("attachments", attachmentDao.selectPosterList(movieNumber));
+      		
         return "admin/movieDetail";
     }
-	//영화정보 - 수정
-	@GetMapping("/movieChange")
-	public String movieChange() {
-		return "admin/movieChange";
-	}
-	@PostMapping("/movieChange")
-	public String movieChange(RedirectAttributes attr) {
+    //영화포스터만 추가
+    @PostMapping("/moviePosterAdd")
+    public String moviePosterAdd(@RequestParam int movieNumber,
+    		List<MultipartFile> attachments, RedirectAttributes attr) 
+    				throws IllegalStateException, IOException {
+    	
+    	//파일첨부
+  		for(MultipartFile file : attachments) {
+  			if(!file.isEmpty()) {
+  				//이미지 추가 service로
+  				int fileNumber = attachmentService.attachmentsUp(attachments, file);	
+  				
+  				//영화번호로 → 영화포스터에 저장
+  				attachmentDao.addPoster(movieNumber, fileNumber); 						
+  			}
+		}
+  		
+    	attr.addAttribute("movieNumber",movieNumber);
+		return "redirect:movieDetail";
+    }
+	//영화포스터만 삭제
+	@GetMapping("/posterDelete")
+	public String posterDelete(@RequestParam int movieNumber,
+			@RequestParam int fileNumber, RedirectAttributes attr) {
+		//실제파일 삭제(poster 자동삭제)
+		List<ImageDto> attachments = attachmentDao.selectList(fileNumber);
+		attachmentService.attachmentsDelete(attachments);
+		
+		attr.addAttribute("movieNumber",movieNumber);
 		return "redirect:movieDetail";
 	}
 	//영화정보 - 삭제
 	@GetMapping("/movieDelete")
     public String delete(@RequestParam int movieNumber) {
-        movieDao.delete(movieNumber);
+		//삭제 전, 첨부파일 조회
+		List<ImageDto> attachments = attachmentDao.selectPosterList(movieNumber);
+		
+		//영화정보 삭제(DB: cinema_image 자동삭제)
+		boolean result = movieDao.delete(movieNumber);
+		
+		if(result) { //삭제 성공
+			//실제파일 삭제
+			attachmentService.attachmentsDelete(attachments);
+			return "redirect:movieList";
+		}
         return "redirect:movieList";
     }
 	
 	
-//	@GetMapping("/detailAdmin")
-//	public String detail(Model model,@RequestParam int movieNumber ) {
-//		model.addAttribute("dto", movieDao.selectOne(movieNumber));
-//		return "movie/detailAdmin";
-//	}
-//	//수정
-//	@GetMapping("/edit")
-//	public String edit(Model model, @RequestParam int movieNumber) {
-//		model.addAttribute("dto",movieDao.selectOne(movieNumber));
-//		return "movie/edit";
-//	}
-//	@PostMapping("/edit")
-//	public String edit(@ModelAttribute MovieDto dto,
-//			//redirect 전용 저장소(Model의 자식 클래스),리다이렉트를 하는데 데이터를 넘길 경우
-//			RedirectAttributes attr) {
-//		boolean result=movieDao.update(dto);
-//	if(result) {
-//			attr.addAttribute("movieNumber",dto.getMovieNumber());
-//			//return "redirect:detail?movieNumber="+dto.getMovieNumber();
-//			return "redirect:detail";
-//		}
-//	else {//리스트에 있는 movieNumber가 아니면  edit_fail 페이지로
-//		    
-//			return "redirect:edit_fail";
-//	    }
-//  }
-//	
-//	@GetMapping("/edit_fail")
-//	public String editFail() {
-//		return "movie/editFail";
-//	}
-//	
-//	//삭제
-//	@GetMapping("/delete")
-//	public String delete(@RequestParam int movieNumber) {
-//		boolean result=movieDao.delete(movieNumber);
-//		if(result) {
-//			return "redirect:list";
-//		}
-//		else {
-//			return "movie/editFail";
-//		}
-//	}
-	// Q&A 답변
-	@GetMapping("/askingList")
-	public String askingList(Model model) {
-		model.addAttribute("oneQnaDto",oneQnaDao.selectList());
-		return "admin/askingList";
-	}
-	
-	
-	
-	
-	
-	
-	
-	
 
-	
 //	영화스케쥴 관리
 	//영화스케쥴 - 추가
 	@GetMapping("/moviePlayAdd")
@@ -447,8 +418,8 @@ public class AdminController {
 		return "admin/moviePlayAdd";
 	}
 	@PostMapping("/moviePlayAdd")
-	public String moviePlayAdd(
-			@ModelAttribute MoviePlayDto moviePlayDto) throws ParseException {
+	public String moviePlayAdd(@ModelAttribute MoviePlayDto moviePlayDto) 
+			throws ParseException {
 
 		String moviePlayStartDate = moviePlayDto.getMoviePlayStartDate();
 		String moviePlayStartTime = moviePlayDto.getMoviePlayStartTime();		
@@ -543,23 +514,17 @@ public class AdminController {
 		return "redirect:moviePlayList";	//삭제실패시, 알람창 필요
 	}
 	
-	
 
 
 	// Q&A 답변
-	@GetMapping("/qnaAsking")
-	public String qnaAsking(Model model) {
+	@GetMapping("/askingList")
+	public String askingList(Model model) {
 		model.addAttribute("oneQnaDto",oneQnaDao.selectList());
 		return "admin/askingList";
 	}
-	
-	
-
-
 
 	
-	//추가사항 : table 디자인css 작성
-	//재확인 알람창 필요 (ex. 정말 삭제하시겠습니까?)
+	//재확인 알람창 (ex. 정말 삭제하시겠습니까?)
 	
 	
 }

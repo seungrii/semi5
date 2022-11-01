@@ -65,13 +65,13 @@
 		<div class="row mt-20">
 			<label class="ms-10">장르</label>
 			<input class="input input-line w-100" name="genreNo" type="number" min="1" required autocomplete="off">
-			<span>1: 공포, .. 추가 해야 함</span>
+			<span>1:코미디, 2:로맨스, 3:스릴러, 4:스포츠, 5:음악, 6:액션, 7:범죄, 8:드라마, 9:애니메이션, 10:공포 </span>
 		</div>		
 		
 		<!-- 영화 포스터 첨부 -->
 		<div class="row left mt-20">
 			<label>첨부파일(1개당 1MB. 최대 10MB 가능)</label>
-			<input class="input input-line w-100" type="file" name="attachments" multiple>
+			<input class="input input-line w-100" type="file" name="attachments">
 		</div>
 		
 		<div class="row center mt-30">

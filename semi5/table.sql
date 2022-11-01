@@ -24,6 +24,8 @@ create table user_information(
     user_rank varchar2(9) default '일반' not null check(user_rank in ('일반', 'VIP')),
     user_tel char(11) not null check(regexp_like(user_tel, '^010[0-9]{8}$'))
 );
+-- 컬럼추가
+alter table user_information add user_blurb varchar2(3) default 'off' not null;
 -- user information 테이블 기본데이터 1개 추가  
 insert into user_information values (
 'hello1234', 'Hello1234!', '테스트', '남자', '2022-10-20', 'hello1234@naver.com', '일반', '01012345678', 'N');
@@ -38,6 +40,8 @@ movie_summary varchar2(3000),
 movie_play_time number(3),
 movie_age_limit number(2)
 );
+-- 컬럼수정
+alter table movie modify (movie_name varchar2(60));
 -- view 테이블 생성 : 영화정보-인물-해시태그 join
 create view movie_character_hashtag_view as
 select
@@ -60,8 +64,7 @@ character_type varchar2(9),
 character_nationality varchar2(36)
 );
 
-alter table character modify (charater_name varchar2(21));
-
+alter table character modify (charater_name varchar2(36));
 create sequence character_seq;
 
 ---영화 장르 
@@ -148,7 +151,14 @@ create table poster(
 movie_number references movie(movie_number) on delete cascade,
 file_number references image(file_number) on delete cascade
 );
-
+-- view 테이블 생성 : 영화포스터-이미지 join
+create view poster_image_view as
+select
+    P.movie_number, A.*
+from
+    poster P inner join image A
+    on P.file_number = A.file_number;
+    
 ----가격표
 create table theater_price(
 theater_num references theater(theater_num),

@@ -57,70 +57,6 @@ public class MovieDaoImpl implements MovieDao {
 
 
 	@Override
-	public void insert(MovieDto dto) {
-		String sql="insert into movie("
-				+"movie_number,movie_name,opening_date, "
-				+"screening_end, movie_summary,movie_play_time,movie_age_limit"
-				+ ") values("
-				+"movie_seq.nextval,?,?,?,?,?,?"
-				+")";
-		
-		Object[] param= {
-				dto.getMovieName(),dto.getOpeningDate(),
-				dto.getScreeningEnd(),dto.getMovieSummary(),
-				dto.getMoviePlayTime(),dto.getMovieAgeLimit()
-		};
-		jdbcTemplate.update(sql,param);
-	}
-
-	@Override
-	public List<MovieDto> selectList() {
-		  String sql="select*from movie order by movie_number asc";
-			return jdbcTemplate.query(sql, mapper);
-	}
-	@Override
-	public List<MovieDto> selectList(String type, String keyword) {
-		String sql="select*from movie "
-				+"where instr(#1,?)>0"
-				+"order by #1 asc";
-		sql=sql.replace("#1", type);
-		Object[] param= {keyword};
-		return jdbcTemplate.query(sql, mapper,param);
-	}
-
-	@Override
-	public MovieDto selectOne(int movieNumber) {
-	    String sql="select*from movie where movie_number=?";
-	    Object[]param= {movieNumber};
-	    return jdbcTemplate.query(sql, extractor, param);
-	 }
-
-	@Override
-	public boolean update(MovieDto dto) {
-		String sql="update movie "
-				+"set "
-				+"movie_name=?,opening_date=?,screening_end=?,movie_summary=?,movie_play_time=?,movie_age_limit=? "
-				+"where "
-					+"movie_number=?";
-	
-		Object[] param= {
-				dto.getMovieName(),dto.getOpeningDate(),
-				dto.getScreeningEnd(),dto.getMovieSummary(),
-				dto.getMoviePlayTime(),dto.getMovieAgeLimit(),
-				dto.getMovieNumber()
-		};
-		return jdbcTemplate.update(sql,param)>0;
-	}
-
-	@Override//삭제
-	public boolean delete(int movieNumber) {
-		String sql="delete movie where movie_number=?";
-		Object[] param= {movieNumber};
-		return jdbcTemplate.update(sql,param)>0;
-		
-	}
-
-	@Override
 	public int insert2(MovieVO movieVO) {
 		// TODO Auto-generated method stub
 	String sql="select movie_seq.nextval from dual";
@@ -141,6 +77,46 @@ public class MovieDaoImpl implements MovieDao {
 		jdbcTemplate.update(sql, param);
 		return movieNumber;
 	}
+	
+	@Override
+	public List<MovieDto> selectList() {
+		  String sql="select*from movie order by movie_number asc";
+			return jdbcTemplate.query(sql, mapper);
+	}
+	@Override
+	public List<MovieDto> selectListMoviePlayDate(String keyword) {
+		String sql="select * from movie "
+				+"where opening_date <= to_date(?, 'yyyy-mm-dd hh24:mi') "
+				+"and screening_end >= to_date(?, 'yyyy-mm-dd hh24:mi') "
+				+"order by movie_number asc";
+		Object[] param= {keyword, keyword};
+		return jdbcTemplate.query(sql, mapper,param);
+	}
+	@Override
+	public List<MovieDto> selectList(String type, String keyword) {
+		String sql="select*from movie "
+				+"where instr(#1,?)>0"
+				+"order by movie_number asc";
+		sql=sql.replace("#1", type);
+		Object[] param= {keyword};
+		return jdbcTemplate.query(sql, mapper,param);
+	}
+	
+
+	@Override
+	public MovieDto selectOne(int movieNumber) {
+	    String sql="select*from movie where movie_number=?";
+	    Object[]param= {movieNumber};
+	    return jdbcTemplate.query(sql, extractor, param);
+	 }
+
+	@Override//삭제
+	public boolean delete(int movieNumber) {
+		String sql="delete movie where movie_number=?";
+		Object[] param= {movieNumber};
+		return jdbcTemplate.update(sql,param)>0;
+		
+	}
 
 	@Override
 	public void insertHashtag(int movieNumber, int genreNo) {
@@ -148,6 +124,9 @@ public class MovieDaoImpl implements MovieDao {
 		Object[] param = {movieNumber, genreNo};
 		jdbcTemplate.update(sql, param);
 	}
+
+
+
 
 	@Override
 	public List<MovieDto> selectSearch(String movieName) {
