@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import com.victory.semi5.entity.CinemaDto;
 import com.victory.semi5.entity.MovieDto;
+import com.victory.semi5.vo.AdvanceConfirmVO;
 import com.victory.semi5.vo.AdvanceTimeVO;
 import com.victory.semi5.vo.CinemaNameVO;
 import com.victory.semi5.vo.DateVO;
@@ -151,6 +152,25 @@ public class AdvanceDaoImpl implements AdvanceDao {
 		String sql = "select to_date(sysdate) + (level - 1) days from dual "
 				+ "connect by level <= (to_date(sysdate+30) - to_date(sysdate) + 1)";
 		return jdbcTemplate.query(sql, dateMapper);
+	}
+	
+	private ResultSetExtractor<AdvanceConfirmVO> confirmExtractor = (rs) -> {
+		if(rs.next()) {
+			AdvanceConfirmVO advanceConfirmVO = new AdvanceConfirmVO();
+			advanceConfirmVO.setTicketingNum(rs.getInt("ticketing_num"));
+			return advanceConfirmVO;
+		}
+		else {
+			return null;
+		}
+		
+	};
+	
+	@Override
+	public AdvanceConfirmVO selectConfirm(int moviePlayNum, int seatNum) {
+		String sql = "select ticketing_num from ticketing where movie_play_num = ? and seat_num = ?";
+		Object[] param = {moviePlayNum, seatNum};
+		return jdbcTemplate.query(sql, confirmExtractor, param);
 	}
 
 }//AdvanceDao end
