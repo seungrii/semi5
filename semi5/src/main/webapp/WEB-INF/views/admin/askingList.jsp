@@ -5,11 +5,13 @@
 	<jsp:param value="1:1문의내역" name="title"/>
 </jsp:include>
 <section class="w-980">
-	<div class="row mt-40 mb-40">
-		<div class="row center">
+<jsp:include page="/WEB-INF/views/template/sidebar.jsp"></jsp:include>
+
+	<div class="container-600">
+		<div class="row center mt-50">
 			<h1>1:1 문의내역</h1>
 		</div>
-		<table class="table table-slit">
+		<table class="table table-slit mt-50">
 			<thead>
 				<tr>
 					<th>번호</th>

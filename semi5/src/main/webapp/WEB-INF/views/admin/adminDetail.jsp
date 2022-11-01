@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<jsp:include page="/WEB-INF/views/admin/admin-template/adminHeader.jsp">
+<jsp:include page="/WEB-INF/views/template/header.jsp">
 	<jsp:param value="관리자계정 상세" name="title"/>
 </jsp:include>
 <section class="w-980 test-css">
+<jsp:include page="/WEB-INF/views/template/sidebar.jsp"></jsp:include>
 	
 	
 <div class="container-400">

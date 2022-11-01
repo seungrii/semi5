@@ -5,6 +5,8 @@
 	<jsp:param value="로그인" name="title"/>
 </jsp:include>
 	<section class="w-980">
+	<jsp:include page="/WEB-INF/views/template/usersidebar.jsp"></jsp:include>
+	
 		<div class="row mt-50 ms-50">
 			<h1>개인정보 수정</h1>
 		</div>
