@@ -23,6 +23,10 @@
 		<div class="row">
 			<a href="oneQnaList">1:1 문의내역</a>
 		</div>
+		<div class="row">
+			<a href="ticketing">예매내역</a>
+		</div>
+
 		<!-- 지점 이미지 첨부 -->
 		<!--<div>
 			<img src="download?userId=${userDto.userId}" width="100" height="100">
