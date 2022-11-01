@@ -8,12 +8,12 @@
 
 <div class="container">
 
-	<div class="row center">
+	<div class="row center mt-50">
 		<h1>지점 목록</h1>
 	</div>
 	
 	<!-- 키워드 검색 -->
-	<div class="row center">
+	<div class="row center mt-30">
 	<form action="cinemaList" method="get">
 		<!-- type 선택목록 -->
 		<c:choose>
@@ -36,9 +36,13 @@
 	</form>
 	</div>
 	
+	<div class="right mb-10">
+		<a class="btn btn-positive" href="cinemaAdd">추가</a>
+	</div>
+	
 	<!-- 목록 -->
 	<div class="row center">
-	<table>
+	<table class="table table-slit">
 		<thead>
 			<tr>
 				<td>지점명</td>
@@ -69,9 +73,7 @@
 	</table>
 	</div>
 	
-	<div class="center">
-		<a class="btn btn-positive" href="cinemaAdd">추가</a>
-	</div>
+	
 
 </div>
 

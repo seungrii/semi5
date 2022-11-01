@@ -5,7 +5,7 @@
 	<jsp:param value="로그인" name="title"/>
 </jsp:include>
 	<section class="w-980">
-		<div class="row mt-20 center">
+		<div class="row mt-50 center">
 			<h1>개인정보 수정</h1>
 		</div>
 		<!-- 지점 이미지 첨부 -->
@@ -26,13 +26,13 @@
 				<input type="hidden" name="userId" value="${userDto.userId}" >
 			</div>
 			<div class="row">
-				<input type="email" name="userEmail" value="${userDto.userEmail}">
+				<input class="input-user" type="email" name="userEmail" value="${userDto.userEmail}" placeholder="이메일을 입력해주세요">
 			</div>
 			<div class="row">
-				<input type="tel" name="userTel" value="${userDto.userTel }" >
+				<input class="input-user" type="tel" name="userTel" value="${userDto.userTel }" placeholder="전화번호를 입력해주세요">
 			</div>
 			<!-- 회원 프로필 첨부 -->
-			<div class="row">
+			<div class="row mt-10">
 				<span>첨부파일(1개당 1MB. 최대 10MB 가능)</span>
 			</div>
 			<div class="row">

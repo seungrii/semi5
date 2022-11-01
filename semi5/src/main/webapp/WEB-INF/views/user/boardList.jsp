@@ -2,10 +2,10 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="/WEB-INF/views/template/header.jsp">
-	<jsp:param value="메인화면" name="title"/>
+	<jsp:param value="내 게시글" name="title"/>
 </jsp:include>
 	<section class="w-980">
-		<div class="row center mt-40 mb-40">
+		<div class="row center mt-50 mb-40">
 			<h1>내가 작성한 게시글</h1>
 		</div>
 		
