@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
@@ -12,6 +13,7 @@ import com.victory.semi5.entity.CinemaDto;
 import com.victory.semi5.entity.MovieDto;
 import com.victory.semi5.vo.AdvanceTimeVO;
 import com.victory.semi5.vo.CinemaNameVO;
+import com.victory.semi5.vo.DateVO;
 import com.victory.semi5.vo.MovieScheduleVO;
 
 @Repository
@@ -136,6 +138,19 @@ public class AdvanceDaoImpl implements AdvanceDao {
 		return jdbcTemplate.query(sql, AdvanceTimeMapper, param);
 	}
 	
+	private RowMapper<DateVO> dateMapper = (rs, idx) -> {
+		DateVO dateVO = new DateVO();
+		
+		dateVO.setSysdate(rs.getDate("days"));
+		
+		return dateVO;
+	};
 	
+	@Override
+	public List<DateVO> selectDatelist() {
+		String sql = "select to_date(sysdate) + (level - 1) days from dual "
+				+ "connect by level <= (to_date(sysdate+30) - to_date(sysdate) + 1)";
+		return jdbcTemplate.query(sql, dateMapper);
+	}
 
 }//AdvanceDao end
