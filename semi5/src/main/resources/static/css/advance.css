@@ -1,0 +1,237 @@
+@charset "UTF-8";
+
+.advance-container {
+    height: 720px;
+    display: flex;
+    /* position: relative; */
+    /* padding: 5px; */
+    background-color: #F9E7BA;
+    border: 1px solid #888;
+}
+
+.advance-movie {
+    width: 284px;
+    height: 100%;
+    /* background-color: blue; */
+    /* position: absolute; */
+    border-right: 1px solid #888;
+}
+
+.advance-cinema {
+    width: 265px;
+    height: 100%;
+    /* background-color: green; */
+    /* position: absolute; */
+    border-right: 1px solid #888;
+}
+
+.advance-date {
+    width: 131px;
+    height: 100%;
+    /* background-color: aqua; */
+    /* position: absolute; */
+    border-right: 1px solid #888;
+}
+
+.advance-time {
+    width: 300px;
+    height: 100%;
+    /* background-color: yellowgreen; */
+    /* position: absolute; */
+}
+
+.advance-movie span,
+.advance-cinema span, 
+.advance-date span, 
+.advance-time span 
+{
+    width: 100%;
+    height: 30px;
+    color: #F9E7BA;
+    background-color: #511517;
+    display: block;
+    text-align: center;
+    line-height: 30px;
+}
+.advance-btn-box {
+    display: flex;
+    justify-content: right;
+    height: 130px;
+    background-color: #511517;
+    align-items: center;
+    padding: 10px;
+}
+.advance-btn-box.second {
+    display: flex;
+    justify-content: space-between;
+}
+
+.advance-next-btn,
+.advance-prev-btn
+ {
+    width: 100px;
+    height: 100px;
+    font-weight: 600;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    border-radius: 10px;
+    background-color: #F9E7BA;
+    color: #511517;
+}
+
+.advance-next-btn > i,
+.advance-prev-btn > i
+ {
+    font-size: 50px;
+}
+
+.advance-payment-btn {
+    width: 160px;
+    height: 100px;
+    font-size: 20px;
+    font-weight: 600;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    border-radius: 10px;
+    background-color: #F9E7BA;
+    color: #511517;
+}
+.advance-payment-btn > i {
+    font-size: 40px;
+}
+
+.advance-person-screen {
+    display: flex;
+    height: 140px;
+    padding-top: 20px;
+    /* background-color: green; */
+}
+
+.group-box, .user-select-info {
+    /* background-color: red; */
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+}
+
+.advance-group, .advance-group ul {
+    display: flex;
+    margin-bottom: 3px;
+}
+
+.advance-group li {
+    margin-left: 5px;
+    width: 20px;
+    height: 20px;
+    border: 1px solid #d6d3ce;
+    background-color: #f2f0e5;
+    
+}
+
+.advance-group li > a {
+    display: block;
+    height: 100%;
+    text-align: center;
+    font-weight: bold;
+    line-height: 20px;
+}
+
+.advance-group li.selected {
+    border-color: black;
+    background-color: #333;
+    color: white;
+}
+
+.advance-group li.selected >a {
+    color: white;
+}
+
+.advance-group span {
+    width: 60px;
+}
+
+.advance-group .impossible {
+    background-color: #777;
+}
+
+.advance-container.second {
+    flex-direction: column;
+}
+
+.seat-box {
+    text-align: center;
+    /* background-color: gold; */
+    width: 300px;
+    margin: 200px auto 0 auto;
+
+}
+
+.seat-row {
+    width: 200px;
+    margin: 0 auto;
+}
+
+/* #ad1712 */
+.seat-line {
+    display: flex;
+    justify-content: center;
+}
+
+.seat-line li {
+    width: 20px;
+    height: 20px;
+    background-color: #666;
+}
+.seat-line li:hover {
+    background-color: #511517;
+}
+/* 예매를 하기 위해 사용자가 선택한 좌석 표시에 사용 */
+.seat-select {
+    background-color: #511517;
+}
+/* 예매가 완료된 좌석에 사용 */
+.seat-advance-complete {
+    background-color: #e6e6e6;
+}
+.seat-line li>a {
+    display: block;
+    color: white;
+}
+
+.seat-line span {
+    width: 20px;
+}
+
+.advance-seat > div {
+    float: left;
+}
+.advance-seat > div:nth-child(1) {
+    width: 830px;
+}
+.advance-seat > div:nth-child(2) {
+    width: 130px;
+    height: 100%;
+}
+
+.screen {
+    width: 780px;
+    height: 30px;
+    text-align: center;
+    margin: 10px auto 0 auto;
+    line-height: 30px;
+    background-color: #e6e6e6;
+}
+
+.seat-choice-info>div {
+    margin-top: 195px;
+}
+
+.seat-choice-info p:nth-child(1)>i {
+    color: #511517;
+}
+.seat-choice-info p:nth-child(2)>i {
+    color: #e6e6e6;
+}

@@ -5,267 +5,15 @@
 	<jsp:param name="title" value="예매" />
 </jsp:include>
 
-<style>
-.advance-container {
-    height: 720px;
-    display: flex;
-    /* position: relative; */
-}
-
-.advance-movie {
-    width: 284px;
-    height: 100%;
-    /* background-color: blue; */
-    /* position: absolute; */
-}
-
-.advance-cinema {
-    width: 265px;
-    height: 100%;
-    /* background-color: green; */
-    /* position: absolute; */
-}
-
-.advance-date {
-    width: 91px;
-    height: 100%;
-    /* background-color: aqua; */
-    /* position: absolute; */
-}
-
-.advance-time {
-    width: 340px;
-    height: 100%;
-    /* background-color: yellowgreen; */
-    /* position: absolute; */
-}
-.advance-btn-box {
-    display: flex;
-    justify-content: right;
-}
-
-.advance-next-btn {
-    width: 100px;
-    height: 100px;
-}
-
-.advance-next-btn > i {
-    font-size: 50px;
-}
-
-.advance-person-screen {
-    display: flex;
-    height: 140px;
-    padding-top: 20px;
-    background-color: green;
-}
-
-.group-box, .user-select-info {
-    background-color: red;
-    display: flex;
-    flex-direction: column;
-    width: 50%;
-}
-
-.advance-group, .advance-group ul {
-    display: flex;
-    margin-bottom: 3px;
-}
-
-.advance-group li {
-    margin-left: 5px;
-    width: 20px;
-    height: 20px;
-    border: 1px solid #d6d3ce;
-    background-color: #f2f0e5;
-    
-}
-
-.advance-group li > a {
-    display: block;
-    height: 100%;
-    text-align: center;
-    font-weight: bold;
-    line-height: 20px;
-}
-
-.advance-group li.selected {
-    border-color: black;
-    background-color: #333;
-    color: white;
-}
-
-.advance-group li.selected >a {
-    color: white;
-}
-
-.advance-group span {
-    width: 60px;
-}
-
-.advance-group .impossible {
-    background-color: #777;
-}
-
-.advance-container.second {
-    flex-direction: column;
-}
-
-</style>
-
-<script type="text/javascript">
-$(function(){
-    var movieNumber, cinemaName, moviePlayDate, moviePlayTime, theaterHall;
-    var moviePlay = moviePlayDate + " " +moviePlayTime
-
-    $(".advance-movie").find("li").click(function(){
-        // $(".advance-theater").css("color","red");
-        // console.log($(this).text()); //text 확인
-
-        movieNumber = $(this).data("no");
-        // console.log($(this).data("no"));
-        if(!movieNumber) return;
-
-        $.ajax({
-            url:"http://localhost:8888/rest/advance/cinemalist?movieNumber="+$(this).data("no"),//moiveNumber,
-            method:"get",
-            success:function(resp){
-                // console.log(resp);// list값 제대로 넘어옴
-                $(".advance-cinema").find("li").remove();
-                $.each(resp, function(index, item){
-                    $(".advance-cinema").find("ul").append("<li>"+item.cinemaName+"</li>");
-                    
-                });
-                
-            }
-        }); //ajax end
-        return movieNumber;
-    }); //click function end
-
-
-    $(document).on("click",".advance-cinema li",function(){
-        // console.log(movieNumber); //movieNumber 확인
-        // console.log($(this).text()); //text 확인
-
-        $.ajax({
-            url:"http://localhost:8888/rest/advance/datelist?movieNumber=" + movieNumber + "&cinemaName=" + $(this).text(),//moiveNumber,
-            method:"get",
-            success:function(resp){
-                // console.log(resp);// list값 제대로 넘어옴
-                $(".advance-date").find("li").remove();
-                $.each(resp, function(index, item){
-                    $(".advance-date").find("ul").append("<li>"+item.moviePlayStart+"</li>");
-                    
-                });
-                // console.log("통신완료");
-            }
-        }); //ajax end
-        cinemaName = $(this).text();
-        return cinemaName;
-    });// click function end
-
-    
-    $(document).on("click",".advance-date li", function(){
-        
-        $.ajax({
-            url:"http://localhost:8888/rest/advance/timelist?movieNumber=" + movieNumber + "&cinemaName=" + cinemaName + "&moviePlayDate="+$(this).text(),//moiveNumber,
-            method:"get",
-            success:function(resp){
-                // console.log(resp);// list값 제대로 넘어옴
-                $(".advance-time").find("li").remove();
-                $.each(resp, function(index, item){
-                    $(".advance-time").find("ul").append("<li>"+item.time+"</li>");
-                    // $(".advance-time").find("ul").append("<li>"+"<sapn>"+item.theatertype+"</span>"+
-                    //     "<sapn>"+item.theaterHall+"관"+"</span>"+
-                    //     "<sapn>"+item.time+"</span>"+
-                    //     "<sapn>"+item.theaterTotalSeat+"석"+"</span>"+
-                    //     "</li>");
-                    // $(".advance-time").find("ul").append("<li>"+item.theatertype+"</li>");
-                    // $(".advance-time").find("ul").append("<li>"+item.theaterHall+"관"+"</li>");
-                    // $(".advance-time").find("ul").append("<li>"+item.time+"</li>");
-                    // $(".advance-time").find("ul").append("<li>"+item.theaterTotalSeat+"석"+"</li>");
-                    
-                });
-                // console.log("통신완료");
-            }
-    });//ajax end
-    moviePlayDate = $(this).text();
-    return moviePlayDate, theaterHall;
-    });// click function end
-
-    $(document).on("click", ".advance-time li", function(){
-        var moviePlayTime = $(this).text();
-        // console.log(moviePlayTime);
-        return moviePlayTime;
-
-    });
-
-    // 첫페이지의 선택사항을 모두 선택했을시 버튼 활성화 기능 구현중
-    // if(movieNumber, cinemaName, moviePlayDate, moviePlayTime != null){
-    //     $(".advance-next-btn").css("background-color","red");
-    // }
-
-    
-    $(".advance-group").find("a").click(function(e){
-        e.preventDefault();
-        $(this).parent().addClass("selected");
-        $(this).parent().siblings(".selected").removeClass("selected");
-
-        
-        var num1 = $(".selected").text().charAt(0);
-        var num2 = $(".selected").text().charAt(1);
-        var num3 = $(".selected").text().charAt(2);
-        var max = parseInt(num1) + parseInt(num2) + parseInt(num3);
-        // console.log(max); //확인 완료
-        // if(max >= 8) {
-        //     $(".advance-group").find(".selected").siblings().addClass("impossible");
-        // }
-        // else{
-        //     $(".advance-group").find(".selected").siblings().removeClass("impossible");
-        // }
-
-        $(".advance-group").find("a").each(function(){
-            var fieldNum = $(this).text();
-            var intFieldNum = Number(parseInt(fieldNum));
-            var intMax = Number(max)
-            console.log("intFieldNum = "+intFieldNum);
-            console.log(intFieldNum+intMax);
-
-            var a = intFieldNum + intMax;
-            // console.log(a);
-            if(a > 8) {
-                $(this).not(a<8).addClass("impossible");
-                $(".selected").removeClass("impossible")
-                $(".selected").prevAll().removeClass("impossible");
-            }
-            else {
-                $(this).removeClass("impossible");
-            }
-        });
-
-    });
-
-
-    $(".advance-next-btn").click(function(){
-        // 좌석선택 버튼을 클릭해서 다음 div로 넘어왔을때 정보를 뿌려주기 위해 작성하던 코딩 미완성.
-        // $(".user-select-info").find("ul").append("<li>"+cinemaName+"</li>").append("<li>"+theaterHall+"</li>");
-        $(".user-select-info").find("li").remove();
-        $(".user-select-info").find("ul").append("<li>"+cinemaName+"</li>");
-    });
-
-
-});
-
-        
-    </script>
-
 <section class="w-980">
             <!-- 컨텐츠 -->
+            <form action="advance" method="post">
             <div class="advance-container">
                 <!-- 영화 고르는 박스 -->
                 <!-- 284px -->
                 <div class="advance-movie">
                     <div>
+                        <span>영화</span>
                         <ul>
                         <c:forEach var="movieList" items="${movieList}">
                             <li data-no="${movieList.movieNumber}">${movieList.movieName}</li>
@@ -277,6 +25,7 @@ $(function(){
                 <!-- 265px -->
                 <div class="advance-cinema">
                     <div>
+                        <span>지점</span>
                         <ul>
                         <c:forEach var="cinemaList" items="${cinemaList}">
                             <li>${cinemaList.cinemaPorin}</li>
@@ -288,12 +37,11 @@ $(function(){
                 <!-- 91px -->
                 <div class="advance-date">
                     <div>
+                        <span>날짜</span>
                         <ul>
-                            <li>날짜1</li>
-                            <li>날짜2</li>
-                            <li>날짜3</li>
-                            <li>날짜4</li>
-                            <li>날짜5</li>
+                        <c:forEach var="dateList" items="${dateList}">
+                            <li>${dateList.sysdate}</li>
+                        </c:forEach>
                         </ul>
                     </div>
                 </div>
@@ -301,26 +49,22 @@ $(function(){
                 <!-- 340px -->
                 <div class="advance-time">
                     <div>
+                        <span>시간</span>
                         <ul>
-                            <li>시간1</li>
-                            <li>시간2</li>
-                            <li>시간3</li>
-                            <li>시간4</li>
-                            <li>시간5</li>
+                            <li></li>
                         </ul>
                     </div>
                 </div>
             </div>
-            
             <div class="advance-btn-box">
                 <button class="advance-next-btn">
                     <i class="fa-sharp fa-solid fa-circle-arrow-right"></i>
-                    <span>좌석석택</span>
+                    <p>좌석석택</p>
                 </button>
             </div>
 
 
-            <div class="advance-container second" style="background-color: blue;">
+            <div class="advance-container second" style="display: none;">
                 <div class="advance-person-screen w-100">
                     <div class="group-box">
                         <div class="advance-group adult">
@@ -376,54 +120,135 @@ $(function(){
                     </div>
                 </div>
 
-                <div>
+                <div class="advance-seat">
                     <div>
-						<ul>
-							<li>1</li>
-							<li>2</li>
-							<li>3</li>
-							<li>4</li>
-							<li>5</li>
-							<li>6</li>
-						</ul>
-						<ul>
-							<li>1</li>
-							<li>2</li>
-							<li>3</li>
-							<li>4</li>
-							<li>5</li>
-							<li>6</li>
-						</ul>
-						<ul>
-							<li>1</li>
-							<li>2</li>
-							<li>3</li>
-							<li>4</li>
-							<li>5</li>
-							<li>6</li>
-						</ul>
-						<ul>
-							<li>1</li>
-							<li>2</li>
-							<li>3</li>
-							<li>4</li>
-							<li>5</li>
-							<li>6</li>
-						</ul>
-						<ul>
-							<li>1</li>
-							<li>2</li>
-							<li>3</li>
-							<li>4</li>
-							<li>5</li>
-							<li>6</li>
+                        <div class="screen"><span>SCREEN</span></div>
+                        <!-- ul > li 행(row), ul > li > ul 열(line) -->
+                        <ul class="seat-box">
+							<li class="seat-row">
+                                <ul class="seat-line">
+                                    <span>A</span>
+                                    <c:forEach var="i" begin="1" end="8">
+                                    	<li><a href="#" data-row="A" data-line="${i}">${i}</a></li>
+                                    </c:forEach>
+                                </ul>
+                            </li>
+							<li class="seat-row">
+                                <ul class="seat-line">
+                                    <span>B</span>
+                                    <c:forEach var="i" begin="1" end="8">
+                                    	<li><a href="#" data-row="B" data-line="${i}">${i}</a></li>
+                                    </c:forEach>
+                                </ul>
+                            </li>
+							<li class="seat-row">
+                                <ul class="seat-line">
+                                    <span>C</span>
+                                    <c:forEach var="i" begin="1" end="8">
+                                    	<li><a href="#" data-row="C" data-line="${i}">${i}</a></li>
+                                    </c:forEach>
+                                </ul>
+                            </li>
+							<li class="seat-row">
+                                <ul class="seat-line">
+                                    <span>D</span>
+                                    <c:forEach var="i" begin="1" end="8">
+                                    	<li><a href="#" data-row="D" data-line="${i}">${i}</a></li>
+                                    </c:forEach>
+                                </ul>
+                            </li>
+							<li class="seat-row">
+                                <ul class="seat-line">
+                                    <span>E</span>
+                                    <c:forEach var="i" begin="1" end="8">
+                                    	<li><a href="#" data-row="E" data-line="${i}">${i}</a></li>
+                                    </c:forEach>
+                                </ul>
+                            </li>
+							<li class="seat-row">
+                                <ul class="seat-line">
+                                    <span>F</span>
+                                    <c:forEach var="i" begin="1" end="8">
+                                    	<li><a href="#" data-row="F" data-line="${i}">${i}</a></li>
+                                    </c:forEach>
+                                </ul>
+                            </li>
+							<li class="seat-row">
+                                <ul class="seat-line">
+                                    <span>G</span>
+                                    <c:forEach var="i" begin="1" end="8">
+                                    	<li><a href="#" data-row="G" data-line="${i}">${i}</a></li>
+                                    </c:forEach>
+                                </ul>
+                            </li>
+							<li class="seat-row">
+                                <ul class="seat-line">
+                                    <span>H</span>
+                                    <c:forEach var="i" begin="1" end="8">
+                                    	<li><a href="#" data-row="H" data-line="${i}">${i}</a></li>
+                                    </c:forEach>
+                                </ul>
+                            </li>
+							<li class="seat-row">
+                                <ul class="seat-line">
+                                    <span>I</span>
+                                    <c:forEach var="i" begin="1" end="8">
+                                    	<li><a href="#" data-row="I" data-line="${i}">${i}</a></li>
+                                    </c:forEach>
+                                </ul>
+                            </li>
+							<li class="seat-row">
+                                <ul class="seat-line">
+                                    <span>J</span>
+                                    <c:forEach var="i" begin="1" end="8">
+                                    	<li><a href="#" data-row="J" data-line="${i}">${i}</a></li>
+                                    </c:forEach>
+                                </ul>
+                            </li>
 						</ul>
                     </div>
-                    <div>
-
+                    <div class="seat-choice-info">
+                        <div>
+                            <p><i class="fa-solid fa-square"></i>선택</p>
+                            <p><i class="fa-solid fa-square"></i>예매완료</p>
+                        </div>
                     </div>
                 </div>
             </div>
+            <div class="advance-btn-box second" style="display: none;">
+                <button class="advance-prev-btn">
+                    <i class="fa-sharp fa-solid fa-circle-arrow-left"></i>
+                    <p>영화선택</p>
+                </button>
+                <button class="advance-next-btn">
+                    <i class="fa-sharp fa-solid fa-circle-arrow-right"></i>
+                    <p>결제선택</p>
+                </button>
+            </div>
+
+            <div style="display: none;">
+                <div>
+                    <h1>예매내역</h1>
+                    <input type="text" name="userId" value= ${session.loginId} readonly>
+                    <input type="text" name="moviePlayNum" value="moviePlayNum" readonly>
+                    <input type="text" name="seatNum" value="seatNum" readonly>
+                    <input type="text" name="priceTotal" value="priceTotal" readonly>
+                </div>
+                <div>
+
+                </div>
+            </div>
+            <div class="advance-btn-box second" style="display: none;">
+                <button class="advance-prev-btn">
+                    <i class="fa-sharp fa-solid fa-circle-arrow-left"></i>
+                    <p>좌석선택</p>
+                </button>
+                <button class="advance-payment-btn" type="submit">
+                    <i class="fa-solid fa-coins"></i>
+                    <p>결제하기</p>
+                </button>
+            </div>
+        </form>
             
         </section>
 
