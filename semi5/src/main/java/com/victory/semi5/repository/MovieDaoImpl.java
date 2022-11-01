@@ -57,22 +57,27 @@ public class MovieDaoImpl implements MovieDao {
 
 
 	@Override
-	public void insert(MovieDto dto) {
-		String sql="insert into movie("
-				+"movie_number,movie_name,opening_date, "
-				+"screening_end, movie_summary,movie_play_time,movie_age_limit"
-				+ ") values("
-				+"movie_seq.nextval,?,?,?,?,?,?"
-				+")";
-		
-		Object[] param= {
-				dto.getMovieName(),dto.getOpeningDate(),
-				dto.getScreeningEnd(),dto.getMovieSummary(),
-				dto.getMoviePlayTime(),dto.getMovieAgeLimit()
-		};
-		jdbcTemplate.update(sql,param);
+	public int insert2(MovieVO movieVO) {
+		// TODO Auto-generated method stub
+	String sql="select movie_seq.nextval from dual";
+	int movieNumber=jdbcTemplate.queryForObject(sql, int.class);
+	
+	sql="insert into movie("
+			+"movie_number,movie_name,opening_date, "
+			+"screening_end, movie_summary,movie_play_time,movie_age_limit"
+			+ ") values("
+			+"?,?,?,?,?,?,?"
+			+")";
+	Object[] param= {
+			movieNumber,movieVO.getMovieName(),movieVO.getOpeningDate(),
+			movieVO.getScreeningEnd(),movieVO.getMovieSummary(),
+			movieVO.getMoviePlayTime(),movieVO.getMovieAgeLimit(),
+			
+	};
+		jdbcTemplate.update(sql, param);
+		return movieNumber;
 	}
-
+	
 	@Override
 	public List<MovieDto> selectList() {
 		  String sql="select*from movie order by movie_number asc";
@@ -95,23 +100,6 @@ public class MovieDaoImpl implements MovieDao {
 	    return jdbcTemplate.query(sql, extractor, param);
 	 }
 
-	@Override
-	public boolean update(MovieDto dto) {
-		String sql="update movie "
-				+"set "
-				+"movie_name=?,opening_date=?,screening_end=?,movie_summary=?,movie_play_time=?,movie_age_limit=? "
-				+"where "
-					+"movie_number=?";
-	
-		Object[] param= {
-				dto.getMovieName(),dto.getOpeningDate(),
-				dto.getScreeningEnd(),dto.getMovieSummary(),
-				dto.getMoviePlayTime(),dto.getMovieAgeLimit(),
-				dto.getMovieNumber()
-		};
-		return jdbcTemplate.update(sql,param)>0;
-	}
-
 	@Override//삭제
 	public boolean delete(int movieNumber) {
 		String sql="delete movie where movie_number=?";
@@ -121,33 +109,13 @@ public class MovieDaoImpl implements MovieDao {
 	}
 
 	@Override
-	public int insert2(MovieVO movieVO) {
-		// TODO Auto-generated method stub
-	String sql="select movie_seq.nextval from dual";
-	int movieNumber=jdbcTemplate.queryForObject(sql, int.class);
-	
-	sql="insert into movie("
-			+"movie_number,movie_name,opening_date, "
-			+"screening_end, movie_summary,movie_play_time,movie_age_limit"
-			+ ") values("
-			+"?,?,?,?,?,?,?"
-			+")";
-	Object[] param= {
-			movieNumber,movieVO.getMovieName(),movieVO.getOpeningDate(),
-			movieVO.getScreeningEnd(),movieVO.getMovieSummary(),
-			movieVO.getMoviePlayTime(),movieVO.getMovieAgeLimit(),
-			
-	};
-		jdbcTemplate.update(sql, param);
-		return movieNumber;
-	}
-
-	@Override
 	public void insertHashtag(int movieNumber, int genreNo) {
 		String sql = "insert into hashtag values(?, ?)";
 		Object[] param = {movieNumber, genreNo};
 		jdbcTemplate.update(sql, param);
 	}
+
+
 
 	
 }

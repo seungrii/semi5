@@ -148,7 +148,14 @@ create table poster(
 movie_number references movie(movie_number) on delete cascade,
 file_number references image(file_number) on delete cascade
 );
-
+-- view 테이블 생성 : 영화포스터-이미지 join
+create view poster_image_view as
+select
+    P.movie_number, A.*
+from
+    poster P inner join image A
+    on P.file_number = A.file_number;
+    
 ----가격표
 create table theater_price(
 theater_num references theater(theater_num),

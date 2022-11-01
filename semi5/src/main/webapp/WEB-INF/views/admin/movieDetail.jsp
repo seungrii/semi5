@@ -11,7 +11,6 @@
 
 
 
-	<form action="movieAdd" method="post" enctype="multipart/form-data"> 
 		<div class="row center fs-28">
 			<span>영화 정보 상세</span>
 		</div>
@@ -76,17 +75,37 @@
 			<span>1: 공포,2.로맨스 .. 추가 해야 함</span>
 		</div>
 		
+		<form action="moviePosterAdd" method="post" enctype="multipart/form-data"> 
 		<!-- 영화 포스터 첨부 -->
-		<!-- <div class="row left mt-20">
+		<div class="row left">
+			<input class="input input-line w-100" type="hidden" name="movieNumber" value="${movieDto.movieNumber}">
 			<label>첨부파일(1개당 1MB. 최대 10MB 가능)</label>
-			<input class="input input-line w-100" type="file" name="imageCinema" accept=".png,.jpg">
-		</div> -->
+			<input class="input input-line w-100" type="file" name="attachments" multiple>
+			<button class="btn btn-positive" type="submit">포스터 추가</button>
+		</div>
+		</form>
+		
+		<c:if test="${!attachments.isEmpty()}">
+			<div class="row left">
+				<label class="ms-10">영화 포스터</label>
+				<div class="mt-10">
+				<c:forEach var="imageDto" items="${attachments}">
+					<span class="ms-10 mt-10">
+					<img src="/attachment/download/${imageDto.fileNumber}" width="100" height="100">
+					<a href="/attachment/download/${imageDto.fileNumber}">다운로드</a>
+					<a href="/admin/posterDelete?movieNumber=${movieDto.movieNumber}&fileNumber=${imageDto.fileNumber}">삭제</a>
+					</span>
+				</c:forEach>
+				</div>
+			</div>
+		</c:if>
 		
 		<div class="row center mt-30">
 			<a class="btn btn-neutral" href="movieList">목록</a>
 			<a class="btn btn-negative" href="movieDelete?movieNumber=${movieDto.movieNumber}">삭제</a>
 		</div>
-	</form>
+		
+		
 	
 </div>
 

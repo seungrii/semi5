@@ -109,6 +109,13 @@ public class AttachmentDaoImpl implements AttachmentDao{
 		Object[] param = {movieNumber, fileNumber};
 		jdbcTemplate.update(sql, param);
 	}
+	@Override
+	public List<ImageDto> selectPosterList(int movieNumber) {
+		String sql = "select * from poster_image_view "
+					+ "where movie_number= ? order by file_time asc";
+		Object[] param = {movieNumber};
+		return jdbcTemplate.query(sql, mapper, param);
+	}
 	
 //	회원 프로필
 	@Override
