@@ -1,4 +1,4 @@
-package com.victory.semi5.entity;
+package com.victory.semi5.vo;
 
 import java.sql.Date;
 
@@ -8,8 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data @AllArgsConstructor @NoArgsConstructor @Builder
-public class TicketingDto {
-	private int ticketingNum, moviePlayNum, seatNum, priceTotal;
-	private String userId;
-	private Date ticketingTime;
+public class DateVO {
+	private Date sysdate;
+
 }
