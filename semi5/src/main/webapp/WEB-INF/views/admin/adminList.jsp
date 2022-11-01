@@ -1,49 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<jsp:include page="/WEB-INF/views/admin/admin-template/adminHeader.jsp">
+<jsp:include page="/WEB-INF/views/template/header.jsp">
 	<jsp:param value="관리자계정 목록" name="title"/>
 </jsp:include>
-<section>
+
 <!-- 관리자메뉴 사이드바 -->
-    <div class="container left">
-    	<aside>
-    		<div class="float-container mt-50">
-    			<div class="row">
-    				<h2>관리자메뉴</h2>
-    			</div>
-	 		    <div class="row">
-	    			<a href="/admin/adminList">관리자 계정</a>
-	     		</div>
-	     		<div class="row">
-	     			<a href="/admin/userList">회원 정보</a>
-	     		</div>
-	     		<div class="row">
-	     			<a href="/admin/cinemaList">지점 관리</a>
-	     		</div>
-	     		<div class="row">
-	     			<a href="/admin/movieList">영화정보 관리</a>
-	     		</div>
-	     		<div class="row">
-	     			<a href="/admin/moviePlayList">상영스케쥴 관리</a>
-	     		</div>
-  			     <div class="row">
-	     			<a href="/notice/list">커뮤니티</a>
-	     		</div>
-	     		<div class="row">
-	     			<a href="#">1:1 문의내역</a>
-	     		</div>
-    		</div>
-    	</aside>
-    </div>
-<div class="float-container mt-50">
-	<div class="container">
-	<div class="row center">
+<section class="w-980 test-css">
+<jsp:include page="/WEB-INF/views/template/sidebar.jsp"></jsp:include>
+
+<div class="container-650">
+	<div class="row center mt-50">
 		<h1>관리자계정 조회</h1>
 	</div>
 	
 	<!-- 키워드 검색 -->
-	<div class="float-container row right">
+	<div class="row mt-30 center">
 	<form action="adminList" method="get">
 		<!-- type 선택목록 -->
 		<c:choose>
@@ -63,12 +35,13 @@
 		<!-- keyword 입력 -->
 		<input class="input input-underline" type="search" name="keyword" required value="${param.keyword}">
 		<button class="btn btn-neutral" type="submit">검색</button>
+		<a class="btn btn-positive" href="adminAdd">추가</a>
+		
 	</form>
 	</div>
 	
 	<!-- 관리자계정 목록 -->
-	<div class="row center">
-	<table class="table table-slit">
+	<table class="table table-slit mt-30">
 		<thead>
 			<tr class="center">
 				<td>아이디</td>
@@ -97,11 +70,9 @@
 	</table>
 	</div>
 	
-	<div class="center mt-50">
+	<!-- <div class="mt-30">
 		<a class="btn btn-positive" href="adminAdd">추가</a>
-	</div>
+	</div> -->
 
-</div>
-</div>
 </section>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

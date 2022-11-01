@@ -1,14 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<jsp:include page="/WEB-INF/views/admin/admin-template/adminHeader.jsp">
+<jsp:include page="/WEB-INF/views/template/header.jsp">
 	<jsp:param value="지점 목록" name="title"/>
 </jsp:include>
-<section class="w-980 test-css">
+<section class="container">
+<jsp:include page="/WEB-INF/views/template/sidebar.jsp"></jsp:include>
 
-<div class="container">
+<div class="row">
 
-	<div class="row center mt-50">
+	<div class="center mt-50">
 		<h1>지점 목록</h1>
 	</div>
 	
@@ -33,15 +34,12 @@
 		<!-- keyword 입력 -->
 		<input class="input input-underline" type="search" name="keyword" required value="${param.keyword}">
 		<button class="btn btn-neutral" type="submit">검색</button>
+		<a class="btn btn-positive" href="cinemaAdd">추가</a>
 	</form>
 	</div>
 	
-	<div class="right mb-10">
-		<a class="btn btn-positive" href="cinemaAdd">추가</a>
-	</div>
-	
 	<!-- 목록 -->
-	<div class="row center">
+	<div class="container center">
 	<table class="table table-slit">
 		<thead>
 			<tr>
