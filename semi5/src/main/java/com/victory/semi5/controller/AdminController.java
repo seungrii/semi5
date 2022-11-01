@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -25,7 +24,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.victory.semi5.entity.AdminDto;
 import com.victory.semi5.entity.CharacterDto;
 import com.victory.semi5.entity.CinemaDto;
-import com.victory.semi5.entity.GenreDto;
 import com.victory.semi5.entity.ImageDto;
 import com.victory.semi5.entity.MovieDto;
 import com.victory.semi5.entity.MoviePlayDto;
