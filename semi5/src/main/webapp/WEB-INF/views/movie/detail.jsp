@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
@@ -9,7 +9,6 @@
 </jsp:include>
 
 
-<title>${dto.movieNumber}번 영화 정보</title>
 <style>
 
 	.container-980 { width:980px; margin:0 auto; }
