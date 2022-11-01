@@ -12,4 +12,6 @@ public interface OneQnaDao {
 	OneQnaDto selectOne(int askingNo);
 	
 	List<OneQnaDto> selectList();
+	
+	boolean insertAnswer(OneQnaDto oneQnaDto);
 }

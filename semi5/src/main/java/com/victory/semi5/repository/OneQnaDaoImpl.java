@@ -75,5 +75,13 @@ public class OneQnaDaoImpl implements OneQnaDao{
 		return jdbcTemplate.query(sql, mapper);
 	}
 	
+	public boolean insertAnswer(OneQnaDto oneQnaDto) {
+		String sql = "update asking set admin_id=?, asking_answer=?, asking_answer_time=sysdate "
+				+ "where asking_no=?";
+		Object[] param = {oneQnaDto.getAdminId(), oneQnaDto.getAskingAnswer(), oneQnaDto.getAskingNo()};
+		int result = jdbcTemplate.update(sql, param); 
+		return result > 0;
+	}
+	
 
 }

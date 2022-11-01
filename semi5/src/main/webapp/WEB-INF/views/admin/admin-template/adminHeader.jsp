@@ -202,7 +202,7 @@
 	     			<a href="/notice/list">커뮤니티</a>
 	     		</div>
 	     		<div class="row">
-	     			<a href="#">1:1 문의내역</a>
+	     			<a href="qnaAsking">1:1 문의내역</a>
 	     		</div>
     		</div>
     	</aside>

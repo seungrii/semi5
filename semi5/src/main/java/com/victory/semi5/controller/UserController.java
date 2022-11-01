@@ -349,6 +349,17 @@ public class UserController {
 		model.addAttribute("oneQnaDto", oneQnaDao.selectOne(askingNo));
 		return "user/qnaDetail";
 	}
+	@PostMapping("/oneQnaDetail")
+	public String oneQnaDetail(@ModelAttribute OneQnaDto oneQnaDto,
+			RedirectAttributes attr) {
+		boolean result = oneQnaDao.insertAnswer(oneQnaDto);
+		if(result) {
+			attr.addAttribute("askingNo", oneQnaDto.getAskingNo());
+			return "redirect:oneQnaDetail";
+		}else {
+			return "redirect:oneQnaDetail";
+		}
+	}
 	
 	@GetMapping("/boardList")
 	public String boardList(Model model,
