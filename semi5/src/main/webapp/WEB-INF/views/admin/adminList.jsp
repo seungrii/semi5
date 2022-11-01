@@ -7,13 +7,15 @@
 
 <!-- 관리자메뉴 사이드바 -->
 <section class="w-980 test-css">
+<div class="admin-box">
+
 <jsp:include page="/WEB-INF/views/template/sidebar.jsp"></jsp:include>
 
 <div class="container-980">
 	<div class="row center mt-50">
 		<h1>관리자계정 조회</h1>
 	</div>
-	
+	 
 	<!-- 키워드 검색 -->
 	<div class="row mt-30 center">
 	<form action="adminList" method="get">
@@ -73,6 +75,7 @@
 	<!-- <div class="mt-30">
 		<a class="btn btn-positive" href="adminAdd">추가</a>
 	</div> -->
-
+</div>
 </section>
+
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

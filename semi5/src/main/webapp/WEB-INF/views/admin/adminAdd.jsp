@@ -7,6 +7,8 @@
 <script src="/js/adminAccountCheck.js"></script>
 
 <section class="w-980 test-css">
+<div class="admin-box">
+
 <jsp:include page="/WEB-INF/views/template/sidebar.jsp"></jsp:include>
 	
 	
@@ -47,6 +49,6 @@
 	
  
 	
-	
+</div>	
 </section>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

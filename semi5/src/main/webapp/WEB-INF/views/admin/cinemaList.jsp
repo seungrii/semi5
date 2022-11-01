@@ -5,6 +5,8 @@
 	<jsp:param value="지점 목록" name="title"/>
 </jsp:include>
 <section class="container">
+<div class="admin-box">
+
 <jsp:include page="/WEB-INF/views/template/sidebar.jsp"></jsp:include>
 
 <div class="row">
@@ -47,7 +49,7 @@
 				<td>기본주소</td>
 				<td>상세주소</td>
 				<td>전화번호</td>
-				<td colspan="1">관리</td>
+				<td colspan="2">관리</td>
 			</tr>
 		</thead>
 		<tbody align="center">
@@ -74,6 +76,6 @@
 	
 
 </div>
-
+</div>
 </section>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
