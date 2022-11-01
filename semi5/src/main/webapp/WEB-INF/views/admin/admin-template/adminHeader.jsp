@@ -9,16 +9,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>
-		<c:choose>
-			<c:when test="${param.title != null}">
-				${param.title}
-			</c:when>
-			<c:otherwise>
-				VIC
-			</c:otherwise>
-		</c:choose>
-	</title>
+	
 
     <!-- 글꼴 Noto Sans Korean -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -166,52 +157,7 @@
         </div>
     </nav>
     
-    <!-- 관리자메뉴 사이드바 -->
-    <div class="container left">
-    	<aside>
-    		<div class="container-150">
-    			<div class="row">
-    				<h2>상태창</h2>
-    			</div>
-    			<div class="row">
-    				login : ${sessionScope.LoginId}
-    			</div>
-    			<div class="row">
-    				admin : ${sessionScope.loginGrade}
-    			</div>
-    			<div class="row">
-    				<h2>관리자메뉴</h2>
-    			</div>
-	 		    <div class="row">
-	    			<a href="/admin/adminList">관리자 계정</a>
-	     		</div>
-	     		<div class="row">
-	     			<a href="/admin/userList">회원 정보</a>
-	     		</div>
-	     		<div class="row">
-	     			<a href="/admin/cinemaList">지점 관리</a>
-	     		</div>
-	     		<div class="row">
-	     			<a href="/admin/movieList">영화정보 관리</a>
-	     		</div>
-	     		<div class="row">
-	     			<a href="/admin/moviePlayList">상영스케쥴 관리</a>
-	     		</div>
-  			     <div class="row">
-	     			<a href="/notice/list">커뮤니티</a>
-	     		</div>
-	     		<div class="row">
-
-	     			<a href="qnaAsking">1:1 문의내역</a>
-
-	     			<a href="/admin/askingList">1:1 문의내역</a>
-
-	     			<a href="#">1:1 문의내역</a>
-
-	     		</div>
-    		</div>
-    	</aside>
-    </div>
+    
     
     
     </main>

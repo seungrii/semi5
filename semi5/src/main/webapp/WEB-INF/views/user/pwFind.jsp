@@ -9,13 +9,13 @@
 				<h1>비밀번호 찾기</h1>
 			</div>
 			<div class="row mt-30">
-				아이디 <input class="input-user" type="text" name="userId">
+				<input class="input-user" type="text" name="userId" placeholder="아이디를 입력해주세요">
 			</div>
 			<div class="row">
-				이름 <input class="input-user" type="text" name="userName">
+				<input class="input-user" type="text" name="userName" placeholder="이름을 입력해주세요">
 			</div>
 			<div class="row">
-				전화번호 <input class="input-user" type="tel" name="userTel">
+				<input class="input-user" type="tel" name="userTel" placeholder="전화번호를 입력해주세요">
 			</div>
 			<div class="row mt-30">
 				<button class="btn btn-positive" id="pw-find" type="button">찾기</button>

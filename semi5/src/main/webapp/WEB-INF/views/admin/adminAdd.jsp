@@ -6,6 +6,7 @@
 <script src="/js/adminAccountCheck.js"></script>
 
 <section class="w-980 test-css">
+<jsp:include page="/WEB-INF/views/template/sidebar.jsp"></jsp:include>
 	
 	
 <div class="container-400">

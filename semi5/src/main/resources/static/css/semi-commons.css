@@ -513,6 +513,15 @@ aside{
     width: 25%;
     min-height: 400px;
 }
+.sidebar-css{
+	text-align:center;
+	background-color: rgb(233, 233, 233);
+	border: 0;
+	border-radius: 15px;
+	outline: none;
+	padding-left: 10px;
+	
+}
 #yadoran{
     padding: 20px;
     float: left;

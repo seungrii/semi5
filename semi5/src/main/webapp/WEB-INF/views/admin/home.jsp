@@ -3,8 +3,8 @@
 <jsp:include page="/WEB-INF/views/admin/admin-template/adminHeader.jsp">
 	<jsp:param value="관리자 home" name="title"/>
 </jsp:include>
-<section class="w-980 test-css">
-	
+<section class="w-980">
+<jsp:include page="/WEB-INF/views/template/sidebar.jsp"></jsp:include>
 <div class="container mt-50">
 	<h1>관리자 home</h1>
 	
