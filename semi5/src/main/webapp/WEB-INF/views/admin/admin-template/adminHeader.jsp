@@ -203,9 +203,13 @@
 	     		</div>
 	     		<div class="row">
 <<<<<<< HEAD
+	     			<a href="qnaAsking">1:1 문의내역</a>
+=======
+<<<<<<< HEAD
 	     			<a href="/admin/askingList">1:1 문의내역</a>
 =======
 	     			<a href="#">1:1 문의내역</a>
+>>>>>>> refs/remotes/origin/main
 >>>>>>> refs/remotes/origin/main
 	     		</div>
     		</div>

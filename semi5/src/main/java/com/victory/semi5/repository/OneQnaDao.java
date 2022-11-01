@@ -14,4 +14,5 @@ public interface OneQnaDao {
 	OneQnaDto selectOne(int askingNo);
 	
 	List<OneQnaDto> selectList();
+	
 }

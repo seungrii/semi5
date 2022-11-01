@@ -513,7 +513,8 @@ public class AdminController {
 
 	// Q&A 답변
 	@GetMapping("/qnaAsking")
-	public String qnaAsking() {
+	public String qnaAsking(Model model) {
+		model.addAttribute("oneQnaDto",oneQnaDao.selectList());
 		return "admin/askingList";
 	}
 	

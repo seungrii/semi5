@@ -82,7 +82,6 @@ public class OneQnaDaoImpl implements OneQnaDao{
 		Object[] param = {oneQnaDto.getAdminId(), oneQnaDto.getAskingAnswer(), oneQnaDto.getAskingNo()};
 		int result = jdbcTemplate.update(sql, param); 
 		return result > 0;
-	}
-	
+	}	
 
 }
