@@ -34,6 +34,7 @@ import com.victory.semi5.repository.AdminDao;
 import com.victory.semi5.repository.AttachmentDao;
 import com.victory.semi5.repository.CharacterDao;
 import com.victory.semi5.repository.CinemaDao;
+import com.victory.semi5.repository.GenreDao;
 import com.victory.semi5.repository.MovieDao;
 import com.victory.semi5.repository.MoviePlayDao;
 import com.victory.semi5.repository.UserDao;
@@ -63,6 +64,8 @@ public class AdminController {
 	private MovieDao movieDao;
 	@Autowired
 	private CharacterDao characterDao;
+	@Autowired
+	private GenreDao genreDao;
 	@Autowired
 	private MoviePlayDao moviePlayDao;
 	
@@ -281,6 +284,7 @@ public class AdminController {
 	}
 	
 	
+	
 //  영화정보 관리
   //영화정보 - 추가
   @GetMapping("/movieAdd")
@@ -326,43 +330,6 @@ public class AdminController {
       }
       return "redirect:movieList";
   }
-  
-  
-
-	//영화정보 - 조회(목록)
-//	@GetMapping("/movieList")
-//	public String movieList() {
-//	
-//		
-//		
-//	
-//		
-//		return "admin/movieList";
-////	}
-//	//영화정보 - 조회(상세)
-//	@GetMapping("/movieDetail")
-//	public String movieDetail() {
-//		return "admin/movieDetail";
-//	}
-//	//영화정보 - 수정
-//	@GetMapping("/movieChange")
-//	public String movieChange() {
-//		return "admin/movieChange";
-//	}
-//	@PostMapping("/movieChange")
-//	public String movieChange(
-//			RedirectAttributes attr) {
-//		return "redirect:movieDetail";
-//	}
-//	//영화정보 - 삭제
-//	@GetMapping ("/movieDelete") 
-//	public String movieDelete() {
-//		return "redirect:movieList";
-//	}
-	
-	
-	
-
 	//영화정보 - 조회 (목록)
 	@GetMapping("/movieList")
 	public String movieList(Model model,
@@ -379,150 +346,33 @@ public class AdminController {
 		}
 		return "admin/movieList";
 	}
-	
-//	@GetMapping("/moviePlayList")
-//	public String moviePlayList( Model model,
-//			@RequestParam(required = false) String type,
-//			@RequestParam(required = false) String keyword) {
-//		boolean isSearch = type != null && keyword != null;
-//		if(isSearch) {
-//			//뷰 조회) 상영스케쥴-영화정보-상영관정보
-//			model.addAttribute("moviePlayList", moviePlayDao.selectMoviePlayViewList(type, keyword));
-//		}
-//		else {
-//			//뷰 조회) 상영스케쥴-영화정보-상영관정보
-//			model.addAttribute("moviePlayList", moviePlayDao.selectMoviePlayViewList());		
-//		}
-//		return "admin/moviePlayList";
-//	}
-	
-	
 //상세"/movieDetail"
 	@GetMapping("/movieDetail")
 	public String movieDetail(Model model,
 			@RequestParam int movieNumber ) {
-		//MovieVO movieVO = movieDao.selectMovieView(movieNumber);
-		//model.addAttribute("movieVO",movieVO)
-
+		
+		//영화정보
 		MovieDto movieDto = movieDao.selectOne(movieNumber);
 		model.addAttribute("movieDto",movieDto);
 		
-		List<HashtagVO> hashtagVO = movieDao.selectListHashtagVO(movieNumber);
-		model.addAttribute("hashtagVOList",hashtagVO);
-
-//		List<CharacterDto> characterDto = characterDao.selectList(movieNumber);
-//		model.addAttribute("characterDtoList",characterDto);
+		//인물
 		List<CharacterDto> characterDtoDirector = characterDao.selectListDirector(movieNumber);
 		model.addAttribute("characterDtoListDirector",characterDtoDirector);
 		List<CharacterDto> characterDtoActor = characterDao.selectListActor(movieNumber);
 		model.addAttribute("characterDtoListActor",characterDtoActor);
-		
-		//System.out.println(movieVO.getMovieNumber());
+		System.out.println(characterDtoActor);
+
+		//장르
+		List<HashtagVO> hashtagVO = genreDao.selectListHashtagVO(movieNumber);
+		model.addAttribute("ListHashtag", hashtagVO);
+		System.out.println(hashtagVO);
+
 		return "admin/movieDetail";
 	}
-		///////////////////////////////////////////////////////////
-		//지점관리 - 조회(상세)
-//		@GetMapping("/cinemaDetail")
-//		public String cinemaDetail(Model model, 
-//				@RequestParam String cinemaPorin) {
-//			
-//			//지점정보 첨부
-//			CinemaDto cinemaDto = cinemaDao.selectOne(cinemaPorin);
-//			model.addAttribute("cinemaDto", cinemaDto);	
-//
-//			//첨부파일 조회하여 첨부
-//			model.addAttribute("attachments", attachmentDao.selectCinemaImageList(cinemaPorin));
-//			
-//			return "admin/cinemaDetail";
-//		}
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-
-	
-	
-	//영화스케쥴 - 조회(상세)
-//	@GetMapping("/moviePlayDetail")
-//	public String moviePlayDetail(Model model,
-//			@RequestParam int moviePlayNum) {
-//		
-//		MoviePlayVO moviePlayVO = moviePlayDao.selectMoviePlayView(moviePlayNum);
-//
-//	    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-//	    String moviePlayStart = format.format(moviePlayVO.getMoviePlayStart());
-//		String moviePlayStartDate = moviePlayStart.substring(0,10);
-//		String moviePlayStartTime = moviePlayStart.substring(11);
-//		
-//		moviePlayVO.setMoviePlayStartDate(moviePlayStartDate);
-//		moviePlayVO.setMoviePlayStartTime(moviePlayStartTime);
-//		
-//		model.addAttribute("moviePlayVO", moviePlayVO);
-//		
-//		return "admin/moviePlayDetail";
-//	}
-//	//영화정보 - 수정	-"/movieChange"
-//	@GetMapping("/movieChange")
-//	public String movieChange(Model model, @RequestParam int movieNumber) {
-//		model.addAttribute("dto",movieDao.selectOne(movieNumber));
-//		return "admin/movieChange";
-//	}
-
-//
-//	@PostMapping("/movieChange")
-//	public String movieChange(@ModelAttribute MovieDto dto,RedirectAttributes attr) {
-//	boolean result=movieDao.update(dto);
-//	if(result) {
-//		attr.addAttribute("movieNumber",dto.getMovieNumber());
-//		//return "redirect:detail?movieNumber="+dto.getMovieNumber();
-//		return "redirect:admin/movieDetail";
-//	}
-//	
-////	else {//리스트에 있는 movieNumber가 아니면  edit_fail 페이지로
-////    
-////		return "redirect:edit_fail";
-////   }
-//}
 	@GetMapping("/movieDelete")
 	public String delete(@RequestParam int movieNumber) {
-		boolean result=movieDao.delete(movieNumber);
-		if(result) {
-			return "redirect:list";
-		}
-		else {
-			return "movie/editFail";
-		}
+		movieDao.delete(movieNumber);
+		return "redirect:movieList";
 	}
 	
 

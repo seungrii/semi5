@@ -29,7 +29,10 @@ public interface MovieDao {
 	
 	HashtagVO selectOneHashtagVO(int movieNumber);
 	List<HashtagVO> selectListHashtagVO(int movieNumber);
-	
-	
-	
+	//List<HashtagVO> selectListHashtagVO(int genreNo);
+	//List<HashtagVO> selectListHashtagVO(String genreName);
+	//List<HashtagVO> selectListHashtagVO(int movieNumber);
+	//HashtagVO selectOneHashtagVO(int movieNumber);
+	//HashtagVO selectOneHashtagVO(String genreName);
+	//List<HashtagVO> selectListHashtagVO(String genreName);
 }

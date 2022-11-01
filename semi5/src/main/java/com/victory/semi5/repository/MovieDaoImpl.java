@@ -268,8 +268,8 @@ public class MovieDaoImpl implements MovieDao {
 	private RowMapper<HashtagVO> mapperHashtagVO = (rs, idx) -> {
 		if(rs.next()) {
 			return HashtagVO.builder()
-						.genreNo(rs.getInt("genre_no"))
-						.movieNumber(rs.getInt("movie_number"))
+//						.genreNo(rs.getInt("genre_no"))
+//						.movieNumber(rs.getInt("movie_number"))
 						.genreName(rs.getString("genre_name"))
 					.build();
 		}
@@ -277,15 +277,35 @@ public class MovieDaoImpl implements MovieDao {
 			return null;
 		}
 	};
+	
+
 	@Override
 	public List<HashtagVO> selectListHashtagVO(int movieNumber) {
-		String sql = "select * from Hashtag_genre_view "
+		String sql = "select genre_name from Hashtag_genre_view "
 				+ "where movie_number = ?";
 		Object[] param = {movieNumber};
 		return jdbcTemplate.query(sql, mapperHashtagVO, param);
 	}
 	
 	
+//	
+//	@Override
+//	public List<HashtagVO> selectListHashtagVO(int genreNo) {
+//		String sql = "select * from Hashtag_genre_view "
+//				+ "where gnere_no = ?";
+//		Object[] param = {genreNo};
+//		return jdbcTemplate.query(sql, mapperHashtagVO, param);
+//	}
+
+	
+	
+//	@Override
+//	public List<HashtagVO> selectListHashtagVO(String genreName) {
+//		String sql = "select * from Hashtag_genre_view "
+//				+ "where genre_no = ?";
+//		Object[] param = {genreName};
+//		return jdbcTemplate.query(sql, mapperHashtagVO, param);
+//	}
 
 	
 	

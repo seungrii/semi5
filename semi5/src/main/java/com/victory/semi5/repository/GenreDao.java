@@ -1,6 +1,9 @@
 package com.victory.semi5.repository;
 
+import java.util.List;
+
 import com.victory.semi5.entity.GenreDto;
+import com.victory.semi5.vo.HashtagVO;
 
 public interface GenreDao {
 	
@@ -8,8 +11,15 @@ public interface GenreDao {
 	int insert2(GenreDto dto);
 	GenreDto selectOne(int genreNo);
     
+	//HashtagVO selectOneHashtagVO(String genreName);
+	List<HashtagVO> selectListHashtagVO(String genreName);
+	
+	List<HashtagVO> selectListHashtagVO(int movieNumber);
+
 	
 	
+	List<HashtagVO> selectListHashtag(int movieNumber);
+
 	
 	
 	

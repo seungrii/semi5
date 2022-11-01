@@ -53,43 +53,28 @@
 		
 		<c:forEach var="characterDtoListDirector" items="${characterDtoListDirector}">
 		<div class="row mt-20">
-			<label class="ms-10">감독 (필수)</label>
+			<label class="ms-10">감독</label>
 			<input class="input input-line w-100" name="directorName1" type="text" readonly
 			value="${characterDtoListDirector.chraterName}">
 		</div>
 		</c:forEach>
 		
-		<c:forEach var="characterDtoListActor" items="${characterDtoListActor}">
 		<div class="row mt-20">
-			<label class="ms-10">배우1 (필수)</label>
-			<input class="input input-line w-100" name="actorName1" type="text" readonly
-			value="${characterDtoListActor.chraterName}">
+			<label class="ms-10">배우</label>
+			<c:forEach var="characterDtoListActor" items="${characterDtoListActor}">
+				<input class="input input-line w-100" name="actorName1" type="text" readonly
+					value="${characterDtoListActor.chraterName}">
+			</c:forEach>
 		</div>
-		<div class="row mt-20">
-			<label class="ms-10">배우2</label>
-			<input class="input input-line w-100" name="actorName2" type="text" readonly
-			value="${characterDtoListActor.chraterName}">
-		</div>
-		<div class="row mt-20">
-			<label class="ms-10">배우3</label>
-			<input class="input input-line w-100" name="actorName3" type="text" readonly
-			value="${characterDtoListActor.chraterName}">
-		</div>
-		<div class="row mt-20">
-			<label class="ms-10">배우4</label>
-			<input class="input input-line w-100" name="actorName4" type="text" readonly
-			value="${characterDtoListActor.chraterName}">
-		</div>
-		</c:forEach>
 		
-		<c:forEach var="hashtagVOList" items="${hashtagVOList}">
 		<div class="row mt-20">
 			<label class="ms-10">장르</label>
-			<input class="input input-line w-100" name="genreName" type="text" readonly 
-			value="${hashtagVOList.genreName}">
-			<span>1: 공포, .. 추가 해야 함</span>
+			<c:forEach var="ListHashtag" items="${ListHashtag}">
+				<input class="input input-line w-100" name="genreName" type="text" readonly
+					value="${ListHashtag.genreName}">
+			</c:forEach>
+			<span>1: 공포,2.로맨스 .. 추가 해야 함</span>
 		</div>
-		</c:forEach>		
 		
 		<!-- 영화 포스터 첨부 -->
 		<!-- <div class="row left mt-20">
@@ -99,13 +84,13 @@
 		
 		<div class="row center mt-30">
 			<a class="btn btn-neutral" href="movieList">목록</a>
-			<button class="btn btn-positive" type="submit">추가</button>
+			<a class="btn btn-negative" href="movieDelete?movieNumber=${movieDto.movieNumber}">삭제</a>
 		</div>
 	</form>
 	
 </div>
 
-	
+	<!--value="${hashtagVOList.genreName}"  -->
 	
 </section>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
