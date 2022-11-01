@@ -8,12 +8,12 @@
 
 <div class="container">
 
-	<div class="row center">
+	<div class="row center mt-50">
 		<h1>상영스케쥴 목록</h1>
 	</div>
 	
 	<!-- 키워드 검색 -->
-	<div class="row center">
+	<div class="row right">
 	<form action="moviePlayList" method="get">
 		<!-- type 선택목록 -->
 		<c:choose>
@@ -57,8 +57,8 @@
 	</div>
 	
 	<!-- 목록 -->
-	<div class="row center">
-	<table>
+	<div class="row center mt-30">
+	<table class="table table-slit">
 		<thead>
 			<tr>
 				<td>스케쥴번호</td>
@@ -93,7 +93,7 @@
 	</table>
 	</div>
 	
-	<div class="center">
+	<div class="center mt-30">
 		<a class="btn btn-positive" href="moviePlayAdd">추가</a>
 	</div>
 

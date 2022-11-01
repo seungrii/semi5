@@ -37,13 +37,13 @@
     	</aside>
     </div>
 <div class="float-container mt-50">
-	<div id="yadoran">
-	<div class="row">
+	<div class="container">
+	<div class="row center">
 		<h1>관리자계정 조회</h1>
 	</div>
 	
 	<!-- 키워드 검색 -->
-	<div class="float-container row center">
+	<div class="float-container row right">
 	<form action="adminList" method="get">
 		<!-- type 선택목록 -->
 		<c:choose>
@@ -68,13 +68,13 @@
 	
 	<!-- 관리자계정 목록 -->
 	<div class="row center">
-	<table class="table">
+	<table class="table table-slit">
 		<thead>
-			<tr>
+			<tr class="center">
 				<td>아이디</td>
 				<td>사원번호</td>
 				<td>생성일</td>
-				<td colspan="1">관리</td>
+				<td colspan="2">관리</td>
 			</tr>
 		</thead>
 		<tbody align="center">
@@ -97,7 +97,7 @@
 	</table>
 	</div>
 	
-	<div class="center">
+	<div class="center mt-50">
 		<a class="btn btn-positive" href="adminAdd">추가</a>
 	</div>
 

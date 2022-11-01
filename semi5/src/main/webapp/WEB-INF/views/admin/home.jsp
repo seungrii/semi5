@@ -6,7 +6,7 @@
 <section class="w-980 test-css">
 	
 <div class="container mt-50">
-	<p1>관리자 home</p1>
+	<h1>관리자 home</h1>
 	
 </div>	
 
