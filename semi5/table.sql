@@ -38,6 +38,15 @@ movie_summary varchar2(3000),
 movie_play_time number(3),
 movie_age_limit number(2)
 );
+-- view 테이블 생성 : 영화정보-인물-해시태그 join
+create view movie_character_hashtag_view as
+select
+    M.*,
+    C.character_number,charater_name,character_age, character_awards,character_filmography, character_type,character_nationality,
+    H.genre_no
+from movie M, character C, hashtag H
+    where M.movie_number=C.movie_number
+        and M.movie_number=H.movie_number;
 
 --인물
 create table character(
@@ -72,6 +81,13 @@ create table hashtag(
 movie_number references movie(movie_number) on delete cascade,
 genre_no references genre(genre_no) on delete cascade
 );
+-- view 테이블 생성 : 해시태그-장르 join
+create view Hashtag_genre_view as
+select
+    H.*,
+    G.genre_name
+from Hashtag H, genre G 
+    where H.genre_no=G.genre_no;
 
 
 ----------영화관(지점별)

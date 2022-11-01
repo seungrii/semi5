@@ -34,10 +34,12 @@ import com.victory.semi5.repository.AdminDao;
 import com.victory.semi5.repository.AttachmentDao;
 import com.victory.semi5.repository.CharacterDao;
 import com.victory.semi5.repository.CinemaDao;
+import com.victory.semi5.repository.GenreDao;
 import com.victory.semi5.repository.MovieDao;
 import com.victory.semi5.repository.MoviePlayDao;
 import com.victory.semi5.repository.UserDao;
 import com.victory.semi5.service.AttachmentService;
+import com.victory.semi5.vo.HashtagVO;
 import com.victory.semi5.vo.MoviePlayVO;
 import com.victory.semi5.vo.MovieVO;
 
@@ -61,6 +63,8 @@ public class AdminController {
 	private CharacterDao characterDao;
 	@Autowired
 	private MoviePlayDao moviePlayDao;
+	@Autowired
+	private GenreDao genreDao;
 	
 	private final File dir = new File("C:\\study\\vic\\upload"); //파일경로
 	@PostConstruct //최초 실행 시, 딱 한번만 실행되는 메소드
@@ -322,32 +326,58 @@ public class AdminController {
 		}
 		return "redirect:movieList";
 	}
-	//영화정보 - 조회(목록)
-	@GetMapping("/movieList")
-	public String movieList() {
-		
-		return "admin/movieList";
-	}
-	//영화정보 - 조회(상세)
-	@GetMapping("/movieDetail")
-	public String movieDetail() {
-		return "admin/movieDetail";
-	}
+	//영화정보 - 조회 (목록)
+    @GetMapping("/movieList")
+    public String movieList(Model model,
+            @RequestParam(required=false)String type,
+            @RequestParam(required=false) String keyword) {
+        boolean isSearch=type !=null&&keyword !=null;
+        if(isSearch) {//검색
+            model.addAttribute("movieList",movieDao.selectList(type,keyword));
+        }
+        else {//목록) 뷰 조회
+            model.addAttribute("movieList",movieDao.selectList());
+        }
+        return "admin/movieList";
+    }
+    //영화정보 - 상세
+    @GetMapping("/movieDetail")
+    public String movieDetail(Model model,
+            @RequestParam int movieNumber ) {
+
+        //영화정보
+        MovieDto movieDto = movieDao.selectOne(movieNumber);
+        model.addAttribute("movieDto",movieDto);
+
+        //인물
+        List<CharacterDto> characterDtoDirector = characterDao.selectListDirector(movieNumber);
+        model.addAttribute("characterDtoListDirector",characterDtoDirector);
+        List<CharacterDto> characterDtoActor = characterDao.selectListActor(movieNumber);
+        model.addAttribute("characterDtoListActor",characterDtoActor);
+        System.out.println(characterDtoActor);
+
+        //장르
+        List<HashtagVO> hashtagVO = genreDao.selectListHashtagVO(movieNumber);
+        model.addAttribute("ListHashtag", hashtagVO);
+        System.out.println(hashtagVO);
+
+        return "admin/movieDetail";
+    }
 	//영화정보 - 수정
 	@GetMapping("/movieChange")
 	public String movieChange() {
 		return "admin/movieChange";
 	}
 	@PostMapping("/movieChange")
-	public String movieChange(
-			RedirectAttributes attr) {
+	public String movieChange(RedirectAttributes attr) {
 		return "redirect:movieDetail";
 	}
 	//영화정보 - 삭제
-	@GetMapping ("/movieDelete") 
-	public String movieDelete() {
-		return "redirect:movieList";
-	}
+	@GetMapping("/movieDelete")
+    public String delete(@RequestParam int movieNumber) {
+        movieDao.delete(movieNumber);
+        return "redirect:movieList";
+    }
 	
 
 

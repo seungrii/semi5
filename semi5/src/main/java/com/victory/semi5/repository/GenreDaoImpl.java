@@ -1,10 +1,14 @@
 package com.victory.semi5.repository;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.victory.semi5.entity.GenreDto;
+import com.victory.semi5.vo.HashtagVO;
 
 @Repository
 public class GenreDaoImpl implements GenreDao {
@@ -50,5 +54,20 @@ public class GenreDaoImpl implements GenreDao {
 		return genreNo;
 		
 	}
+
+	private RowMapper<HashtagVO> mapperHashtag = (rs, idx) -> {
+        return HashtagVO.builder()
+                .movieNumber(rs.getInt("movie_number"))
+                .genreNo(rs.getInt("genre_no"))
+                .genreName(rs.getString("genre_name"))
+                .build();
+	};
+	@Override
+    public List<HashtagVO> selectListHashtagVO(int movieNumber) {
+        String sql = "select * from Hashtag_genre_view "
+                + "where movie_number =?";
+        Object[] param= {movieNumber};
+        return jdbcTemplate.query(sql, mapperHashtag, param);
+    }
 
 }
