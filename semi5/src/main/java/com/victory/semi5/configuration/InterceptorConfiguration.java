@@ -29,8 +29,8 @@ public class InterceptorConfiguration implements WebMvcConfigurer {
 		registry.addInterceptor(memberInterceptor)
 			.addPathPatterns(
 				
-					///////////////////////////////////////////////
-					//"/admin/**", 회원도 비회원도 못들어 오므로 패쓰
+					
+					
 					"/advance/list",
 					"/board/**",
 					"/user/**",
@@ -44,7 +44,7 @@ public class InterceptorConfiguration implements WebMvcConfigurer {
 	
 			
 			
-			///////////////////////////////
+	
 			
 			"/board/list",
 			"/user/idFind",
@@ -59,8 +59,8 @@ public class InterceptorConfiguration implements WebMvcConfigurer {
 		
 		//관리자용 인터셉터
 		registry.addInterceptor(adminInterceptor)
-					.addPathPatterns(//인터셉터가 감시할 주소...관리자만이 들어 갈 수 있는 곳
-						//    "/guestbook/edit*",//방명록 수정페이지
+					.addPathPatterns(//인터셉터가 감시할 주소
+						
 						"/admin/**"	,
 						"/notice/edit",
 						"/notice/write"
@@ -70,7 +70,7 @@ public class InterceptorConfiguration implements WebMvcConfigurer {
 					
 					)
 					.excludePathPatterns(//위의 주소에서 제외할 주소
-						//     "/music/list",//음원 목록
+						
 							
 							
 							
