@@ -6,12 +6,48 @@
 	<jsp:param value="1:1문의내역" name="title"/>
 </jsp:include>
 <section class="w-980">
+	<div class="row mt-40 mb-40">
+		<div class="row center">
+			<h1>1:1 문의내역</h1>
+		</div>
+		<table class="table table-slit">
+			<thead>
+				<tr>
+					<th>번호</th>
+					<th width="45%">제목</th>
+					<th>작성자</th>
+					<th>작성일</th>
+					<th>처리상태</th>
+				</tr>
+			</thead>
+			<tbody class="center">
+				<c:forEach var="oneQnaDto" items="${oneQnaDto}">
+					<tr>
+						<td>${oneQnaDto.askingNo}</td>
+						<td><a href="../user/oneQnaDetail?askingNo=${oneQnaDto.askingNo}">${oneQnaDto.askingTitle}</a></td>
+						<td>${oneQnaDto.userId}</td>
+						<td>${oneQnaDto.askingWriteTime}</td>
+						<td>
+							<c:choose>
+								<c:when test="${oneQnaDto.askingAnswer == null}">
+									처리 전
+								</c:when>
+								<c:otherwise>
+									처리완료
+								</c:otherwise>
+							</c:choose>
+						</td>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
+	</div>
 	<c:forEach var="oneQnaDto" items="${oneQnaDto}">
 		<div class="row">
-			${oneQnaDto.askingNo}
+			
 		</div>
 		<div class="row">
-			<a href="../user/oneQnaDetail?askingNo=${oneQnaDto.askingNo}">${oneQnaDto.askingTitle}</a>
+			
 		</div>
 	</c:forEach>
 </section>

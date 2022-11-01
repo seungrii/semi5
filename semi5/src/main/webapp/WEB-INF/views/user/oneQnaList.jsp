@@ -27,7 +27,7 @@
 										<a href="oneQnaDetail?askingNo=${oneQnaDto.askingNo}">${oneQnaDto.askingTitle}</a>
 									</c:when>
 									<c:otherwise>
-										<a href="oneQnaDetail?askingNo=${oneQnaDto.askingNo}">${oneQnaDto.askingTitle}[1]</a>
+										<a href="oneQnaDetail?askingNo=${oneQnaDto.askingNo}">${oneQnaDto.askingTitle}[처리완료]</a>
 									</c:otherwise>
 								</c:choose>
 							</td>
