@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!-- 관리자메뉴 사이드바 -->
+<!-- 회원메뉴 사이드바 -->
     	<aside class="sidebar-css">
     		<div class="container-150">
-    			<%-- <div class="row">
+    			<div class="row">
     				<h2>상태창</h2>
     			</div>
     			<div class="row">
@@ -11,7 +11,7 @@
     			</div>
     			<div class="row">
     				admin : ${sessionScope.loginGrade}
-    			</div> --%>
+    			</div>
 	 		    <div class="row center">
 					<h1>마이페이지</h1>
 				</div>
