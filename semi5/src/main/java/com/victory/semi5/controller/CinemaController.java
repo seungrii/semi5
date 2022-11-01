@@ -16,6 +16,7 @@ public class CinemaController {
 	
 	@GetMapping("/home")
 	public String cinemaHome() {
+		
 		return "cinema/home";
 	}
 }
