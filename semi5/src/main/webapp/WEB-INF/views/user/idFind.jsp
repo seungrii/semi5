@@ -3,19 +3,19 @@
 <jsp:include page="/WEB-INF/views/user-login-template/loginHeader.jsp">
 	<jsp:param value="로그인" name="title"/>
 </jsp:include>
-	<section class="w-980">
-		<div class="row login-page">
-			<div class="row left">
+	<section class="container">
+		<div class="row login-page mt-50">
+			<div class="row left mt-50">
 				<h1>아이디 찾기</h1>
 			</div>
 			<div class="row">
-				이름:<input type="text" name="userName">
+				이름 <input class="input-user" type="text" name="userName">
 			</div>
 			<div class="row">
-				전화번호:<input type="tel" name="userTel">
+				전화번호 <input class="input-user" type="tel" name="userTel">
 			</div>
 			<div class="row">
-				<button id="id-find" type="button">확인</button>
+				<button class="btn btn-positive" id="id-find" type="button">확인</button>
 			</div>
 		</div>
 		<div class="row login-page success-page">

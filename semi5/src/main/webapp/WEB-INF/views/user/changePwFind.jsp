@@ -8,16 +8,15 @@
 		<div class="row mt-20">
 			<h1>비밀번호 변경</h1>
 		</div>
-		<div class="row center">
+		<div class="row center mt-50">
 			<h2>비밀번호 확인</h2>
 		</div>
 		<form action="changePwFind" method="post">
 			<div class="row">
-				<label>비밀번호</label>
-				<input type="password" name="userPw">
+				<input class="input-user" type="password" name="userPw" placeholder="비밀번호 입력">
 			</div>
 			<div class="row">
-				<button type="submit">확인</button>
+				<button class="btn btn-positive" type="submit">확인</button>
 			</div>
 		</form>
 		<div class="row center">
