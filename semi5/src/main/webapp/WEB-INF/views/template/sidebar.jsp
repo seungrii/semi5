@@ -31,17 +31,17 @@
 	     			<a href="/admin/moviePlayList">상영스케쥴 관리</a>
 	     		</div>
   			     <div class="row">
-	     			<a href="/notice/list">커뮤니티</a>
+	     			<a href="/notice/list">공지사항</a>
 	     		</div>
 	     		<div class="row">
 
 	     			<a href="qnaAsking">1:1 문의내역</a>
 				</div>
 	     		<div class="row">
-	     			<a href="/admin/askingList">1:1 문의내역</a>
+	     			<a href="/admin/askingList">문의내역 리스트</a>
 				</div>
 		   		<div class="row">
-	     			<a href="#">1:1 문의내역</a>
+	     			<a href="qna/list">문의게시판</a>
 	     		</div>
     		</div>
     	</aside>
