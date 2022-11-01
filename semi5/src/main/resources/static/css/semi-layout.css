@@ -23,12 +23,11 @@ nav {
 }
 
 aside {
-    padding-left: 10px;
     /* float: left; */
     width: 155px;
     min-height: 200px;
-    position: relative;
-    left: -155px;
+    position: absolute;
+    left:30px;
 }
 
 section {
