@@ -381,7 +381,14 @@ public class AdminController {
 		boolean isSearch = type != null && keyword != null;
 		if(isSearch) {
 			//뷰 조회) 상영스케쥴-영화정보-상영관정보
-			model.addAttribute("moviePlayList", moviePlayDao.selectMoviePlayViewList(type, keyword));
+			if(type.equals("movie_play_start")) {
+				model.addAttribute("moviePlayList", 
+						moviePlayDao.selectMoviePlayViewListDate(type, keyword));
+			}
+			else {				
+				model.addAttribute("moviePlayList", 
+						moviePlayDao.selectMoviePlayViewList(type, keyword));
+			}
 		}
 		else {
 			//뷰 조회) 상영스케쥴-영화정보-상영관정보
