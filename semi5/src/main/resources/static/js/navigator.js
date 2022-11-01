@@ -17,4 +17,7 @@ $(function(){
             $(".nav-title").find("a").first().css("display", "none");
         }
     });
+    $(".btn-search").click(function(){
+		
+	});
 });

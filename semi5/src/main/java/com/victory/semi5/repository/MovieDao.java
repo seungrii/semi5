@@ -19,4 +19,6 @@ public interface MovieDao {
 
     void insertHashtag(int movieNumber, int genreNo);
     
+    
+    List<MovieDto> selectSearch(String movieName);
 }
