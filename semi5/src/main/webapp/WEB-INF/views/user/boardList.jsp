@@ -5,6 +5,8 @@
 	<jsp:param value="내 게시글" name="title"/>
 </jsp:include>
 	<section class="w-980">
+	<jsp:include page="/WEB-INF/views/template/usersidebar.jsp"></jsp:include>
+	
 		<div class="row center mt-50 mb-40">
 			<h1>내가 작성한 게시글</h1>
 		</div>
