@@ -4,21 +4,21 @@
 	<jsp:param value="로그인" name="title"/>
 </jsp:include>
 	<section class="w-980">
-		<div class="row login-page">
-			<div class="row">
+		<div class="row login-page center">
+			<div class="row mt-50">
 				<h1>비밀번호 찾기</h1>
 			</div>
-			<div class="row">
-				아이디:<input type="text" name="userId">
+			<div class="row mt-30">
+				<input class="input-user" type="text" name="userId" placeholder="아이디를 입력해주세요">
 			</div>
 			<div class="row">
-				이름:<input type="text" name="userName">
+				<input class="input-user" type="text" name="userName" placeholder="이름을 입력해주세요">
 			</div>
 			<div class="row">
-				전화번호:<input type="tel" name="userTel">
+				<input class="input-user" type="tel" name="userTel" placeholder="전화번호를 입력해주세요">
 			</div>
-			<div class="row">
-				<button id="pw-find" type="button">찾기</button>
+			<div class="row mt-30">
+				<button class="btn btn-positive" id="pw-find" type="button">찾기</button>
 			</div>
 		</div>
 		<div class="row login-page success-page">

@@ -4,16 +4,46 @@
 <jsp:include page="/WEB-INF/views/admin/admin-template/adminHeader.jsp">
 	<jsp:param value="관리자계정 목록" name="title"/>
 </jsp:include>
-<section class="w-980 test-css">
-
-<div class="container">
-
+<section>
+<!-- 관리자메뉴 사이드바 -->
+    <div class="container left">
+    	<aside>
+    		<div class="float-container mt-50">
+    			<div class="row">
+    				<h2>관리자메뉴</h2>
+    			</div>
+	 		    <div class="row">
+	    			<a href="/admin/adminList">관리자 계정</a>
+	     		</div>
+	     		<div class="row">
+	     			<a href="/admin/userList">회원 정보</a>
+	     		</div>
+	     		<div class="row">
+	     			<a href="/admin/cinemaList">지점 관리</a>
+	     		</div>
+	     		<div class="row">
+	     			<a href="/admin/movieList">영화정보 관리</a>
+	     		</div>
+	     		<div class="row">
+	     			<a href="/admin/moviePlayList">상영스케쥴 관리</a>
+	     		</div>
+  			     <div class="row">
+	     			<a href="/notice/list">커뮤니티</a>
+	     		</div>
+	     		<div class="row">
+	     			<a href="#">1:1 문의내역</a>
+	     		</div>
+    		</div>
+    	</aside>
+    </div>
+<div class="float-container mt-50">
+	<div class="container">
 	<div class="row center">
 		<h1>관리자계정 조회</h1>
 	</div>
 	
 	<!-- 키워드 검색 -->
-	<div class="row center">
+	<div class="float-container row right">
 	<form action="adminList" method="get">
 		<!-- type 선택목록 -->
 		<c:choose>
@@ -38,13 +68,13 @@
 	
 	<!-- 관리자계정 목록 -->
 	<div class="row center">
-	<table>
+	<table class="table table-slit">
 		<thead>
-			<tr>
+			<tr class="center">
 				<td>아이디</td>
 				<td>사원번호</td>
 				<td>생성일</td>
-				<td colspan="1">관리</td>
+				<td colspan="2">관리</td>
 			</tr>
 		</thead>
 		<tbody align="center">
@@ -67,11 +97,11 @@
 	</table>
 	</div>
 	
-	<div class="center">
+	<div class="center mt-50">
 		<a class="btn btn-positive" href="adminAdd">추가</a>
 	</div>
 
 </div>
-
+</div>
 </section>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

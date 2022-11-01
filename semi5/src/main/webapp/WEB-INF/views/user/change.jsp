@@ -5,19 +5,19 @@
 	<jsp:param value="로그인" name="title"/>
 </jsp:include>
 	<section class="w-980">
-		<div class="row mt-20">
+		<div class="row mt-50 ms-50">
 			<h1>개인정보 수정</h1>
 		</div>
-		<div class="row center">
+		<div class="row center mt-50">
 			<h2>비밀번호 확인</h2>
 		</div>
 		<form action="change" method="post">
-			<div class="row">
+			<div class="row mt-30">
 				<label>비밀번호</label>
-				<input type="password" name="userPw">
+				<input class="input-user ms-10" type="password" name="userPw">
 			</div>
-			<div class="row">
-				<button type="submit">확인</button>
+			<div class="row mt-20">
+				<button class="btn btn-positive" type="submit">확인</button>
 			</div>
 		</form>
 		<div class="row center">

@@ -8,12 +8,12 @@
 
 <div class="container">
 
-	<div class="row center">
+	<div class="row center mt-50">
 		<h1>상영스케쥴 목록</h1>
 	</div>
 	
 	<!-- 키워드 검색 -->
-	<div class="row center">
+	<div class="row right">
 	<form action="moviePlayList" method="get">
 		<!-- type 선택목록 -->
 		<c:choose>
@@ -22,7 +22,7 @@
 					<option value="movie_play_num">스케쥴번호</option>
 					<option value="movie_name" selected>영화명</option>
 					<option value="cinema_porin">지점명</option>
-					<option value="moviePlayStartDate">상영일자</option>
+					<option value="movie_play_start">상영일자</option>
 				</select>
 			</c:when>
 			<c:when test="${param.type == 'cinema_porin'}">
@@ -30,15 +30,15 @@
 					<option value="movie_play_num">스케쥴번호</option>
 					<option value="movie_name">영화명</option>
 					<option value="cinema_porin" selected>지점명</option>
-					<option value="moviePlayStartDate">상영일자</option>
+					<option value="movie_play_start">상영일자</option>
 				</select>
 			</c:when>
-			<c:when test="${param.type == 'movie_play_start_date'}">
+			<c:when test="${param.type == 'movie_Play_Start'}">
 				<select class="input input-line" name="type" required>
 					<option value="movie_play_num">스케쥴번호</option>
 					<option value="movie_name">영화명</option>
 					<option value="cinema_porin">지점명</option>
-					<option value="moviePlayStartDate" selected>상영일자</option>
+					<option value="movie_play_start" selected>상영일자</option>
 				</select>
 			</c:when>
 			<c:otherwise>
@@ -46,7 +46,7 @@
 					<option value="movie_play_num" selected>스케쥴번호</option>
 					<option value="movie_name">영화명</option>
 					<option value="cinema_porin">지점명</option>
-					<option value="moviePlayStartDate">상영일자</option>
+					<option value="movie_play_start">상영일자</option>
 				</select>
 			</c:otherwise>
 		</c:choose>
@@ -57,8 +57,8 @@
 	</div>
 	
 	<!-- 목록 -->
-	<div class="row center">
-	<table>
+	<div class="row center mt-30">
+	<table class="table table-slit">
 		<thead>
 			<tr>
 				<td>스케쥴번호</td>
@@ -71,21 +71,21 @@
 			</tr>
 		</thead>
 		<tbody align="center">
-			<c:forEach var="moviePlayListDto" items="${moviePlayList}">
+			<c:forEach var="moviePlayList" items="${moviePlayList}">
 				<tr>
-					<td>${moviePlayListDto.moviePlayNum}</td>
-					<td>${moviePlayListDto.movieName}</td>
-					<td>${moviePlayListDto.cinemaPorin}</td>
-					<td>${moviePlayListDto.theaterHall}</td>
-					<td>${moviePlayListDto.moviePlayStart}</td>
-					<td>${moviePlayListDto.theaterHall}</td>
+					<td>${moviePlayList.moviePlayNum}</td>
+					<td>${moviePlayList.movieName}</td>
+					<td>${moviePlayList.cinemaPorin}</td>
+					<td>${moviePlayList.theaterHall}</td>
+					<td>${moviePlayList.moviePlayStart}</td>
+					<td>${moviePlayList.theaterHall}</td>
 					<td>
 						<a class="btn btn-neutral" 
-							href="moviePlayDetail?moviePlayNum=${moviePlayListDto.moviePlayNum}">상세</a>
+							href="moviePlayDetail?moviePlayNum=${moviePlayList.moviePlayNum}">상세</a>
 					</td>
 					<td>
 						<a class="btn btn-negative" 
-							href="moviePlayDelete?moviePlayNum=${moviePlayListDto.moviePlayNum}">삭제</a>
+							href="moviePlayDelete?moviePlayNum=${moviePlayList.moviePlayNum}">삭제</a>
 					</td>
 				</tr>
 			</c:forEach>
@@ -93,7 +93,7 @@
 	</table>
 	</div>
 	
-	<div class="center">
+	<div class="center mt-30">
 		<a class="btn btn-positive" href="moviePlayAdd">추가</a>
 	</div>
 

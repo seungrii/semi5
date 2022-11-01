@@ -5,7 +5,7 @@
 	<jsp:param value="로그인" name="title"/>
 </jsp:include>
 	<section class="w-980">
-		<div class="row center">
+		<div class="row center mt-50">
 			<h1>로그인</h1>
 		</div>
 		<div class="">

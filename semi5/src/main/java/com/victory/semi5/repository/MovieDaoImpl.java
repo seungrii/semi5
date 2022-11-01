@@ -31,7 +31,6 @@ public class MovieDaoImpl implements MovieDao {
 			dto.setMovieSummary(rs.getString("movie_summary"));
 			dto.setMoviePlayTime(rs.getInt("movie_play_time"));
 			dto.setMovieAgeLimit(rs.getInt("movie_age_limit"));
-			
 			return dto;
 		}
 	};
@@ -48,11 +47,7 @@ public class MovieDaoImpl implements MovieDao {
 				dto.setMovieSummary(rs.getString("movie_summary"));
 				dto.setMoviePlayTime(rs.getInt("movie_play_time"));
 				dto.setMovieAgeLimit(rs.getInt("movie_age_limit"));
-				
 				return dto;
-				
-				
-				
 			}
 			else {
 				return null;
@@ -63,8 +58,6 @@ public class MovieDaoImpl implements MovieDao {
 
 	@Override
 	public void insert(MovieDto dto) {
-		// TODO Auto-generated method stub
-		
 		String sql="insert into movie("
 				+"movie_number,movie_name,opening_date, "
 				+"screening_end, movie_summary,movie_play_time,movie_age_limit"
@@ -85,7 +78,6 @@ public class MovieDaoImpl implements MovieDao {
 		  String sql="select*from movie order by movie_number asc";
 			return jdbcTemplate.query(sql, mapper);
 	}
-
 	@Override
 	public List<MovieDto> selectList(String type, String keyword) {
 		String sql="select*from movie "
@@ -98,7 +90,6 @@ public class MovieDaoImpl implements MovieDao {
 
 	@Override
 	public MovieDto selectOne(int movieNumber) {
-		// TODO Auto-generated method stub
 	    String sql="select*from movie where movie_number=?";
 	    Object[]param= {movieNumber};
 	    return jdbcTemplate.query(sql, extractor, param);
@@ -111,8 +102,7 @@ public class MovieDaoImpl implements MovieDao {
 				+"movie_name=?,opening_date=?,screening_end=?,movie_summary=?,movie_play_time=?,movie_age_limit=? "
 				+"where "
 					+"movie_number=?";
-		
-
+	
 		Object[] param= {
 				dto.getMovieName(),dto.getOpeningDate(),
 				dto.getScreeningEnd(),dto.getMovieSummary(),
@@ -158,5 +148,6 @@ public class MovieDaoImpl implements MovieDao {
 		Object[] param = {movieNumber, genreNo};
 		jdbcTemplate.update(sql, param);
 	}
+
 	
 }
