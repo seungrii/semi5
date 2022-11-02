@@ -44,7 +44,7 @@
      /* margin: 80px 22.5px 0px 22.5px;  */
      
      box-sizing: border-box;
-     background-color: aqua;
+     background-color: b2bec3;
      /* margin-bottom: 70px; */
      
     
@@ -116,48 +116,74 @@
 
 </head>
 <body>
-    
+
     <div class="container-980">
        
         <div class="row left">
             <h1>무비차트</h1>
         </div>
         <hr>
-        <!--  
-        <select class="select"  >
-            <option value="popular" selected><a href="#">예매율순</a></option>
-            <option value="reservation"><a href="#">별점순</a></option>
-            <option value="star"><a href="#">관람객순</a></option>
-        </select>
-        -->
+        <!-- 키워드 검색 -->
+		<%-- <div class="row center">
+			<form action="list" method="get">
+				<!-- type 선택목록 -->
+				<c:choose>
+					<c:when test="${param.type == 'moviePlayDate'}">
+						<select class="input input-line" name="type" required>
+							<option value="movie_name">영화이름</option>
+							<option value="moviePlayDate" selected>상영일</option>
+						</select>
+					</c:when>
+					<c:otherwise>
+						<select class="input input-line" name="type" required>
+							<option value="movie_name" selected>영화이름</option>
+							<option value="moviePlayDate">상영일</option>
+						</select>
+					</c:otherwise>
+				</c:choose>
+				<!-- keyword 입력 -->
+				<input class="input input-underline" type="search" name="keyword" required value="${param.keyword}">
+				<button class="btn btn-neutral" type="submit">검색</button>
+			</form>
+		</div> --%>
+       
        
         
-            	<c:forEach var="dto" items="${list}">
-              
-                
-                    <table class="small" >
-                        <!-- <tr>
-                           <td class="ranking" style="background-color: red;"> 순위</td>
-                        </tr> -->
-                        <tr>
-                            <td>
-                                <a href="#"><img src="./image/$[dto.fileName].png" class="image"> </a>
-                            </td>
-                        </tr>
-                        <tr >
-                            <td class="content" >
-                                <ul >
-                                    <li >${dto.movieName}</li>
-                                   
-                                    <li>개봉일:${dto.openingDate}</li>
-                                     <a href="#"><button class="btn btn-neutral" type="submit">예매하기</button></a>
-                                </ul>
-                            </td>
-                        </tr>
-                    </table> 
-                   
-                
-                  </c:forEach>   
+        
+        
+       	<c:forEach var="movieDto" items="${movieList}" varStatus="status">
+    	
+            <table class="small" >
+                <!-- <tr>
+                   <td class="ranking" style="background-color: red;"> 순위</td>
+                </tr> -->
+
+                <tr>
+                    <td>
+                    	<c:choose>
+							<c:when test="${!attachments.isEmpty()}">
+								<a href="/movie/movieDetail?movieNumber=${movieDto.movieNumber}">
+								<img src="/attachment/download/${imageDto[status.index].fileNumber}" width="200px" height="280px">
+								</a>
+							</c:when>
+							<c:otherwise>
+	                        	<a href="/movie/movieDetail?movieNumber=${movieDto.movieNumber}"><img class="image"></a>
+	                        </c:otherwise>
+                        </c:choose>
+                    </td>
+                </tr>
+                <tr >
+                    <td class="content" >
+                        <ul >
+                            <li >${movieDto.movieName}</li>
+                            <li>개봉일:${movieDto.openingDate}</li>
+                           	<li>상영종료일:${movieDto.screeningEnd}</li>
+                             <a href="/advance/list"><button class="btn btn-neutral" type="submit">예매하기</button></a>
+                        </ul>
+                    </td>
+                </tr>
+            </table> 
+         </c:forEach>   
             
    <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
          

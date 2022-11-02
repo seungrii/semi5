@@ -1,21 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<jsp:include page="/WEB-INF/views/template/header.jsp">
+<jsp:include page="/WEB-INF/views/admin/admin-template/adminHeader.jsp">
 	<jsp:param value="영화정보 상세" name="title"/>
 </jsp:include>
 <section class="w-980 test-css">
-<div class="admin-box">
-
-<jsp:include page="/WEB-INF/views/template/sidebar.jsp"></jsp:include>
 	
 <div class="container-400">
 
 
 
 
-	<form action="movieAdd" method="post" enctype="multipart/form-data"> 
-		<div class="row center fs-28 mt-50">
+		<div class="row center fs-28">
 			<span>영화 정보 상세</span>
 		</div>
 		<div class="row mt-50">
@@ -78,15 +74,6 @@
 			</c:forEach>
 		</div>
 		
-		<form action="moviePosterAdd" method="post" enctype="multipart/form-data"> 
-		<!-- 영화 포스터 첨부 -->
-		<div class="row left">
-			<input class="input input-line w-100" type="hidden" name="movieNumber" value="${movieDto.movieNumber}">
-			<label>첨부파일(1개당 1MB. 최대 10MB 가능)</label>
-			<input class="input input-line w-100" type="file" name="attachments" multiple>
-			<button class="btn btn-positive" type="submit">포스터 추가</button>
-		</div>
-		</form>
 		
 		<c:if test="${!attachments.isEmpty()}">
 			<div class="row left">
@@ -96,7 +83,6 @@
 					<span class="ms-10 mt-10">
 					<img src="/attachment/download/${imageDto.fileNumber}" width="100" height="100">
 					<a href="/attachment/download/${imageDto.fileNumber}">다운로드</a>
-					<a href="/admin/posterDelete?movieNumber=${movieDto.movieNumber}&fileNumber=${imageDto.fileNumber}">삭제</a>
 					</span>
 				</c:forEach>
 				</div>
@@ -104,8 +90,7 @@
 		</c:if>
 		
 		<div class="row center mt-30">
-			<a class="btn btn-neutral" href="movieList">목록</a>
-			<a class="btn btn-negative" href="movieDelete?movieNumber=${movieDto.movieNumber}">삭제</a>
+			<a class="btn btn-neutral" href="list">목록</a>
 		</div>
 		
 		
@@ -113,6 +98,6 @@
 </div>
 
 	<!--value="${hashtagVOList.genreName}"  -->
-</div>	
+	
 </section>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
