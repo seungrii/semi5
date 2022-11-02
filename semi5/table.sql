@@ -363,6 +363,16 @@ alter session set nls_date_format = 'yyyy-MM-dd hh24:mi';
 alter table qna_board modify(qna_answer_time null);
 alter table qna_board modify(qna_answer_time default null);
 
-
+--
+create table asking(
+    ASKING_NO number,
+    ASKING_TITLE varchar2(120),
+    ASKING_CONTENTS varchar2(3000),
+    ASKING_WRITE_TIME date,
+    ASKING_ANSWER varchar2(3000),
+    ASKING_ANSWER_TIME date,
+    user_id references user_information(user_id) on delete cascade,
+    admin_id references admin(admin_id) on delete set null
+);
 
 
