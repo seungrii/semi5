@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<link rel="stylesheet" type="text/css" href="/css/admin.css">
 <jsp:include page="/WEB-INF/views/template/header.jsp">
 	<jsp:param value="관리자계정 수정" name="title"/>
 </jsp:include>
