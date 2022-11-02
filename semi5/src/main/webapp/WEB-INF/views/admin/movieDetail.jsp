@@ -77,7 +77,7 @@
 					value="${ListHashtag.genreName}">
 			</c:forEach>
 		</div>
-		
+		</form>
 		<form action="moviePosterAdd" method="post" enctype="multipart/form-data"> 
 		<!-- 영화 포스터 첨부 -->
 		<div class="row left">

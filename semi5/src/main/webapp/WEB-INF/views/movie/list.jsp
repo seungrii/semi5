@@ -6,10 +6,9 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <jsp:include page="/WEB-INF/views/template/header.jsp">
+		<jsp:param value="무비차트" name="title"/>
+	</jsp:include>
 
 
 
@@ -119,7 +118,7 @@
 
     <div class="container-980">
        
-        <div class="row left">
+        <div class="row left mt-50 mb-20">
             <h1>무비차트</h1>
         </div>
         <hr>
@@ -150,10 +149,10 @@
        
         
         
-        
+    <div class="center mb-50">    
        	<c:forEach var="movieDto" items="${movieList}" varStatus="status">
     	
-            <table class="small" >
+            <table class="small center" >
                 <!-- <tr>
                    <td class="ranking" style="background-color: red;"> 순위</td>
                 </tr> -->
@@ -184,7 +183,7 @@
                 </tr>
             </table> 
          </c:forEach>   
-            
+    </div>        
    <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
          
           </div>
