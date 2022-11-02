@@ -84,6 +84,17 @@ public class MovieDaoImpl implements MovieDao {
 			return jdbcTemplate.query(sql, mapper);
 	}
 	@Override
+	public List<MovieDto> selectList3() {
+		String sql = "SELECT *\r\n"
+				+ " FROM (\r\n"
+				+ "        SELECT *\r\n"
+				+ "          FROM movie\r\n"
+				+ "         ORDER BY movie_number asc\r\n"
+				+ "      )\r\n"
+				+ "WHERE ROWNUM <= 3";
+		return jdbcTemplate.query(sql, mapper);
+	}
+	@Override
 	public List<MovieDto> selectListMoviePlayDate(String keyword) {
 		String sql="select * from movie "
 				+"where opening_date <= to_date(?, 'yyyy-mm-dd hh24:mi') "

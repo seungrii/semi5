@@ -26,8 +26,9 @@
 		</div>
 		<div class="container center mt-50">
 			<img width="900px" src="/image/suite.jpeg">
-			<div class="p-suite">
-				<p>호텔 스위트룸을 극장 안에 옮긴 듯 독립된 공간과 세련된 인테리어로 쾌적한 영화 관람 환경을 선사합니다. 소중한 이들과 특별한 영화 여행을 떠나보세요</p>
+			<div style="margin-bottom: 100px">
+				<p class="p-suite">호텔 스위트룸을 극장 안에 옮긴 듯 독립된 공간과 세련된 인테리어로</p>
+				<p class="p-suite">쾌적한 영화 관람 환경을 선사합니다. 소중한 이들과 특별한 영화 여행을 떠나보세요</p>
 			</div>
 		</div>
 		

@@ -109,11 +109,31 @@
 	<div class="container row mt-50 mb-50">
 		<div id="chart">무비차트</div>
 	</div>
-	<div class="container mt-50 mb-50">
-		<img id="movieChart" src="https://img.cgv.co.kr/Movie/Thumbnail/StillCut/000080/80489/80489152234_727.jpg">
-		<img id="movieChart" src="https://img.cgv.co.kr/Movie/Thumbnail/StillCut/000086/86276/86276206590_727.jpg">
-		<img id="movieChart" src="https://img.cgv.co.kr/Movie/Thumbnail/StillCut/000086/86271/86271206942_727.jpg">
-	</div>
+	
+	
+	    	
+	<%-- <div class="container mt-50 mb-50">		
+		<c:forEach var="imageDto" items="${attachments}">
+			<img id="movieChart" src="/attachment/download/${imageDto.fileNumber}">
+		</c:forEach>
+	</div> --%>	
+	
+	
+	
+		<c:forEach var="movieDto" items="${movieList}" varStatus="status">
+            <c:choose>
+				<c:when test="${!attachments.isEmpty()}">
+					<a href="/movie/movieDetail?movieNumber=${movieDto.movieNumber}">
+					<img id="movieChart" src="/attachment/download/${imageDto[status.index].fileNumber}">
+					</a>
+				</c:when>
+				<c:otherwise>
+                      	<a href="/movie/movieDetail?movieNumber=${movieDto.movieNumber}"><img class="image"></a>
+                </c:otherwise>
+            </c:choose>
+         </c:forEach>
+	
+	
 	
 	<div class="container mt-50 mb-50">
 	<div class="row float-container">
@@ -163,7 +183,7 @@
 			</div>
 			
 			<div class="row">
-				<table class="table">
+				<table class="table table-board">
 					<!-- <thead>
 						<tr>
 							<th width="50%">제목</th>

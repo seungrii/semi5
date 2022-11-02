@@ -26,9 +26,9 @@
 		</div>
 		<div class="container center mt-50">
 			<img src="/image/imax.jpeg">
-			<div class="p-imax">
-				<p>대형 스크린에 맞는 맞춤형 설계로 모든 좌석에서 최고의 몰입 가능</p>
-				<p>완벽하게 조율된 소리와 핀 포인트 정확도로 최적의 사운드를 제공</p>		
+			<div style="margin-bottom: 100px">
+				<p class="p-imax">대형 스크린에 맞는 맞춤형 설계로 모든 좌석에서 최고의 몰입 가능</p>
+				<p class="p-imax">완벽하게 조율된 소리와 핀 포인트 정확도로 최적의 사운드를 제공</p>		
 			</div>
 		</div>
 		

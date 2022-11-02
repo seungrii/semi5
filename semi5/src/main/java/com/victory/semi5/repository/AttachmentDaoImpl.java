@@ -123,6 +123,19 @@ public class AttachmentDaoImpl implements AttachmentDao{
 				+ "order by movie_number asc";
 		return jdbcTemplate.query(sql, mapper);
 	}
+	//home 조회용
+	@Override
+	public List<ImageDto> selectPosterList3() {
+		String sql = "SELECT *\r\n"
+				+ " FROM (\r\n"
+				+ "        SELECT *\r\n"
+				+ "          FROM poster_image_view\r\n"
+				+ "         ORDER BY movie_number asc\r\n"
+				+ "      )\r\n"
+				+ "WHERE ROWNUM <= 3";
+		return jdbcTemplate.query(sql, mapper);
+	}
+
 //	@Override
 //	public List<ImageDto> selectPosterList(String keyword) {
 //		String sql="select * from movie "

@@ -13,12 +13,12 @@
     			<div class="row">
     				<h2>상태창</h2>
     			</div>
-    			<div class="row">
+    			<%-- <div class="row">
     				login : ${sessionScope.LoginId}
     			</div>
     			<div class="row">
     				admin : ${sessionScope.loginGrade}
-    			</div>
+    			</div> --%>
 	 		    <div class="row center">
 					<h1>마이페이지</h1>
 				</div>

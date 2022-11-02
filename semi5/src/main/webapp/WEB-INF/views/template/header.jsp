@@ -142,12 +142,6 @@
                                 <a href="/movie/list">
                                     <li>무비차트</li>
                                 </a>
-                                <a href="/movie/list">
-                                    <li>상영중</li>
-                                </a>
-                                <a href="/movie/list">
-                                    <li>상영 예정</li>
-                                </a>
                             </ul>
                         </li>
                         <li>

@@ -29,6 +29,10 @@ public interface AttachmentDao {
 //	List<ImageDto> selectPosterList(String type,String keyword);
 	List<ImageDto> fileNumber(int movieNumber);
 	
+	//home 조회용
+	List<ImageDto> selectPosterList3();
+	
+	
 	//회원프로필
 	void addProfileImage(String userId, int fileNumber);
 	List<ImageDto> selectProfileImageList(String userId);

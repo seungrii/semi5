@@ -118,14 +118,18 @@ $(function(){
             var a = intFieldNum + intMax;
             // console.log(a);
             if(a > 8) {
-                $(this).not(a<8).parent().addClass("impossible");
-                $(this).not(a<8).parent().siblings().addClass("impossible");
+//                $(this).not(a<8).parent().addClass("impossible");
+//                $(this).not(a<8).parent().siblings().addClass("impossible");
+				$(this).not(a<8).addClass("impossible");
+                $(this).not(a<8).siblings().addClass("impossible");
                 $(".selected").removeClass("impossible");
                 $(".selected").prevAll().removeClass("impossible");
             }
             else {
-                $(this).parent().removeClass("impossible");
-                $(this).parent().siblings().removeClass("impossible");
+//                $(this).parent().removeClass("impossible");
+//                $(this).parent().siblings().removeClass("impossible");
+				$(this).removeClass("impossible");
+                $(this).siblings().removeClass("impossible");
             }
         });
         return adult, youth, senior, max;
