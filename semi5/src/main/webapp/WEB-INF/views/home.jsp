@@ -93,7 +93,7 @@
                    <!-- Slides -->
                    <div class="swiper-slide"><img src="https://biz.chosun.com/resizer/xkTEK-divyr381d3fJrMA0Z5toA=/616x0/smart/cloudfront-ap-northeast-1.images.arcpublishing.com/chosunbiz/MJAZBYCG3JK3HZLVPT434FHUT4.jpg"></div>
                    <div class="swiper-slide"><img src="https://web-cf-image.cjenm.com/public/share/metamng/boards/kr/%ED%97%A4%EC%96%B4%EC%A7%88%20%EA%B2%B0%EC%8B%AC_STILL_%EC%A2%85%ED%95%A91.jpg?v=1653962290"></div>
-                   <div class="swiper-slide"><img src="/image/normal.jpeg"></div> 
+                   <div class="swiper-slide"><img src="${pageContext.request.contextPath}/image/normal.jpeg"></div> 
                 </div>
 
                 <!-- If we need pagination -->
@@ -123,12 +123,12 @@
 		<c:forEach var="movieDto" items="${movieList}" varStatus="status">
             <c:choose>
 				<c:when test="${!attachments.isEmpty()}">
-					<a href="/movie/movieDetail?movieNumber=${movieDto.movieNumber}">
-					<img id="movieChart" src="/attachment/download/${imageDto[status.index].fileNumber}">
+					<a href="${pageContext.request.contextPath}/movie/movieDetail?movieNumber=${movieDto.movieNumber}">
+					<img id="movieChart" src="${pageContext.request.contextPath}/attachment/download/${imageDto[status.index].fileNumber}">
 					</a>
 				</c:when>
 				<c:otherwise>
-                      	<a href="/movie/movieDetail?movieNumber=${movieDto.movieNumber}"><img class="image"></a>
+                      	<a href="${pageContext.request.contextPath}/movie/movieDetail?movieNumber=${movieDto.movieNumber}"><img class="image"></a>
                 </c:otherwise>
             </c:choose>
          </c:forEach>

@@ -6,7 +6,7 @@
 <section class="w-980 test-css">
 <div class="admin-box">
 
-<jsp:include page="/WEB-INF/views/template/sidebar.jsp"></jsp:include>
+<jsp:include page="${pageContext.request.contextPath}/WEB-INF/views/template/sidebar.jsp"></jsp:include>
 	
 	
 <div class="container-400">

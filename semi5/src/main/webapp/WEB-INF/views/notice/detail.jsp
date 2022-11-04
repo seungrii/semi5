@@ -8,7 +8,7 @@
 </jsp:include>
  
  
-<link rel="stylesheet" type="text/css" href="/css/semi-commons.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/semi-commons.css">
 
 
 <style>

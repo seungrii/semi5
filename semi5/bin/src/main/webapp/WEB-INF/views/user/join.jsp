@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<<<<<<< HEAD
-<jsp:include page="/WEB-INF/views/user-login-template/header.jsp">
+<jsp:include page="${pageContext.request.contextPath}/WEB-INF/views/user-login-template/header.jsp">
 	<jsp:param value="회원가입" name="title"/>
 </jsp:include>
 	<section class="w-980">
@@ -45,8 +44,7 @@
 			</div>
 		</form>
 	</section>
-<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
-=======
+<jsp:include page="${pageContext.request.contextPath}/WEB-INF/views/template/footer.jsp"></jsp:include>
 <html>
 <head>
 <meta charset="UTF-8">

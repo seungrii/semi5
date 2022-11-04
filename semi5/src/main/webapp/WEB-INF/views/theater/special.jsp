@@ -7,7 +7,7 @@
 
 <head>
 
-<link rel="stylesheet" type="text/css" href="/css/semi-commons.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/semi-commons.css">
 <jsp:include page="/WEB-INF/views/template/header.jsp">
 	<jsp:param value="특별관" name="title"/>
 </jsp:include>
@@ -90,10 +90,10 @@
                 <!-- Additional required wrapper -->
                 <div class="swiper-wrapper">
                     <!-- Slides -->
-                    <div class="swiper-slide"><img src="/image/imax.jpeg"></div>
-                    <div class="swiper-slide"><img src="/image/4d.jpeg"></div>
-                    <div class="swiper-slide"><img src="/image/suite.jpeg"></div>
-                    <div class="swiper-slide"><img src="/image/kids.jpeg"></div>     
+                    <div class="swiper-slide"><img src="${pageContext.request.contextPath}/image/imax.jpeg"></div>
+                    <div class="swiper-slide"><img src="${pageContext.request.contextPath}/image/4d.jpeg"></div>
+                    <div class="swiper-slide"><img src="${pageContext.request.contextPath}/image/suite.jpeg"></div>
+                    <div class="swiper-slide"><img src="${pageContext.request.contextPath}/image/kids.jpeg"></div>     
                          
                 </div>
 
@@ -125,19 +125,19 @@
 	<div class="container mt-50 mb-50">
 		<div class="container">
 			<h1>&darr;4d</h1>
-			<img alt="" src="/image/4d.jpeg">
+			<img alt="" src="${pageContext.request.contextPath}/image/4d.jpeg">
 		</div>
 		<div class="container">
 			<h1>&darr;스위트</h1>
-			<img alt="" src="/image/suite.jpeg">
+			<img alt="" src="${pageContext.request.contextPath}/image/suite.jpeg">
 		</div>
 		<div class="container">
 			<h1>&darr;아이맥스</h1>
-			<img alt="" src="/image/imax.jpeg">
+			<img alt="" src="${pageContext.request.contextPath}/image/imax.jpeg">
 		</div>
 		<div class="container">
 			<h1>&darr;키즈</h1>
-			<img alt="" src="/image/kids.jpeg">
+			<img alt="" src="${pageContext.request.contextPath}/image/kids.jpeg">
 		</div>
 	</div>
 </body>

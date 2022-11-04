@@ -8,7 +8,7 @@
 </jsp:include>
  
  
-<link rel="stylesheet" type="text/css" href="/css/semi-commons.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/semi-commons.css">
 
 
 <style>
@@ -77,7 +77,7 @@ $(function(){
 		console.log(this);
 		
 		$.ajax({
-			url:"/rest/reply/delete",
+			url:${pageContext.request.contextPath}+"/rest/reply/delete",
 			method:"post",
 			data:{
 				replyOrigin:$(this).data("reply-origin"),

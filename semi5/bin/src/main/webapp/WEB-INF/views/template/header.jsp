@@ -14,20 +14,18 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
 
     <!-- css파일 -->
-    <link rel="stylesheet" type="text/css" href="/css/semi-commons.css">
-    <link rel="stylesheet" type="text/css" href="/css/reset.css">
-    <link rel="stylesheet" type="text/css" href="/css/semi-layout.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/semi-commons.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/reset.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/semi-layout.css">
 
     <!-- 폰트어썸 -->
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"/>
 
-<<<<<<< HEAD
     <!-- jquery 사용 위한 라이브러리 파일 불러옴 -->
     <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 
     <!-- js 파일 -->
     <script src="/js/navigator.js"></script>
-=======
     <style>
         
         /*
@@ -54,7 +52,6 @@
 
     <!-- js 파일 -->
     <script src="./js/navigator.js"></script>
->>>>>>> refs/remotes/origin/main
     <script type="text/javascript">
 
 
@@ -69,7 +66,7 @@
         <div class="flex-container">
             <div class="left">
                 <a href="#" id="logo">
-                    <img id="logo" src="/image/logo.png">
+                    <img id="logo" src="${pageContext.request.contextPath}/image/logo.png">
                 </a>
             </div>
             <div class="right header-menu">
@@ -102,7 +99,7 @@
                 <ul class="nav-title">
                     <a href="#">
                         <li>
-                            <img id="nav-logo" src="/image/logo.png">
+                            <img id="nav-logo" src="${pageContext.request.contextPath}/image/logo.png">
                         </li>
                     </a>
                     <a href="#">
@@ -117,13 +114,10 @@
                     <a href="#">
                         <li>커뮤니티</li>
                     </a>
-<<<<<<< HEAD
                     <li>
                     	<input class="input">
                     	<button type="button" class="btn btn-search"><i class="fa-solid fa-magnifying-glass"></i></button>
                 	</li>
-=======
->>>>>>> refs/remotes/origin/main
                 </ul>
             </div>
             <!-- 네이게이터 영역 -->

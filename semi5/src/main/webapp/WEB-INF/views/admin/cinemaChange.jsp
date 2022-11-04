@@ -48,10 +48,10 @@
 				<div class="mt-10">
 				<c:forEach var="imageDto" items="${attachments}">
 					<span class="ms-10 mt-10">
-					<img src="/attachment/download/${imageDto.fileNumber}" width="100" height="100">
-					<a href="/attachment/download/${imageDto.fileNumber}">다운로드</a>
+					<img src="${pageContext.request.contextPath}/attachment/download/${imageDto.fileNumber}" width="100" height="100">
+					<a href="${pageContext.request.contextPath}/attachment/download/${imageDto.fileNumber}">다운로드</a>
 					<%-- <a href="/attachment/delete/${imageDto.fileNumber}">삭제</a> 	삭제는 비동기로 구현 --%>
-					<a href="/admin/cinemaImageDelete?cinemaPorin=${cinemaDto.cinemaPorin}&fileNumber=${imageDto.fileNumber}">삭제</a>
+					<a href="${pageContext.request.contextPath}/admin/cinemaImageDelete?cinemaPorin=${cinemaDto.cinemaPorin}&fileNumber=${imageDto.fileNumber}">삭제</a>
 					</span>
 				</c:forEach>
 				</div>

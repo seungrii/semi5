@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<link rel="stylesheet" type="text/css" href="/css/semi-commons.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/semi-commons.css">
 
 
 <head>
@@ -25,7 +25,7 @@
 			<h1>키즈관</h1>
 		</div>
 		<div class="container center mt-50">
-			<img width="900px" src="/image/kids.jpeg">
+			<img width="900px" src="${pageContext.request.contextPath}/image/kids.jpeg">
 			<div style="margin-bottom: 100px">
 				<p class="p-kids">어린이/가족 관람객을 위한 ‘자동차석’, ’어린이석’, ‘일반석’으로 구성된 상영관으로</p>
 				<p class="p-kids"> 아이들이 취향에 맞게 좌석을 선택하여 영화를 관람하고, 보호자는 일반석에서</p>

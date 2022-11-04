@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<<<<<<< HEAD
 <jsp:include page="/WEB-INF/views/user-login-template/header.jsp">
 	<jsp:param value="로그인" name="title"/>
 </jsp:include>
@@ -28,8 +27,7 @@
 			</div>
 			<div class="row">
 				<button type="submit" class="btn btn-positive login-btn">로그인</button>
-=======
-<jsp:include page="/WEB-INF/views/template/header.jsp">
+<jsp:include page="${pageContext.request.contextPath}/WEB-INF/views/template/header.jsp">
 	<jsp:param value="회원 가입" name="title"/>
 </jsp:include>
 	<section class="w-980 test-css">
@@ -55,7 +53,6 @@
 			</div>
 			<div>
 				<button type="submit">로그인</button>
->>>>>>> refs/remotes/origin/main
 			</div>
 		</form>
 		<!-- 이상인 경우만 나오는 화면 -->

@@ -53,8 +53,8 @@
 					<div class="mt-10">
 					<c:forEach var="imageDto" items="${attachments}">
 						<span class="ms-10 mt-10">
-						<img src="/attachment/download/${imageDto.fileNumber}" width="100" height="100">
-						<a href="/user/profileImageDelete?userId=${userDto.userId}&fileNumber=${imageDto.fileNumber}">삭제</a>
+						<img src="${pageContext.request.contextPath}/attachment/download/${imageDto.fileNumber}" width="100" height="100">
+						<a href="${pageContext.request.contextPath}/user/profileImageDelete?userId=${userDto.userId}&fileNumber=${imageDto.fileNumber}">삭제</a>
 						</span>
 					</c:forEach>
 					</div>

@@ -17,7 +17,7 @@ $(function(){
 		
 		var userfind = "userName="+userName.val()+"&userTel="+userTel.val();
 		$.ajax({
-			url:"http://localhost:8888/rest/user/userIdFind?"+userfind,
+			url:root+"/http://localhost:8888/rest/user/userIdFind?"+userfind,
 			method:"get",
 			success:function(resp){
 				if(resp != "NNNNY"){
@@ -40,7 +40,7 @@ $(function(){
 		
 		var userfind = "userId="+userId.val()+"&userName="+userName.val()+"&userTel="+userTel.val();
 		$.ajax({
-			url:"http://localhost:8888/rest/user/userPwFind?"+userfind,
+			url:root+"/http://localhost:8888/rest/user/userPwFind?"+userfind,
 			method:"get",
 			success:function(resp){
 				if(resp != "NNNNY"){
