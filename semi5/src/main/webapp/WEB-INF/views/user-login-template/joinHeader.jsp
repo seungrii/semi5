@@ -25,10 +25,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
 
     <!-- css파일 -->
-    <link rel="stylesheet" type="text/css" href="/css/semi-commons.css">
-    <link rel="stylesheet" type="text/css" href="/css/reset.css">
-    <link rel="stylesheet" type="text/css" href="/css/semi-layout.css">
-    <link rel="stylesheet" type="text/css" href="/css/join.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/semi-commons.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/reset.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/semi-layout.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/join.css">
 
     <!-- 폰트어썸 -->
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"/>
@@ -54,26 +54,26 @@
         <!-- 헤더 영역 -->
         <div class="flex-container">
             <div class="left">
-                <a href="/" id="logo">
-                    <img id="logo" src="/image/logo.png">
+                <a href="${pageContext.request.contextPath}/" id="logo">
+                    <img id="logo" src="${pageContext.request.contextPath}/image/logo.png">
                 </a>
             </div>
             <div class="right header-menu">
                 <ul>
                     <li>
-                        <a href="/user/login">
+                        <a href="${pageContext.request.contextPath}/user/login">
                             <i class="fa-solid fa-arrow-right-to-bracket"></i>
                             <span>로그인</span>
                         </a>
                 	</li>
                 	<li>
-                        <a href="/user/join">
+                        <a href="${pageContext.request.contextPath}/user/join">
                             <i class="fa-solid fa-user-plus"></i>
                             <span>회원가입</span>
                         </a>
                     </li>
                     <li>
-                        <a href="/user/mypage">
+                        <a href="${pageContext.request.contextPath}/user/mypage">
                             <i class="fa-solid fa-gear"></i>
                             <span>마이페이지</span>
                         </a>
@@ -88,7 +88,7 @@
                 <ul class="nav-title">
                     <a href="#">
                         <li>
-                            <img id="nav-logo" src="/image/logo.png">
+                            <img id="nav-logo" src="${pageContext.request.contextPath}/image/logo.png">
                         </li>
                     </a>
                     <a href="#">

@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<link rel="stylesheet" type="text/css" href="/css/semi-commons.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/semi-commons.css">
 
 <head>
 <jsp:include page="/WEB-INF/views/template/header.jsp">
@@ -48,12 +48,12 @@
 				<div class="container">
 					<div class="container">
 						<a href="normal">
-						<img id="normal" src="/image/normal.jpeg">
+						<img id="normal" src="${pageContext.request.contextPath}/image/normal.jpeg">
 						</a>
 					</div>
 					<div class="container">
 						<a href="special">
-						<img id="special" src="/image/imax.jpeg"><div class="bottom-left">특별관으로 이동</div>
+						<img id="special" src="${pageContext.request.contextPath}/image/imax.jpeg"><div class="bottom-left">특별관으로 이동</div>
 						</a>
 					</div>
 					<div class="container" id="name">
@@ -61,7 +61,7 @@
 						<a href="special" id="special">특별관으로 이동</a>
 					</div>		
 					<div class="container">
-						<a href="/">home</a>
+						<a href="${pageContext.request.contextPath}/">home</a>
 					</div>
 				</div>
 		</div>

@@ -7,7 +7,7 @@
 	<jsp:param value="문의 수정" name="title"/>
 </jsp:include>
 
-<link rel="stylesheet" type="text/css" href="/css/semi-commons.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/semi-commons.css">
 
 
 <style>
@@ -49,3 +49,5 @@
 </div>
 
 </form>
+
+	<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

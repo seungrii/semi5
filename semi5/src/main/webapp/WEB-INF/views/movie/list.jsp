@@ -161,12 +161,12 @@
                     <td>
                     	<c:choose>
 							<c:when test="${!attachments.isEmpty()}">
-								<a href="/movie/movieDetail?movieNumber=${movieDto.movieNumber}">
-								<img src="/attachment/download/${imageDto[status.index].fileNumber}" width="200px" height="280px">
+								<a href="${pageContext.request.contextPath}/movie/movieDetail?movieNumber=${movieDto.movieNumber}">
+								<img src="${pageContext.request.contextPath}/attachment/download/${imageDto[status.index].fileNumber}" width="200px" height="280px">
 								</a>
 							</c:when>
 							<c:otherwise>
-	                        	<a href="/movie/movieDetail?movieNumber=${movieDto.movieNumber}"><img class="image"></a>
+	                        	<a href="${pageContext.request.contextPath}/movie/movieDetail?movieNumber=${movieDto.movieNumber}"><img class="image"></a>
 	                        </c:otherwise>
                         </c:choose>
                     </td>
@@ -177,7 +177,7 @@
                             <li >${movieDto.movieName}</li>
                             <li>개봉일:${movieDto.openingDate}</li>
                            	<li>상영종료일:${movieDto.screeningEnd}</li>
-                             <a href="/advance/list"><button class="btn btn-neutral" type="submit">예매하기</button></a>
+                             <a href="${pageContext.request.contextPath}/advance/list"><button class="btn btn-neutral" type="submit">예매하기</button></a>
                         </ul>
                     </td>
                 </tr>

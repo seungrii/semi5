@@ -26,10 +26,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
 
     <!-- css파일 -->
-    <link rel="stylesheet" type="text/css" href="/css/semi-commons.css">
-    <link rel="stylesheet" type="text/css" href="/css/reset.css">
-    <link rel="stylesheet" type="text/css" href="/css/semi-layout.css">
-    <link rel="stylesheet" type="text/css" href="/css/advance.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/semi-commons.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/reset.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/semi-layout.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/advance.css">
 
     <!-- 폰트어썸 -->
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"/>
@@ -37,6 +37,9 @@
     <!-- jquery 사용 위한 라이브러리 파일 불러옴 -->
     <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 
+	<script>
+	   var root = "${pageContext.request.contextPath}";
+	</script>
     <!-- js 파일 -->
     <script src="/js/navigator.js"></script>
     <script src="/js/advance.js"></script>
@@ -52,8 +55,8 @@
         <!-- 헤더 영역 -->
         <div class="flex-container">
             <div class="left">
-                <a href="/" id="logo">
-                    <img id="logo" src="/image/logo.png">
+                <a href="${pageContext.request.contextPath}/" id="logo">
+                    <img id="logo" src="${pageContext.request.contextPath}/image/logo.png">
                 </a>
             </div>
             <div class="right header-menu">
@@ -61,7 +64,7 @@
                 	<!-- 관리자일 경우, 관리자 아이콘 -->
 					<c:if test="${admin}">
 	    	           	<li>
-	                        <a href="/admin/home">
+	                        <a href="${pageContext.request.contextPath}/admin/home">
 	                            <i class="fa-solid fa-screwdriver-wrench"></i>
 	                            <span>관리자</span>
 	                        </a>
@@ -70,7 +73,7 @@
                     <c:choose>
 	                    <c:when test="${login}">
 	                    	<li>
-		                        <a href="/user/logout">
+		                        <a href="${pageContext.request.contextPath}/user/logout">
 		                            <i class="fa-solid fa-arrow-right-from-bracket"></i>
 		                            <span>로그아웃</span>
 		                        </a>
@@ -78,13 +81,13 @@
 	                    </c:when>
                     	<c:otherwise>
                 			<li>
-		                        <a href="/user/login">
+		                        <a href="${pageContext.request.contextPath}/user/login">
 		                            <i class="fa-solid fa-arrow-right-to-bracket"></i>
 		                            <span>로그인</span>
 		                        </a>
                     		</li>
                     		<li>
-		                        <a href="/user/join">
+		                        <a href="${pageContext.request.contextPath}/user/join">
 		                            <i class="fa-solid fa-user-plus"></i>
 		                            <span>회원가입</span>
 		                        </a>
@@ -92,7 +95,7 @@
                     	</c:otherwise>
                     </c:choose>
                     <li>
-                        <a href="/user/mypage">
+                        <a href="${pageContext.request.contextPath}/user/mypage">
                             <i class="fa-solid fa-gear"></i>
                             <span>마이페이지</span>
                         </a>
@@ -107,19 +110,19 @@
                 <ul class="nav-title">
                     <a href="#">
                         <li>
-                            <img id="nav-logo" src="/image/logo.png">
+                            <img id="nav-logo" src="${pageContext.request.contextPath}/image/logo.png">
                         </li>
                     </a>
-                    <a href="/movie/list">
+                    <a href="${pageContext.request.contextPath}/movie/list">
                         <li>영화</li>
                     </a>
-                    <a href="/advance/list">
+                    <a href="${pageContext.request.contextPath}/advance/list">
                         <li>예매</li>
                     </a>
-                    <a href="/theater/home">
+                    <a href="${pageContext.request.contextPath}/theater/home">
                         <li>극장</li>
                     </a>
-                    <a href="/notice/list">
+                    <a href="${pageContext.request.contextPath}/notice/list">
                         <li>커뮤니티</li>
                     </a>
                     <li>
@@ -136,46 +139,46 @@
                     <ul class="nav-list">
                         <li>
                             <ul>
-                                <a href="/movie/list">
+                                <a href="${pageContext.request.contextPath}/movie/list">
                                     <li>영화</li>
                                 </a>
-                                <a href="/movie/list">
+                                <a href="${pageContext.request.contextPath}/movie/list">
                                     <li>무비차트</li>
                                 </a>
                             </ul>
                         </li>
                         <li>
                             <ul>
-                                <a href="/advance/list">
+                                <a href="${pageContext.request.contextPath}/advance/list">
                                     <li>예매</li>
                                 </a>
-                                <a href="/advance/list">
+                                <a href="${pageContext.request.contextPath}/advance/list">
                                     <li>예매하기</li>
                                 </a>
                             </ul>
                         </li>
                         <li>
                             <ul>
-                                <a href="/theater/home">
+                                <a href="${pageContext.request.contextPath}/theater/home">
                                     <li>극장</li>
                                 </a>
-                                <a href="/theater/home">
+                                <a href="${pageContext.request.contextPath}/theater/home">
                                     <li>상영관 종류</li>
                                 </a>
-                                <a href="/cinema/home">
+                                <a href="${pageContext.request.contextPath}/cinema/home">
                                     <li>지점 안내</li>
                                 </a>
                             </ul>
                         </li>
                         <li>
                             <ul>
-                                <a href="/notice/list">
+                                <a href="${pageContext.request.contextPath}/notice/list">
                                     <li>공지사항</li>
                                 </a>
-                                <a href="/qna/list">
+                                <a href="${pageContext.request.contextPath}/qna/list">
                                     <li>문의게시판</li>
                                 </a>
-                                <a href="/board/list">
+                                <a href="${pageContext.request.contextPath}/board/list">
                                     <li>자유게시판</li>
                                 </a>
                             </ul>

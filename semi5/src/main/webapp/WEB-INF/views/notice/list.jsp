@@ -10,7 +10,7 @@
 </c:set>
 
 
-<link rel="stylesheet" type="text/css" href="/css/semi-commons.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/semi-commons.css">
 
 <!-- 테스트용 데이터 출력 -->
 <%-- <h3>${vo}</h3> --%>
@@ -66,7 +66,7 @@
 	<table class="table table-slit">
 		<thead>
 			<td align="right" colspan="5">
-				<a href="/">홈으로</a>
+				<a href="${pageContext.request.contextPath}/">홈으로</a>
 				
 				<c:set var="admin" value="${loginGrade == '관리자'}"></c:set>
 				<c:if test="${admin}">
