@@ -33,7 +33,7 @@ public class AttachmentController {
 	@Autowired
 	private AttachmentService attachmentService;
 	
-	private final File dir = new File("d:\\upload\\kh10E"); //파일경로
+	private final File dir = new File("c:\\upload\\kh10E"); //파일경로
 		
 	@GetMapping("/download/{fileNumber}")	//이미지 보여주기(다운로드)
 	public ResponseEntity<ByteArrayResource> download(

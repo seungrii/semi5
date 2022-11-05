@@ -42,7 +42,7 @@ public class MemberInterceptor implements HandlerInterceptor {
 		if(loginId==null) {//비회원2-2
 			//선택지는 2가지가 있다
 			//1.로그인 페이지로 리다이렉트
-			response.sendRedirect("/user/login");
+			response.sendRedirect(request.getContextPath()+"/user/login");
 			//2.http상태 코드 중에서 미인증(401)을 반환
 			//response.sendError(401);
 			return false;//차단

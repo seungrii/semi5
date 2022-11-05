@@ -31,7 +31,7 @@ $(function(){
                 //url:"http://localhost:8888/rest/member/nick?memberNick="+memberNick,
                 //method:"get",
 
-                url:root+"/http://localhost:8888/rest/admin/id",
+                url:root+"/rest/admin/id",
                 method:"post",
                 data:{//POST일 경우만 생성 가능한 파라미터 객체
                     //왼쪽이 파라미터 이름, 오른쪽이 전달될 값의 변수명

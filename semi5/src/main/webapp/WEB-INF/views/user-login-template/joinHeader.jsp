@@ -37,10 +37,10 @@
     <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 
     <!-- js 파일 -->
-    <script src="/js/navigator.js"></script>
-    <script src="/js/joinCheckBox.js"></script>
-    <script src="/js/joinMultiPage.js"></script>
-    <script src="/js/joinMessage.js"></script>
+    <script src="${pageContext.request.contextPath}/js/navigator.js"></script>
+    <script src="${pageContext.request.contextPath}/js/joinCheckBox.js"></script>
+    <script src="${pageContext.request.contextPath}/js/joinMultiPage.js"></script>
+    <script src="${pageContext.request.contextPath}/js/joinMessage.js"></script>
     <script type="text/javascript">
 
 
@@ -86,25 +86,25 @@
         <div class="container">
             <div class="nav-title-box">
                 <ul class="nav-title">
-                    <a href="#">
+                    <a href="${pageContext.request.contextPath}/">
                         <li>
                             <img id="nav-logo" src="${pageContext.request.contextPath}/image/logo.png">
                         </li>
                     </a>
-                    <a href="#">
+                    <a href="${pageContext.request.contextPath}/movie/list">
                         <li>영화</li>
                     </a>
-                    <a href="#">
+                    <a href="${pageContext.request.contextPath}/advance/list">
                         <li>예매</li>
                     </a>
-                    <a href="#">
+                    <a href="${pageContext.request.contextPath}/theater/home">
                         <li>극장</li>
                     </a>
-                    <a href="#">
+                    <a href="${pageContext.request.contextPath}/notice/list">
                         <li>커뮤니티</li>
                     </a>
                     <li>
-						<form action="keywordSearch">
+                    	<form action="keywordSearch">
     	                	<input name="movieName" class="input search-input-keyword">
 	                    	<button type="submit" class="btn btn-search"><i class="fa-solid fa-magnifying-glass"></i></button>
                     	</form>
@@ -117,52 +117,46 @@
                     <ul class="nav-list">
                         <li>
                             <ul>
-                                <a href="#">
+                                <a href="${pageContext.request.contextPath}/movie/list">
                                     <li>영화</li>
                                 </a>
-                                <a href="#">
+                                <a href="${pageContext.request.contextPath}/movie/list">
                                     <li>무비차트</li>
-                                </a>
-                                <a href="#">
-                                    <li>상영중</li>
-                                </a>
-                                <a href="#">
-                                    <li>상영 예정</li>
                                 </a>
                             </ul>
                         </li>
                         <li>
                             <ul>
-                                <a href="#">
+                                <a href="${pageContext.request.contextPath}/advance/list">
                                     <li>예매</li>
                                 </a>
-                                <a href="#">
+                                <a href="${pageContext.request.contextPath}/advance/list">
                                     <li>예매하기</li>
                                 </a>
                             </ul>
                         </li>
                         <li>
                             <ul>
-                                <a href="#">
+                                <a href="${pageContext.request.contextPath}/theater/home">
                                     <li>극장</li>
                                 </a>
-                                <a href="#">
+                                <a href="${pageContext.request.contextPath}/theater/home">
                                     <li>상영관 종류</li>
                                 </a>
-                                <a href="#">
+                                <a href="${pageContext.request.contextPath}/cinema/home">
                                     <li>지점 안내</li>
                                 </a>
                             </ul>
                         </li>
                         <li>
                             <ul>
-                                <a href="#">
-                                    <li>커뮤니티</li>
-                                </a>
-                                <a href="#">
+                                <a href="${pageContext.request.contextPath}/notice/list">
                                     <li>공지사항</li>
                                 </a>
-                                <a href="#">
+                                <a href="${pageContext.request.contextPath}/qna/list">
+                                    <li>문의게시판</li>
+                                </a>
+                                <a href="${pageContext.request.contextPath}/board/list">
                                     <li>자유게시판</li>
                                 </a>
                             </ul>
