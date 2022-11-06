@@ -1,7 +1,5 @@
 package com.victory.semi5.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,7 +8,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.victory.semi5.entity.ImageDto;
 import com.victory.semi5.repository.AttachmentDao;
 import com.victory.semi5.repository.BoardDao;
 import com.victory.semi5.repository.MovieDao;
@@ -60,6 +57,8 @@ public class HomeController {
 			@RequestParam (required = false) String movieName) {
 		if(movieName != null) {
 			model.addAttribute("movieDto", movieDao.selectSearch(movieName));
+			model.addAttribute("imageDto", attachmentDao.keywordSearchPosterList(movieName));
+			
 		}else {
 			model.addAttribute("movieDto", null);
 		}

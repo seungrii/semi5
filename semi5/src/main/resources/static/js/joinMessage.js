@@ -10,7 +10,7 @@ $(function(){
 		if(!userId) return;
 		userId.removeClass("success fail");
 		$.ajax({
-			url:root+"/http://localhost:8888/rest/user/id?userId="+userId.val(),
+			url:root+"/rest/user/id?userId="+userId.val(),
 			method:"get",
 			success:function(resp){
 				if(resp=="NNNNY"){

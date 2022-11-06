@@ -116,6 +116,15 @@ public class AttachmentDaoImpl implements AttachmentDao{
 		Object[] param = {movieNumber};
 		return jdbcTemplate.query(sql, mapper, param);
 	}
+	@Override
+	public List<ImageDto> keywordSearchPosterList(String movieName) {
+		String sql = "select * "
+				+ "from poster_image_view P "
+				+ "where P.movie_number "
+				+ "in (select M.movie_number from movie M where instr(movie_name, ?)>0)";
+		Object[] param = {movieName};
+		return jdbcTemplate.query(sql, mapper, param);
+	}
 	//무비차트 조회용
 	@Override
 	public List<ImageDto> selectPosterList() {
@@ -168,5 +177,6 @@ public class AttachmentDaoImpl implements AttachmentDao{
 		Object[] param = {movieNumber};
 		return jdbcTemplate.query(sql, mapper, param);
 	}
+
 
 }

@@ -9,7 +9,7 @@
 
 <div class="admin-box">
 
-<jsp:include page="${pageContext.request.contextPath}/WEB-INF/views/template/sidebar.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/views/template/sidebar.jsp"></jsp:include>
 
 <div class="container">
 

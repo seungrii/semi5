@@ -25,7 +25,7 @@
     <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 
     <!-- js 파일 -->
-    <script src="/js/navigator.js"></script>
+    <script src="${pageContext.request.contextPath}/js/navigator.js"></script>
     <style>
         
         /*
@@ -51,7 +51,7 @@
     <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 
     <!-- js 파일 -->
-    <script src="./js/navigator.js"></script>
+    <%-- <script src="${pageContext.request.contextPath}/js/navigator.js"></script> --%>
     <script type="text/javascript">
 
 

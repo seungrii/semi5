@@ -41,8 +41,8 @@
 	   var root = "${pageContext.request.contextPath}";
 	</script>
     <!-- js 파일 -->
-    <script src="/js/navigator.js"></script>
-    <script src="/js/advance.js"></script>
+    <script src="${pageContext.request.contextPath}/js/navigator.js"></script>
+    <script src="${pageContext.request.contextPath}/js/advance.js"></script>
     <script type="text/javascript">
 
         
@@ -108,7 +108,7 @@
         <div class="container">
             <div class="nav-title-box">
                 <ul class="nav-title">
-                    <a href="#">
+                    <a href="${pageContext.request.contextPath}/">
                         <li>
                             <img id="nav-logo" src="${pageContext.request.contextPath}/image/logo.png">
                         </li>
@@ -126,7 +126,7 @@
                         <li>커뮤니티</li>
                     </a>
                     <li>
-                    	<form action="keywordSearch">
+                    	<form action="${pageContext.request.contextPath}/keywordSearch">
     	                	<input name="movieName" class="input search-input-keyword">
 	                    	<button type="submit" class="btn btn-search"><i class="fa-solid fa-magnifying-glass"></i></button>
                     	</form>

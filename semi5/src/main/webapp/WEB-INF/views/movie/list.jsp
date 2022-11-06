@@ -173,11 +173,11 @@
                 </tr>
                 <tr >
                     <td class="content" >
-                        <ul >
+                        <ul>
                             <li >${movieDto.movieName}</li>
                             <li>개봉일:${movieDto.openingDate}</li>
                            	<li>상영종료일:${movieDto.screeningEnd}</li>
-                             <a href="${pageContext.request.contextPath}/advance/list"><button class="btn btn-neutral" type="submit">예매하기</button></a>
+                            <a href="${pageContext.request.contextPath}/advance/list"><button class="btn btn-neutral" type="submit">예매하기</button></a>
                         </ul>
                     </td>
                 </tr>

@@ -99,27 +99,39 @@
 		<div class="row left mt-50">
 			<h1>영화 통합검색</h1>
 		</div>
+        <hr>
 		<c:choose>
 			<c:when test="${movieDto != null}">
-				<c:forEach var="movieDto" items="${movieDto}">
-					<table class="small">
-						<tr>
-							<td>
-								<a><img alt="" src="" class="image"></a>
-							</td>
-						</tr>
-						<tr>
-							<td class="content" >
-                                <ul >
-                                    <li >${movieDto.movieName}</li>
-                                   
-                                    <li>개봉일:${movieDto.openingDate}</li>
-                                     <a href="#"><button class="btn btn-neutral" type="submit">예매하기</button></a>
-                                </ul>
-                            </td>
-						</tr>
-					</table>
-				</c:forEach>
+		        <div class="center mb-50">   
+				<c:forEach var="movieDto" items="${movieDto}" varStatus="status">
+		            <table class="small center" >
+		                <tr>
+		                    <td>
+		                    	<c:choose>
+									<c:when test="${!attachments.isEmpty()}">
+										<a href="${pageContext.request.contextPath}/movie/movieDetail?movieNumber=${movieDto.movieNumber}">
+										<img src="${pageContext.request.contextPath}/attachment/download/${imageDto[status.index].fileNumber}" width="200px" height="280px">
+										</a>
+									</c:when>
+									<c:otherwise>
+			                        	<a href="${pageContext.request.contextPath}/movie/movieDetail?movieNumber=${movieDto.movieNumber}"><img class="image"></a>
+			                        </c:otherwise>
+		                        </c:choose>
+		                    </td>
+		                </tr>
+		                <tr >
+		                    <td class="content" >
+		                        <ul>
+		                            <li >${movieDto.movieName}</li>
+		                            <li>개봉일:${movieDto.openingDate}</li>
+		                           	<li>상영종료일:${movieDto.screeningEnd}</li>
+		                            <a href="${pageContext.request.contextPath}/advance/list"><button class="btn btn-neutral" type="submit">예매하기</button></a>
+		                        </ul>
+		                    </td>
+		                </tr>
+		            </table> 
+        		</c:forEach>
+        		</div>  
 			</c:when>
 			<c:otherwise>
 			</c:otherwise>

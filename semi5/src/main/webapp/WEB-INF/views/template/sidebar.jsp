@@ -37,7 +37,7 @@
                  <a href="${pageContext.request.contextPath}/qna/list">문의게시판</a>
               </div>
               <div class="row">
-                 <a href="${pageContext.request.contextPath}/askingList">1:1 문의내역</a>
+                 <a href="${pageContext.request.contextPath}/admin/askingList">1:1 문의내역</a>
             	</div>
           </div>
        </aside>

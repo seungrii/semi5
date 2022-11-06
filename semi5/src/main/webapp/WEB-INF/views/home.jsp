@@ -9,8 +9,8 @@
 
 <head>
 
-	<link rel="stylesheet" type="text/css" href="./css/reset.css">
-	<link rel="stylesheet" type="text/css" href="./css/commons.css">
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/reset.css">
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/commons.css">
 	
 	<!-- swiper 의존성 -->
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"/>
@@ -163,8 +163,8 @@
 									${noticeDto.noticeTitle}	
 								</a>
 							</td>
-							<td>${noticeDto.adminId}</td>
-							<td>${noticeDto.noticeRead}</td>
+							<%-- <td>${noticeDto.adminId}</td>
+							<td>${noticeDto.noticeRead}</td> --%>
 						</tr>
 						</c:forEach>
 					</tbody>
