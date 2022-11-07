@@ -41,7 +41,7 @@ import com.victory.semi5.service.AttachmentService;
 import com.victory.semi5.vo.HashtagVO;
 import com.victory.semi5.vo.MoviePlayVO;
 import com.victory.semi5.vo.MovieVO;
-
+ 
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
