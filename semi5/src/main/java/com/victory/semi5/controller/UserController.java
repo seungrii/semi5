@@ -56,7 +56,7 @@ public class UserController {
 	@Autowired
 	private AttachmentService attachmentService;
 	
-	private final File dir = new File("C:\\study\\vic\\upload"); //파일경로
+	private final File dir = new File("D:\\upload\\kh10E"); //파일경로
 	@PostConstruct //최초 실행 시, 딱 한번만 실행되는 메소드
 	public void prepare() {
 		dir.mkdirs();

@@ -25,11 +25,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
 
     <!-- css파일 -->
-    <link rel="stylesheet" type="text/css" href="/css/semi-commons.css">
-    <link rel="stylesheet" type="text/css" href="/css/reset.css">
-    <link rel="stylesheet" type="text/css" href="/css/semi-layout.css">
-    <link rel="stylesheet" type="text/css" href="/css/join.css">
-    <link rel="stylesheet" type="text/css" href="/css/userChange.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/semi-commons.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/reset.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/semi-layout.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/join.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/userChange.css">
     <!-- <link rel="stylesheet" type="text/css" href="/css/login.css">  login.css 어디..? -->
 
 
@@ -40,9 +40,9 @@
     <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 
     <!-- js 파일 -->
-    <script src="/js/navigator.js"></script>
-    <script src="/js/idfind.js"></script>
-    <script src="/js/findMessage.js"></script>
+    <script src="${pageContext.request.contextPath}/js/navigator.js"></script>
+    <script src="${pageContext.request.contextPath}/js/idfind.js"></script>
+    <script src="${pageContext.request.contextPath}/js/findMessage.js"></script>
     <script type="text/javascript">
 
         
@@ -55,26 +55,26 @@
         <!-- 헤더 영역 -->
         <div class="flex-container">
             <div class="left">
-                <a href="/" id="logo">
-                    <img id="logo" src="/image/logo.png">
+                <a href="${pageContext.request.contextPath}/" id="logo">
+                    <img id="logo" src="${pageContext.request.contextPath}/image/logo.png">
                 </a>
             </div>
             <div class="right header-menu">
                 <ul>
                     <li>
-                        <a href="/user/login">
+                        <a href="${pageContext.request.contextPath}/user/login">
                             <i class="fa-solid fa-arrow-right-to-bracket"></i>
                             <span>로그인</span>
                         </a>
                 	</li>
                 	<li>
-                        <a href="/user/join">
+                        <a href="${pageContext.request.contextPath}/user/join">
                             <i class="fa-solid fa-user-plus"></i>
                             <span>회원가입</span>
                         </a>
                     </li>
                     <li>
-                        <a href="/user/mypage">
+                        <a href="${pageContext.request.contextPath}/user/mypage">
                             <i class="fa-solid fa-gear"></i>
                             <span>마이페이지</span>
                         </a>
@@ -87,25 +87,25 @@
         <div class="container">
             <div class="nav-title-box">
                 <ul class="nav-title">
-                    <a href="#">
+                    <a href="${pageContext.request.contextPath}/">
                         <li>
-                            <img id="nav-logo" src="/image/logo.png">
+                            <img id="nav-logo" src="${pageContext.request.contextPath}/image/logo.png">
                         </li>
                     </a>
-                    <a href="#">
+                    <a href="${pageContext.request.contextPath}/movie/list">
                         <li>영화</li>
                     </a>
-                    <a href="#">
+                    <a href="${pageContext.request.contextPath}/advance/list">
                         <li>예매</li>
                     </a>
-                    <a href="#">
+                    <a href="${pageContext.request.contextPath}/theater/home">
                         <li>극장</li>
                     </a>
-                    <a href="#">
+                    <a href="${pageContext.request.contextPath}/notice/list">
                         <li>커뮤니티</li>
                     </a>
                     <li>
-						<form action="keywordSearch">
+                    	<form action="keywordSearch">
     	                	<input name="movieName" class="input search-input-keyword">
 	                    	<button type="submit" class="btn btn-search"><i class="fa-solid fa-magnifying-glass"></i></button>
                     	</form>
@@ -118,52 +118,46 @@
                     <ul class="nav-list">
                         <li>
                             <ul>
-                                <a href="#">
+                                <a href="${pageContext.request.contextPath}/movie/list">
                                     <li>영화</li>
                                 </a>
-                                <a href="#">
+                                <a href="${pageContext.request.contextPath}/movie/list">
                                     <li>무비차트</li>
-                                </a>
-                                <a href="#">
-                                    <li>상영중</li>
-                                </a>
-                                <a href="#">
-                                    <li>상영 예정</li>
                                 </a>
                             </ul>
                         </li>
                         <li>
                             <ul>
-                                <a href="#">
+                                <a href="${pageContext.request.contextPath}/advance/list">
                                     <li>예매</li>
                                 </a>
-                                <a href="#">
+                                <a href="${pageContext.request.contextPath}/advance/list">
                                     <li>예매하기</li>
                                 </a>
                             </ul>
                         </li>
                         <li>
                             <ul>
-                                <a href="#">
+                                <a href="${pageContext.request.contextPath}/theater/home">
                                     <li>극장</li>
                                 </a>
-                                <a href="#">
+                                <a href="${pageContext.request.contextPath}/theater/home">
                                     <li>상영관 종류</li>
                                 </a>
-                                <a href="#">
+                                <a href="${pageContext.request.contextPath}/cinema/home">
                                     <li>지점 안내</li>
                                 </a>
                             </ul>
                         </li>
                         <li>
                             <ul>
-                                <a href="#">
-                                    <li>커뮤니티</li>
-                                </a>
-                                <a href="#">
+                                <a href="${pageContext.request.contextPath}/notice/list">
                                     <li>공지사항</li>
                                 </a>
-                                <a href="#">
+                                <a href="${pageContext.request.contextPath}/qna/list">
+                                    <li>문의게시판</li>
+                                </a>
+                                <a href="${pageContext.request.contextPath}/board/list">
                                     <li>자유게시판</li>
                                 </a>
                             </ul>

@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<link rel="stylesheet" type="text/css" href="/css/semi-commons.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/semi-commons.css">
 
 
 <head>
@@ -39,7 +39,7 @@
 			<button class="btn btn-theater"><a href="home">&#60; 상영관 종류 보기</a></button>
 		</div>
 		<div class="container img">
-			<img alt="" src="/image/normal.jpeg">
+			<img alt="" src="${pageContext.request.contextPath}/image/normal.jpeg">
 		</div>
 		<div class="container mt-50 mb-50">
 			<p id="p-normal">일반관</p>

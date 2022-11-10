@@ -23,7 +23,7 @@ public class AttachmentServiceImpl implements AttachmentService{
 	@Autowired
 	private AttachmentDao attachmentDao;
 	
-	private final File dir = new File("C:\\study\\vic\\upload"); //파일경로
+	private final File dir = new File("D:\\upload\\kh10E"); //파일경로
 	
 	@Override
 	public int attachmentsUp(List<MultipartFile> attachments, MultipartFile file)

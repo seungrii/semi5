@@ -77,7 +77,7 @@
 					value="${ListHashtag.genreName}">
 			</c:forEach>
 		</div>
-		
+		</form>
 		<form action="moviePosterAdd" method="post" enctype="multipart/form-data"> 
 		<!-- 영화 포스터 첨부 -->
 		<div class="row left">
@@ -94,9 +94,9 @@
 				<div class="mt-10">
 				<c:forEach var="imageDto" items="${attachments}">
 					<span class="ms-10 mt-10">
-					<img src="/attachment/download/${imageDto.fileNumber}" width="100" height="100">
-					<a href="/attachment/download/${imageDto.fileNumber}">다운로드</a>
-					<a href="/admin/posterDelete?movieNumber=${movieDto.movieNumber}&fileNumber=${imageDto.fileNumber}">삭제</a>
+					<img src="${pageContext.request.contextPath}/attachment/download/${imageDto.fileNumber}" width="100" height="100">
+					<a href="${pageContext.request.contextPath}/attachment/download/${imageDto.fileNumber}">다운로드</a>
+					<a href="${pageContext.request.contextPath}/admin/posterDelete?movieNumber=${movieDto.movieNumber}&fileNumber=${imageDto.fileNumber}">삭제</a>
 					</span>
 				</c:forEach>
 				</div>

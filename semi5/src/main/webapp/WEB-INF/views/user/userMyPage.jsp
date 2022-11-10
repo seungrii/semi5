@@ -11,7 +11,7 @@
 	<!-- 회원메뉴 사이드바 -->
     	<aside class="sidebar-css">
     		<div class="container-150">
-    			<div class="row">
+    			<%-- <div class="row">
     				<h2>상태창</h2>
     			</div>
     			<div class="row">
@@ -19,7 +19,7 @@
     			</div>
     			<div class="row">
     				admin : ${sessionScope.loginGrade}
-    			</div>
+    			</div> --%>
 	 		    <div class="row center">
 					<h1>마이페이지</h1>
 				</div>
@@ -57,7 +57,7 @@
 				<div class="mt-10">
 				<c:forEach var="imageDto" items="${attachments}">
 					<span class="ms-10 mt-10">
-					<img src="/attachment/download/${imageDto.fileNumber}" width="100" height="100">
+					<img src="${pageContext.request.contextPath}/attachment/download/${imageDto.fileNumber}" width="100" height="100">
 					</span>
 				</c:forEach>
 				</div>

@@ -440,6 +440,11 @@ textarea.fix-width {
     width:980px;
     font-size: 16px;
 }
+.table.table-board{
+    border-collapse: collapse;/*테두리 병합*/
+    width:100%;
+    font-size: 16px;
+}
 /* 
     방법 1 : .table 안에 있는 모든 th와 모든 td를 선택(후손선택자) 
     - 내부에 있는 모든 요소를 선택하므로 테이블이 중첩되는 경우 문제가 발생

@@ -7,7 +7,7 @@
 	<jsp:param value="공지 게시판" name="title"/>
 </jsp:include>
 
-<link rel="stylesheet" type="text/css" href="/css/semi-commons.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/semi-commons.css">
 
 
 <style>

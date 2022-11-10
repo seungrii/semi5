@@ -7,14 +7,22 @@
 <section class="w-980 test-css">
 <div class="admin-box">
 
-<jsp:include page="/WEB-INF/views/template/sidebar.jsp"></jsp:include>
+<jsp:include page="${pageContext.request.contextPath}/WEB-INF/views/template/sidebar.jsp"></jsp:include>
 
 <div class="container">
 <table class="table table-slit center mt-50">
-	<tr>
-		<td colspan="2"><img src="download?userId=${userDto.userId}" width="100" height="100"></td>
-		<%-- <td>${userDto.userId}</td> --%>
-	</tr>
+
+	<c:if test="${!attachments.isEmpty()}">
+			<div class="row">
+				<div class="mt-10">
+				<c:forEach var="imageDto" items="${attachments}">
+					<span class="ms-10 mt-10">
+					<img src="${pageContext.request.contextPath}/attachment/download/${imageDto.fileNumber}" width="100" height="100">
+					</span>
+				</c:forEach>
+				</div>
+			</div>
+		</c:if>
 	<tr>
 		<td>아이디</td>
 		<td>${userDto.userId}</td>

@@ -23,11 +23,16 @@ public interface AttachmentDao {
 	//영화포스터
 	void addPoster(int movieNumber, int fileNumber);
 	List<ImageDto> selectPosterList(int movieNumber);
+	List<ImageDto> keywordSearchPosterList(String movieName);
 	//무비차트 조회용
 	List<ImageDto> selectPosterList();
 //	List<ImageDto> selectPosterList(String keyword);
 //	List<ImageDto> selectPosterList(String type,String keyword);
 	List<ImageDto> fileNumber(int movieNumber);
+	
+	//home 조회용
+	List<ImageDto> selectPosterList3();
+	
 	
 	//회원프로필
 	void addProfileImage(String userId, int fileNumber);

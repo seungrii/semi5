@@ -9,7 +9,7 @@
 	<fmt:formatDate value="${now}" pattern="yyyy-MM-dd"/>
 </c:set>
 
-<link rel="stylesheet" type="text/css" href="/css/semi-commons.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/semi-commons.css">
 
 <jsp:include page="/WEB-INF/views/template/header.jsp">
 	<jsp:param value="문의 게시판" name="title"/>

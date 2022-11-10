@@ -6,10 +6,9 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <jsp:include page="/WEB-INF/views/template/header.jsp">
+		<jsp:param value="무비차트" name="title"/>
+	</jsp:include>
 
 
 
@@ -119,7 +118,7 @@
 
     <div class="container-980">
        
-        <div class="row left">
+        <div class="row left mt-50 mb-20">
             <h1>무비차트</h1>
         </div>
         <hr>
@@ -150,10 +149,10 @@
        
         
         
-        
+    <div class="center mb-50">    
        	<c:forEach var="movieDto" items="${movieList}" varStatus="status">
     	
-            <table class="small" >
+            <table class="small center" >
                 <!-- <tr>
                    <td class="ranking" style="background-color: red;"> 순위</td>
                 </tr> -->
@@ -162,29 +161,29 @@
                     <td>
                     	<c:choose>
 							<c:when test="${!attachments.isEmpty()}">
-								<a href="/movie/movieDetail?movieNumber=${movieDto.movieNumber}">
-								<img src="/attachment/download/${imageDto[status.index].fileNumber}" width="200px" height="280px">
+								<a href="${pageContext.request.contextPath}/movie/movieDetail?movieNumber=${movieDto.movieNumber}">
+								<img src="${pageContext.request.contextPath}/attachment/download/${imageDto[status.index].fileNumber}" width="200px" height="280px">
 								</a>
 							</c:when>
 							<c:otherwise>
-	                        	<a href="/movie/movieDetail?movieNumber=${movieDto.movieNumber}"><img class="image"></a>
+	                        	<a href="${pageContext.request.contextPath}/movie/movieDetail?movieNumber=${movieDto.movieNumber}"><img class="image"></a>
 	                        </c:otherwise>
                         </c:choose>
                     </td>
                 </tr>
                 <tr >
                     <td class="content" >
-                        <ul >
+                        <ul>
                             <li >${movieDto.movieName}</li>
                             <li>개봉일:${movieDto.openingDate}</li>
                            	<li>상영종료일:${movieDto.screeningEnd}</li>
-                             <a href="/advance/list"><button class="btn btn-neutral" type="submit">예매하기</button></a>
+                            <a href="${pageContext.request.contextPath}/advance/list"><button class="btn btn-neutral" type="submit">예매하기</button></a>
                         </ul>
                     </td>
                 </tr>
             </table> 
          </c:forEach>   
-            
+    </div>        
    <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
          
           </div>

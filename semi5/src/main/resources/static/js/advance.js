@@ -11,7 +11,7 @@ $(function(){
         if(!movieNumber) return;
 
         $.ajax({
-            url:"http://localhost:8888/rest/advance/cinemalist?movieNumber="+$(this).data("no"),//moiveNumber,
+            url:root+"/rest/advance/cinemalist?movieNumber="+$(this).data("no"),//moiveNumber,
             method:"get",
             success:function(resp){
                 // console.log(resp);// list값 제대로 넘어옴
@@ -32,7 +32,7 @@ $(function(){
         // console.log($(this).text()); //text 확인
 
         $.ajax({
-            url:"http://localhost:8888/rest/advance/datelist?movieNumber=" + movieNumber + "&cinemaName=" + $(this).text(),//moiveNumber,
+            url:root+"/rest/advance/datelist?movieNumber=" + movieNumber + "&cinemaName=" + $(this).text(),//moiveNumber,
             method:"get",
             success:function(resp){
                 // console.log(resp);// list값 제대로 넘어옴
@@ -52,7 +52,7 @@ $(function(){
     $(document).on("click",".advance-date li", function(){
         
         $.ajax({
-            url:"http://localhost:8888/rest/advance/timelist?movieNumber=" + movieNumber + "&cinemaName=" + cinemaName + "&moviePlayDate="+$(this).text(),//moiveNumber,
+            url:root+"/rest/advance/timelist?movieNumber=" + movieNumber + "&cinemaName=" + cinemaName + "&moviePlayDate="+$(this).text(),//moiveNumber,
             method:"get",
             success:function(resp){
                 // console.log(resp);// list값 제대로 넘어옴
@@ -118,14 +118,18 @@ $(function(){
             var a = intFieldNum + intMax;
             // console.log(a);
             if(a > 8) {
-                $(this).not(a<8).parent().addClass("impossible");
-                $(this).not(a<8).parent().siblings().addClass("impossible");
+//                $(this).not(a<8).parent().addClass("impossible");
+//                $(this).not(a<8).parent().siblings().addClass("impossible");
+				$(this).not(a<8).addClass("impossible");
+                $(this).not(a<8).siblings().addClass("impossible");
                 $(".selected").removeClass("impossible");
                 $(".selected").prevAll().removeClass("impossible");
             }
             else {
-                $(this).parent().removeClass("impossible");
-                $(this).parent().siblings().removeClass("impossible");
+//                $(this).parent().removeClass("impossible");
+//                $(this).parent().siblings().removeClass("impossible");
+				$(this).removeClass("impossible");
+                $(this).siblings().removeClass("impossible");
             }
         });
         return adult, youth, senior, max;

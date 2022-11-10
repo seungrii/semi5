@@ -67,7 +67,7 @@ public class AdminController {
 	@Autowired
 	private OneQnaDao oneQnaDao;
 	
-	private final File dir = new File("C:\\study\\vic\\upload"); //파일경로
+	private final File dir = new File("D:\\upload\\kh10E"); //파일경로
 	@PostConstruct //최초 실행 시, 딱 한번만 실행되는 메소드
 	public void prepare() {
 		dir.mkdirs();
@@ -110,6 +110,30 @@ public class AdminController {
 		AdminDto adminDto = adminDao.selectOne(adminId);
 		model.addAttribute("adminDto", adminDto);
 		return "admin/adminDetail";
+	}
+	
+	@GetMapping("/mypage")
+	public String mypage(Model model,
+			HttpSession session, RedirectAttributes attr) {
+		String userId = (String)session.getAttribute("LoginId");
+
+		UserDto userDto = userDao.selectOne(userId);
+		model.addAttribute("userDto", userDto);
+
+//		boolean admin = session.getAttribute("loginGrade") != null;
+		boolean admin = session.getAttribute("loginGrade") == "관리자";
+		
+		if(admin) {	//관리자 로그인일 경우
+			attr.addAttribute("adminId", userId);
+			return "redirect:/admin/adminDetail";
+		}
+		else {			
+			model.addAttribute("userDto", userDto);
+			
+			//첨부파일 조회하여 첨부
+			model.addAttribute("attachments", attachmentDao.selectProfileImageList(userId));
+			return "user/userMyPage";
+		}
 	}
 	//admin 계정수정
 	@GetMapping("/adminChange")
@@ -163,6 +187,8 @@ public class AdminController {
 	public String userDatail(Model model, @RequestParam String userId) {
 		UserDto userDto = userDao.selectOne(userId);
 		model.addAttribute("userDto", userDto);
+		//첨부파일 조회하여 첨부
+		model.addAttribute("attachments", attachmentDao.selectProfileImageList(userId));
 		return "admin/userDetail";
 	}
 	

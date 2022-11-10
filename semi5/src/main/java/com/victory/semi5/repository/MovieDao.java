@@ -15,7 +15,8 @@ public interface MovieDao {
     List<MovieDto> selectList(String type, String keyword);//검색
 	List<MovieDto> selectListMoviePlayDate(String keyword);
 
-   
+    List<MovieDto> selectList3();//목록
+	
     MovieDto selectOne(int movieNumber);//상세조회
     
     boolean delete(int movieNumber);//삭제

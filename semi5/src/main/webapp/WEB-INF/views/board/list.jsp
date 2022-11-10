@@ -10,7 +10,7 @@
 </c:set>
 
 
-<link rel="stylesheet" type="text/css" href="/css/semi-commons.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/semi-commons.css">
 
 <!-- 테스트용 데이터 출력 -->
 <%-- <h3>${vo}</h3> --%>
@@ -37,7 +37,7 @@
 			<c:if test="${LoginId != null}">
 				<a href="write">글쓰기</a>
 			</c:if>
-				<a href="/">홈으로</a>
+				<a href="${pageContext.request.contextPath}/">홈으로</a>
 			</td>
 		
 			<tr>

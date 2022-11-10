@@ -9,8 +9,8 @@
 
 <head>
 
-	<link rel="stylesheet" type="text/css" href="./css/reset.css">
-	<link rel="stylesheet" type="text/css" href="./css/commons.css">
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/reset.css">
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/commons.css">
 	
 	<!-- swiper 의존성 -->
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"/>
@@ -93,7 +93,7 @@
                    <!-- Slides -->
                    <div class="swiper-slide"><img src="https://biz.chosun.com/resizer/xkTEK-divyr381d3fJrMA0Z5toA=/616x0/smart/cloudfront-ap-northeast-1.images.arcpublishing.com/chosunbiz/MJAZBYCG3JK3HZLVPT434FHUT4.jpg"></div>
                    <div class="swiper-slide"><img src="https://web-cf-image.cjenm.com/public/share/metamng/boards/kr/%ED%97%A4%EC%96%B4%EC%A7%88%20%EA%B2%B0%EC%8B%AC_STILL_%EC%A2%85%ED%95%A91.jpg?v=1653962290"></div>
-                   <div class="swiper-slide"><img src="/image/normal.jpeg"></div> 
+                   <div class="swiper-slide"><img src="${pageContext.request.contextPath}/image/normal.jpeg"></div> 
                 </div>
 
                 <!-- If we need pagination -->
@@ -109,11 +109,31 @@
 	<div class="container row mt-50 mb-50">
 		<div id="chart">무비차트</div>
 	</div>
-	<div class="container mt-50 mb-50">
-		<img id="movieChart" src="https://img.cgv.co.kr/Movie/Thumbnail/StillCut/000080/80489/80489152234_727.jpg">
-		<img id="movieChart" src="https://img.cgv.co.kr/Movie/Thumbnail/StillCut/000086/86276/86276206590_727.jpg">
-		<img id="movieChart" src="https://img.cgv.co.kr/Movie/Thumbnail/StillCut/000086/86271/86271206942_727.jpg">
-	</div>
+	
+	
+	    	
+	<%-- <div class="container mt-50 mb-50">		
+		<c:forEach var="imageDto" items="${attachments}">
+			<img id="movieChart" src="/attachment/download/${imageDto.fileNumber}">
+		</c:forEach>
+	</div> --%>	
+	
+	
+	
+		<c:forEach var="movieDto" items="${movieList}" varStatus="status">
+            <c:choose>
+				<c:when test="${!attachments.isEmpty()}">
+					<a href="${pageContext.request.contextPath}/movie/movieDetail?movieNumber=${movieDto.movieNumber}">
+					<img id="movieChart" src="${pageContext.request.contextPath}/attachment/download/${imageDto[status.index].fileNumber}">
+					</a>
+				</c:when>
+				<c:otherwise>
+                      	<a href="${pageContext.request.contextPath}/movie/movieDetail?movieNumber=${movieDto.movieNumber}"><img class="image"></a>
+                </c:otherwise>
+            </c:choose>
+         </c:forEach>
+	
+	
 	
 	<div class="container mt-50 mb-50">
 	<div class="row float-container">
@@ -143,8 +163,8 @@
 									${noticeDto.noticeTitle}	
 								</a>
 							</td>
-							<td>${noticeDto.adminId}</td>
-							<td>${noticeDto.noticeRead}</td>
+							<%-- <td>${noticeDto.adminId}</td>
+							<td>${noticeDto.noticeRead}</td> --%>
 						</tr>
 						</c:forEach>
 					</tbody>
@@ -163,7 +183,7 @@
 			</div>
 			
 			<div class="row">
-				<table class="table">
+				<table class="table table-board">
 					<!-- <thead>
 						<tr>
 							<th width="50%">제목</th>

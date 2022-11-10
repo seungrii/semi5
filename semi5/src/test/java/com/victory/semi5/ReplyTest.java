@@ -35,9 +35,9 @@ public class ReplyTest {
 	public void test() {
 		//select
 		List<ReplyDto> list = replyDao.selectList(555);
-		for(ReplyDto replyDto : list) {
-			System.out.println(replyDto);
-		}
+//		for(ReplyDto replyDto : list) {
+//			//System.out.println(replyDto);
+//		}
 	}
 	
 	@Test
